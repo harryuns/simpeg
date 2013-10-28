@@ -34,7 +34,7 @@ class pegawai extends Controller {
 	
 	function get_array($param) {
 		$param_pegawai['SORTING'] = 1;
-		$param_pegawai['PencarianDetail'] = 0;
+		$param_pegawai['PencarianDetail'] = 3;
 		$param_pegawai['NAMA'] = (!empty($param['NAMA'])) ? $param['NAMA'] : '';
 		$param_pegawai['K_JENIS_KERJA'] = (!empty($param['K_JENIS_KERJA'])) ? $param['K_JENIS_KERJA'] : '01';
 		$param_pegawai['K_UNIT_KERJA'] = (!empty($param['K_UNIT_KERJA'])) ? $param['K_UNIT_KERJA'] : 'x';

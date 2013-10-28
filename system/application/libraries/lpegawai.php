@@ -143,6 +143,8 @@ class LPegawai extends Controller {
 				$RawQuery = "CALL DB2ADMIN.GETPEGBYJENISKERJA('".$Search['NAMA']."', '".$Search['K_JENIS_KERJA']."', '".$Search['K_UNIT_KERJA']."')";
 			} else if ($Search['PencarianDetail'] == '2') {
 				$RawQuery = "CALL DB2ADMIN.GETPEGBYSTATUSKERJ('".$Search['NAMA']."', '".$Search['K_STATUS_KERJA']."', '".$Search['K_UNIT_KERJA']."')";
+			} else if ($Search['PencarianDetail'] == '3') {
+				$RawQuery = "CALL DB2ADMIN.GETPEGBYUNITJENIS('".$Search['NAMA']."', '".$Search['K_JENIS_KERJA']."', '".$Search['K_UNIT_KERJA']."')";
 			} else {
 				$RawQuery = "CALL DB2ADMIN.GETPEGBYSTATUSAKTF('".$Search['NAMA']."', '".$Search['K_AKTIF']."')";
 			}
