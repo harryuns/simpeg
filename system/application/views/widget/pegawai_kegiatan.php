@@ -1,6 +1,16 @@
 <?php
 	ini_set('memory_limit','124M');
-	$param_luaran['k_publikasi'] = 4;
+	$K_PUBLIKASI = (isset($_REQUEST['K_PUBLIKASI'])) ? $_REQUEST['K_PUBLIKASI'] : 4;
+	$K_JENJANG = (isset($_REQUEST['K_JENJANG'])) ? $_REQUEST['K_JENJANG'] : 'x';
+	$K_FAKULTAS = (isset($_REQUEST['K_FAKULTAS'])) ? $_REQUEST['K_FAKULTAS'] : 'x';
+	$K_JURUSAN = (isset($_REQUEST['K_JURUSAN'])) ? $_REQUEST['K_JURUSAN'] : 'x';
+	$K_PROG_STUDI = (isset($_REQUEST['K_PROG_STUDI'])) ? $_REQUEST['K_PROG_STUDI'] : 'x';
+	
+	$param_luaran['k_publikasi'] = $K_PUBLIKASI;
+	$param_luaran['k_jenjang'] = $K_JENJANG;
+	$param_luaran['k_fakultas'] = $K_FAKULTAS;
+	$param_luaran['k_jurusan'] = $K_JURUSAN;
+	$param_luaran['k_prog_studi'] = $K_PROG_STUDI;
 	$array_luaran = $this->dosen_luaran_model->get_array($param_luaran);
 ?>
 
@@ -32,6 +42,7 @@
 			<div class="widget grid-view">
 				<div class="table-overflow">
 					<table class="table table-striped table-bordered" id="data-table">
+						<?php if ($K_PUBLIKASI == 4) { ?>
 						<thead>
 							<tr>
 								<th>Nama</th>
@@ -45,8 +56,18 @@
 								<th>Detail</th>
 							</tr>
 						</thead>
+						<?php } else { ?>
+						<thead>
+							<tr>
+								<th>Nama</th>
+								<th>Kelompok Kegiatan</th>
+								<th>Kegiatan</th>
+							</tr>
+						</thead>
+						<?php } ?>
 						<tbody>
 							<?php foreach ($array_luaran as $key => $row) { ?>
+							<?php if ($K_PUBLIKASI == 4) { ?>
 							<tr>
 								<td><?php echo $row['NAMA']; ?></td>
 								<td><?php echo $row['JENIS_PUBLIKASI']; ?></td>
@@ -64,6 +85,13 @@
 									<span class="hide"><?php echo json_encode($row); ?></span>
 								</td>
 							</tr>
+							<?php } else { ?>
+							<tr>
+								<td><?php echo $row['NAMA']; ?></td>
+								<td><?php echo $row['KELOMPOK_KEGIATAN']; ?></td>
+								<td><?php echo $row['KEGIATAN']; ?></td>
+							</tr>
+							<?php } ?>
 							<?php } ?>
 						</tbody>
 					</table>

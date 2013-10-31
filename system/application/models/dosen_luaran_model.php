@@ -9,7 +9,14 @@ class dosen_luaran_model extends Model {
     function get_array($param = array()) {
         $result = array();
         
-		$raw_query = "CALL DB2ADMIN.GETDOSENKEGIATAND('x', '2', 'x', 'x', 'x', '".$param['k_publikasi']."')";
+		$raw_query = "
+			CALL DB2ADMIN.GETDOSENKEGIATAND(
+				'x', '2', 'x', 'x',
+				'x', '".$param['k_publikasi']."', '".$param['k_jenjang']."', '".$param['k_fakultas']."',
+				'".$param['k_jurusan']."', '".$param['k_prog_studi']."'
+			)
+		";
+		
         $Statement = db2_prepare($this->CI->ldb2->Handle, $raw_query);
         db2_execute($Statement);
         while ($row = db2_fetch_assoc($Statement)) {
