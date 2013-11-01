@@ -30,11 +30,9 @@
                                 <tr>
                                     <td>Periode</td>
                                     <td>
-                                     <select id="TAHUN" name="TAHUN">
-										<?foreach($ArrayPeriode as $key=>$value){?>
-                                    	<option <?if ($value['K_PERIODE']==$_SESSION['CurrentPeriode']['K_PERIODE']){?>selected=selected<?}?> value="<?php echo $value['K_PERIODE'];?>"><?php echo $value['PERIODE'] .' - '. $value['TAHUN'];?></option>                                    	                                	                                  	
-										<?}?>
-									</select>
+										<select id="TAHUN" name="TAHUN">
+											<?php echo ShowOption(array( 'Array' => $ArrayPeriode, 'ArrayID' => 'K_PERIODE', 'ArrayTitle' => 'LABEL', 'Selected' => @$_POST['TAHUN'] )); ?>
+										</select>
                                     </td></tr>                                  
                                 <tr>
                                     <td>&nbsp;</td>
@@ -61,6 +59,7 @@
 <input type="hidden" name="IsCetak" value="1" />
 <input type="hidden" name="C_AWAL" value="'.$ArrayNomor['C_AWAL'].'" />
 <input type="hidden" name="C_AKHIR" value="'.$ArrayNomor['C_AKHIR'].'" />
+<input type="hidden" name="TAHUN" value="'.$_POST['TAHUN'].'" />
 
 <table style="width: 100%;">
 <tr>

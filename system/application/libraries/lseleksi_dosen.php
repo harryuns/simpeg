@@ -145,14 +145,13 @@ class LSeleksi_Dosen extends Controller {
     	}
     	return $Message;
     }
-    function GetArrayCetak($From=null, $To=null, $k_periode){
+    function GetArrayCetak($From=null, $To=null, $k_periode = 'x'){
     	$ArrayPegawai = array();
     	$PageActive = 1;
     	$PageCount = 1;
     	$RawQuery = "
 			CALL PP.GETPESERTARANGE('".$From."','".$To."', '$k_periode')
 		";
-		
     	if (is_numeric($From) && is_numeric($To)){
 	    	$Query = db2_prepare($this->CI->ldb2->Handle, $RawQuery);
 	    	db2_execute($Query);
@@ -236,15 +235,16 @@ class LSeleksi_Dosen extends Controller {
 	
     function GetPeriode($tahun='x',$k_periode='x',$is_current='x'){
     	$ArrayPegawai = array();
-    	$RawQuery = "CALL PP.GETPERIODE('$tahun','$k_periode','$is_current')"; 
+    	$RawQuery = "CALL PP.GETPERIODE('$tahun','$k_periode','$is_current')";
     	$Query = db2_prepare($this->CI->ldb2->Handle, $RawQuery);
     	db2_execute($Query);
     	$i=0;
     	while ($Row = db2_fetch_assoc($Query)) {
+			$Row['LABEL'] = $Row['PERIODE'].' - '.$Row['TAHUN'];
     		$ArrayPegawai[$i] = $Row;
     		$i++;
-    	}    	
-    	//print_r($ArrayPegawai);
+    	}
+		
     	return $ArrayPegawai;
     }
 	
@@ -284,7 +284,24 @@ class LSeleksi_Dosen extends Controller {
 	    	return $Array;
     	}
     }  
-    function ReadExcelPeserta($Data){   	 	
+    
+	function get_array_pendaftar($param = array()) {
+		$result = array();
+		$param['IS_DOSEN'] = (!isset($param['IS_DOSEN'])) ? 'x' : $param['IS_DOSEN'];
+		$param['NO_PESERTA'] = (!isset($param['NO_PESERTA'])) ? 'x' : $param['NO_PESERTA'];
+		
+		$RawQuery = "CALL PP.GETPESERTACURRENT('".$param['NO_PESERTA']."', '".$param['IS_DOSEN']."')";
+		$Query = db2_prepare($this->CI->ldb2->Handle, $RawQuery);
+		db2_execute($Query);	    
+		while ($row = db2_fetch_assoc($Query)) {
+			$row['LINK_CETAK'] = base_url('index.php/SeleksiDosen/CetakPesertaHadir/'.$row['NO_PESERTA'].'/'.$row['NO_PESERTA']);
+			$result[] = $row;
+		}
+		
+		return $result;
+	}
+		
+	function ReadExcelPeserta($Data){   	 	
     	$FilePeserta = 'FILEPESERTA';
     	if (isset($_FILES) && isset($_FILES[$FilePeserta]) && isset($_FILES[$FilePeserta]['name']) && !empty($_FILES[$FilePeserta]['name'])) {
     		$ResultQuery = array();

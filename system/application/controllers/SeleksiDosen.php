@@ -122,32 +122,24 @@ class SeleksiDosen extends Controller {
     	}    	
     	$this->load->view('seleksi_unggah', $Array);
     }
-    function CetakHadir($From=0, $To=0){   	    	
-    	$Name = date("YmdHis").".pdf";
-    	$PdfFilePath = PATH."/files/Pdf/". $Name ;
-    	$Array['Page'] = $this->lseleksi_dosen->GetProperty();
-		if (!isset($_SESSION['CurrentPeriode'])){
-    		$ArrayPeriode = $this->lseleksi_dosen->GetPeriode('x','x','1');
-    		if (count($ArrayPeriode) > 0) {
-    			$_SESSION['CurrentPeriode'] = $ArrayPeriode[0];
-    		}
-    	} 
-    	$Array['ArrayPegawai'] = $this->lseleksi_dosen->GetArrayCetak($From, $To,$_SESSION['CurrentPeriode']['K_PERIODE']); 
-    	
-    	if (file_exists($PdfFilePath) == FALSE)
-    	{
-    		ini_set('memory_limit','32M'); // boost the memory limit if it's low <img src="http://davidsimpson.me/wp-includes/images/smilies/icon_wink.gif" alt=";)" class="wp-smiley firstChild">
-    		$html = $this->load->view('seleksi_cetak_hadir', $Array, true); // render the view into HTML
-    		//$this->load->library('lpdf');
-    		$pdf = $this->lpdf->load();
-    		//$pdf->SetFooter($_SERVER['HTTP_HOST'].'|{PAGENO}|'.date(DATE_RFC822));
-    		$pdf->WriteHTML($html); // write the HTML into the PDF
-    		$pdf->Output($PdfFilePath, 'F'); // save to file because we can
-    	}
-    	header("Location: ".HOST."/files/Pdf/".$Name);
-    	exit;
-    	
-    	//$this->load->view('seleksi_cetak_hadir', $Array);
+    function CetakHadir($From=0, $To=0) {
+		ini_set("memory_limit", "124M");
+		$pdf = $this->lpdf->load();
+		
+		// prepare data
+		$array_peserta = $this->lseleksi_dosen->GetArrayCetak($From, $To);
+		
+		// generate page for each peserta
+		$template = '';
+		foreach ($array_peserta['Pegawai'] as $key => $row) {
+			if (!empty($template) && (($key & 2) == 0)) {
+				$pdf->AddPage();
+			}
+			
+			$template = $this->load->view( 'seleksi_cetak_hadir', array( 'peserta' => $row ), true );
+			$pdf->WriteHTML($template);
+		}
+		$pdf->Output();
     }
     function CetakPeserta($From=0, $To=0){
     	$Name = date("YmdHis").".pdf";
@@ -197,6 +189,7 @@ class SeleksiDosen extends Controller {
     }
     function Cetak(){
     	$Data = $_POST;
+		
     	if (!isset($_SESSION['ArrayPeriode'])){
     		$ArrayPeriode = $this->lseleksi_dosen->GetPeriode();
     		if (count($ArrayPeriode) > 0) {
@@ -229,7 +222,7 @@ class SeleksiDosen extends Controller {
 			
     		$Data['NMR_AWAL'] = $_POST['C_AWAL'];
     		$Data['NMR_AKHIR'] = $_POST['C_AKHIR'];
-    		$Data['TAHUN'] = $_SESSION['CurrentPeriode'];
+    		$Data['TAHUN'] = (!empty($Data['TAHUN'])) ? $Data['TAHUN'] : $_SESSION['CurrentPeriode'];
     	}
 		
     	$Array['Page'] = $this->lseleksi_dosen->GetProperty();
