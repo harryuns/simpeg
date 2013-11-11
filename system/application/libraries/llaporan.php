@@ -200,11 +200,12 @@ class LLaporan {
     }
     
     function GetArrayJumlahDosenByGolongan($Param) {
-		$Param['IS_DOSEN'] = (isset($Param['IS_DOSEN'])) ? $Param['IS_DOSEN'] : '1';
         $TahunMin = $Param['TAHUN'] - 4;
+		$Param['IS_DOSEN'] = (isset($Param['IS_DOSEN'])) ? $Param['IS_DOSEN'] : '1';
+		$Param['K_STATUS_KERJA'] = (isset($Param['K_STATUS_KERJA'])) ? $Param['K_STATUS_KERJA'] : 'x';
         
-        $Laporan['Year'] = $Param['TAHUN'];
         $Laporan['List'] = array();
+        $Laporan['Year'] = $Param['TAHUN'];
 		
 		if ($Param['IS_DOSEN'] == 1) {
 			$Laporan['Title'] = 'Perkembangan Jumlah Dosen Berdasarkan Golongan Tahun '.$TahunMin.' - '.$Param['TAHUN'];
@@ -214,8 +215,8 @@ class LLaporan {
 			$Laporan['Title'] = 'Perkembangan Jumlah Pegawai Berdasarkan Golongan Tahun '.$TahunMin.' - '.$Param['TAHUN'];
 		}
 		
-		$RawQuery = "CALL DB2ADMIN.LAPJUMDOSBYGOL('".$Param['TAHUN']."', '".$Param['IS_DOSEN']."')";
-        $Statement = db2_prepare($this->CI->ldb2->Handle, $RawQuery);
+		$RawQuery = "CALL DB2ADMIN.LAPJUMDOSBYGOL('".$Param['TAHUN']."', '".$Param['IS_DOSEN']."', '".$Param['K_STATUS_KERJA']."')";
+		$Statement = db2_prepare($this->CI->ldb2->Handle, $RawQuery);
         db2_execute($Statement);
         while ($Row = db2_fetch_assoc($Statement)) {
             $Laporan['List'][] = $Row;
@@ -243,12 +244,14 @@ class LLaporan {
 	
 	function GetArrayJumlahDosenByFungsionalTahun($Param) {
 		$TahunMin = $Param['TAHUN'] - 4;
+		$Param['IS_DOSEN'] = (isset($Param['IS_DOSEN'])) ? $Param['IS_DOSEN'] : '1';
+		$Param['K_STATUS_KERJA'] = (isset($Param['K_STATUS_KERJA'])) ? $Param['K_STATUS_KERJA'] : 'x';
 		
         $Laporan['Year'] = $Param['TAHUN'];
         $Laporan['Title'] = 'Perkembangan Jumlah Dosen Berdasarkan Fungsional Tahun '.$TahunMin.' - '.$Param['TAHUN'];
         $Laporan['List'] = array();
 		
-		$RawQuery = "CALL DB2ADMIN.LAPDOSENFUNGSIONAL('".$Param['TAHUN']."')";
+		$RawQuery = "CALL DB2ADMIN.LAPDOSENFUNGSIONAL('".$Param['TAHUN']."', '".$Param['IS_DOSEN']."', '".$Param['K_STATUS_KERJA']."')";
         $Statement = db2_prepare($this->CI->ldb2->Handle, $RawQuery);
         db2_execute($Statement);
         while ($Row = db2_fetch_assoc($Statement)) {
@@ -264,10 +267,12 @@ class LLaporan {
     }
 	
 	function GetArrayJumlahDosenByPendidikan($Param) {
+		$Param['K_STATUS_KERJA'] = (isset($Param['K_STATUS_KERJA'])) ? $Param['K_STATUS_KERJA'] : 'x';
+		
         $Laporan['Title'] = 'Perkembangan Jumlah Dosen Berdasarkan Pendidikan';
         $Laporan['List'] = array();
 		
-		$RawQuery = "CALL DB2ADMIN.LAPREKPENDD('1')";
+		$RawQuery = "CALL DB2ADMIN.LAPREKPENDD('1', '".$Param['K_STATUS_KERJA']."')";
         $Statement = db2_prepare($this->CI->ldb2->Handle, $RawQuery);
         db2_execute($Statement);
         while ($Row = db2_fetch_assoc($Statement)) {
@@ -387,10 +392,12 @@ class LLaporan {
     }
 	
 	function GetArrayJumlahPegawaiByPendidikan($Param) {
+		$Param['K_STATUS_KERJA'] = (isset($Param['K_STATUS_KERJA'])) ? $Param['K_STATUS_KERJA'] : 'x';
+		
         $Laporan['Title'] = 'Perkembangan Jumlah Tenaga Kepedidikan Berdasarkan Pendidikan';
         $Laporan['List'] = array();
 		
-		$RawQuery = "CALL DB2ADMIN.LAPREKPENDD('0')";
+		$RawQuery = "CALL DB2ADMIN.LAPREKPENDD('0', '".$Param['K_STATUS_KERJA']."')";
         $Statement = db2_prepare($this->CI->ldb2->Handle, $RawQuery);
         db2_execute($Statement);
         while ($Row = db2_fetch_assoc($Statement)) {

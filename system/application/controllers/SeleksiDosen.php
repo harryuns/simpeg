@@ -108,18 +108,15 @@ class SeleksiDosen extends Controller {
     function UnggahPeserta(){
     	$Array['Page'] = $this->lseleksi_dosen->GetProperty();    	
     	$Array['IsUserFakultas'] = $this->llogin->IsUserFakultas();
-    	if (!isset($_SESSION['ArrayPeriode'])){
-    		$ArrayPeriode = $this->lseleksi_dosen->GetPeriode();
-    		if (count($ArrayPeriode) > 0) {
-    			$_SESSION['ArrayPeriode'] = $ArrayPeriode[0];
-    			$Array['ArrayPeriode'] = $ArrayPeriode[0];
-    		}
-    	} else {
-    		$Array['ArrayPeriode'] = $_SESSION['ArrayPeriode'];
-    	}
-    	if(!empty($_POST)){   		    		    		
+		
+		$ArrayPeriode = $this->lseleksi_dosen->GetPeriode();
+		$Array['ArrayPeriode'] = $ArrayPeriode[0];
+		
+		// check upload
+    	if (!empty($_POST)){   		    		    		
     		$Array['ArrayPegawai'] =  $this->lseleksi_dosen->ReadExcelPeserta($_POST);
-    	}    	
+    	}
+		
     	$this->load->view('seleksi_unggah', $Array);
     }
     function CetakHadir($From=0, $To=0) {

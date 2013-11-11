@@ -63,7 +63,7 @@
                                             <td class="body">'.$Array[2].'&nbsp;</td>
                                             <td class="body">'.$Array[3].'&nbsp;</td>
                                             <td class="body">'.$Array[4].'&nbsp;</td>
-                                    		<td class="body">'.$Array[5].'&nbsp;</td>                                                                                                                 	   
+                                    		<td class="body">'.$Array[(count($Array) - 1)].'&nbsp;</td>                                                                                                                 	   
 										</tr>';
                                 }
                                 echo '</table></div>';
@@ -88,7 +88,6 @@
                             }
                         ?>
                 </div>
-                 <script type="text/javascript">InitSearch();</script>
             </div>
         </div>
     </div>

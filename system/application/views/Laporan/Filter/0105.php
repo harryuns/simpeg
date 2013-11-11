@@ -1,18 +1,15 @@
 <?php
+	$ArrayStatusKerja = $this->CI->lstatus_kerja->GetArrayStatusKerja(array( 'with_all' => true ));
+	
     $ArrayYear = array();
     for ($Year = date("Y"); $Year >= 2000; $Year--) {
         $ArrayYear[$Year] = $Year;
     }
+	$ArrayJenjang = $this->CI->ljenjang->GetArrayJenjang();
+	$ArrayFakultas = $this->CI->lfakultas->GetArrayFakultas();
 ?>
-<input type="hidden" name="IS_DOSEN" value="0" />
 <div style="float: left; width: 200px; padding: 0 0 10px 0;">Status Kerja</div>
-<div style="float: left; width: 350px;">
-    <select name="STATUS_KERJA" style="width: 300px;">
-		<option value="2">Pegawai Negeri Sipil</option>
-		<option value="3">Pegawai Tetap Non PNS</option>
-		<option value="1" selected>Semua</option>
-	</select>
-</div>
+<div style="float: left; width: 350px;"><select name="K_STATUS_KERJA" style="width: 300px;"><?php echo GetOption(false, $ArrayStatusKerja, 'x'); ?></select></div>
 <div class="clear"></div>
 <div style="float: left; width: 200px; padding: 0 0 10px 0;">Tahun</div>
 <div style="float: left; width: 500px;">

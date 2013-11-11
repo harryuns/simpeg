@@ -65,9 +65,10 @@ class LSeleksi_Dosen extends Controller {
 	    	return $Message;
     	}
     }
-    function InsUpdPeserta($Peserta){
+    function InsUpdPeserta($Peserta) {
     	if (empty($Peserta))
     		return;
+		
     	$Message = 'Data Gagal Disimpan !';
     	$Data['INNO_PESERTA'] = $Peserta[0];
     	$Data['INTAHUN'] = '20133';
@@ -78,7 +79,7 @@ class LSeleksi_Dosen extends Controller {
     	$Data['INUNIT'] = $Peserta[5];
     	$Data['INPILIHAN'] = $Peserta[6];
     	$Data['TGL_UJIAN'] = (isset($Peserta[7])) ? $Peserta[7] : date("Y-m-d");
-		$Data['PUKUL'] = (isset($Peserta[7])) ? $Peserta[7] : '08:00 WIB';
+		$Data['PUKUL'] = (isset($Peserta[8])) ? $Peserta[8] : '08:00 WIB';
     	$Data['UID'] = $_SESSION['UserLogin']['UserID'];
 		
     	if (!is_numeric($Data['INNO_PESERTA'])){
@@ -318,8 +319,8 @@ class LSeleksi_Dosen extends Controller {
     			$PageCount = 1;
     			$Data['PageActive'] = (empty($Data['PageActive'])) ? 1 : $Data['PageActive'];
     			$Data['PageOffset'] = (empty($Data['PageOffset'])) ? 20 : $Data['PageOffset'];
-    			$ArrayPegawai = $this->GetArrayFromExcel($Path,7,1000);
-    			 
+    			$ArrayPegawai = $this->GetArrayFromExcel($Path,9,1000);
+				
     			$PegawaiTotal = count($ArrayPegawai);
     			$PageActive = $Data['PageActive'];
     			$PageCount = ceil($PegawaiTotal / $Data['PageOffset']);
@@ -344,36 +345,47 @@ class LSeleksi_Dosen extends Controller {
     	->setSubject("Office 2007 XLSX Test Document")
     	->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.")
     	->setKeywords("office 2007 openxml php")
-    	->setCategory("Test result file");    	    	
+    	->setCategory("Test result file");
+		
     	$arr_data = array();    	
-    	$arr_cols = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
-    			'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
+    	$arr_cols = array(
+			'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
+			'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+		);
+		
     	try {
     		$objPHPExcel = PHPExcel_IOFactory::load($Path);
     		for ($i=2; $i<$RowNum+1; $i++){
     			$data = array();
     			$IsData = true;
-    			for($j=1; $j<=$ColNum; $j++){
-    				$Ce = $arr_cols[$j-1].''.$i;    				
-    				$data[$j-1] = $objPHPExcel->getActiveSheet()->getCell($Ce)->getValue();
+    			for ($j=1; $j<=$ColNum; $j++) {
+					$Ce = $arr_cols[$j-1].''.$i;
+					
+					// save value
+					$value = $objPHPExcel->getActiveSheet()->getCell($Ce)->getValue();
+					$data[$j-1] = strtoupper(trim($value));
+					
     				if (($j == 1) && (trim($data[$j-1]) == '')){
     					$IsData = false;
     					break;
-    				}	
+    				}
     			}
+				
     			if (!$IsData){
     				break;
     			}
-    			$data[0] = strtoupper(trim($data[0]));
-    			$data[3] = strtoupper(trim($data[3]));    			
-    			$data[5] = $this->InsUpdPeserta($data);
+				
     			$arr_data[$i-2] = $data;
-    		}    		
-    		//print_r($arr_data);    		
+    		}
     	} catch(Exception $e){
     		return null;
     	}
+		
+		// update to db
+		foreach ($arr_data as $key => $row) {
+			$arr_data[$key][] = $this->InsUpdPeserta($row);
+		}
+		
     	return $arr_data;
     }
 }
-?>

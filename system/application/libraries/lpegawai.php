@@ -130,6 +130,7 @@ class LPegawai extends Controller {
         $PageCount = 1;
         
         $Search['NAMA'] = (isset($Search['NAMA'])) ? $Search['NAMA'] : '';
+        $Search['K_STATUS_PEGAWAI'] = (isset($Search['K_STATUS_PEGAWAI'])) ? $Search['K_STATUS_PEGAWAI'] : 'x';
         $Search['Export'] = (isset($Search['Export'])) ? $Search['Export'] : '';
         $Search['PageActive'] = (empty($Search['PageActive'])) ? 1 : $Search['PageActive'];
         $Search['PageOffset'] = (empty($Search['PageOffset'])) ? 50 : $Search['PageOffset'];
@@ -150,9 +151,9 @@ class LPegawai extends Controller {
 			}
 		} else if ($Search['SORTING'] == 2) {
 			if ($Search['K_JENIS_KERJA'] == '01') {
-				$RawQuery = "CALL DB2ADMIN.LAPDUKALL('".$Search['K_UNIT_KERJA']."', 'x', 'x', 'x', 'x', '".date("Y-m-d")."', '1')";
+				$RawQuery = "CALL DB2ADMIN.LAPDUKALL('".$Search['K_UNIT_KERJA']."', 'x', 'x', 'x', 'x', '".date("Y-m-d")."', '1', '".$Search['K_STATUS_PEGAWAI']."')";
 			} else if ($Search['K_JENIS_KERJA'] == '02') {
-				$RawQuery = "CALL DB2ADMIN.LAPDUKALL('".$Search['K_UNIT_KERJA']."', 'x', 'x', 'x', 'x', '".date("Y-m-d")."', '0')";
+				$RawQuery = "CALL DB2ADMIN.LAPDUKALL('".$Search['K_UNIT_KERJA']."', 'x', 'x', 'x', 'x', '".date("Y-m-d")."', '0', '".$Search['K_STATUS_PEGAWAI']."')";
 			}
 		}
 		
