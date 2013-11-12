@@ -24,7 +24,7 @@
 		<?php if ($status_kerja == 1) { ?>
 		<tr>
 			<td class="left" style="width: 4%;" rowspan="2">No</td>
-			<td class="center" style="width: 36%;" rowspan="2">Fakultas</td>
+			<td class="center" style="width: 36%;" rowspan="2">Fakultas / Unit Kerja</td>
 			<td class="normal" style="width: 12%; text-align: center;" colspan="3"><?php echo ($Laporan['Year'] - 4); ?></td>
 			<td class="normal" style="width: 12%; text-align: center;" colspan="3"><?php echo ($Laporan['Year'] - 3); ?></td>
 			<td class="normal" style="width: 12%; text-align: center;" colspan="3"><?php echo ($Laporan['Year'] - 2); ?></td>

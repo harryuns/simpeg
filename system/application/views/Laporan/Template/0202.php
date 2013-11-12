@@ -5,7 +5,7 @@
         <table style="width: 100%;">
             <tr>
                 <td class="left" style="width: 4%;" rowspan="2">No</td>
-                <td class="center" style="width: 21%;" rowspan="2">Fakultas</td>
+                <td class="center" style="width: 21%;" rowspan="2">Fakultas / Unit Kerja</td>
                 <td class="normal" style="width: 15%; text-align: center;" colspan="3">'.($Laporan['Year'] - 4).'</td>
                 <td class="normal" style="width: 15%; text-align: center;" colspan="3">'.($Laporan['Year'] - 3).'</td>
                 <td class="normal" style="width: 15%; text-align: center;" colspan="3">'.($Laporan['Year'] - 2).'</td>
