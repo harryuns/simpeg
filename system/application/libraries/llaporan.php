@@ -28,33 +28,32 @@ class LLaporan {
         $Array['01']['01'] = 'Jumlah Dosen';
         $Array['01']['02'] = 'Berdasarkan Gender';
         $Array['01']['03'] = 'Berdasarkan Golongan';
-//        $Array['01']['04'] = 'Berdasarkan Fungsional Tiap Fakultas';
         $Array['01']['05'] = 'Berdasarkan Fungsional';
         $Array['01']['06'] = 'Berdasarkan Pendidikan';
 		
 		$Array['02']['09'] = 'Jumlah Tenaga Pendidikan';
         $Array['02']['02'] = 'Berdasarkan Gender';
-/*
-        $Array['02']['01'] = 'Berdasarkan Gender & Status Kerja';
-        $Array['02']['03'] = 'Berdasarkan Riwayat Administrasi';
-        $Array['02']['04'] = 'Berdasarkan Riwayat Studi Dosen';
-        $Array['02']['05'] = 'Berdasarkan Riwayat Studi Honorer';
-        $Array['02']['06'] = 'Berdasarkan Jumlah Administrasi Per Golongan';
-/*	*/
         $Array['02']['07'] = 'Berdasarkan Umur';
         $Array['02']['08'] = 'Berdasarkan Pendidikan';
         $Array['02']['10'] = 'Berdasarkan Golongan';
+		$Array['02']['11'] = 'Berdasarkan Fungsional';
 		
         $Array['03']['01'] = 'Dosen';
         $Array['03']['02'] = 'Tenaga Kependidikan';
 /*
-        $Array['01']['04'] = 'Berdasarkan Pendidikan Tertinggi';
+        $Array['01']['04'] = 'Berdasarkan Fungsional Tiap Fakultas';
         $Array['01']['05'] = 'Berdasarkan Jabatan Fungsional';
         $Array['01']['06'] = 'Sedang Studi Program S2 dan S3 Dalam Negeri';
         $Array['01']['07'] = 'Sedang Studi Program S2 dan S3 Luar Negeri';
         $Array['01']['08'] = 'Selesai Studi Program S2 dan S3 Dalam Negeri';
         $Array['01']['09'] = 'Selesai Studi Program S2 dan S3 Luar Negeri';
         $Array['01']['10'] = 'Jumlah Guru Besar';
+		
+        $Array['02']['01'] = 'Berdasarkan Gender & Status Kerja';
+        $Array['02']['03'] = 'Berdasarkan Riwayat Administrasi';
+        $Array['02']['04'] = 'Berdasarkan Riwayat Studi Dosen';
+        $Array['02']['05'] = 'Berdasarkan Riwayat Studi Honorer';
+        $Array['02']['06'] = 'Berdasarkan Jumlah Administrasi Per Golongan';
 */
         
         $ArrayResult = (isset($Array[$JenisLaporan])) ? $Array[$JenisLaporan] : array();
@@ -94,7 +93,8 @@ class LLaporan {
 				'07' => 'GetArrayJumlahPegawaiByUmur',
 				'08' => 'GetArrayJumlahPegawaiByPendidikan',
 				'09' => 'GetArrayJumlahDosen',
-				'10' => 'GetArrayJumlahDosenByGolongan'
+				'10' => 'GetArrayJumlahDosenByGolongan',
+				'11' => 'GetArrayJumlahDosenByFungsionalTahun'
 			),
 			'03' => array(
 				// Nama Laporan
@@ -243,23 +243,17 @@ class LLaporan {
     }
 	
 	function GetArrayJumlahDosenByFungsionalTahun($Param) {
-		$TahunMin = $Param['TAHUN'] - 4;
 		$Param['IS_DOSEN'] = (isset($Param['IS_DOSEN'])) ? $Param['IS_DOSEN'] : '1';
 		$Param['K_STATUS_KERJA'] = (isset($Param['K_STATUS_KERJA'])) ? $Param['K_STATUS_KERJA'] : 'x';
 		
         $Laporan['Year'] = $Param['TAHUN'];
-        $Laporan['Title'] = 'Perkembangan Jumlah Dosen Berdasarkan Fungsional Tahun '.$TahunMin.' - '.$Param['TAHUN'];
+        $Laporan['Title'] = 'Perkembangan Jumlah Dosen Berdasarkan Fungsional Tahun '.$Param['TAHUN'];
         $Laporan['List'] = array();
 		
-		$RawQuery = "CALL DB2ADMIN.LAPDOSENFUNGSIONAL('".$Param['TAHUN']."', '".$Param['IS_DOSEN']."', '".$Param['K_STATUS_KERJA']."')";
-        $Statement = db2_prepare($this->CI->ldb2->Handle, $RawQuery);
+		$RawQuery = "CALL DB2ADMIN.LAPPEGFUNGSIONAL('".$Param['TAHUN']."', '".$Param['IS_DOSEN']."', '".$Param['K_STATUS_KERJA']."')";
+		$Statement = db2_prepare($this->CI->ldb2->Handle, $RawQuery);
         db2_execute($Statement);
         while ($Row = db2_fetch_assoc($Statement)) {
-			$Row['JML_4'] = $Row['JML' . ($Param['TAHUN'] - 4)];
-			$Row['JML_3'] = $Row['JML' . ($Param['TAHUN'] - 3)];
-			$Row['JML_2'] = $Row['JML' . ($Param['TAHUN'] - 2)];
-			$Row['JML_1'] = $Row['JML' . ($Param['TAHUN'] - 1)];
-			$Row['JML_0'] = $Row['JML' . ($Param['TAHUN'] - 0)];
             $Laporan['List'][] = $Row;
         }
         
