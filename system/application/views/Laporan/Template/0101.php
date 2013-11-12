@@ -49,7 +49,7 @@
 		<?php } else if ($status_kerja == 2 || $status_kerja == 3) { ?>
 		<tr>
 			<td class="left" style="width: 4%;">No</td>
-			<td class="center" style="width: 36%;">Fakultas</td>
+			<td class="center" style="width: 36%;">Fakultas / Unit Kerja</td>
 			<td class="normal" style="width: 12%; text-align: center;"><?php echo ($Laporan['Year'] - 4); ?></td>
 			<td class="normal" style="width: 12%; text-align: center;"><?php echo ($Laporan['Year'] - 3); ?></td>
 			<td class="normal" style="width: 12%; text-align: center;"><?php echo ($Laporan['Year'] - 2); ?></td>
