@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class riwayat_diklat_request_model extends Model {
+class riwayat_struktural_request_model extends Model {
     function __construct() {
 		parent::__construct();
         $this->CI =& get_instance();
@@ -8,18 +8,16 @@ class riwayat_diklat_request_model extends Model {
 	
 	function update($param) {
 		$result['status'] = false;
-		$param['ID_REQUEST'] = (empty($param['ID_REQUEST'])) ? 'x' : $param['ID_REQUEST'];
-		$param['ID_RIWAYAT_DIKLAT'] = (empty($param['ID_RIWAYAT_DIKLAT'])) ? 'x' : $param['ID_RIWAYAT_DIKLAT'];
+		$param['ID_REQ_JABATAN_STRUKTURAL'] = (empty($param['ID_REQ_JABATAN_STRUKTURAL'])) ? 'x' : $param['ID_REQ_JABATAN_STRUKTURAL'];
+		$param['ID_RIWAYAT_JABATAN_STRUKTURAL'] = (empty($param['ID_RIWAYAT_JABATAN_STRUKTURAL'])) ? 'x' : $param['ID_RIWAYAT_JABATAN_STRUKTURAL'];
 		
 		$raw_query = "
-			CALL DB2ADMIN.INSUPDREQRIWAYATDIKLAT(
-				'".$param['ID_REQUEST']."',
-				'".$param['JENIS_REQUEST']."', '".$param['USERID']."', '".$param['ID_RIWAYAT_DIKLAT']."', '".$param['K_PEGAWAI']."',
-				'".$param['NO_SERTIFIKAT']."', '".$param['TGL_SERTIFIKAT']."', '".$param['PENYELENGGARA']."',
-				'".$param['K_DIKLAT']."', '', '".$param['ANGKATAN']."',
-				'".$param['TGL_MULAI']."', '".$param['TGL_LULUS']."', '".$param['KETERANGAN']."',
-				'".$param['TMP_DIKLAT']."', '', '".$param['IS_LUARNEGERI']."',
-				'".$param['JML_JAM']."', '".$param['PREDIKAT']."', '".$param['NAMA_DIKLAT']."'
+			CALL DB2ADMIN.INSUPDREQRIWAYATJABATANSTRUKTURAL(
+				'".$param['ID_REQ_JABATAN_STRUKTURAL']."', '".$param['JENIS_REQ_JABATAN_STRUKTURAL']."', '".$param['USERID']."', '".$param['ID_RIWAYAT_JABATAN_STRUKTURAL']."',
+				'".$param['K_PEGAWAI']."', '".$param['NO_SK']."', '".$param['TGL_SK']."', '".$param['K_ASAL_SK']."',
+				'".$param['TMT']."', '".$param['K_UNIT_KERJA']."', '".$param['K_JABATAN_STRUKTURAL']."',
+				'".$param['K_BIDANG_KERJA']."', '".@$param['K_JENJANG']."', '".@$param['K_FAKULTAS']."', '".@$param['K_JURUSAN']."',
+				'".@$param['K_PROG_STUDI']."', '".$param['TUNJANGAN_STRUKTURAL']."', '".$param['KETERANGAN']."', '".@$param['FILE']."'
 			)
 		";
 		
@@ -31,7 +29,7 @@ class riwayat_diklat_request_model extends Model {
 			if ($query_status == QUERY_STATUS_SUCCESS) {
 				$result['status'] = true;
 				$result['message'] = 'Data berhasil disimpan';
-				$result['ID_REQUEST'] = $row['ID_REQUEST'];
+				$result['ID_REQ_JABATAN_STRUKTURAL'] = $row['ID_REQ_JABATAN_STRUKTURAL'];
 			} else {
 				$result['message'] = 'Error.';
 			}
@@ -42,7 +40,8 @@ class riwayat_diklat_request_model extends Model {
 	
 	function validate($param) {
 		$result['status'] = false;
-		$raw_query = "CALL DB2ADMIN.VALREQRIWAYATDIKLAT( '".$param['ID_REQUEST']."', '".$param['USERID']."' )";
+		$raw_query = "CALL DB2ADMIN.VALREQRIWAYATJABATANSTRUKTURAL( '".$param['ID_REQ_JABATAN_STRUKTURAL']."', '".$param['USERID']."' )";
+		echo $raw_query;
 		
 		WriteLog($param['K_PEGAWAI'], $raw_query);
 		$execute_query = db2_prepare($this->CI->ldb2->Handle, $raw_query);
@@ -62,13 +61,13 @@ class riwayat_diklat_request_model extends Model {
 	
     function get_array($param = array()) {
         $result = array();
-		$param['id_request'] = (empty($param['id_request'])) ? 'x' : $param['id_request'];
-		$param['no_sertifikat'] = (empty($param['no_sertifikat'])) ? 'x' : $param['no_sertifikat'];
-		$param['is_validate'] = (empty($param['is_validate'])) ? '0' : $param['is_validate'];
+		$param['ID_REQ_JABATAN_STRUKTURAL'] = (empty($param['ID_REQ_JABATAN_STRUKTURAL'])) ? 'x' : $param['ID_REQ_JABATAN_STRUKTURAL'];
+		$param['IS_VALIDATE'] = (isset($param['IS_VALIDATE'])) ? $param['IS_VALIDATE'] : 'x';
 		
-		$raw_query = "CALL DB2ADMIN.GETREQRIWAYATDIKLAT(
-			'".$param['id_request']."', '".$param['k_pegawai']."', '".$param['no_sertifikat']."', '".$param['is_validate']."'
+		$raw_query = "CALL DB2ADMIN.GETREQRIWAYATJABATANSTRUKTURAL(
+			'".$param['ID_REQ_JABATAN_STRUKTURAL']."', '".$param['K_PEGAWAI']."', '".$param['IS_VALIDATE']."'
 		)";
+		
         $statement = db2_prepare($this->CI->ldb2->Handle, $raw_query);
         db2_execute($statement);
         while ($row = db2_fetch_assoc($statement)) {
@@ -80,7 +79,7 @@ class riwayat_diklat_request_model extends Model {
 	
 	function delete($param) {
 		$result = array( 'status' => false, 'message' => 'Error.') ;
-        $raw_query = "CALL DB2ADMIN.DELREQRIWAYATDIKLAT('".$param['ID_REQUEST']."')";
+        $raw_query = "CALL DB2ADMIN.DELREQRIWAYATJABATANSTRUKTURAL('".$param['ID_REQ_JABATAN_STRUKTURAL']."')";
 		
 		WriteLog($param['K_PEGAWAI'], $raw_query);
         $execute_query = db2_prepare($this->CI->ldb2->Handle, $raw_query);
@@ -97,7 +96,7 @@ class riwayat_diklat_request_model extends Model {
 	}
 	
 	function sync($row) {
-		$row['JML_FILE_TEXT'] = ($row['JML_FILE'] == 0) ? '-' : 'Cek';
+		$row['JML_FILE_TEXT'] = (@$row['JML_FILE'] == 0) ? '-' : 'Cek';
 		
 		return $row;
 	}
@@ -108,11 +107,11 @@ class riwayat_diklat_request_model extends Model {
 		$result['status'] = false;
 		$result['message'] = '';
 		
-		$param['JENIS_REQUEST'] = (isset($param['JENIS_REQUEST'])) ? $param['JENIS_REQUEST'] : 'I';
-		$param['ID_RIWAYAT_DIKLAT_FILE'] = (isset($param['ID_RIWAYAT_DIKLAT_FILE'])) ? $param['ID_RIWAYAT_DIKLAT_FILE'] : 'x';
+		$param['JENIS_REQ_JABATAN_STRUKTURAL_FILE'] = (isset($param['JENIS_REQ_JABATAN_STRUKTURAL_FILE'])) ? $param['JENIS_REQ_JABATAN_STRUKTURAL_FILE'] : 'I';
+		$param['ID_RIWAYAT_JABATAN_STRUKTURAL_FILE'] = (isset($param['ID_RIWAYAT_JABATAN_STRUKTURAL_FILE'])) ? $param['ID_RIWAYAT_JABATAN_STRUKTURAL_FILE'] : 'x';
 		
-        $raw_query = "CALL DB2ADMIN.INSREQRIWAYATDIKLATFILE(
-			'".$param['JENIS_REQUEST']."', '".$param['USERID']."', '".$param['ID_REQUEST']."', '".$param['ID_RIWAYAT_DIKLAT_FILE']."',
+		$raw_query = "CALL DB2ADMIN.INSREQRIWAYATJABATANSTRUKTURALFILE(
+			'".$param['JENIS_REQ_JABATAN_STRUKTURAL_FILE']."',  '".$param['USERID']."', '".$param['ID_REQ_JABATAN_STRUKTURAL']."', '".$param['ID_RIWAYAT_JABATAN_STRUKTURAL_FILE']."',
 			'".$param['FILENAME']."'
 		)";
 		
@@ -137,44 +136,23 @@ class riwayat_diklat_request_model extends Model {
 		return $result;
 	}
 	
-	function validate_file($param) {
-		$result['status'] = false;
-		$raw_query = "CALL DB2ADMIN.VALREQRIWAYATDIKLATFILE( '".$param['ID_REQUEST']."', '".$param['USERID']."' )";
-		
-		WriteLog($param['K_PEGAWAI'], $raw_query);
-		$execute_query = db2_prepare($this->CI->ldb2->Handle, $raw_query);
-		$execute_result = db2_execute($execute_query) or die(db2_stmt_errormsg($execute_query));
-		if ($row = db2_fetch_assoc($execute_query)) {
-			print_r($row); exit;
-			$query_status = $row['ERROR'];
-			if ($query_status == QUERY_STATUS_SUCCESS) {
-				$result['status'] = true;
-				$result['message'] = 'Data berhasil divalidasi';
-			} else {
-				$result['message'] = 'Error.';
-			}
-		}
-		
-		return $result;
-	}
-	
 	function get_array_file($param) {
 		$result = array();
 		
 		$counter = 0;
-		$param['ID_REQUEST'] = (empty($param['ID_REQUEST'])) ? 'x' : $param['ID_REQUEST'];
+		$param['ID_REQ_JABATAN_STRUKTURAL'] = (empty($param['ID_REQ_JABATAN_STRUKTURAL'])) ? 'x' : $param['ID_REQ_JABATAN_STRUKTURAL'];
 		$param['IS_VALIDATE'] = (empty($param['IS_VALIDATE'])) ? 'x' : $param['IS_VALIDATE'];
-		$param['ID_RIWAYAT_DIKLAT_FILE'] = (empty($param['ID_RIWAYAT_DIKLAT_FILE'])) ? 'x' : $param['ID_RIWAYAT_DIKLAT_FILE'];
+		$param['ID_REQ_JABATAN_STRUKTURAL_FILE'] = (empty($param['ID_REQ_JABATAN_STRUKTURAL_FILE'])) ? 'x' : $param['ID_REQ_JABATAN_STRUKTURAL_FILE'];
 		
-        $raw_query = "CALL DB2ADMIN.GETREQRIWAYATDIKLATFILE(
-			'".$param['ID_RIWAYAT_DIKLAT_FILE']."', '".$param['ID_REQUEST']."', '".$param['IS_VALIDATE']."'
+        $raw_query = "CALL DB2ADMIN.GETREQRIWAYATJABATANSTRUKTURALFILE(
+			'".$param['ID_REQ_JABATAN_STRUKTURAL_FILE']."', '".$param['ID_REQ_JABATAN_STRUKTURAL']."', '".$param['IS_VALIDATE']."'
 		)";
 		
         $execute_query = db2_prepare($this->CI->ldb2->Handle, $raw_query);
         $execute_result = db2_execute($execute_query) or die(db2_stmt_errormsg($execute_query));
         while (false !== $row = db2_fetch_assoc($execute_query)) {
 			$counter++;
-			$row['name_file'] = $row['NO_SERTIFIKAT'] . ' File ke ' . $counter;
+			$row['name_file'] = $row['NO_SK'] . ' File ke ' . $counter;
 			$row['link_file'] = base_url('images/upload/'. $row['FILENAME']);
 			$result[] = $row;
         }
@@ -184,7 +162,7 @@ class riwayat_diklat_request_model extends Model {
 	
 	function delete_file($param) {
 		$result = array();
-		$raw_query = "CALL DB2ADMIN.DELREQRIWAYATDIKLATFILE( '".$param['ID_REQUEST']."' )";
+		$raw_query = "CALL DB2ADMIN.DELREQRIWAYATJABATANSTRUKTURALFILE( '".$param['ID_REQ_JABATAN_STRUKTURAL_FILE']."' )";
         
 		WriteLog($param['K_PEGAWAI'], $raw_query);
         $execute_query = db2_prepare($this->CI->ldb2->Handle, $raw_query);

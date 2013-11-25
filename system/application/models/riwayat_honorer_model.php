@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class riwayat_diklat_model extends Model {
+class riwayat_honorer_model extends Model {
     function __construct() {
 		parent::__construct();
         $this->CI =& get_instance();
@@ -10,13 +10,11 @@ class riwayat_diklat_model extends Model {
 		$result['status'] = false;
 		
 		$raw_query = "
-			CALL DB2ADMIN.INSUPDRIWAYATDIKLAT(
-				'".$param['ID_RIWAYAT_DIKLAT']."', '".$param['K_PEGAWAI']."', '".$param['NO_SERTIFIKAT']."', '".$param['TGL_SERTIFIKAT']."',
-				'".$param['PENYELENGGARA']."', '".$param['K_DIKLAT']."', '', 
-				'".$param['ANGKATAN']."', '".$param['TGL_MULAI']."', '".$param['TGL_LULUS']."',
-				'".$param['KETERANGAN']."', '".$param['USERID']."', '".$param['TMP_DIKLAT']."',
-				'', '".$param['JML_JAM']."', '".$param['PREDIKAT']."',
-				'".$param['IS_LUARNEGERI']."', '".$param['NAMA_DIKLAT']."'
+			CALL DB2ADMIN.INSUPDRIWAYATHONORER(
+				'".$param['ID_RIWAYAT_HONORER']."', '".$param['K_PEGAWAI']."', '".$param['NO_SK']."', '".$param['TGL_SK']."',
+				'".$param['K_ASAL_SK']."', '".$param['TMT']."', '".$param['K_UNIT_KERJA']."', '".$param['K_BIDANG_KERJA']."',
+				'".$param['K_JENJANG']."', '".$param['K_FAKULTAS']."', '".$param['K_JURUSAN']."', '".$param['K_PROG_STUDI']."',
+				'".$param['KETERANGAN']."', '".$param['USERID']."', '".$param['GAJI']."', '".$param['BIDANG_KERJA']."'
 			)
 		";
 		
@@ -38,9 +36,9 @@ class riwayat_diklat_model extends Model {
 	function get_by_id($param = array()) {
         $result = array();
 		$param['K_PEGAWAI'] = (empty($param['K_PEGAWAI'])) ? 'x' : $param['K_PEGAWAI'];
-		$param['NO_SERTIFIKAT'] = (empty($param['NO_SERTIFIKAT'])) ? 'x' : $param['NO_SERTIFIKAT'];
+		$param['ID_RIWAYAT_HONORER'] = (empty($param['ID_RIWAYAT_HONORER'])) ? 'x' : $param['ID_RIWAYAT_HONORER'];
         
-		$raw_query = "CALL DB2ADMIN.GETRIWAYATDIKLAT('".$param['ID_RIWAYAT_DIKLAT']."', '".$param['K_PEGAWAI']."', '".$param['NO_SERTIFIKAT']."')";
+		$raw_query = "CALL DB2ADMIN.GETRIWAYATHONORER('".$param['ID_RIWAYAT_HONORER']."', '".$param['K_PEGAWAI']."')";
         $statement = db2_prepare($this->CI->ldb2->Handle, $raw_query);
         db2_execute($statement);
         while ($row = db2_fetch_assoc($statement)) {
@@ -52,10 +50,10 @@ class riwayat_diklat_model extends Model {
 	
     function get_array($param = array()) {
         $result = array();
-		$param['id_riwayat_diklat'] = (empty($param['id_riwayat_diklat'])) ? 'x' : $param['id_riwayat_diklat'];
-		$param['no_sertifikat'] = (empty($param['no_sertifikat'])) ? 'x' : $param['no_sertifikat'];
+		$param['K_PEGAWAI'] = (empty($param['K_PEGAWAI'])) ? 'x' : $param['K_PEGAWAI'];
+		$param['ID_RIWAYAT_HONORER'] = (empty($param['ID_RIWAYAT_HONORER'])) ? 'x' : $param['ID_RIWAYAT_HONORER'];
         
-		$raw_query = "CALL DB2ADMIN.GETRIWAYATDIKLAT('".$param['id_riwayat_diklat']."', '".$param['k_pegawai']."', '".$param['no_sertifikat']."')";
+		$raw_query = "CALL DB2ADMIN.GETRIWAYATHONORER('".$param['ID_RIWAYAT_HONORER']."', '".$param['K_PEGAWAI']."')";
         $statement = db2_prepare($this->CI->ldb2->Handle, $raw_query);
         db2_execute($statement);
         while ($row = db2_fetch_assoc($statement)) {
@@ -67,7 +65,7 @@ class riwayat_diklat_model extends Model {
 	
 	function delete($param) {
 		$result = array( 'status' => false, 'message' => 'Error.') ;
-        $raw_query = "CALL DB2ADMIN.DELRIWAYATDIKLAT('".$param['ID_RIWAYAT_DIKLAT']."')";
+        $raw_query = "CALL DB2ADMIN.DELRIWAYATHONORER('".$param['ID_RIWAYAT_HONORER']."')";
 		
 		WriteLog($param['K_PEGAWAI'], $raw_query);
         $execute_query = db2_prepare($this->CI->ldb2->Handle, $raw_query);
@@ -84,7 +82,7 @@ class riwayat_diklat_model extends Model {
 	}
 	
 	function sync($row) {
-		$row['JML_FILE_TEXT'] = ($row['JML_FILE'] == 0) ? '-' : 'Cek';
+		$row['JML_FILE_TEXT'] = (@$row['JML_FILE'] == 0) ? '-' : 'Cek';
 		
 		return $row;
 	}
@@ -94,9 +92,10 @@ class riwayat_diklat_model extends Model {
 	function update_file($param) {
 		$result['status'] = false;
 		$result['message'] = '';
-		$param['ID_RIWAYAT_DIKLAT_FILE'] = (empty($param['ID_RIWAYAT_DIKLAT_FILE'])) ? 'x' : $param['ID_RIWAYAT_DIKLAT_FILE'];
-		$raw_query = "CALL DB2ADMIN.INSUPDRIWAYATDIKLATFILE(
-			'".$param['ID_RIWAYAT_DIKLAT_FILE']."', '".$param['ID_RIWAYAT_DIKLAT']."', '".$param['FILENAME']."', '".$param['USERID']."'
+		
+		$param['ID_RIWAYAT_HONORER_FILE'] = (empty($param['ID_RIWAYAT_HONORER_FILE'])) ? 'x' : $param['ID_RIWAYAT_HONORER_FILE'];
+		$raw_query = "CALL DB2ADMIN.INSUPDRIWAYATHONORERFILE(
+			'".$param['ID_RIWAYAT_HONORER_FILE']."', '".$param['ID_RIWAYAT_HONORER']."', '".$param['FILENAME']."', '".$param['USERID']."'
 		)";
 		
 		WriteLog($param['K_PEGAWAI'], $raw_query);
@@ -120,10 +119,11 @@ class riwayat_diklat_model extends Model {
 	}
 	
 	function get_array_file($param) {
-		$counter = 0;
 		$result = array();
-		$param['ID_RIWAYAT_DIKLAT_FILE'] = (empty($param['ID_RIWAYAT_DIKLAT_FILE'])) ? 'x' : $param['ID_RIWAYAT_DIKLAT_FILE'];
-        $raw_query = "CALL DB2ADMIN.GETRIWAYATDIKLATFILE('".$param['ID_RIWAYAT_DIKLAT_FILE']."', '".$param['ID_RIWAYAT_DIKLAT']."')";
+		
+		$counter = 0;
+		$param['ID_RIWAYAT_HONORER_FILE'] = (empty($param['ID_RIWAYAT_HONORER_FILE'])) ? 'x' : $param['ID_RIWAYAT_HONORER_FILE'];
+        $raw_query = "CALL DB2ADMIN.GETRIWAYATHONORERFILE('".$param['ID_RIWAYAT_HONORER_FILE']."', '".$param['ID_RIWAYAT_HONORER']."')";
 		
 		WriteLog($param['K_PEGAWAI'], $raw_query);
         $execute_query = db2_prepare($this->CI->ldb2->Handle, $raw_query);
@@ -140,7 +140,7 @@ class riwayat_diklat_model extends Model {
 	
 	function delete_file($param) {
 		$result = array();
-		$raw_query = "CALL DB2ADMIN.DELRIWAYATDIKLATFILE( '".$param['ID_RIWAYAT_DIKLAT_FILE']."', '".$param['ID_RIWAYAT_DIKLAT']."' )";
+		$raw_query = "CALL DB2ADMIN.DELRIWAYATHONORERFILE( '".$param['ID_RIWAYAT_HONORER_FILE']."', '".$param['ID_RIWAYAT_HONORER']."' )";
 		
 		WriteLog($param['K_PEGAWAI'], $raw_query);
         $execute_query = db2_prepare($this->CI->ldb2->Handle, $raw_query);
