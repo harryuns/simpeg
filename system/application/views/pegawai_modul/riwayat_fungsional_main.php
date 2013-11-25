@@ -2,17 +2,19 @@
 	$is_user_fakultas = $this->llogin->is_user_fakultas();
 //	$is_user_fakultas = true;
 	$k_pegawai = get_link_pegawai(@$this->uri->segments[4]);
+	$pegawai = $this->lpegawai->GetPegawaiById($k_pegawai);
 	$page = array( 'is_user_fakultas' => $is_user_fakultas, 'k_pegawai' => $k_pegawai );
 	
 	$message = get_flash_message();
-	$array_diklat = $this->ldiklat->GetArray();
-	$array_pegawai_diklat = $this->riwayat_diklat_model->get_array(array( 'k_pegawai' => $k_pegawai ));
-	$array_pegawai_diklat_request = $this->riwayat_diklat_request_model->get_array(array( 'k_pegawai' => $k_pegawai ));
+	$array_asal_sk = $this->asal_sk_model->get_array();
+	$array_jabatan_fungsional = $this->jabatan_fungsional_model->get_array(array( 'IS_DOSEN' => $pegawai['IsDosen'] ));
+	$array_pegawai_fungsional = $this->riwayat_fungsional_model->get_array(array( 'K_PEGAWAI' => $k_pegawai ));
+	$array_pegawai_fungsional_request = $this->riwayat_fungsional_request_model->get_array(array( 'K_PEGAWAI' => $k_pegawai, 'IS_VALIDATE' => 0 ));
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<?php $this->load->view('body_meta', array( 'page_title' => 'Riwayat Diklat' ) ); ?>
+<?php $this->load->view('body_meta', array( 'page_title' => 'Riwayat Jabatan Fungsional' ) ); ?>
 
 <body>
 <div id="body"><div id="frame">
@@ -20,6 +22,7 @@
 		<div class="hidden cnt-page"><?php echo json_encode($page); ?></div>
 		<div class="glossymenu"><?php $this->load->view('main_menu'); ?></div>
 		<div class="glossymenu" style="padding: 50px 0 0 0;"><?php $this->load->view('main_sub_menu'); ?></div>
+		<?php $this->load->view('common/form_unit_kerja'); ?>
 	</div>
 	
 	<div id="content"><div class="full" style="min-height: 400px;"><div id="CntRightFull">
@@ -30,22 +33,21 @@
 		<?php } ?>
 		
 		<div class="cnt-grid">
-			<?php if (count($array_pegawai_diklat) > 0) { ?>
-				<h1>Riwayat Diklat</h1>
-				<div class="cnt_table_main record-valid"><table style="width: 1300px;">
+			<?php if (count($array_pegawai_fungsional) > 0) { ?>
+				<h1>Riwayat Jabatan Fungsional</h1>
+				<div class="cnt_table_main record-valid"><table style="width: 1625px;">
 					<tr>
 						<td class="left" style="width: 175px;">&nbsp;</td>
-						<td class="normal" style="width: 150px;">No Sertifikat</td>
-						<td class="normal" style="width: 100px;">Tanggal SK</td>
-						<td class="normal" style="width: 100px;">Diklat</td>
-						<td class="normal" style="width: 200px;">Penyelenggara</td>
-						<td class="normal" style="width: 100px;">Tempat Diklat</td>
-						<td class="normal" style="width: 100px;">Angkatan</td>
-						<td class="normal" style="width: 100px;">Tanggal Mulai</td>
-						<td class="normal" style="width: 100px;">Tanggal Lulus</td>
-						<td class="normal" style="width: 300px;">Keterangan</td>
-						<td class="normal" style="width: 50px;">Sertifikat</td></tr>
-					<?php foreach ($array_pegawai_diklat as $row) { ?>
+						<td class="normal" style="width: 150px;">No SK</td>
+						<td class="normal" style="width: 200px;">Jabatan Fungsional</td>
+						<td class="normal" style="width: 200px;">Unit Kerja</td>
+						<td class="normal" style="width: 150px;">Tanggal SK</td>
+						<td class="normal" style="width: 225px;">Asal SK</td>
+						<td class="normal" style="width: 150px;">TMT</td>
+						<td class="normal" style="width: 100px;">Angka Kredit</td>
+						<td class="normal" style="width: 200px;">Keterangan</td>
+						<td class="normal" style="width: 75px;">Sertifikat</td></tr>
+					<?php foreach ($array_pegawai_fungsional as $row) { ?>
 					<tr>
 						<td class="licon">
 							<span class="record hidden"><?php echo json_encode($row); ?></span>
@@ -53,37 +55,35 @@
 							<a class="btn-edit" data-action="update_valid"><img class="link" src="<?php echo HOST; ?>/images/Pencil.png" /></a>
 							<a class="btn-upload" data-action="update_upload_valid"><img class="link" src="<?php echo HOST; ?>/images/folder.png" /></a>
 						</td>
-						<td class="body"><?php echo $row['NO_SERTIFIKAT']; ?></td>
-						<td class="body"><?php echo ConvertDateToString($row['TGL_SERTIFIKAT']); ?></td>
-						<td class="body"><?php echo $row['DIKLAT']; ?></td>
-						<td class="body"><?php echo $row['PENYELENGGARA']; ?></td>
-						<td class="body"><?php echo $row['TMP_DIKLAT']; ?></td>
-						<td class="body"><?php echo $row['ANGKATAN']; ?></td>
-						<td class="body"><?php echo ConvertDateToString($row['TGL_MULAI']); ?></td>
-						<td class="body"><?php echo ConvertDateToString($row['TGL_LULUS']); ?></td>
+						<td class="body"><?php echo $row['NO_SK']; ?></td>
+						<td class="body"><?php echo $row['JABATAN_FUNGSIONAL']; ?></td>
+						<td class="body"><?php echo $row['UNIT_KERJA']; ?></td>
+						<td class="body"><?php echo ConvertDateToString($row['TGL_SK']); ?></td>
+						<td class="body"><?php echo $row['ASAL_SK']; ?></td>
+						<td class="body"><?php echo ConvertDateToString($row['TMT']); ?></td>
+						<td class="body"><?php echo $row['ANGKA_KREDIT']; ?></td>
 						<td class="body"><?php echo $row['KETERANGAN']; ?></td>
 						<td class="body"><?php echo $row['JML_FILE_TEXT']; ?></td></tr>
 					<?php } ?>
 				</table></div>
 			<?php } ?>
 			
-			<?php if (count($array_pegawai_diklat_request) > 0) { ?>
+			<?php if (count($array_pegawai_fungsional_request) > 0) { ?>
 				<h1>Riwayat yang belum tervalidasi</h1>
-				<div class="cnt_table_main record-request"><table style="width: 1450px;">
+				<div class="cnt_table_main record-request"><table style="width: 1775px;">
 					<tr>
 						<td class="left" style="width: 175px;">&nbsp;</td>
 						<td class="normal" style="width: 150px;">Jenis Request</td>
-						<td class="normal" style="width: 150px;">No Sertifikat</td>
-						<td class="normal" style="width: 100px;">Tanggal SK</td>
-						<td class="normal" style="width: 100px;">Diklat</td>
-						<td class="normal" style="width: 200px;">Penyelenggara</td>
-						<td class="normal" style="width: 100px;">Tempat Diklat</td>
-						<td class="normal" style="width: 100px;">Angkatan</td>
-						<td class="normal" style="width: 100px;">Tanggal Mulai</td>
-						<td class="normal" style="width: 100px;">Tanggal Lulus</td>
-						<td class="normal" style="width: 300px;">Keterangan</td>
-						<td class="normal" style="width: 50px;">Sertifikat</td></tr>
-					<?php foreach ($array_pegawai_diklat_request as $row) { ?>
+						<td class="normal" style="width: 150px;">No SK</td>
+						<td class="normal" style="width: 200px;">Jabatan Fungsional</td>
+						<td class="normal" style="width: 200px;">Unit Kerja</td>
+						<td class="normal" style="width: 150px;">Tanggal SK</td>
+						<td class="normal" style="width: 225px;">Asal SK</td>
+						<td class="normal" style="width: 150px;">TMT</td>
+						<td class="normal" style="width: 100px;">Angka Kredit</td>
+						<td class="normal" style="width: 200px;">Keterangan</td>
+						<td class="normal" style="width: 75px;">Sertifikat</td></tr>
+					<?php foreach ($array_pegawai_fungsional_request as $row) { ?>
 					<tr>
 						<td class="licon">
 							<span class="record hidden"><?php echo json_encode($row); ?></span>
@@ -92,15 +92,14 @@
 							<a class="btn-upload" data-action="update_upload_request"><img class="link" src="<?php echo HOST; ?>/images/folder.png" /></a>
 							<a class="btn-validate"><img class="link" src="<?php echo HOST; ?>/images/tick.png" /></a>
 						</td>
-						<td class="body"><?php echo show_jenis_request($row['JENIS_REQUEST']); ?></td>
-						<td class="body"><?php echo $row['NO_SERTIFIKAT']; ?></td>
-						<td class="body"><?php echo ConvertDateToString($row['TGL_SERTIFIKAT']); ?></td>
-						<td class="body"><?php echo $row['DIKLAT']; ?></td>
-						<td class="body"><?php echo $row['PENYELENGGARA']; ?></td>
-						<td class="body"><?php echo $row['TMP_DIKLAT']; ?></td>
-						<td class="body"><?php echo $row['ANGKATAN']; ?></td>
-						<td class="body"><?php echo ConvertDateToString($row['TGL_MULAI']); ?></td>
-						<td class="body"><?php echo ConvertDateToString($row['TGL_LULUS']); ?></td>
+						<td class="body"><?php echo show_jenis_request($row['JENIS_REQ_JABATAN_FUNGSIONAL']); ?></td>
+						<td class="body"><?php echo $row['NO_SK']; ?></td>
+						<td class="body"><?php echo $row['JABATAN_FUNGSIONAL']; ?></td>
+						<td class="body"><?php echo $row['UNIT_KERJA']; ?></td>
+						<td class="body"><?php echo ConvertDateToString($row['TGL_SK']); ?></td>
+						<td class="body"><?php echo $row['ASAL_SK']; ?></td>
+						<td class="body"><?php echo ConvertDateToString($row['TMT']); ?></td>
+						<td class="body"><?php echo $row['ANGKA_KREDIT']; ?></td>
 						<td class="body"><?php echo $row['KETERANGAN']; ?></td>
 						<td class="body"><?php echo $row['JML_FILE_TEXT']; ?></td></tr>
 					<?php } ?>
@@ -113,55 +112,60 @@
 		</div>
 		
 		<div class="cnt-form hidden">
-			<h1>Riwayat Diklat</h1>
+			<h1>Riwayat Jabatan Fungsional</h1>
 			
-			<form style="width: 80%;" id="FormRiwayatDiklat" action="<?php echo base_url('index.php/pegawai_modul/riwayat_diklat/action'); ?>">
+			<form style="width: 80%;" id="FormRiwayatHomeBase" action="<?php echo base_url('index.php/pegawai_modul/riwayat_fungsional/action'); ?>">
 				<input type="hidden" name="action" />
-				<input type="hidden" name="ID_REQUEST" value="x" />
-				<input type="hidden" name="ID_RIWAYAT_DIKLAT" value="x" />
+				<input type="hidden" name="ID_REQ_JABATAN_FUNGSIONAL" value="x" />
+				<input type="hidden" name="ID_RIWAYAT_JABATAN_FUNGSIONAL" value="x" />
 				<input type="hidden" name="K_PEGAWAI" value="<?php echo $k_pegawai; ?>" />
-				<input type="hidden" name="JENIS_REQUEST" />
+				<input type="hidden" name="JENIS_REQ_JABATAN_FUNGSIONAL" />
 				
 				<table style="width: 100%;" class="tabel" cellspacing="0" cellpadding="5" border="0">
 					<tr>
-						<td>No Sertifikat</td>
-						<td><input type="text" style="width: 150px;" size="50" name="NO_SERTIFIKAT" class="required sk_char" alt="Silahkan memasukkan No Sertifikat" /></td></tr>
+						<td>No SK</td>
+						<td><input type="text" style="width: 85%;" size="50" name="NO_SK" class="required sk_char" alt="No SK kosong" /></td></tr>
 					<tr>
-						<td>Tanggal Sertifikat</td>
-						<td><input type="text" style="width: 150px;" size="50" name="TGL_SERTIFIKAT" class="datepicker" /></td></tr>
+						<td>Tanggal SK</td>
+						<td><input type="text" style="width: 150px;" size="50" name="TGL_SK" class="required datepicker" alt="Tanggal SK kosong" /></td></tr>
 					<tr>
-						<td style="width: 200px;">Diklat</td>
+						<td style="width: 200px;">Asal SK</td>
+						<td style="width: 300px;"><select style="width: 85%;" name="K_ASAL_SK">
+							<?php echo ShowOption(array( 'Array' => $array_asal_sk, 'ArrayID' => 'K_ASAL_SK', 'ArrayTitle' => 'CONTENT' )); ?>
+						</select></td></tr>
+					<tr>
+						<td>TMT</td>
+						<td><input type="text" style="width: 150px;" size="50" name="TMT" class="datepicker" /></td></tr>
+					<tr>
+						<td style="width: 200px;">Unit Kerja</td>
 						<td style="width: 300px;">
-							<select style="width: 150px;" name="K_DIKLAT"><?php echo GetOption(false, $array_diklat, ''); ?></select>
-							<input type="text" style="width: 125px;" size="50" name="DIKLAT_NAMA" class="hidden" />
+							<input type="hidden" name="K_UNIT_KERJA" data-change="1" />
+							<input type="text" style="width: 150px;" size="50" class="unit-kerja" readonly="readonly" />
+							<input type="button" style="width: 75px;" class="show_unitkerja" data-target=".unit-kerja" value="Ubah" />
 						</td></tr>
 					<tr>
-						<td>Penyelenggara</td>
-						<td><input type="text" style="width: 150px;" size="50" name="PENYELENGGARA"></td></tr>
+						<td style="width: 200px;">Jabatan Fungsional</td>
+						<td style="width: 300px;"><select style="width: 85%;" name="K_JABATAN_FUNGSIONAL">
+							<?php echo ShowOption(array( 'Array' => $array_jabatan_fungsional, 'ArrayID' => 'K_JABATAN_FUNGSIONAL', 'ArrayTitle' => 'CONTENT' )); ?>
+						</select></td></tr>
+					<tr class="cnt-bidang-ilmu">
+						<td>Bidang Ilmu</td>
+						<td><input type="text" style="width: 150px;" size="50" name="BIDANG_ILMU" /></td></tr>
 					<tr>
-						<td>Nama Diklat</td>
-						<td><input type="text" style="width: 150px;" size="50" name="NAMA_DIKLAT" /></td></tr>
+						<td>Jabatan Lain</td>
+						<td><input type="text" style="width: 150px;" size="50" name="JABATAN_LAIN" /></td></tr>
 					<tr>
-						<td>Tempat Diklat</td>
-						<td><input type="text" style="width: 150px;" size="50" name="TMP_DIKLAT"></td></tr>
+						<td>Penandatangan SK</td>
+						<td><input type="text" style="width: 150px;" size="50" name="PENANDATANGAN_SK" /></td></tr>
 					<tr>
-						<td>Angkatan</td>
-						<td><input type="text" style="width: 150px;" size="50" name="ANGKATAN"></td></tr>
+						<td>Tunjangan Fungsional</td>
+						<td><input type="text" style="width: 150px;" size="50" name="TUNJANGAN_FUNGSIONAL" class="integer" /></td></tr>
 					<tr>
-						<td>Tanggal Mulai</td>
-						<td><input type="text" style="width: 150px;" size="50" name="TGL_MULAI" class="datepicker" /></td></tr>
-					<tr>
-						<td>Tanggal Lulus</td>
-						<td><input type="text" style="width: 150px;" size="50" name="TGL_LULUS" class="datepicker" /></td></tr>
-					<tr>
-						<td>Jumlah Jam</td>
-						<td><input type="text" style="width: 150px;" size="50" name="JML_JAM" class="integer" /></td></tr>
-					<tr>
-						<td>Predikat</td>
-						<td><input type="text" style="width: 150px;" size="50" name="PREDIKAT" /></td></tr>
-					<tr>
-						<td>Diklat Luar Negeri</td>
-						<td><input type="checkbox" value="1" name="IS_LUARNEGERI" /></td></tr>
+						<td>Angka Kredit</td>
+						<td>
+							<input type="text" style="width: 150px;" size="50" name="ANGKA_KREDIT" maxlength="10" />
+							<div>Gunakan tanda titik '.' sebagai pengganti tanda koma ','</div>
+						</td></tr>
 					<tr>
 						<td>Keterangan</td>
 						<td><textarea name="KETERANGAN" style="width: 85%; height: 75px;"></textarea></td></tr>
@@ -182,8 +186,8 @@
 			<div id="form-upload" class="cnt_table_main">
 				<input type="hidden" name="action" />
 				<input type="hidden" name="K_PEGAWAI" />
-				<input type="hidden" name="ID_REQUEST" />
-				<input type="hidden" name="ID_RIWAYAT_DIKLAT" />
+				<input type="hidden" name="ID_REQ_JABATAN_FUNGSIONAL" />
+				<input type="hidden" name="ID_RIWAYAT_JABATAN_FUNGSIONAL" />
 				
 				<table style="width: 80%; display: inline-table;" class="tabel" cellspacing="0" cellpadding="5" border="0">
 					<tr>
@@ -205,7 +209,7 @@
 
 <script type="text/javascript">
 (function() {
-	InitForm.Start('FormRiwayatDiklat');
+	InitForm.Start('FormRiwayatHomeBase');
 	
 	var page = {
 		init: function() {
@@ -234,13 +238,6 @@
 			$('.cnt-upload').show();
 			
 			page.load_grid_upload(p);
-		},
-		form_type: function(action) {
-			if (action == 'update_request') {
-				$('.cnt-request').show();
-			} else if (action == 'update_valid') {
-				$('.cnt-request').hide();
-			}
 		},
 		load_grid_upload: function(p) {
 			$('.cnt-upload .grid-upload').html('');
@@ -293,64 +290,78 @@
 					});
 				}
 			});
+		},
+		
+		combo: {
+			jabatan_fungsional: function() {
+				var value = $('select[name="K_JABATAN_FUNGSIONAL"]').val();
+				
+				if (value == '03' || value == '04') {
+					$('.cnt-bidang-ilmu').show();
+				} else {
+					$('.cnt-bidang-ilmu').hide();
+				}
+			}
 		}
 	}
 	
 	// button
 	$('.record-new').click(function() {
 		page.show_form();
-		page.form_type('update_request');
 		
 		// reset form
 		$('.cnt-form form')[0].reset();
 		
 		// init form
-//		$('.cnt-form .btn-submit').show();
 		$('.cnt-form [name="action"]').val('update_request');
-		$('.cnt-form [name="ID_RIWAYAT_DIKLAT"]').val('x');
-		$('.cnt-form [name="JENIS_REQUEST"]').val('I');
-		$('.cnt-form [name="K_DIKLAT"]').change();
+		$('.cnt-form [name="ID_RIWAYAT_JABATAN_FUNGSIONAL"]').val('x');
+		$('.cnt-form [name="JENIS_REQ_JABATAN_FUNGSIONAL"]').val('I');
+		$('.cnt-form [name="K_JABATAN_FUNGSIONAL"]').change();
 	});
 	$('.cnt-grid .btn-edit').click(function() {
 		page.show_form();
 		
 		// set action
 		var action = $(this).attr('data-action');
-		action = (action == 'update_valid' && page.data.is_user_fakultas) ? 'update_request' : action;
-		$('.cnt-form [name="action"]').val(action);
-		page.form_type(action);
+		var action_form = (action == 'update_valid' && page.data.is_user_fakultas) ? 'update_request' : action;
+		$('.cnt-form [name="action"]').val(action_form);
 		
 		// populate form
 		var raw = $(this).parents('tr').find('.record').html();
 		eval('var record = ' + raw);
 		
-		$('.cnt-form [name="ID_REQUEST"]').val((record.ID_REQUEST == null) ? 'x' : record.ID_REQUEST);
-		$('.cnt-form [name="NO_SERTIFIKAT"]').val(record.NO_SERTIFIKAT);
-		$('.cnt-form [name="TGL_SERTIFIKAT"]').val(Func.swap_date(record.TGL_SERTIFIKAT));
-		$('.cnt-form [name="K_DIKLAT"]').val(record.K_DIKLAT);
-		$('.cnt-form [name="DIKLAT_NAMA"]').val(record.DIKLAT_NAMA);
-		$('.cnt-form [name="PENYELENGGARA"]').val(record.PENYELENGGARA);
-		$('.cnt-form [name="NAMA_DIKLAT"]').val(record.NAMA_DIKLAT);
-		$('.cnt-form [name="TMP_DIKLAT"]').val(record.TMP_DIKLAT);
-		$('.cnt-form [name="ANGKATAN"]').val(record.ANGKATAN);
-		$('.cnt-form [name="TGL_MULAI"]').val(Func.swap_date(record.TGL_MULAI));
-		$('.cnt-form [name="TGL_LULUS"]').val(Func.swap_date(record.TGL_LULUS));
-		$('.cnt-form [name="JML_JAM"]').val(record.JML_JAM);
-		$('.cnt-form [name="PREDIKAT"]').val(record.PREDIKAT);
+		a = record
+		record = a;
+		
+		$('.cnt-form [name="JENIS_REQ_JABATAN_FUNGSIONAL"]').val(record.JENIS_REQ_JABATAN_FUNGSIONAL);
+		$('.cnt-form [name="ID_RIWAYAT_JABATAN_FUNGSIONAL"]').val((record.ID_RIWAYAT_JABATAN_FUNGSIONAL == null) ? 'x' : record.ID_RIWAYAT_JABATAN_FUNGSIONAL);
+		$('.cnt-form [name="ID_REQ_JABATAN_FUNGSIONAL"]').val((record.ID_REQ_JABATAN_FUNGSIONAL == null) ? 'x' : record.ID_REQ_JABATAN_FUNGSIONAL);
+		$('.cnt-form [name="NO_SK"]').val(record.NO_SK);
+		$('.cnt-form [name="TGL_SK"]').val(Func.swap_date(record.TGL_SK));
+		$('.cnt-form [name="TMT"]').val(Func.swap_date(record.TMT));
+		$('.cnt-form [name="K_ASAL_SK"]').val(record.K_ASAL_SK);
+		$('.cnt-form [name="K_UNIT_KERJA"]').val(record.K_UNIT_KERJA);
+		$('.cnt-form [name="K_UNIT_KERJA"]').next().val(record.UNIT_KERJA)
+		$('.cnt-form [name="K_JABATAN_FUNGSIONAL"]').val(record.K_JABATAN_FUNGSIONAL);
 		$('.cnt-form [name="KETERANGAN"]').val(record.KETERANGAN);
-		$('.cnt-form [name="IS_LUARNEGERI"]').attr('checked', ( record.IS_LUARNEGERI == 1 ? 'checked' : ''));
+		$('.cnt-form [name="TUNJANGAN_FUNGSIONAL"]').val(record.TUNJANGAN_FUNGSIONAL);
+		$('.cnt-form [name="ANGKA_KREDIT"]').val(record.ANGKA_KREDIT);
+		$('.cnt-form [name="BIDANG_ILMU"]').val(record.BIDANG_ILMU);
+		$('.cnt-form [name="JABATAN_LAIN"]').val(record.JABATAN_LAIN);
+		$('.cnt-form [name="PENANDATANGAN_SK"]').val(record.PENANDATANGAN_SK);
 		
 		// set combo
-		$('.cnt-form [name="K_DIKLAT"]').change();
-		
-		// set ansync data
-		$('.cnt-form [name="ID_RIWAYAT_DIKLAT"]').val((record.ID_RIWAYAT_DIKLAT == null) ? 'x' : record.ID_RIWAYAT_DIKLAT);
+		$('.cnt-form [name="K_JABATAN_FUNGSIONAL"]').change();
 		
 		// update request or valid
-		if (action == 'update_request') {
-			$('.cnt-form [name="JENIS_REQUEST"]').val(record.JENIS_REQUEST);
-		} else if (action == 'update_valid') {
-			$('.cnt-form [name="JENIS_REQUEST"]').val('U');
+		if (action_form == 'update_request') {
+			if (action == 'update_valid') {
+				$('.cnt-form [name="JENIS_REQ_JABATAN_FUNGSIONAL"]').val('U');
+			} else {
+				$('.cnt-form [name="JENIS_REQ_JABATAN_FUNGSIONAL"]').val(record.JENIS_REQ_JABATAN_FUNGSIONAL);
+			}
+		} else if (action_form == 'update_valid') {
+			$('.cnt-form [name="JENIS_REQ_JABATAN_FUNGSIONAL"]').val('U');
 		}
 	});
 	$('.cnt-grid .btn-delete').click(function() {
@@ -363,7 +374,7 @@
 			
 			// set data
 			param.action = 'update_request';
-			param.JENIS_REQUEST = 'D';
+			param.JENIS_REQ_JABATAN_FUNGSIONAL = 'D';
 			
 			Func.ajax({ url: form.attr('action'), param: param, callback: function(result) {
 				if (result.status) {
@@ -402,10 +413,10 @@
 		$('#form-upload [name="FILENAME"]').val('');
 		
 		// add param
-		if (record.ID_REQUEST != null)
-			$('#form-upload [name="ID_REQUEST"]').val(record.ID_REQUEST);
-		if (record.ID_RIWAYAT_DIKLAT != null)
-			$('#form-upload [name="ID_RIWAYAT_DIKLAT"]').val(record.ID_RIWAYAT_DIKLAT);
+		if (record.ID_REQ_JABATAN_FUNGSIONAL != null)
+			$('#form-upload [name="ID_REQ_JABATAN_FUNGSIONAL"]').val(record.ID_REQ_JABATAN_FUNGSIONAL);
+		if (record.ID_RIWAYAT_JABATAN_FUNGSIONAL != null)
+			$('#form-upload [name="ID_RIWAYAT_JABATAN_FUNGSIONAL"]').val(record.ID_RIWAYAT_JABATAN_FUNGSIONAL);
 		
 		record.reload = false;
 		record.action = (action == 'update_upload_valid') ? 'get_upload_valid' : 'get_upload_request';
@@ -416,31 +427,24 @@
 	});
 	
 	// init form
-	$('.cnt-form [name="K_DIKLAT"]').change(function() {
-		var value = $('.cnt-form [name="K_DIKLAT"]').val();
-		(value == '99') ? $('.cnt-form [name="DIKLAT_NAMA"]').show() : $('.cnt-form [name="DIKLAT_NAMA"]').hide();
+	$('.cnt-form [name="K_JABATAN_FUNGSIONAL"]').change(function() {
+		page.combo.jabatan_fungsional();
 	});
 	$('.cnt-form form').submit(function(event) {
 		event.preventDefault();
 		
 		var form = $('.cnt-form form');
-		var ArrayError = InitForm.Validation('FormRiwayatDiklat');
+		var ArrayError = InitForm.Validation('FormRiwayatHomeBase');
 		
 		// validation
-		var TGL_MULAI = InitForm.GetTimeFromString($('.cnt-form [name="TGL_MULAI"]').val());
-		var TGL_LULUS = InitForm.GetTimeFromString($('.cnt-form [name="TGL_LULUS"]').val());
-		if (TGL_MULAI > TGL_LULUS) {
-			ArrayError[ArrayError.length] = 'Tanggal Mulai harus lebih kecil daripada Tanggal Lulus';
-		}
 		if (ArrayError.length > 0) {
 			return ShowWarning(ArrayError);
 		}
 		
 		// submit
-		var param = Site.Form.GetValue('FormRiwayatDiklat');
-		param.TGL_SERTIFIKAT = Func.swap_date(param.TGL_SERTIFIKAT);
-		param.TGL_MULAI = Func.swap_date(param.TGL_MULAI);
-		param.TGL_LULUS = Func.swap_date(param.TGL_LULUS);
+		var param = Site.Form.GetValue('FormRiwayatHomeBase');
+		param.TGL_SK = Func.swap_date(param.TGL_SK);
+		param.TMT = Func.swap_date(param.TMT);
 		Func.ajax({ url: form.attr('action'), param: param, callback: function(result) {
 			if (result.status) {
 				window.location = window.location.href
@@ -473,7 +477,6 @@
 					ShowDialogObject({ ArrayMessage: [result.message] });
 				}
 			} });
-			console.log('here');
 		} else {
 			param.reload = false;
 			Func.ajax({ url: $('.cnt-form form').attr('action'), param: param, callback: function(result) {

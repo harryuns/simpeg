@@ -139,6 +139,7 @@ function InitSearch() {
 					eval('var unit_kerja = ' + RawResult);
 					$('[name="K_UNIT_KERJA"]').val(unit_kerja.id);
 					$('[name="UNIT_KERJA"]').val(unit_kerja.Content);
+					$('[name="K_PARENT"]').val(unit_kerja.id);
 				}
 			});
 		},

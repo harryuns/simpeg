@@ -6,7 +6,7 @@
 	// param fix
 	$param_pegawai['SORTING'] = 2;
 	$param_pegawai['PencarianDetail'] = 0;
-	$param_pegawai['PageOffset'] = 100;
+	$param_pegawai['PageOffset'] = 1000000;
 	$array_pegawai = $this->lpegawai->GetArrayPegawai($param_pegawai);
 ?>
 

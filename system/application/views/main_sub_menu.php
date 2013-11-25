@@ -41,6 +41,9 @@
 		$ArrayMenu['RiwayatSeminar'] = array( 'link' => $Pegawai['LinkRiwayatSeminar'], 'title' => 'Riwayat Seminar' );
 		$ArrayMenu['RiwayatOrganisasi'] = array( 'link' => $Pegawai['LinkRiwayatOrganisasi'], 'title' => 'Riwayat Organisasi' );
 		$ArrayMenu['RiwayatHukuman'] = array( 'link' => $Pegawai['LinkRiwayatHukuman'], 'title' => 'Riwayat Hukuman' );
+		
+		// SKP
+		$ArrayMenu['skp'] = array( 'link' => $Pegawai['link_skp'], 'title' => 'SKP' );
         
         if ($Pegawai['IsDosen'] == '1' && $_SESSION['UserLogin']['ApplicationRequest'] == 'Simpeg') {
             $ArrayMenu['DataAsessor'] = array( 'link' => $Pegawai['LinkDataAsessor'], 'title' => 'Data Asessor' );
