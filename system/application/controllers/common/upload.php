@@ -1,0 +1,1 @@
+<?phpclass upload extends Controller {    function upload() {        parent::Controller();    }    	function index() {		$this->load->view( 'common/form_upload' );	}}?>

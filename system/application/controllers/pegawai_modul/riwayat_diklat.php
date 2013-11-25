@@ -13,7 +13,7 @@ class riwayat_diklat extends Controller {
 		$result = array();
 		$action = (isset($_POST['action'])) ? $_POST['action'] : '';
 		$reload = (isset($_POST['reload'])) ? $_POST['reload'] : true;
-		$reload = ($reload === 'false') ? false : true;
+		$reload = ($reload === 'false') ? false : $reload;
 		
 		// user
 		$_POST['USERID'] = $this->session->UserLogin['UserID'];

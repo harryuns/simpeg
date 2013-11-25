@@ -113,7 +113,8 @@ class SeleksiDosen extends Controller {
 		$Array['ArrayPeriode'] = $ArrayPeriode[0];
 		
 		// check upload
-    	if (!empty($_POST)){   		    		    		
+    	if (!empty($_POST)) {
+			ini_set("memory_limit", "1G");
     		$Array['ArrayPegawai'] =  $this->lseleksi_dosen->ReadExcelPeserta($_POST);
     	}
 		

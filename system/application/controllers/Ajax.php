@@ -94,14 +94,18 @@ class Ajax extends Controller {
 	}
 	
     function JabatanStruktural() {
-        $Result = '';
+        $result = '';
+		
         if ($this->Action == 'GetArrayByUnitKerja') {
             $K_UNIT_KERJA = $this->input->post('K_UNIT_KERJA');
             $ArrayUnitKerja = $this->ljabatan_struktural->GetArrayByUnitKerja($K_UNIT_KERJA);
-            $Result = GetOption(false, $ArrayUnitKerja, '');
+            $result = GetOption(false, $ArrayUnitKerja, '');
+        } else if ($this->Action == 'GetJabatanStrukturalByUnitKerja') {
+            $array = $this->jabatan_struktural_model->get_array($_POST);
+			$result = ShowOption(array( 'Array' => $array, 'ArrayID' => 'K_JABATAN_STRUKTURAL', 'ArrayTitle' => 'CONTENT' ));
         }
         
-        echo $Result;
+        echo $result;
         exit;
     }
     
