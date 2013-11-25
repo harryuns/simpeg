@@ -1,0 +1,1 @@
+<div class="footer_cnt">&copy; University of Brawijayaawdawd</div>
