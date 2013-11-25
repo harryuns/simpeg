@@ -82,7 +82,10 @@ class LSeleksi_Dosen extends Controller {
 		$Data['PUKUL'] = (isset($Peserta[8])) ? $Peserta[8] : '08:00 WIB';
     	$Data['UID'] = $_SESSION['UserLogin']['UserID'];
 		
-    	if (!is_numeric($Data['INNO_PESERTA'])){
+		// convert to int
+		$Data['INNO_PESERTA'] = preg_replace('/[^0-9]/i', '', $Data['INNO_PESERTA']);
+		$Data['INNO_PESERTA'] = intval($Data['INNO_PESERTA']);
+		if (!is_numeric($Data['INNO_PESERTA'])){
     		return $Message;
     	}
 		
@@ -99,16 +102,19 @@ class LSeleksi_Dosen extends Controller {
 			)
 		";
 		
-    	try {
-	    	$Query = @db2_prepare($this->CI->ldb2->Handle, $RawQuery);
-	    	$Result = @db2_execute($Query);// or die(db2_stmt_errormsg($Query));
+    	// try {
+	    	$Query = db2_prepare($this->CI->ldb2->Handle, $RawQuery);
+	    	$Result = db2_execute($Query) or die(db2_stmt_errormsg($Query));
 	    	
-	    	while ($Row = @db2_fetch_assoc($Query)) {    		
+	    	while ($Row = db2_fetch_assoc($Query)) {    		
 	    		$Message = $Row['MSG'];
 	    	}
+		/*
     	} catch (Exception $e) {
     		$Message = 'Proses Simpan Data Gagal Dieksekusi ...';
     	}
+		/*	*/
+		
     	return $Message;
     }
     function DelAllPeserta($Periode){
@@ -319,7 +325,7 @@ class LSeleksi_Dosen extends Controller {
     			$PageCount = 1;
     			$Data['PageActive'] = (empty($Data['PageActive'])) ? 1 : $Data['PageActive'];
     			$Data['PageOffset'] = (empty($Data['PageOffset'])) ? 20 : $Data['PageOffset'];
-    			$ArrayPegawai = $this->GetArrayFromExcel($Path,9,1000);
+    			$ArrayPegawai = $this->GetArrayFromExcel($Path,9,5000);
 				
     			$PegawaiTotal = count($ArrayPegawai);
     			$PageActive = $Data['PageActive'];
@@ -380,6 +386,7 @@ class LSeleksi_Dosen extends Controller {
     	} catch(Exception $e){
     		return null;
     	}
+		
 		
 		// update to db
 		foreach ($arr_data as $key => $row) {

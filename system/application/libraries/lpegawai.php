@@ -108,6 +108,14 @@ class LPegawai extends Controller {
 		$Pegawai['LinkRiwayatHukuman'] = HOST.'/index.php/RiwayatHukuman/Ubah/'.ConvertLink($Pegawai['K_PEGAWAI']);
 		$Pegawai['LinkDataEkd'] = HOST.'/index.php/SendToEkd/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
 		
+		$Pegawai['LinkRiwayatDiklat'] = HOST.'/index.php/pegawai_modul/riwayat_diklat/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
+		$Pegawai['LinkRiwayatFungsional'] = HOST.'/index.php/pegawai_modul/riwayat_fungsional/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
+		$Pegawai['LinkRiwayatStruktural'] = HOST.'/index.php/pegawai_modul/riwayat_struktural/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
+		$Pegawai['LinkRiwayatHomeBase'] = HOST.'/index.php/pegawai_modul/riwayat_homebase/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
+		$Pegawai['LinkRiwayatHonorer'] = HOST.'/index.php/pegawai_modul/riwayat_honorer/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
+		$Pegawai['LinkRiwayatHukuman'] = HOST.'/index.php/pegawai_modul/riwayat_hukuman/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
+		$Pegawai['link_skp'] = HOST.'/index.php/pegawai_modul/skp/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
+		
         // Add Parameter
         $Pegawai['IsNewPegawai'] = (empty($K_PEGAWAI)) ? 1 : 0;
         
