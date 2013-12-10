@@ -1,12 +1,12 @@
 <?php
 
-class skp extends Controller {
+class skp_penilaian extends Controller {
 	function __construct() {
         parent::Controller();
     }
     
     function index() {
-        $this->load->view('pegawai_modul/skp');
+        $this->load->view('pegawai_modul/skp_penilaian');
     }
     
     function action() {

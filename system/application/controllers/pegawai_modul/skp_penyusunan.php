@@ -1,12 +1,12 @@
 <?php
 
-class skp extends Controller {
+class skp_penyusunan extends Controller {
 	function __construct() {
         parent::Controller();
     }
     
     function index() {
-        $this->load->view('pegawai_modul/skp');
+        $this->load->view('pegawai_modul/skp_penyusunan');
     }
     
     function action() {
@@ -18,18 +18,10 @@ class skp extends Controller {
 		// user
 		$_POST['USERID'] = $this->session->UserLogin['UserID'];
 		
-		// riwayat
-		if ($action == 'update_tupoksi') {
-			$result = $this->skp_model->update_tupoksi($_POST);
-		} else if ($action == 'delete') {
+		if ($action == 'update_penyusunan') {
+			$result = $this->skp_model->update_penyusunan($_POST);
+		} else if ($action == 'delete_penyusunan') {
 			$result = $this->skp_model->delete_tupoksi($_POST);
-		}
-		
-		// penilai
-		else if ($action == 'update_penilai') {
-			$result = $this->skp_model->update_penilai($_POST);
-		} else if ($action == 'delete_penilai') {
-			$result = $this->skp_model->delete_penilai($_POST);
 		}
 		
 		if ($reload && isset($result['status']) && $result['status']) {

@@ -3,15 +3,13 @@
 	$page = array( 'k_pegawai' => $k_pegawai );
 	
 	$message = get_flash_message();
-	//	$array_jenis_skp = $this->jenis_skp_model->get_array();
-	$array_jenis_skp = array();
 	$array_kegiatan_skp = $this->skp_model->get_array_kegiatan(array( 'K_PEGAWAI' => $k_pegawai ));
 	$array_penilai_skp = $this->skp_model->get_array_penilai(array( 'K_PEGAWAI' => $k_pegawai ));
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<?php $this->load->view('body_meta', array( 'page_title' => 'SKP' ) ); ?>
+<?php $this->load->view('body_meta', array( 'page_title' => 'SKP Penilaian' ) ); ?>
 
 <body>
 <div id="body"><div id="frame">
@@ -30,13 +28,12 @@
 		<?php } ?>
 		
 		<div class="cnt-grid-kegiatan">
-			<h1>Riwayat SKP</h1>
+			<h1>SKP Penilaian</h1>
 			<?php if (count($array_kegiatan_skp) > 0) { ?>
-				<div class="cnt_table_main"><table style="width: 1050px;">
+				<div class="cnt_table_main"><table style="width: 900px;">
 					<tr>
 						<td class="left" style="width: 175px;">&nbsp;</td>
 						<td class="normal" style="width: 150px;">Tahun</td>
-						<td class="normal" style="width: 150px;">Jenis SKP</td>
 						<td class="normal" style="width: 150px;">Kegiatan</td>
 						<td class="normal" style="width: 150px;">AK Target</td>
 						<td class="normal" style="width: 150px;">KUAN Target</td>
@@ -52,7 +49,6 @@
 							<a class="btn-edit" data-action="update_tupoksi"><img class="link" src="<?php echo HOST; ?>/images/Pencil.png" /></a>
 						</td>
 						<td class="body"><?php echo $row['TAHUN']; ?></td>
-						<td class="body"><?php echo $row['JENIS_SKP']; ?></td>
 						<td class="body"><?php echo $row['KEGIATAN']; ?></td>
 						<td class="body"><?php echo $row['AK_TARGET']; ?></td>
 						<td class="body"><?php echo $row['KUAN_TARGET']; ?></td>
@@ -70,7 +66,7 @@
 		</div>
 		
 		<div class="cnt-grid-penilai">
-			<h1>Penilai SKP</h1>
+			<h1>SKP Penilai</h1>
 			<?php if (count($array_penilai_skp) > 0) { ?>
 				<div class="cnt_table_main"><table style="width: 475px;">
 					<tr>
@@ -108,12 +104,6 @@
 					<tr>
 						<td>Tahun</td>
 						<td><input type="text" style="width: 30%;" size="50" name="TAHUN" class="required integer" alt="Tahun kosong" /></td></tr>
-					<tr>
-						<td>Jenis SKP</td>
-						<td><select name="K_JENIS_SKP" class="required" style="width: 50%;">
-							<?php echo ShowOption(array( 'Array' => $array_jenis_skp, 'ArrayID' => 'K_JENIS_SKP', 'ArrayTitle' => 'CONTENT' )); ?>
-						</select></td>
-					</tr>
 					<tr>
 						<td>Kegiatan</td>
 						<td><textarea name="KEGIATAN" class="required" alt="Kegiatan kosong" style="width: 75%; height: 60px;"></textarea></td></tr>
@@ -225,6 +215,7 @@
 		
 		// init form
 		$('.cnt-form-kegiatan [name="action"]').val('update_tupoksi');
+		$('.cnt-form-kegiatan [name="TAHUN"]').val(new Date().getFullYear());
 		$('.cnt-form-kegiatan [name="ID_NILAI_TUPOKSI"]').val('x');
 	});
 	$('.cnt-grid-kegiatan .btn-edit').click(function() {
