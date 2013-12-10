@@ -1,5 +1,5 @@
 <?php
-//	print_r($RiwayatPendidikan);
+//	print_r($ArrayJenjang); exit;
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -100,7 +100,9 @@
 								<table style="width: 100%;" class="tabel" cellspacing="0" cellpadding="5" border="0">
 									<tr>
 										<td style="width: 200px;">Jenjang</td>
-										<td style="width: 300px;"><select style="width: 150px;" name="K_JENJANG" class="required"><?php echo GetOption(false, $ArrayJenjang, $RiwayatPendidikan['K_JENJANG']); ?></select></td></tr>
+										<td style="width: 300px;"><select style="width: 150px;" name="K_JENJANG" class="required">
+											<?php echo ShowOption(array( 'Array' => $ArrayJenjang, 'ArrayID' => 'Code', 'ArrayTitle' => 'Content', 'Selected' => $RiwayatPendidikan['K_JENJANG'] )); ?>
+										</select></td></tr>
 									<tr id="CntPt">
 										<td>Perguruan Tinggi / Sekolah</td>
 										<td><input type="text" style="width: 150px;" size="50" value="<?php echo $RiwayatPendidikan['PT']; ?>" name="PT"></td></tr>

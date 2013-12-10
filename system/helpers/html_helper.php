@@ -461,6 +461,7 @@ if ( ! function_exists('ShowOption'))
 		$Param['ArrayID'] = (isset($Param['ArrayID'])) ? $Param['ArrayID'] : 'id';
 		$Param['ArrayTitle'] = (isset($Param['ArrayTitle'])) ? $Param['ArrayTitle'] : 'title';
 		$Param['Selected'] = (isset($Param['Selected'])) ? $Param['Selected'] : '';
+		$Param['Selected'] = preg_replace('/[^a-z0-9]+/i', '', $Param['Selected']);
 		
 		$Content = '';
 		$Selected = '';

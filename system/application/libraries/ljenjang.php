@@ -57,6 +57,7 @@ class LJenjang {
         
         $ArrayJenjang = array();
         foreach ($Array as $Key => $Element) {
+            $ArrayJenjang[$Element['K_JENJANG']]['Code'] = $Element['K_JENJANG'];
             $ArrayJenjang[$Element['K_JENJANG']]['Singkat'] = $Element['SINGKAT'];
             $ArrayJenjang[$Element['K_JENJANG']]['Content'] = $Element['CONTENT'];
         }
