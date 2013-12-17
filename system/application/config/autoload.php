@@ -59,7 +59,7 @@ $autoload['libraries'] = array(
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('html', 'date', 'file', 'common', 'url');
+$autoload['helper'] = array('html', 'date', 'file', 'common', 'url', 'mcrypt' );
 
 
 /*
@@ -120,7 +120,8 @@ $autoload['model'] = array(
 	'dosen_luaran_model', 'riwayat_diklat_model', 'riwayat_diklat_request_model', 'directory_gurubesar_model', 'riwayat_homebase_model',
 	'riwayat_homebase_request_model', 'riwayat_honorer_model', 'riwayat_honorer_request_model', 'asal_sk_model', 'bidang_kerja_model',
 	'riwayat_hukuman_model', 'riwayat_hukuman_request_model', 'riwayat_fungsional_model', 'riwayat_fungsional_request_model',
-	'jabatan_fungsional_model', 'riwayat_struktural_model', 'riwayat_struktural_request_model', 'jabatan_struktural_model', 'skp_model'
+	'jabatan_fungsional_model', 'riwayat_struktural_model', 'riwayat_struktural_request_model', 'jabatan_struktural_model', 'skp_model',
+	'jenis_skp_model', 'jabatan_pekerjaan_model'
 );
 
 

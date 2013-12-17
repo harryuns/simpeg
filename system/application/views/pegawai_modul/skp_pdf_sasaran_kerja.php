@@ -39,17 +39,17 @@ table.border td,th,caption{background-color:#fff}
 	<tr>
 		<td style="text-align: center;">4</td>
 		<td>Jabatan</td>
-		<td>-</td>
+		<td><?php echo $penilai_detail['JABATAN_LAIN']; ?></td>
 		<td style="text-align: center;">4</td>
 		<td>Jabatan</td>
-		<td>-</td></tr>
+		<td><?php echo $pegawai_detail['JABATAN_LAIN']; ?></td></tr>
 	<tr>
 		<td style="text-align: center;">5</td>
 		<td>Unit Kerja</td>
-		<td>-</td>
+		<td><?php echo $penilai_detail['UNIT_KERJA']; ?></td>
 		<td style="text-align: center;">5</td>
 		<td>Unit Kerja</td>
-		<td>-</td></tr>
+		<td><?php echo $pegawai_detail['UNIT_KERJA']; ?></td></tr>
 </table>
 </div>
 
@@ -70,11 +70,11 @@ table.border td,th,caption{background-color:#fff}
 	<tr>
 		<td style="text-align: center;"><?php echo $counter; ?></td>
 		<td><?php echo $row['KEGIATAN']; ?></td>
-		<td style="text-align: center;"><?php echo $row['AK_TARGET']; ?></td>
+		<td style="text-align: center;"><?php echo show_skp($row['AK_TARGET']); ?></td>
 		<td style="text-align: center;"><?php echo $row['KUAN_TARGET']; ?></td>
 		<td style="text-align: center;"><?php echo $row['KUAL_TARGET']; ?></td>
 		<td style="text-align: center;"><?php echo $row['WAKTU_TARGET']; ?></td>
-		<td style="text-align: center;"><?php echo $row['BIAYA_TARGET']; ?></td></tr>
+		<td style="text-align: center;"><?php echo show_skp($row['BIAYA_TARGET']); ?></td></tr>
 	<?php $counter++; ?>
 	<?php } ?>
 </table>

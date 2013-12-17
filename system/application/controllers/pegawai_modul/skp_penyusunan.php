@@ -24,6 +24,13 @@ class skp_penyusunan extends Controller {
 			$result = $this->skp_model->delete_tupoksi($_POST);
 		}
 		
+		// penilai
+		else if ($action == 'update_penilai') {
+			$result = $this->skp_model->update_penilai($_POST);
+		} else if ($action == 'delete_penilai') {
+			$result = $this->skp_model->delete_penilai($_POST);
+		}
+		
 		if ($reload && isset($result['status']) && $result['status']) {
 			set_flash_message($result['message']);
 		}
@@ -40,11 +47,6 @@ class skp_penyusunan extends Controller {
 		
 		$template = $this->load->view( 'pegawai_modul/skp_pdf_sasaran_kerja', array( 'K_PENILAI' => $K_PENILAI ), true );
 		$pdf->WriteHTML($template);
-		
-		$pdf->AddPage('L');
-		$template = $this->load->view( 'pegawai_modul/skp_pdf_capaian_sasaran', array( 'K_PENILAI' => $K_PENILAI ), true );
-		$pdf->WriteHTML($template);
-		
 		$pdf->Output();
 	}
 }

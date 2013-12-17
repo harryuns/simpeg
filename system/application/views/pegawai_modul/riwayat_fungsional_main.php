@@ -7,6 +7,7 @@
 	
 	$message = get_flash_message();
 	$array_asal_sk = $this->asal_sk_model->get_array();
+	$array_jabatan_pekerjaan = $this->jabatan_pekerjaan_model->get_array();
 	$array_jabatan_fungsional = $this->jabatan_fungsional_model->get_array(array( 'IS_DOSEN' => $pegawai['IsDosen'] ));
 	$array_pegawai_fungsional = $this->riwayat_fungsional_model->get_array(array( 'K_PEGAWAI' => $k_pegawai ));
 	$array_pegawai_fungsional_request = $this->riwayat_fungsional_request_model->get_array(array( 'K_PEGAWAI' => $k_pegawai, 'IS_VALIDATE' => 0 ));
@@ -152,8 +153,11 @@
 						<td>Bidang Ilmu</td>
 						<td><input type="text" style="width: 150px;" size="50" name="BIDANG_ILMU" /></td></tr>
 					<tr>
-						<td>Jabatan Lain</td>
-						<td><input type="text" style="width: 150px;" size="50" name="JABATAN_LAIN" /></td></tr>
+						<td style="width: 200px;">Jabatan Pekerjaan</td>
+						<td style="width: 300px;"><select style="width: 85%;" name="JABATAN_LAIN">
+							<?php echo ShowOption(array( 'Array' => $array_jabatan_pekerjaan, 'ArrayID' => 'K_JABATAN_PEKERJAAN', 'ArrayTitle' => 'CONTENT' )); ?>
+						</select></td>
+					</tr>
 					<tr>
 						<td>Penandatangan SK</td>
 						<td><input type="text" style="width: 150px;" size="50" name="PENANDATANGAN_SK" /></td></tr>

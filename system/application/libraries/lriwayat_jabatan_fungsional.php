@@ -112,11 +112,10 @@ class LRiwayat_Jabatan_Fungsional {
             if ($Validation == 'pass' && $ParameterUpdate == 'insert') {
                 $RawQuery = "
                     CALL DB2ADMIN.INSUPDRWYTJABFUNG(
-                        '".$Data['K_PEGAWAI']."', '".$Data['NO_SK']."', '".$Data['TGL_SK']."',
-                        '".$Data['K_ASAL_SK']."', '".$Data['TMT']."', '".$Data['K_UNIT_KERJA']."', 
-                        '".$Data['K_JABATAN_FUNGSIONAL']."', '".$Data['KETERANGAN']."',
-                        '".$this->CI->session->UserLogin['UserID']."', '".$Data['TUNJANGAN_FUNGSIONAL']."', '".$Data['ANGKA_KREDIT']."',
-                        '".$Data['BIDANG_ILMU']."', '".$Data['JABATAN_LAIN']."', '".$Data['PENANDATANGAN_SK']."'
+                        '".$Data['K_PEGAWAI']."', '".$Data['NO_SK']."', '".$Data['TGL_SK']."', '".$Data['K_ASAL_SK']."',
+						'".$Data['TMT']."', '".$Data['K_UNIT_KERJA']."', '".$Data['K_JABATAN_FUNGSIONAL']."', '".$Data['KETERANGAN']."',
+                        '".$this->CI->session->UserLogin['UserID']."', '".$Data['TUNJANGAN_FUNGSIONAL']."', '".$Data['ANGKA_KREDIT']."', '".$Data['BIDANG_ILMU']."',
+						'".$Data['JABATAN_LAIN']."', '".$Data['PENANDATANGAN_SK']."'
 					)
 				";
 				
@@ -127,11 +126,10 @@ class LRiwayat_Jabatan_Fungsional {
             } else if ($Validation == 'pass' && $ParameterUpdate == 'update') {
                 $RawQuery = "
                     CALL DB2ADMIN.INSUPDRWYTJABFUNG(
-                        '".$Data['K_PEGAWAI']."', '".$Data['NO_SK']."', '".$Data['TGL_SK']."',
-                        '".$Data['K_ASAL_SK']."', '".$Data['TMT']."', '".$Data['K_UNIT_KERJA']."', 
-                        '".$Data['K_JABATAN_FUNGSIONAL']."', '".$Data['KETERANGAN']."', 
-                        '".$this->CI->session->UserLogin['UserID']."', '".$Data['TUNJANGAN_FUNGSIONAL']."', '".$Data['ANGKA_KREDIT']."',
-                        '".$Data['BIDANG_ILMU']."', '".$Data['JABATAN_LAIN']."', '".$Data['PENANDATANGAN_SK']."'
+                        '".$Data['K_PEGAWAI']."', '".$Data['NO_SK']."', '".$Data['TGL_SK']."', '".$Data['K_ASAL_SK']."',
+						'".$Data['TMT']."', '".$Data['K_UNIT_KERJA']."', '".$Data['K_JABATAN_FUNGSIONAL']."', '".$Data['KETERANGAN']."', 
+                        '".$this->CI->session->UserLogin['UserID']."', '".$Data['TUNJANGAN_FUNGSIONAL']."', '".$Data['ANGKA_KREDIT']."', '".$Data['BIDANG_ILMU']."',
+						'".$Data['JABATAN_LAIN']."', '".$Data['PENANDATANGAN_SK']."'
 					)
 				";
 				

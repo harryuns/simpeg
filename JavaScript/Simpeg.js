@@ -1,6 +1,29 @@
 var InitForm = {
 	InitUser: function() {
-		if (! Func.InArray(Web.UserGroupID, Web.admin_group_id)) {
+		// tenaga pendidikan
+		if (Web.UserGroupID == 1061) {
+			var page_link = window.location.href;
+			var array_match = page_link.match(new RegExp('pegawai_modul\/skp', 'gi'));
+			if (typeof(array_match) == 'undefined' || array_match == null) {
+				$('#InitTable .Delete').parent('td').html('&nbsp;');
+				$('#ListPegawai .DeletePegawai').parent('td').html('&nbsp;');
+				$('#CntImage .Relative .position .cursor').remove();
+				$('input[type="file"]').remove();
+				$('input[name="UploadFile"]').remove();
+				
+				for (var i = 0; i < $('input[type="submit"]').length; i++) {
+					var Input = $('input[type="submit"]').eq(i);
+					if (InitForm.InArray(Input.val(), ['Save', 'Tambah'])) {
+						Input.remove();
+					}
+				}
+			} else if (array_match.length == 1 && array_match[0] == 'pegawai_modul/skp') {
+				// free to write
+			}
+		}
+		
+		// non admin
+		else if (! Func.InArray(Web.UserGroupID, Web.admin_group_id)) {
 //			$('#InitTable .Edit').parent('td').html('&nbsp;');
 			$('#InitTable .Delete').parent('td').html('&nbsp;');
 			$('#ListPegawai .DeletePegawai').parent('td').html('&nbsp;');
@@ -191,6 +214,39 @@ var Func = {
 			}
 		} });
 	},
+	set_combo: function(p) {
+		/*	how to use
+			var param = {
+				value: 30,
+				combo: $('[name="K_JENJANG"]'),
+				callback: function() {
+				}
+				ajax: {
+					url: Web.HOST + '/index.php/Ajax/Jenjang',
+					param: { Action: 'GetJenjangByUnitKerja', K_UNIT_KERJA: $('[name="K_UNIT_KERJA"]').val() }
+				}
+			}
+			Func.set_combo(param);
+		/*	*/
+		
+		var ajax_param = p.ajax;
+		ajax_param.is_json = false;
+		ajax_param.callback = function(option) {
+			p.combo.html(option);
+			
+			// set value
+			if (typeof(p.value) != 'undefined') {
+				p.combo.val(p.value);
+			}
+			
+			// set callback
+			if (typeof(p.callback) != 'undefined') {
+				p.callback();
+			}
+		}
+		
+		Func.ajax(ajax_param);
+	},
 	swap_date: function(Value) {
 		if (Value == null) {
 			return '';
@@ -265,18 +321,6 @@ var Func = {
 		}
 		str = '{' + str + '}';
 		return str;
-	},
-	SetValue: function(Param) {
-		// Func.SetValue({ Action : 'City', ForceID: Param.city_id, Combo: WinGateway.city });
-		
-		Ext.Ajax.request({
-			url: Web.HOST + '/index.php/combo',
-			params: { Action : Param.Action, ForceID: Param.ForceID },
-			success: function(Result) {
-				Param.Combo.store.loadData(eval(Result.responseText));
-				Param.Combo.setValue(Param.ForceID);
-			}
-		});
 	},
 	SyncComboParam: function(c, Param) {
 		var ArrayConfig = ['renderTo', 'name', 'fieldLabel', 'anchor', 'id', 'allowBlank', 'blankText', 'tooltip', 'iconCls', 'width', 'listeners', 'value'];
@@ -484,7 +528,37 @@ var Site = {
 
             return Data;
         }
-    }
+    },
+	autocomplate: function(p) {
+		// sample
+		// Site.autocomplate({ action: 'pegawai' });
+		
+		// set default on select
+		if (typeof(p.select) == 'undefined') {
+			p.select = function(value) {
+			}
+		}
+		
+		// set default format
+		if (typeof(p.format) == 'undefined') {
+			p.format = function(row) {
+				return row[0] + " (" + row[1] + ")";
+			}
+		}
+		
+		$(".auto-pegawai").autocomplete( Web.HOST + "/index.php/common/autocomplete", {
+			delay: 1500,
+			minChars:5,
+			matchSubset:1,
+			matchContains:1,
+			cacheLength:10,
+			autoFill: true,
+			extraParams: { action: p.action },
+			onItemSelect: p.select,
+			onItemSelect: p.format,
+			formatItem: p.format
+		} );
+	}
 }
 
 function IsValidEmail(Email) {

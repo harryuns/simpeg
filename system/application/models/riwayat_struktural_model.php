@@ -26,6 +26,9 @@ class riwayat_struktural_model extends Model {
 			if ($row['ERROR'] == QUERY_STATUS_SUCCESS) {
 				$result['status'] = true;
 				$result['message'] = 'Data berhasil disimpan';
+				
+				// bais sync
+				$this->bais_sync($param);
 			} else {
 				$result['message'] = 'Error.';
 			}
@@ -169,4 +172,37 @@ class riwayat_struktural_model extends Model {
 	}
 	
 	/*	end region upload file */
+	
+	/*	region sync bais */
+	
+	function bais_sync($param) {
+		$param_bais['IN_NIP'] = $param['K_PEGAWAI'];
+		$param_bais['IN_K_UNIT_KERJA'] = $param['K_UNIT_KERJA'];
+		$param_bais['IN_K_JABATAN_STRUKTURAL'] = $param['K_JABATAN_STRUKTURAL'];
+		$param_bais['IN_K_FAKULTAS'] = $param['K_FAKULTAS'];
+		$param_bais['IN_K_JENJANG'] = $param['K_JENJANG'];
+		$param_bais['IN_K_JURUSAN'] = $param['K_JURUSAN'];
+		$param_bais['IN_K_PROG_STUDI'] = $param['K_PROG_STUDI'];
+		$param_bais['DBFAK'] = $param_bais['IN_K_FAKULTAS'];							// sesuai fakultas user login bais
+		$param_bais['IN_USERID'] = 'rizalespe';											// sesuai user login bais
+		$param_bais['IN_KEY'] = crypt($param_bais['IN_USERID'], 'UB-S14K4D-2013');
+		$param_encode = rawurlencode(base64_encode(json_encode($param_bais)));
+		
+		$ch = curl_init();
+		$curl_config = array( 
+			CURLOPT_POST => true,
+			CURLOPT_TIMEOUT => 20,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_POSTFIELDS => array( 'p' => $param_encode ),
+			CURLOPT_URL => 'http://devel184.ub.ac.id/siakad_api/api/pegawai/CallInsPejabatSimpeg',
+		);
+		curl_setopt_array($ch, $curl_config);
+		$result = curl_exec($ch);
+		$result	= json_decode(base64_decode(gzuncompress(trim($result))));
+		curl_close($ch);
+		
+		return $result;
+	}
+	
+	/*	end region sync bais */
 }

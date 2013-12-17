@@ -43,14 +43,15 @@
 		$ArrayMenu['RiwayatHukuman'] = array( 'link' => $Pegawai['LinkRiwayatHukuman'], 'title' => 'Riwayat Hukuman' );
 		
 		// SKP
-		$ArrayMenu['skp'] = array( 'link' => $Pegawai['link_skp'], 'title' => 'SKP' );
+		$ArrayMenu['skp_penyusunan'] = array( 'link' => $Pegawai['link_skp_penyusunan'], 'title' => 'SKP Target' );
+		$ArrayMenu['skp_penilaian'] = array( 'link' => $Pegawai['link_skp_penilaian'], 'title' => 'SKP Realisasi' );
+//		$ArrayMenu['skp_perilaku'] = array( 'link' => $Pegawai['link_skp_perilaku'], 'title' => 'SKP Perilaku' );
+		$ArrayMenu['skp_validasi'] = array( 'link' => $Pegawai['link_skp_validasi'], 'title' => 'Validasi SKP' );
+		$ArrayMenu['skp_tanggapan'] = array( 'link' => $Pegawai['link_skp_tanggapan'], 'title' => 'Tanggapan SKP' );
         
         if ($Pegawai['IsDosen'] == '1' && $_SESSION['UserLogin']['ApplicationRequest'] == 'Simpeg') {
             $ArrayMenu['DataAsessor'] = array( 'link' => $Pegawai['LinkDataAsessor'], 'title' => 'Data Asessor' );
-			
-			if (GetUnixTime(date("Y-m-d H:i:s")) > GetUnixTime('2012-10-01 00:00:00')) {
-				$ArrayMenu['DataEkd'] = array( 'link' => $Pegawai['LinkDataEkd'], 'title' => 'Data BKD' );
-			}
+			$ArrayMenu['DataEkd'] = array( 'link' => $Pegawai['LinkDataEkd'], 'title' => 'Data BKD' );
         }
 		
         $Content = '';

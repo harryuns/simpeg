@@ -113,7 +113,7 @@ class LLogin extends Controller {
             $StringRandom = 'xxxx';
             $URLRequest  = LOGIN_URL.'?userid='.$LoginName.'&passport='.MD5($StringRandom . $LoginPass) . '_' . $LoginName.'&challenge='.$StringRandom.'&appid='.$ApplicationID;
             $URLRequest .= '&ipaddr='.$RemoteAddress;
-            
+			
             $XMLContent = $this->GetContent($URLRequest);
             $ArrayLogin = $this->XMLToArray($XMLContent);
 			
@@ -123,9 +123,9 @@ class LLogin extends Controller {
 					$UserName = (isset($User['attr']) && isset($User['attr']['ID']) && !empty($User['attr']['ID'])) ? $User['attr']['ID'] : '';
                     $Group = (isset($User['GROUP'])) ? $User['GROUP'] : array();
                     $GroupAttr = (isset($Group['attr'])) ? $Group['attr'] : array();
-                    $GroupAttrID = (isset($GroupAttr['ID'])) ? $GroupAttr['ID'] : 0;
+                    $GroupAttrID = (isset($GroupAttr['ID'])) ? trim($GroupAttr['ID']) : 0;
 					$PegawaiNip = @$User['NIP']['attr']['Code'];
-                    
+					
                     $Authority = $ArrayLogin['BAIS_XML']['CONTENT']['AUTHORITY'];
                     $Access['Register'] = (isset($Authority['DIKENAL']) && isset($Authority['DIKENAL']['value'])) ? $Authority['DIKENAL']['value'] : '0';
                     $Access['Active'] = (isset($Authority['AKTIVASI']) && isset($Authority['AKTIVASI']['value'])) ? $Authority['AKTIVASI']['value'] : '0';
@@ -145,6 +145,8 @@ class LLogin extends Controller {
 					// Devel Hack
 					$GroupAttrID = 88;
 					$PegawaiNip = '195811261986091001';
+					
+					// 1061 => tenaga kependidikan
 					/*	*/
 					
 					// Success Login

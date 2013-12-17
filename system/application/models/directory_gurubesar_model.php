@@ -14,7 +14,7 @@ class directory_gurubesar_model extends Model {
 			INID_GURU_BESAR
 			INK_PEGAWAI
 		  */
-		$raw_query = "CALL DB2ADMIN.GETDIRGURUBESAR('".$param['K_UNIT_KERJA']."','".$param['ID_GURU_BESAR']."','".$param['K_PEGAWAI']."')";
+		$raw_query = "CALL DB2ADMIN.GETDIRGURUBESAR('".$param['K_UNIT_KERJA']."','".$param['ID_GURU_BESAR']."','".$param['K_PEGAWAI']."','".$param['NAMA']."')";
         //echo $raw_query;
         $Statement = db2_prepare($this->CI->ldb2->Handle, $raw_query);
         db2_execute($Statement);

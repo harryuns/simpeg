@@ -886,6 +886,7 @@ if (! function_exists('select_jenis_request')) {
 		return $result;
 	}
 }
+
 if (! function_exists('show_jenis_request')) {
 	function show_jenis_request($value) {
 		$array = array(
@@ -903,6 +904,31 @@ if (! function_exists('show_jenis_request')) {
 			if ($row['id'] == $value) {
 				$result = $row['nama'];
 			}
+		}
+		
+		return $result;
+	}
+}
+
+if (! function_exists('show_skp')) {
+	function show_skp($value) {
+		$result = (empty($value)) ? '-' : $value;
+		return $result;
+	}
+}
+
+if (! function_exists('show_skp_score')) {
+	function show_skp_score($value) {
+		if ($value <= 50) {
+			$result = 'Buruk';
+		} else if ($value <= 60) {
+			$result = 'Kurang';
+		} else if ($value <= 75) {
+			$result = 'Cukup';
+		} else if ($value <= 90) {
+			$result = 'Baik';
+		} else {
+			$result = 'Sangat Baik';
 		}
 		
 		return $result;

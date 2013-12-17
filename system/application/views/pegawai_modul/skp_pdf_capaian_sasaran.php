@@ -1,6 +1,12 @@
 <?php
-//	$penilai = $this->skp_model->get_by_id_penilai(array( 'K_PENILAI' => $K_PENILAI ));
-//	$riwayat = $this->skp_model->get_array_riwayat(array( 'K_PENILAI' => $K_PENILAI ));
+	$penilai = $this->skp_model->get_by_id_penilai(array( 'K_PENILAI' => $K_PENILAI ));
+	$pegawai_detail = $this->lpegawai->GetPegawaiById($penilai['K_PEGAWAI']);
+	$penilai_detail = $this->lpegawai->GetPegawaiById($penilai['K_PENILAI_PEGAWAI']);
+	$array_kegiatan = $this->skp_model->get_array_kegiatan(array( 'K_PEGAWAI' => $penilai['K_PEGAWAI'], 'TAHUN' => $penilai['TAHUN'] ));
+	$rate_kegiatan = $this->skp_model->get_rate_kegiatan(array( 'K_PEGAWAI' => $penilai['K_PEGAWAI'], 'TAHUN' => $penilai['TAHUN'] ));
+	
+	$array_kreativitas = $this->skp_model->get_array_kreativitas_pegawai(array( 'K_PEGAWAI' => $penilai['K_PEGAWAI'], 'TAHUN' => $penilai['TAHUN'] ));
+	$array_tugas_tambahan = $this->skp_model->get_array_tugas_tambahan_pegawai(array( 'K_PEGAWAI' => $penilai['K_PEGAWAI'], 'TAHUN' => $penilai['TAHUN'] ));
 ?>
 
 <style>
@@ -13,8 +19,10 @@ table.border td,th,caption{background-color:#fff}
 	<div>PEGAWAI NEGERI SIPIL</div>
 </div>
 
-<div style="padding: 20px 0 0 40px;">
-<div style="padding: 10px 0; font-size: 12px;">Jangka Waktu Penilaian 02  Januari s.d. 31 Desember 2014</div>
+<div style="padding: 20px 0 0 20px;">
+<div style="padding: 10px 0; font-size: 12px;">
+	<?php echo 'Jangka Waktu Penilaian 02 Januari s.d. '.date("t", mktime(0, 0, 0, 12, 01, $penilai['TAHUN'])).' Desember '.$penilai['TAHUN']; ?>
+</div>
 <table class="border" style="font-size: 10px; width: 1000px;">
 	<tr>
 		<td style="width: 25px; text-align: center;" rowspan="2">NO</td>
@@ -36,22 +44,25 @@ table.border td,th,caption{background-color:#fff}
 		<td style="text-align: center;">Waktu</td>
 		<td style="text-align: center;">Biaya</td>
 	</tr>
+	<?php $counter = 1; ?>
+	<?php foreach ($array_kegiatan as $row) { ?>
 	<tr>
-		<td style="text-align: center;">1</td>
-		<td>Menyiapkan usul persetujuan teknis kenaikan pangkat.</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-	</tr>
+		<td style="text-align: center;"><?php echo $counter; ?></td>
+		<td><?php echo $row['KEGIATAN']; ?></td>
+		<td style="text-align: center;"><?php echo show_skp($row['AK_TARGET']); ?></td>
+		<td style="text-align: center;"><?php echo $row['KUAN_TARGET']; ?></td>
+		<td style="text-align: center;"><?php echo $row['KUAL_TARGET']; ?></td>
+		<td style="text-align: center;"><?php echo $row['WAKTU_TARGET']; ?></td>
+		<td style="text-align: center;"><?php echo show_skp($row['BIAYA_TARGET']); ?></td>
+		<td style="text-align: center;"><?php echo show_skp($row['AK_REAL']); ?></td>
+		<td style="text-align: center;"><?php echo $row['KUAN_REAL']; ?></td>
+		<td style="text-align: center;"><?php echo $row['KUAL_REAL']; ?></td>
+		<td style="text-align: center;"><?php echo $row['WAKTU_REAL']; ?></td>
+		<td style="text-align: center;"><?php echo show_skp($row['BIAYA_REAL']); ?></td>
+		<td style="text-align: center;"><?php echo $row['PERHITUNGAN']; ?></td>
+		<td style="text-align: center;"><?php echo $row['NILAI_CAPAIAN']; ?></td></tr>
+	<?php $counter++; ?>
+	<?php } ?>
 	<tr>
 		<td>&nbsp;</td>
 		<td>II. TUGAS TAMBAHAN DAN KREATIVITAS :</td>
@@ -69,43 +80,62 @@ table.border td,th,caption{background-color:#fff}
 		<td>-</td>
 	</tr>
 	<tr>
-		<td>1</td>
-		<td>(tugas tambahan)</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
+		<td>&nbsp;</td>
+		<td>
+			a. Tugas Tambahan<br />
+			<?php foreach ($array_tugas_tambahan as $row) { ?>
+				- <?php echo $row['KEGIATAN']; ?><br />
+			<?php } ?>
+		</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td style="text-align: center;">
+			&nbsp;<br />
+			<?php foreach ($array_tugas_tambahan as $row) { ?>
+				<?php echo $row['NILAI']; ?><br />
+			<?php } ?>
+		</td>
+		<td>&nbsp;</td>
 	</tr>
 	<tr>
-		<td>1</td>
-		<td>(kreatifitas)</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
-		<td>-</td>
+		<td>&nbsp;</td>
+		<td>
+			b. Kreatifitas<br />
+			<?php foreach ($array_kreativitas as $row) { ?>
+				- <?php echo $row['KEGIATAN']; ?><br />
+			<?php } ?></td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td style="text-align: center;">
+			&nbsp;<br />
+			<?php foreach ($array_kreativitas as $row) { ?>
+				<?php echo $row['NILAI']; ?><br />
+			<?php } ?>
+		</td>
+		<td>&nbsp;</td>
 	</tr>
 	<tr>
 		<td colspan="13" rowspan="2" style="font-size: 14px; text-align: center;">Nilai Capaian SKP</td>
-		<td>92.00</td>
+		<td style="text-align: center;"><?php echo $rate_kegiatan['score']; ?></td>
 	</tr>
 	<tr>
-		<td>Sangat Baik</td>
+		<td style="text-align: center;"><?php echo $rate_kegiatan['label']; ?></td>
 	</tr>
 </table>
 </div>
@@ -115,13 +145,11 @@ table.border td,th,caption{background-color:#fff}
 		<div>&nbsp;</div>
 	</div>
 	<div style="float: left; width: 25%;">
-		<div>Yogyakarta, 02  Januari 2014</div>
+		<div>Malang, 02  Januari <?php echo ($penilai['TAHUN'] + 1); ?></div>
 		<div>Pegawai Negeri Sipil Yang Dinilai</div>
-		<div>Lukito</div>
-		<div>19760222 199610 I 001</div>
+		<div style="padding: 25px 0;">&nbsp;</div>
+		<div><?php echo $pegawai_detail['NAMA_GELAR']; ?></div>
+		<div><?php echo $pegawai_detail['K_PEGAWAI']; ?></div>
 	</div>
 	<div style="clear: both;"></div>
 </div>
-
-<?php
-// exit;

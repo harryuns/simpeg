@@ -160,6 +160,9 @@ class LRiwayat_Jabatan_Struktural {
                     if ($QueryMessage == '00000') {
                         $Data['NO_SK'] = '';
                         $Data['Message'] = $Message;
+						
+						// update bais
+						$this->riwayat_struktural_model->bais_sync($Data);
                     } else if ($QueryMessage == '00001') {
                         $Data['NO_SK'] = '';
                         $Data['Error'] = '00001';

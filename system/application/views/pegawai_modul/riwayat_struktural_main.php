@@ -13,7 +13,7 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<?php $this->load->view('body_meta', array( 'page_title' => 'Riwayat Jabatan Fungsional' ) ); ?>
+<?php $this->load->view('body_meta', array( 'page_title' => 'Riwayat Jabatan Struktural' ) ); ?>
 
 <body>
 <div id="body"><div id="frame">
@@ -33,7 +33,7 @@
 		
 		<div class="cnt-grid">
 			<?php if (count($array_pegawai_struktural) > 0) { ?>
-				<h1>Riwayat Jabatan Fungsional</h1>
+				<h1>Riwayat Jabatan Struktural</h1>
 				<div class="cnt_table_main record-valid"><table style="width: 1550px;">
 					<tr>
 						<td class="left" style="width: 175px;">&nbsp;</td>
@@ -111,7 +111,7 @@
 		</div>
 		
 		<div class="cnt-form hidden">
-			<h1>Riwayat Jabatan Fungsional</h1>
+			<h1>Riwayat Jabatan Struktural</h1>
 			
 			<form style="width: 80%;" id="FormRiwayatHomeBase" action="<?php echo base_url('index.php/pegawai_modul/riwayat_struktural/action'); ?>">
 				<input type="hidden" name="action" />
@@ -143,7 +143,7 @@
 							<input type="button" style="width: 75px;" class="show_unitkerja" data-target=".unit-kerja" value="Ubah" />
 						</td></tr>
 					<tr>
-						<td style="width: 200px;">Jabatan Fungsional</td>
+						<td style="width: 200px;">Jabatan Struktural</td>
 						<td style="width: 300px;"><select style="width: 85%;" name="K_JABATAN_STRUKTURAL"><option>-</option></select></td></tr>
 					<tr class="cnt-bidang-kerja">
 						<td style="width: 200px;">Bidang Kerja</td>
@@ -424,7 +424,7 @@
 		$('.cnt-form [name="K_ASAL_SK"]').val(record.K_ASAL_SK);
 		$('.cnt-form [name="K_UNIT_KERJA"]').val(record.K_UNIT_KERJA);
 		$('.cnt-form [name="K_UNIT_KERJA"]').next().val(record.UNIT_KERJA)
-		$('.cnt-form [name="K_JABATAN_STRUKTURAL"]').val(record.K_JABATAN_STRUKTURAL);
+		$('.cnt-form [name="K_BIDANG_KERJA"]').val(record.K_BIDANG_KERJA);
 		$('.cnt-form [name="KETERANGAN"]').val(record.KETERANGAN);
 		$('.cnt-form [name="TUNJANGAN_STRUKTURAL"]').val(record.TUNJANGAN_STRUKTURAL);
 		$('.cnt-form [name="ANGKA_KREDIT"]').val(record.ANGKA_KREDIT);
@@ -434,7 +434,7 @@
 		
 		// set ansync data
 		var jabatan_struktural_param = {
-			value: record.K_UNIT_KERJA,
+			value: record.K_JABATAN_STRUKTURAL,
 			combo: $('.cnt-form [name="K_JABATAN_STRUKTURAL"]'),
 			callback: function() { page.combo.bidang_kerja(); },
 			ajax: { url: Web.HOST + '/index.php/Ajax/JabatanStruktural', param: { Action: 'GetJabatanStrukturalByUnitKerja', K_UNIT_KERJA: record.K_UNIT_KERJA } }

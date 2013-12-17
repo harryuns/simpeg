@@ -40,8 +40,8 @@ class riwayat_struktural_request_model extends Model {
 	
 	function validate($param) {
 		$result['status'] = false;
+		
 		$raw_query = "CALL DB2ADMIN.VALREQRIWAYATJABATANSTRUKTURAL( '".$param['ID_REQ_JABATAN_STRUKTURAL']."', '".$param['USERID']."' )";
-		echo $raw_query;
 		
 		WriteLog($param['K_PEGAWAI'], $raw_query);
 		$execute_query = db2_prepare($this->CI->ldb2->Handle, $raw_query);
@@ -51,6 +51,12 @@ class riwayat_struktural_request_model extends Model {
 			if ($query_status == QUERY_STATUS_SUCCESS) {
 				$result['status'] = true;
 				$result['message'] = 'Data berhasil divalidasi';
+				
+				// bais sync
+				$param_bais = $this->get_by_id(array( 'ID_REQ_JABATAN_STRUKTURAL' => $param['ID_REQ_JABATAN_STRUKTURAL'] ));
+				if (in_array($param_bais['JENIS_REQ_JABATAN_STRUKTURAL'], array( 'I', 'U' ))) {
+					$result_bais = $this->riwayat_struktural_model->bais_sync($param_bais);
+				}
 			} else {
 				$result['message'] = 'Error.';
 			}
@@ -58,6 +64,24 @@ class riwayat_struktural_request_model extends Model {
 		
 		return $result;
 	}
+	
+	function get_by_id($param = array()) {
+        $result = array();
+		$param['K_PEGAWAI'] = (empty($param['K_PEGAWAI'])) ? 'x' : $param['K_PEGAWAI'];
+		$param['IS_VALIDATE'] = (empty($param['IS_VALIDATE'])) ? 'x' : $param['IS_VALIDATE'];
+        
+		$raw_query = "CALL DB2ADMIN.GETREQRIWAYATJABATANSTRUKTURAL(
+			'".$param['ID_REQ_JABATAN_STRUKTURAL']."', '".$param['K_PEGAWAI']."', '".$param['IS_VALIDATE']."'
+		)";
+		
+        $statement = db2_prepare($this->CI->ldb2->Handle, $raw_query);
+        db2_execute($statement);
+        while ($row = db2_fetch_assoc($statement)) {
+			$result = $this->sync($row);
+        }
+		
+        return $result;
+    }
 	
     function get_array($param = array()) {
         $result = array();

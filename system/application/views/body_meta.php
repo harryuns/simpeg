@@ -22,10 +22,13 @@
     <meta name="keywords" content="Program, Mahasiswa, universitas brawijaya, malang, UB, mandiri">
     <meta name="description" content="Program Mahasiswa Wirausaha">
     <link rel="stylesheet" href="<?php echo HOST."/Style/smoothness/jquery-ui-1.8.5.custom.css"; ?>">
+	<link rel="stylesheet" href="<?php echo base_url('JavaScript/lib/autocomplete/jquery.autocomplete.css'); ?>">
+	
     <script type="text/javascript" src="<?php echo HOST."/JavaScript/jquery-1.4.2.min.js"; ?>"></script>
     <script type="text/javascript" src="<?php echo HOST."/JavaScript/jquery-ui-1.8.5.custom.min.js"; ?>"></script>
     <script type="text/javascript" src="<?php echo HOST."/JavaScript/ddaccordion.js"; ?>"></script>
     <script type="text/javascript" src="<?php echo HOST."/JavaScript/Simpeg.js"; ?>"></script>
+	<script type="text/javascript" src="<?php echo base_url('JavaScript/lib/autocomplete/jquery.autocomplete.js'); ?>"></script>
 	
     <script type="text/javascript">
 		var Web = <?php echo json_encode($Web); ?>;
