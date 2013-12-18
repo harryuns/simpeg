@@ -22,7 +22,6 @@ class skp_validasi extends Controller {
 		if ($action == 'update_penilaian') {
 			$result = $this->skp_model->update_tupoksi($_POST);
 		} else if ($action == 'update_validasi') {
-			$_POST['IS_VALID'] = 1;
 			$result = $this->skp_model->update_validasi($_POST);
 		}
 		

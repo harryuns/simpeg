@@ -258,10 +258,22 @@ class skp_model extends Model {
 			$total += $row['NILAI_CAPAIAN'];
 		}
 		$result['score'] = (count($array) > 0) ? $total / count($array) : 0;
-		$result['score'] = number_format($result['score'], 2);
-		$result['score_percent'] = $result['score'] * 0.6;
+		
+		// tugas tambahan
+		$array_tugas_tambahan = $this->get_array_tugas_tambahan_pegawai(array( 'K_PEGAWAI' => $param['K_PEGAWAI'], 'TAHUN' => $param['TAHUN'] ));
+		foreach ($array_tugas_tambahan as $row) {
+			$result['score'] += $row['NILAI'];
+		}
+		
+		// kreativitas
+		$array_kreativitas = $this->get_array_kreativitas_pegawai(array( 'K_PEGAWAI' => $param['K_PEGAWAI'], 'TAHUN' => $param['TAHUN'] ));
+		foreach ($array_kreativitas as $row) {
+			$result['score'] += $row['NILAI'];
+		}
 		
 		// label
+		$result['score'] = number_format($result['score'], 2);
+		$result['score_percent'] = $result['score'] * 0.6;
 		$result['label'] = show_skp_score($result['score']);
 		
         return $result;

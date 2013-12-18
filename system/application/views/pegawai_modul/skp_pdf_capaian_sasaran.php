@@ -97,13 +97,13 @@ table.border td,th,caption{background-color:#fff}
 		<td>&nbsp;</td>
 		<td>&nbsp;</td>
 		<td>&nbsp;</td>
+		<td>&nbsp;</td>
 		<td style="text-align: center;">
 			&nbsp;<br />
 			<?php foreach ($array_tugas_tambahan as $row) { ?>
 				<?php echo $row['NILAI']; ?><br />
 			<?php } ?>
 		</td>
-		<td>&nbsp;</td>
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
@@ -122,13 +122,13 @@ table.border td,th,caption{background-color:#fff}
 		<td>&nbsp;</td>
 		<td>&nbsp;</td>
 		<td>&nbsp;</td>
+		<td>&nbsp;</td>
 		<td style="text-align: center;">
 			&nbsp;<br />
 			<?php foreach ($array_kreativitas as $row) { ?>
 				<?php echo $row['NILAI']; ?><br />
 			<?php } ?>
 		</td>
-		<td>&nbsp;</td>
 	</tr>
 	<tr>
 		<td colspan="13" rowspan="2" style="font-size: 14px; text-align: center;">Nilai Capaian SKP</td>

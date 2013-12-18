@@ -147,6 +147,8 @@ class LLogin extends Controller {
 					$PegawaiNip = '195811261986091001';
 					
 					// 1061 => tenaga kependidikan
+					// 1013 => administrator simpeg
+					
 					/*	*/
 					
 					// Success Login
@@ -297,6 +299,16 @@ class LLogin extends Controller {
 			}
 		}
 		return $UserID;
+	}
+	
+	function get_user_group() {
+		$user = $this->GetUser();
+		return (isset($user['UserGroupID'])) ? $user['UserGroupID'] : '';
+	}
+	
+	function get_user_nip() {
+		$user = $this->GetUser();
+		return (isset($user['Nip'])) ? $user['Nip'] : '';
 	}
 	
     function XMLToArray($Content, $GetAttribute = 1) {

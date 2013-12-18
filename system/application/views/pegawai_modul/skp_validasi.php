@@ -1,4 +1,7 @@
 <?php
+	$user_group_id = $this->llogin->get_user_group();
+	$user_nip = $this->llogin->get_user_nip();
+	
 	$k_pegawai = get_link_pegawai(@$this->uri->segments[4]);
 	$tahun = (empty($this->uri->segments[5])) ? date("Y") : $this->uri->segments[5];
 	$page = array( 'k_pegawai' => $k_pegawai, 'tahun' => $tahun );
@@ -56,6 +59,9 @@
 						<a class="btn-edit" data-action="update_penilaian"><img class="link" src="<?php echo HOST; ?>/images/Pencil.png" /></a>
 						<?php if (empty($row['IS_VALID'])) { ?>
 						<a class="btn-validate"><img src="<?php echo HOST; ?>/images/tick.png" class="link"></a>
+						
+						<?php } else if ($k_pegawai == $user_nip || $user_group_id == USER_ADMIN_SIMPEG) { ?>
+						<a class="btn-unvalidate"><img src="<?php echo HOST; ?>/images/untick.png" class="link"></a>
 						<?php } ?>
 					</td>
 					<td class="body"><?php echo $row['KEGIATAN']; ?></td>
@@ -239,6 +245,26 @@
 		var raw = $(this).parents('tr').find('.record').html();
 		eval('var record = ' + raw);
 		record.action = 'update_validasi';
+		record.IS_VALID = 1;
+		
+		// ajax request
+		Func.ajax({ url: form.attr('action'), param: record, callback: function(result) {
+			if (result.status) {
+				window.location = window.location.href;
+			} else {
+				ShowDialogObject({ ArrayMessage: [result.message] });
+			}
+		} });
+	});
+	$('.cnt-grid-validasi .btn-unvalidate').click(function() {
+		// form
+		var form = $('.cnt-form-kegiatan form');
+		
+		// populate form
+		var raw = $(this).parents('tr').find('.record').html();
+		eval('var record = ' + raw);
+		record.action = 'update_validasi';
+		record.IS_VALID = 0;
 		
 		// ajax request
 		Func.ajax({ url: form.attr('action'), param: record, callback: function(result) {
