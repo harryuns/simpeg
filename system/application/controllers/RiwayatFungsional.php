@@ -20,7 +20,7 @@ class RiwayatFungsional extends Controller {
 			$this->lunit_kerja->GetArray('1', $Array['Pegawai']['IsDosen'], $_SESSION['UserLogin']['Fakultas']['ID']) :
 			$this->lunit_kerja->GetArrayAll();
 		
-        $Array['ArrayJabatanFungsional'] = $this->ljabatan_fungsional->GetArrayByJenisKerja($Array['Pegawai']['IsDosen']);
+        $Array['ArrayJabatanFungsional'] = $this->ljabatan_fungsional->GetArrayByJenisKerja($Array['Pegawai']['IsDosen'], 'x');
         $Array['ArrayJenjang'] = $this->ljenjang->GetJenjangByUnitKerja($Array['RiwayatFungsional']['K_UNIT_KERJA']);
         $Array['ArrayFakultas'] = $this->lfakultas->GetFakultasByJenjang(@$Array['RiwayatFungsional']['K_JENJANG']);
         $Array['ArrayJurusan'] = $this->ljurusan->GetById(@$Array['RiwayatFungsional']['K_JENJANG'], @$Array['RiwayatFungsional']['K_FAKULTAS']);
@@ -46,7 +46,7 @@ class RiwayatFungsional extends Controller {
 			$this->lunit_kerja->GetArray('1', $Array['Pegawai']['IsDosen'], $_SESSION['UserLogin']['Fakultas']['ID']) :
 			$this->lunit_kerja->GetArrayAll();
 		
-        $Array['ArrayJabatanFungsional'] = $this->ljabatan_fungsional->GetArrayByJenisKerja($Array['Pegawai']['IsDosen']);
+        $Array['ArrayJabatanFungsional'] = $this->ljabatan_fungsional->GetArrayByJenisKerja($Array['Pegawai']['IsDosen'], 'x');
         $Array['ArrayJenjang'] = $this->ljenjang->GetJenjangByUnitKerja($Array['RiwayatFungsional']['K_UNIT_KERJA']);
         $Array['ArrayFakultas'] = $this->lfakultas->GetFakultasByJenjang($Array['RiwayatFungsional']['K_JENJANG']);
         $Array['ArrayJurusan'] = $this->ljurusan->GetById($Array['RiwayatFungsional']['K_JENJANG'], $Array['RiwayatFungsional']['K_FAKULTAS']);
