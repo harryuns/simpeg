@@ -18,7 +18,7 @@ table.border td{vertical-align: top;}
 </style>
 
 <div style="padding: 20px 0 0 40px; text-align: center; font-weight: bold; font-size: 14px;">
-	<div>PENILAIAN PRESTASI KERJA BAGI PNS YANG TUGAS BELAJAR</div>
+	<div>PENILAIAN PRESTASI KERJA BAGI PNS</div>
 </div>
 
 
