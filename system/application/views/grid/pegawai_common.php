@@ -1,20 +1,18 @@
 <?php if (isset($array_pegawai) && count($array_pegawai) > 0) { ?>
-<div id="ListPegawai" class="cnt_table_main" style="width: 100%;"><table>
+<div id="ListPegawai" class="cnt_table_main" style="width: 100%;"><table style="width: 1200px">
 <tr>
 	<td class="left" style="width: 25px;">&nbsp;</td>
 	<td class="normal" style="width: 25px;">&nbsp;</td>
 	<td class="normal" style="width: 125px;">NIP</td>
-	<td class="normal" style="width: 250px;">Nama Pegawai</td>
-	<td class="normal" style="width: 125px;">Unit Kerja</td>
-	<td class="normal" style="width: 125px;">Fungsional</td>
-	<!--
-	<td class="normal" style="width: 100px;">Jenjang</td>
-	-->
-	<td class="normal" style="width: 100px;">Jurusan</td>
+	<td class="normal" style="width: 200px;">Nama Pegawai</td>
+	<td class="normal" style="width: 100px;">Unit Kerja</td>
+	<td class="normal" style="width: 100px;">Fungsional</td>
+	<td class="normal" style="width: 75px;">Email</td>
+	<td class="normal" style="width: 75px;">Jurusan</td>
 	<td class="normal" style="width: 100px;">Prodi</td>
-	<td class="normal" style="width: 100px;">Golongan</td>
+	<td class="normal" style="width: 75px;">Golongan</td>
 	<td class="normal" style="width: 100px;">Download</td></tr>
-	
+	  
 	<?php foreach ($array_pegawai as $key => $row) { ?>
 		<tr>
 			<td class="licon">
@@ -24,10 +22,8 @@
 			<td class="body"><a href="<?php echo $row['LinkEdit']; ?>"><?php echo $row['K_PEGAWAI']; ?></a></td>
 			<td class="body"><a href="<?php echo $row['LinkEdit']; ?>"><?php echo $row['NAMA']; ?></a></td>
 			<td class="body"><?php echo $row['UNIT_KERJA']; ?>&nbsp;</td>
-			<td class="body"><?php echo @$row['FUNGSIONAL']; ?>&nbsp;</td>
-			<!--
-			<td class="body"><?php echo $row['JENJANG']; ?>&nbsp;</td>
-			-->
+			<td class="body"><?php echo $row['JABATAN_FUNGSIONAL']; ?>&nbsp;</td>
+			<td class="body"><?php echo @$row['EMAIL']; ?>&nbsp;</td>
 			<td class="body"><?php echo $row['JURUSAN']; ?>&nbsp;</td>
 			<td class="body"><?php echo $row['PRODI']; ?>&nbsp;</td>
 			<td class="body"><?php echo $row['GOLONGAN']; ?>&nbsp;</td>

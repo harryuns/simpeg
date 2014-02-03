@@ -89,13 +89,13 @@
 				<td class="body" style="text-align: center;"><?php echo ($Laporan['Total']['2'] + $Laporan['Total']['3']); ?></td>
 				<td class="body" style="text-align: center;"><?php echo $Laporan['Total']['4']; ?></td>
 				<td class="body" style="text-align: center;"><?php echo $Laporan['Total']['5']; ?></td>
-				<td class="body" style="text-align: center;"><?php echo ($Laporan['Total']['4'] + $Laporan['Total']['4']); ?></td>
+				<td class="body" style="text-align: center;"><?php echo $Laporan['Total']['4'] + $Laporan['Total']['5']; ?></td>
 				<td class="body" style="text-align: center;"><?php echo $Laporan['Total']['6']; ?></td>
 				<td class="body" style="text-align: center;"><?php echo $Laporan['Total']['7']; ?></td>
 				<td class="body" style="text-align: center;"><?php echo ($Laporan['Total']['6'] + $Laporan['Total']['7']); ?></td>
 				<td class="body" style="text-align: center;"><?php echo $Laporan['Total']['8']; ?></td>
 				<td class="body" style="text-align: center;"><?php echo $Laporan['Total']['9']; ?></td>
-				<td class="body" style="text-align: center;"><?php echo ($Laporan['Total']['8'] + $Laporan['Total']['8']); ?></td>
+				<td class="body" style="text-align: center;"><?php echo ($Laporan['Total']['8'] + $Laporan['Total']['9']); ?></td>
 				<td class="body" style="text-align: center;"><?php echo $Laporan['Total']['10']; ?></td>
 				<td class="body" style="text-align: center;"><?php echo $Laporan['Total']['11']; ?></td>
 				<td class="body" style="text-align: center;"><?php echo ($Laporan['Total']['10'] + $Laporan['Total']['11']); ?></td></tr>

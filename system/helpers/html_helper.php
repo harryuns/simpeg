@@ -411,17 +411,6 @@ if ( ! function_exists('nbs'))
 	}
 }
 
-if ( ! function_exists('StripArray'))
-{
-	function StripArray($Array) {
-		$ArrayResult = array();
-		foreach($Array as $Key => $Element) {
-			$ArrayResult[$Key] = stripslashes(trim($Element));
-		}
-		return $ArrayResult;
-	}
-}
-
 if ( ! function_exists('EscapeString'))
 {
 	function EscapeString($Array) {

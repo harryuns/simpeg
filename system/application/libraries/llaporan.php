@@ -30,6 +30,9 @@ class LLaporan {
         $Array['01']['03'] = 'Berdasarkan Golongan';
         $Array['01']['05'] = 'Berdasarkan Fungsional';
         $Array['01']['06'] = 'Berdasarkan Pendidikan';
+        $Array['01']['11'] = 'Berangkat Studi';
+        $Array['01']['12'] = 'Sedang Studi';
+        $Array['01']['13'] = 'Selesai Studi';
 		
 		$Array['02']['09'] = 'Jumlah Tenaga Pendidikan';
         $Array['02']['02'] = 'Berdasarkan Gender';
@@ -37,6 +40,9 @@ class LLaporan {
         $Array['02']['08'] = 'Berdasarkan Pendidikan';
         $Array['02']['10'] = 'Berdasarkan Golongan';
 		$Array['02']['11'] = 'Berdasarkan Fungsional';
+        $Array['02']['12'] = 'Berangkat Studi';
+        $Array['02']['13'] = 'Sedang Studi';
+        $Array['02']['14'] = 'Selesai Studi';
 		
         $Array['03']['01'] = 'Dosen';
         $Array['03']['02'] = 'Tenaga Kependidikan';
@@ -80,7 +86,10 @@ class LLaporan {
 				'03' => 'GetArrayJumlahDosenByGolongan',
 				'04' => 'GetArrayJumlahDosenByFungsional',
 				'05' => 'GetArrayJumlahDosenByFungsionalTahun',
-				'06' => 'GetArrayJumlahDosenByPendidikan'
+				'06' => 'GetArrayJumlahDosenByPendidikan',
+				'11' => 'GetArrayJumlahDosenByStudiDepart',
+				'12' => 'GetArrayJumlahDosenByStudiOngoing',
+				'13' => 'GetArrayJumlahDosenByStudiArrive'
 			),
 			'02' => array(
 				// Nama Laporan
@@ -94,7 +103,10 @@ class LLaporan {
 				'08' => 'GetArrayJumlahPegawaiByPendidikan',
 				'09' => 'GetArrayJumlahDosen',
 				'10' => 'GetArrayJumlahDosenByGolongan',
-				'11' => 'GetArrayJumlahDosenByFungsionalTahun'
+				'11' => 'GetArrayJumlahDosenByFungsionalTahun',
+				'12' => 'GetArrayJumlahDosenByStudiDepart',
+				'13' => 'GetArrayJumlahDosenByStudiOngoing',
+				'14' => 'GetArrayJumlahDosenByStudiArrive'
 			),
 			'03' => array(
 				// Nama Laporan
@@ -124,7 +136,7 @@ class LLaporan {
 		$ArrayReportMethod = $this->GetArrayMethodName();
         $MethodName = (isset($ArrayReportMethod[$JenisLaporan][$NamaLaporan])) ? $ArrayReportMethod[$JenisLaporan][$NamaLaporan] : '';
 		if (empty($MethodName)) {
-			echo $JenisLaporan. ' - ' .$NamaLaporan;
+			echo 'Fungsi belum tersedia : ' . $JenisLaporan. ' - ' .$NamaLaporan;
 			exit;
 		}
 		
@@ -275,6 +287,99 @@ class LLaporan {
         
         return $Laporan;
     }
+	
+	function GetArrayJumlahDosenByStudiDepart($param) {
+		$param['IS_DOSEN'] = (isset($param['IS_DOSEN'])) ? $param['IS_DOSEN'] : 'x';
+        $TahunMin = $param['TAHUN'] - 4;
+        
+        $Laporan['Year'] = $param['TAHUN'];
+		$Laporan['List'] = array();
+		
+		if ($param['IS_DOSEN'] == 1) {
+			$Laporan['Title'] = 'Perkembangan Jumlah Dosen Berangkat Studi Tahun '.$TahunMin.' - '.$param['TAHUN'];
+		} else if ($param['IS_DOSEN'] == 0) {
+			$Laporan['Title'] = 'Perkembangan Jumlah Tenaga Pendidikan Berangkat Studi Tahun '.$TahunMin.' - '.$param['TAHUN'];
+		} else {
+			$Laporan['Title'] = 'Perkembangan Jumlah Pegawai Berangkat Studi Tahun '.$TahunMin.' - '.$param['TAHUN'];
+		}
+		
+		$RawQuery = "CALL DB2ADMIN.LAPBERSTUDI('".$param['TAHUN']."', '".$param['IS_DOSEN']."')";
+        $Statement = db2_prepare($this->CI->ldb2->Handle, $RawQuery);
+        db2_execute($Statement);
+        while ($Row = db2_fetch_assoc($Statement)) {
+			$Counter = 1;
+			foreach ($Row as $Key => $Value) {
+				$Row[$Counter] = $Value;
+				$Counter++;
+			}
+			
+            $Laporan['List'][] = $Row;
+        }
+		
+        return $Laporan;
+	}
+	
+	function GetArrayJumlahDosenByStudiOngoing($param) {
+		$param['IS_DOSEN'] = (isset($param['IS_DOSEN'])) ? $param['IS_DOSEN'] : 'x';
+        $TahunMin = $param['TAHUN'] - 4;
+        
+        $Laporan['Year'] = $param['TAHUN'];
+		$Laporan['List'] = array();
+		
+		if ($param['IS_DOSEN'] == 1) {
+			$Laporan['Title'] = 'Perkembangan Jumlah Dosen Sedang Studi Tahun '.$TahunMin.' - '.$param['TAHUN'];
+		} else if ($param['IS_DOSEN'] == 0) {
+			$Laporan['Title'] = 'Perkembangan Jumlah Tenaga Pendidikan Sedang Studi Tahun '.$TahunMin.' - '.$param['TAHUN'];
+		} else {
+			$Laporan['Title'] = 'Perkembangan Jumlah Pegawai Sedang Studi Tahun '.$TahunMin.' - '.$param['TAHUN'];
+		}
+		
+		$RawQuery = "CALL DB2ADMIN.LAPMASSTUDI('".$param['TAHUN']."', '".$param['IS_DOSEN']."')";
+        $Statement = db2_prepare($this->CI->ldb2->Handle, $RawQuery);
+        db2_execute($Statement);
+        while ($Row = db2_fetch_assoc($Statement)) {
+			$Counter = 1;
+			foreach ($Row as $Key => $Value) {
+				$Row[$Counter] = $Value;
+				$Counter++;
+			}
+			
+            $Laporan['List'][] = $Row;
+        }
+		
+        return $Laporan;
+	}
+	
+	function GetArrayJumlahDosenByStudiArrive($param) {
+		$param['IS_DOSEN'] = (isset($param['IS_DOSEN'])) ? $param['IS_DOSEN'] : 'x';
+        $TahunMin = $param['TAHUN'] - 4;
+        
+        $Laporan['Year'] = $param['TAHUN'];
+		$Laporan['List'] = array();
+		
+		if ($param['IS_DOSEN'] == 1) {
+			$Laporan['Title'] = 'Perkembangan Jumlah Dosen Selesai Studi Tahun '.$TahunMin.' - '.$param['TAHUN'];
+		} else if ($param['IS_DOSEN'] == 0) {
+			$Laporan['Title'] = 'Perkembangan Jumlah Tenaga Pendidikan Selesai Studi Tahun '.$TahunMin.' - '.$param['TAHUN'];
+		} else {
+			$Laporan['Title'] = 'Perkembangan Jumlah Pegawai Selesai Studi Tahun '.$TahunMin.' - '.$param['TAHUN'];
+		}
+		
+		$RawQuery = "CALL DB2ADMIN.LAPSELSTUDI('".$param['TAHUN']."', '".$param['IS_DOSEN']."')";
+        $Statement = db2_prepare($this->CI->ldb2->Handle, $RawQuery);
+        db2_execute($Statement);
+        while ($Row = db2_fetch_assoc($Statement)) {
+			$Counter = 1;
+			foreach ($Row as $Key => $Value) {
+				$Row[$Counter] = $Value;
+				$Counter++;
+			}
+			
+            $Laporan['List'][] = $Row;
+        }
+		
+        return $Laporan;
+	}
 	
 	function GetArrayJumlahPegawaiByGenderStatusKerja($Param) {
 		$TahunMin = $Param['TAHUN'] - 4;

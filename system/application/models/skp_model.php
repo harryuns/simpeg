@@ -443,6 +443,7 @@ class skp_model extends Model {
         $array = array();
 		$param['TAHUN'] = (empty($param['TAHUN'])) ? 'x' : $param['TAHUN'];
 		$param['K_PEGAWAI'] = (empty($param['K_PEGAWAI'])) ? 'x' : $param['K_PEGAWAI'];
+		$param['K_PERILAKU'] = (empty($param['K_PERILAKU'])) ? 'x' : $param['K_PERILAKU'];
 		$param['ID_NILAI_TUPOKSI'] = (empty($param['ID_NILAI_TUPOKSI'])) ? 'x' : $param['ID_NILAI_TUPOKSI'];
         
 		$raw_query = "CALL SKP.GETNILAIPERILAKU('".$param['K_PEGAWAI']."', '".$param['TAHUN']."', '".$param['K_PERILAKU']."')";

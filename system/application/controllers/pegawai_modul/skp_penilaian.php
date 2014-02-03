@@ -81,6 +81,10 @@ class skp_penilaian extends Controller {
 		$template = $this->load->view( 'pegawai_modul/skp_pdf_perilaku', array( 'K_PEGAWAI' => $penilai['K_PEGAWAI'], 'TAHUN' => $penilai['TAHUN'], 'K_PENILAI' => $K_PENILAI ), true );
 		$pdf->WriteHTML($template);
 		
+		$pdf->AddPage('P');
+		$template = $this->load->view( 'pegawai_modul/skp_pdf_prestasi_kerja', array( 'K_PEGAWAI' => $penilai['K_PEGAWAI'], 'TAHUN' => $penilai['TAHUN'], 'K_PENILAI' => $K_PENILAI ), true );
+		$pdf->WriteHTML($template);
+		
 		$pdf->Output();
 	}
 }

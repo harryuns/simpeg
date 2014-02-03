@@ -110,12 +110,18 @@ class LPegawai extends Controller {
 		$Pegawai['LinkRiwayatHukuman'] = HOST.'/index.php/RiwayatHukuman/Ubah/'.ConvertLink($Pegawai['K_PEGAWAI']);
 		$Pegawai['LinkDataEkd'] = HOST.'/index.php/SendToEkd/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
 		
-		$Pegawai['LinkRiwayatDiklat'] = HOST.'/index.php/pegawai_modul/riwayat_diklat/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
-//		$Pegawai['LinkRiwayatFungsional'] = HOST.'/index.php/pegawai_modul/riwayat_fungsional/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
-		$Pegawai['LinkRiwayatStruktural'] = HOST.'/index.php/pegawai_modul/riwayat_struktural/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
-		$Pegawai['LinkRiwayatHomeBase'] = HOST.'/index.php/pegawai_modul/riwayat_homebase/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
-		$Pegawai['LinkRiwayatHonorer'] = HOST.'/index.php/pegawai_modul/riwayat_honorer/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
-		$Pegawai['LinkRiwayatHukuman'] = HOST.'/index.php/pegawai_modul/riwayat_hukuman/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
+		if (IS_DEVEL) {
+			$Pegawai['LinkPegawaiAktif'] = HOST.'/index.php/pegawai_modul/riwayat_aktif/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
+			$Pegawai['LinkRiwayatPendidikan'] = HOST.'/index.php/pegawai_modul/riwayat_pendidikan/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
+			$Pegawai['LinkRiwayatDiklat'] = HOST.'/index.php/pegawai_modul/riwayat_diklat/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
+			$Pegawai['LinkRiwayatPangkat'] = HOST.'/index.php/pegawai_modul/riwayat_pangkat/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
+			$Pegawai['LinkRiwayatFungsional'] = HOST.'/index.php/pegawai_modul/riwayat_fungsional/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
+			$Pegawai['LinkRiwayatStruktural'] = HOST.'/index.php/pegawai_modul/riwayat_struktural/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
+			$Pegawai['LinkRiwayatHonorer'] = HOST.'/index.php/pegawai_modul/riwayat_honorer/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
+			$Pegawai['LinkRiwayatHomeBase'] = HOST.'/index.php/pegawai_modul/riwayat_homebase/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
+			$Pegawai['LinkRiwayatOrganisasi'] = HOST.'/index.php/pegawai_modul/riwayat_organisasi/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
+			$Pegawai['LinkRiwayatHukuman'] = HOST.'/index.php/pegawai_modul/riwayat_hukuman/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
+		}
 		
 		// skp
 		$Pegawai['link_skp_penyusunan'] = HOST.'/index.php/pegawai_modul/skp_penyusunan/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
@@ -397,6 +403,7 @@ class LPegawai extends Controller {
             }
             
             if ($Pegawai['Error'] == '00000') {
+				$this->bais_sync($Pegawai);
                 $Pegawai['Message'] = 'Data pegawai berhasil disimpan.';
             } else if ($Pegawai['Error'] == '00001') {
                 $Pegawai['K_PEGAWAI'] = '';
@@ -430,6 +437,7 @@ class LPegawai extends Controller {
             }
             
             if ($Pegawai['Error'] == '00000') {
+				$this->bais_sync($Pegawai);
                 $Pegawai['Message'] = 'Data pegawai berhasil diperbaharui.';
             } else if ($Pegawai['Error'] == '00001') {
                 $Pegawai['KARPEG'] = '';
@@ -530,5 +538,40 @@ class LPegawai extends Controller {
         
         return $objPHPExcel;
     }
+	
+	/*	region sync bais */
+	
+	function bais_sync($param) {
+		$array_email = explode('@', $param['EMAIL']);
+		$param_bais['userid'] = $array_email[0];
+		$param_bais['nip'] = $param['K_PEGAWAI'];
+		$param_bais['adminid'] = $this->CI->session->UserLogin['UserID'];
+		
+		/*
+		sample link => http://devel184.ub.ac.id/baisdev/api/User/setNIP/?userid=faridjauhari&nip=1111&adminid=faridjauhari
+		/*	*/
+		
+		if (IS_DEVEL) {
+			$link_bais = 'http://devel184.ub.ac.id/baisdev/api/User/setNIP/';
+		} else {
+			$link_bais = 'http://bais.ub.ac.id/api/User/setNIP/';
+		}
+		
+		
+		$ch = curl_init();
+		$curl_config = array( 
+			CURLOPT_TIMEOUT => 20,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_POSTFIELDS => $param_bais,
+			CURLOPT_URL => $link_bais
+		);
+		curl_setopt_array($ch, $curl_config);
+		$result = curl_exec($ch);
+		curl_close($ch);
+		
+		return $result;
+	}
+	
+	/*	end region sync bais */
 }
 ?>
