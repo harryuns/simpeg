@@ -1,7 +1,7 @@
 var InitForm = {
 	InitUser: function() {
-		// tenaga pendidikan
-		if (Web.UserGroupID == 1061) {
+		// tenaga pendidikan & dosen
+		if (Func.InArray(Web.UserGroupID, [88, 1005, 1061])) {
 			var page_link = window.location.href;
 			var array_match = page_link.match(new RegExp('pegawai_modul\/skp', 'gi'));
 			if (typeof(array_match) == 'undefined' || array_match == null) {
@@ -277,6 +277,24 @@ var Func = {
 				}
 			}
 		});
+	},
+	populate: function(p) {
+		for (var form_name in p.record) {
+			if (p.record.hasOwnProperty(form_name)) {
+				var input = $(p.cnt + ' [name="' + form_name + '"]');
+				var value = p.record[form_name];
+				if (input.attr('type') == 'checkbox') {
+					input.attr('checked', false);
+					if (value == 1) {
+						input.click();
+					}
+				} else if (input.hasClass('datepicker')) {
+					input.val(Func.swap_date(value));
+				} else {
+					input.val(value);
+				}
+			}
+		}
 	},
 	
 	ArrayToJson: function(Data) {

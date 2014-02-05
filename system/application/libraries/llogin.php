@@ -114,6 +114,11 @@ class LLogin extends Controller {
             $URLRequest  = LOGIN_URL.'?userid='.$LoginName.'&passport='.MD5($StringRandom . $LoginPass) . '_' . $LoginName.'&challenge='.$StringRandom.'&appid='.$ApplicationID;
             $URLRequest .= '&ipaddr='.$RemoteAddress;
 			
+			if ($_SERVER['REMOTE_ADDR'] == '172.18.3.8' && false) {
+				echo $URLRequest;
+				print_r($_SERVER); exit;
+			}
+			
             $XMLContent = $this->GetContent($URLRequest);
             $ArrayLogin = $this->XMLToArray($XMLContent);
 			
@@ -146,8 +151,10 @@ class LLogin extends Controller {
 					$GroupAttrID = 88;
 					$PegawaiNip = '195811261986091001';
 					
-					// 1061 => tenaga kependidikan
+					//   88 => dosen
+					// 1005 => dosen
 					// 1013 => administrator simpeg
+					// 1061 => tenaga kependidikan
 					
 					/*	*/
 					
