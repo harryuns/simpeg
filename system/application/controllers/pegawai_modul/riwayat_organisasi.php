@@ -1,12 +1,12 @@
 <?php
 
-class riwayat_hukuman extends Controller {
+class riwayat_organisasi extends Controller {
 	function __construct() {
         parent::Controller();
     }
     
     function index() {
-        $this->load->view('pegawai_modul/riwayat_hukuman_main');
+        $this->load->view('pegawai_modul/riwayat_organisasi_main');
     }
     
     function action() {
@@ -20,18 +20,18 @@ class riwayat_hukuman extends Controller {
 		
 		// valid
 		if ($action == 'update_valid') {
-			$result = $this->riwayat_hukuman_model->update($_POST);
+			$result = $this->riwayat_organisasi_model->update($_POST);
 		} else if ($action == 'delete_valid') {
-			$result = $this->riwayat_hukuman_model->delete($_POST);
+			$result = $this->riwayat_organisasi_model->delete($_POST);
 		}
 		
 		// request
 		else if ($action == 'update_request') {
-			$result = $this->riwayat_hukuman_request_model->update($_POST);
+			$result = $this->riwayat_organisasi_request_model->update($_POST);
 		} else if ($action == 'validation') {
-			$result = $this->riwayat_hukuman_request_model->validate($_POST);
+			$result = $this->riwayat_organisasi_request_model->validate($_POST);
 		} else if ($action == 'delete_request') {
-			$result = $this->riwayat_hukuman_request_model->delete($_POST);
+			$result = $this->riwayat_organisasi_request_model->delete($_POST);
 		}
 		
 		if ($reload && isset($result['status']) && $result['status']) {

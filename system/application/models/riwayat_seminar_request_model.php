@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class riwayat_hukuman_request_model extends Model {
+class riwayat_seminar_request_model extends Model {
     function __construct() {
 		parent::__construct();
         $this->CI =& get_instance();
@@ -8,14 +8,14 @@ class riwayat_hukuman_request_model extends Model {
 	
 	function update($param) {
 		$result['status'] = false;
-		$param['ID_REQ_HUKUMAN'] = (empty($param['ID_REQ_HUKUMAN'])) ? 'x' : $param['ID_REQ_HUKUMAN'];
-		$param['ID_RIWAYAT_HUKUMAN'] = (empty($param['ID_RIWAYAT_HUKUMAN'])) ? 'x' : $param['ID_RIWAYAT_HUKUMAN'];
+		$param['ID_REQ_SEMINAR'] = (empty($param['ID_REQ_SEMINAR'])) ? 'x' : $param['ID_REQ_SEMINAR'];
+		$param['ID_RIWAYAT_SEMINAR'] = (empty($param['ID_RIWAYAT_SEMINAR'])) ? 'x' : $param['ID_RIWAYAT_SEMINAR'];
 		
 		$raw_query = "
-			CALL DB2ADMIN.INSUPDREQRIWAYATHUKUMAN(
-				'".$param['ID_REQ_HUKUMAN']."', '".$param['JENIS_REQ_HUKUMAN']."', '".$param['USERID']."', '".$param['ID_RIWAYAT_HUKUMAN']."',
-				'".$param['K_PEGAWAI']."', '".$param['NO_SK']."', '".$param['TGL_SK']."', '".$param['TMT']."',
-				'".$param['NIP_PEJABAT']."', '".$param['NAMA_PEJABAT']."'
+			CALL DB2ADMIN.INSUPDREQRIWAYATSEMINAR(
+				'".$param['ID_REQ_SEMINAR']."', '".$param['JENIS_REQ_SEMINAR']."', '".$param['USERID']."', '".$param['ID_RIWAYAT_SEMINAR']."',
+				'".$param['K_PEGAWAI']."', '".$param['TAHUN']."', '".$param['NAMA']."', '".$param['LOKASI']."',
+				'".$param['TINGKAT']."', '".$param['PENYELENGGARA']."', '".$param['ID_KEDUDUKAN']."', '".$param['USERID']."'
 			)
 		";
 		
@@ -27,7 +27,7 @@ class riwayat_hukuman_request_model extends Model {
 			if ($query_status == QUERY_STATUS_SUCCESS) {
 				$result['status'] = true;
 				$result['message'] = 'Data berhasil disimpan';
-				$result['ID_REQ_HUKUMAN'] = $row['ID_REQ_HUKUMAN'];
+				$result['ID_REQ_SEMINAR'] = $row['ID_REQ_SEMINAR'];
 			} else {
 				$result['message'] = 'Error.';
 			}
@@ -38,7 +38,7 @@ class riwayat_hukuman_request_model extends Model {
 	
 	function validate($param) {
 		$result['status'] = false;
-		$raw_query = "CALL DB2ADMIN.VALREQRIWAYATHUKUMAN( '".$param['ID_REQ_HUKUMAN']."', '".$param['USERID']."' )";
+		$raw_query = "CALL DB2ADMIN.VALREQRIWAYATSEMINAR( '".$param['ID_REQ_SEMINAR']."', '".$param['USERID']."' )";
 		
 		WriteLog($param['K_PEGAWAI'], $raw_query);
 		$execute_query = db2_prepare($this->CI->ldb2->Handle, $raw_query);
@@ -58,11 +58,13 @@ class riwayat_hukuman_request_model extends Model {
 	
     function get_array($param = array()) {
         $result = array();
-		$param['ID_REQ_HUKUMAN'] = (empty($param['ID_REQ_HUKUMAN'])) ? 'x' : $param['ID_REQ_HUKUMAN'];
+		$param['offset'] = (isset($param['offset'])) ? $param['offset'] : 0;
+		$param['limit'] = (isset($param['limit'])) ? $param['limit'] : 50;
 		$param['IS_VALIDATE'] = (isset($param['IS_VALIDATE'])) ? $param['IS_VALIDATE'] : 'x';
+		$param['ID_REQ_SEMINAR'] = (empty($param['ID_REQ_SEMINAR'])) ? 'x' : $param['ID_REQ_SEMINAR'];
 		
-		$raw_query = "CALL DB2ADMIN.GETREQRIWAYATHUKUMAN(
-			'".$param['ID_REQ_HUKUMAN']."', '".$param['K_PEGAWAI']."', '".$param['IS_VALIDATE']."'
+		$raw_query = "CALL DB2ADMIN.GETREQRIWAYATSEMINAR(
+			'".$param['ID_REQ_SEMINAR']."', '".$param['K_PEGAWAI']."', '".$param['IS_VALIDATE']."'
 		)";
         $statement = db2_prepare($this->CI->ldb2->Handle, $raw_query);
         db2_execute($statement);
@@ -70,12 +72,15 @@ class riwayat_hukuman_request_model extends Model {
 			$result[] = $this->sync($row);
         }
 		
+		// paging
+		$result = GetPageFromArray($result, $param['offset'], $param['limit']);
+		
         return $result;
     }
 	
 	function delete($param) {
 		$result = array( 'status' => false, 'message' => 'Error.') ;
-        $raw_query = "CALL DB2ADMIN.DELREQRIWAYATHUKUMAN('".$param['ID_REQ_HUKUMAN']."')";
+        $raw_query = "CALL DB2ADMIN.DELREQRIWAYATSEMINAR('".$param['ID_REQ_SEMINAR']."')";
 		
 		WriteLog($param['K_PEGAWAI'], $raw_query);
         $execute_query = db2_prepare($this->CI->ldb2->Handle, $raw_query);

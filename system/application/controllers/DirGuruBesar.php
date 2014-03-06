@@ -11,6 +11,7 @@ class DirGuruBesar extends Controller {
 		$param['K_UNIT_KERJA']='x';
 		$param['ID_GURU_BESAR']='x';
 		$param['K_PEGAWAI']='x';
+		$param['NAMA']='x';
 		$data['list']=$this->directory_gurubesar_model->get($param);
 		$this->load->view('DirGuruBesar/header');
 		$this->load->view('DirGuruBesar/home',$data); 
@@ -30,7 +31,7 @@ class DirGuruBesar extends Controller {
 			redirect(base_url().'index.php/DirGuruBesar/');
 			exit;
 		}
-		$data['list_uk'] = $this->lunit_kerja->GetArrayAll('x','1','0');
+		$data['list_uk'] = $this->lunit_kerja->GetArrayAll('x',array('IS_FAKULTAS'=>'1'));
 		$this->load->view('DirGuruBesar/header');
 		$this->load->view('DirGuruBesar/form',$data); 
 	}
@@ -55,7 +56,7 @@ class DirGuruBesar extends Controller {
 				redirect(base_url().'index.php/DirGuruBesar/edit/'.$id);
 				exit;
 			}
-			$data['list_uk'] = $this->lunit_kerja->GetArrayAll('x','x','1');
+			$data['list_uk'] = $this->lunit_kerja->GetArrayAll('x',array('IS_FAKULTAS'=>'1'));
 			$this->load->view('DirGuruBesar/header');
 			$this->load->view('DirGuruBesar/form',$data); 
 		}

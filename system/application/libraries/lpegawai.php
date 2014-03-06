@@ -118,7 +118,12 @@ class LPegawai extends Controller {
 			$Pegawai['LinkRiwayatFungsional'] = HOST.'/index.php/pegawai_modul/riwayat_fungsional/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
 			$Pegawai['LinkRiwayatStruktural'] = HOST.'/index.php/pegawai_modul/riwayat_struktural/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
 			$Pegawai['LinkRiwayatHonorer'] = HOST.'/index.php/pegawai_modul/riwayat_honorer/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
+			$Pegawai['LinkRiwayatPenghargaan'] = HOST.'/index.php/pegawai_modul/riwayat_penghargaan/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
+			$Pegawai['LinkRiwayatSertifikasi'] = HOST.'/index.php/pegawai_modul/riwayat_sertifikasi/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
+			$Pegawai['LinkRiwayatKeluarga'] = HOST.'/index.php/pegawai_modul/riwayat_keluarga/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
+			$Pegawai['LinkKenaikanGaji'] = HOST.'/index.php/pegawai_modul/riwayat_perubahan_gaji/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
 			$Pegawai['LinkRiwayatHomeBase'] = HOST.'/index.php/pegawai_modul/riwayat_homebase/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
+			$Pegawai['LinkRiwayatSeminar'] = HOST.'/index.php/pegawai_modul/riwayat_seminar/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
 			$Pegawai['LinkRiwayatOrganisasi'] = HOST.'/index.php/pegawai_modul/riwayat_organisasi/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
 			$Pegawai['LinkRiwayatHukuman'] = HOST.'/index.php/pegawai_modul/riwayat_hukuman/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
 		}

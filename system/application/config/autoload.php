@@ -1,43 +1,4 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/*
-| -------------------------------------------------------------------
-| AUTO-LOADER
-| -------------------------------------------------------------------
-| This file specifies which systems should be loaded by default.
-|
-| In order to keep the framework as light-weight as possible only the
-| absolute minimal resources are loaded by default. For example,
-| the database is not connected to automatically since no assumption
-| is made regarding whether you intend to use it.  This file lets
-| you globally define which systems you would like loaded with every
-| request.
-|
-| -------------------------------------------------------------------
-| Instructions
-| -------------------------------------------------------------------
-|
-| These are the things you can load automatically:
-|
-| 1. Libraries
-| 2. Helper files
-| 3. Plugins
-| 4. Custom config files
-| 5. Language files
-| 6. Models
-|
-*/
-
-/*
-| -------------------------------------------------------------------
-|  Auto-load Libraries
-| -------------------------------------------------------------------
-| These are the classes located in the system/libraries folder
-| or in your system/application/libraries folder.
-|
-| Prototype:
-|
-|	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
-*/
 
 $autoload['libraries'] = array(
 	'session', 'ldb2', 'llogin', 'lpegawai', 'ldata_asessor', 'lpesan', 'lgolongan', 'llaporan', 'llaporan_ekd', 'lbidang_kerja', 'ldiklat', 'lnegara',
@@ -49,82 +10,24 @@ $autoload['libraries'] = array(
 	'lriwayat_hukuman', 'lriwayat_organisasi', 'lriwayat_seminar', 'lhukuman', 'lkedudukan','lseleksi_dosen','lpdf'
 );
 
-
-/*
-| -------------------------------------------------------------------
-|  Auto-load Helper Files
-| -------------------------------------------------------------------
-| Prototype:
-|
-|	$autoload['helper'] = array('url', 'file');
-*/
-
 $autoload['helper'] = array('html', 'date', 'file', 'common', 'url', 'mcrypt' );
-
-
-/*
-| -------------------------------------------------------------------
-|  Auto-load Plugins
-| -------------------------------------------------------------------
-| Prototype:
-|
-|	$autoload['plugin'] = array('captcha', 'js_calendar');
-*/
 
 $autoload['plugin'] = array();
 
-
-/*
-| -------------------------------------------------------------------
-|  Auto-load Config files
-| -------------------------------------------------------------------
-| Prototype:
-|
-|	$autoload['config'] = array('config1', 'config2');
-|
-| NOTE: This item is intended for use ONLY if you have created custom
-| config files.  Otherwise, leave it blank.
-|
-*/
-
 $autoload['config'] = array();
 
-
-/*
-| -------------------------------------------------------------------
-|  Auto-load Language files
-| -------------------------------------------------------------------
-| Prototype:
-|
-|	$autoload['language'] = array('lang1', 'lang2');
-|
-| NOTE: Do not include the "_lang" part of your file.  For example 
-| "codeigniter_lang.php" would be referenced as array('codeigniter');
-|
-*/
-
 $autoload['language'] = array();
-
-
-/*
-| -------------------------------------------------------------------
-|  Auto-load Models
-| -------------------------------------------------------------------
-| Prototype:
-|
-|	$autoload['model'] = array('model1', 'model2');
-|
-*/
 
 $autoload['model'] = array(
 	'dosen_luaran_model', 'riwayat_diklat_model', 'riwayat_diklat_request_model', 'directory_gurubesar_model', 'riwayat_homebase_model',
 	'riwayat_homebase_request_model', 'riwayat_honorer_model', 'riwayat_honorer_request_model', 'asal_sk_model', 'bidang_kerja_model',
 	'riwayat_hukuman_model', 'riwayat_hukuman_request_model', 'riwayat_fungsional_model', 'riwayat_fungsional_request_model',
 	'jabatan_fungsional_model', 'riwayat_struktural_model', 'riwayat_struktural_request_model', 'jabatan_struktural_model', 'skp_model',
-	'jenis_skp_model', 'jabatan_pekerjaan_model'
+	'jenis_skp_model', 'jabatan_pekerjaan_model', 'riwayat_organisasi_model', 'riwayat_organisasi_request_model', 'riwayat_pangkat_model',
+	'riwayat_pangkat_request_model', 'penjelasan_model', 'golongan_model', 'riwayat_pendidikan_model', 'riwayat_pendidikan_request_model',
+	'jenjang_model', 'negara_model', 'status_studi_model', 'perguruan_tinggi_model', 'riwayat_aktif_model', 'riwayat_aktif_request_model',
+	'aktif_model', 'rumpun_ilmu_model', 'ptp_model', 'riwayat_sertifikasi_model', 'riwayat_sertifikasi_request_model', 'perubahan_gaji_model',
+	'riwayat_perubahan_gaji_request_model', 'riwayat_perubahan_gaji_model', 'riwayat_penghargaan_model', 'riwayat_penghargaan_request_model',
+	'riwayat_seminar_model', 'riwayat_seminar_request_model', 'kedudukan_model', 'riwayat_keluarga_model', 'riwayat_keluarga_request_model',
+	'hubungan_keluarga_model', 'jenis_kelamin_model', 'laporan_rekap_model'
 );
-
-
-
-/* End of file autoload.php */
-/* Location: ./system/application/config/autoload.php */

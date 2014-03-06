@@ -9,7 +9,6 @@
 	$array_jabatan_fungsional = array();
 	$array_pegawai_hukuman = $this->riwayat_hukuman_model->get_array(array( 'K_PEGAWAI' => $k_pegawai ));
 	$array_pegawai_hukuman_request = $this->riwayat_hukuman_request_model->get_array(array( 'K_PEGAWAI' => $k_pegawai, 'IS_VALIDATE' => 0 ));
-	
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -178,17 +177,9 @@
 		var raw = $(this).parents('tr').find('.record').html();
 		eval('var record = ' + raw);
 		
-		a = record
-		record = a;
-		
-		$('.cnt-form [name="JENIS_REQ_HUKUMAN"]').val(record.JENIS_REQ_HUKUMAN);
+		Func.populate({ cnt: '.cnt-form', record: record});
 		$('.cnt-form [name="ID_RIWAYAT_HUKUMAN"]').val((record.ID_RIWAYAT_HUKUMAN == null) ? 'x' : record.ID_RIWAYAT_HUKUMAN);
 		$('.cnt-form [name="ID_REQ_HUKUMAN"]').val((record.ID_REQ_HUKUMAN == null) ? 'x' : record.ID_REQ_HUKUMAN);
-		$('.cnt-form [name="NO_SK"]').val(record.NO_SK);
-		$('.cnt-form [name="TGL_SK"]').val(Func.swap_date(record.TGL_SK));
-		$('.cnt-form [name="TMT"]').val(Func.swap_date(record.TMT));
-		$('.cnt-form [name="NIP_PEJABAT"]').val(record.NIP_PEJABAT);
-		$('.cnt-form [name="NAMA_PEJABAT"]').val(record.NAMA_PEJABAT);
 		
 		// update request or valid
 		if (action_form == 'update_request') {

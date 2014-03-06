@@ -62,18 +62,23 @@ class riwayat_diklat_request_model extends Model {
 	
     function get_array($param = array()) {
         $result = array();
+		$param['offset'] = (isset($param['offset'])) ? $param['offset'] : 0;
+		$param['limit'] = (isset($param['limit'])) ? $param['limit'] : 50;
 		$param['id_request'] = (empty($param['id_request'])) ? 'x' : $param['id_request'];
+		$param['IS_VALIDATE'] = (isset($param['IS_VALIDATE'])) ? $param['IS_VALIDATE'] : 'x';
 		$param['no_sertifikat'] = (empty($param['no_sertifikat'])) ? 'x' : $param['no_sertifikat'];
-		$param['is_validate'] = (empty($param['is_validate'])) ? '0' : $param['is_validate'];
 		
 		$raw_query = "CALL DB2ADMIN.GETREQRIWAYATDIKLAT(
-			'".$param['id_request']."', '".$param['k_pegawai']."', '".$param['no_sertifikat']."', '".$param['is_validate']."'
+			'".$param['id_request']."', '".$param['k_pegawai']."', '".$param['no_sertifikat']."', '".$param['IS_VALIDATE']."'
 		)";
         $statement = db2_prepare($this->CI->ldb2->Handle, $raw_query);
         db2_execute($statement);
         while ($row = db2_fetch_assoc($statement)) {
 			$result[] = $this->sync($row);
         }
+		
+		// paging
+		$result = GetPageFromArray($result, $param['offset'], $param['limit']);
 		
         return $result;
     }

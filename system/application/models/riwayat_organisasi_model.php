@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class riwayat_hukuman_model extends Model {
+class riwayat_organisasi_model extends Model {
     function __construct() {
 		parent::__construct();
         $this->CI =& get_instance();
@@ -10,9 +10,10 @@ class riwayat_hukuman_model extends Model {
 		$result['status'] = false;
 		
 		$raw_query = "
-			CALL DB2ADMIN.INSUPDRIWAYATHUKUMAN(
-				'".$param['ID_RIWAYAT_HUKUMAN']."', '".$param['K_PEGAWAI']."', '".$param['NO_SK']."', '".$param['TGL_SK']."',
-				'".$param['TMT']."', '".$param['NIP_PEJABAT']."', '".$param['USERID']."', '".$param['NAMA_PEJABAT']."'
+			CALL DB2ADMIN.INSUPDRIWAYATORGANISASI(
+				'".$param['ID_RIWAYAT_ORGANISASI']."', '".$param['K_PEGAWAI']."', '".$param['NAMA']."', '".$param['KEDUDUKAN']."',
+				'".$param['TGL_MULAI']."', '".$param['TGL_SELESAI']."', '".$param['NO_SK']."', '".$param['NIP_PEJABAT']."',
+				'".$param['NAMA_PEJABAT']."', '".$param['JABATAN_PEJABAT']."', '".$param['USERID']."'
 			)
 		";
 		
@@ -34,9 +35,9 @@ class riwayat_hukuman_model extends Model {
 	function get_by_id($param = array()) {
         $result = array();
 		$param['K_PEGAWAI'] = (empty($param['K_PEGAWAI'])) ? 'x' : $param['K_PEGAWAI'];
-		$param['ID_RIWAYAT_HUKUMAN'] = (empty($param['ID_RIWAYAT_HUKUMAN'])) ? 'x' : $param['ID_RIWAYAT_HUKUMAN'];
+		$param['ID_RIWAYAT_ORGANISASI'] = (empty($param['ID_RIWAYAT_ORGANISASI'])) ? 'x' : $param['ID_RIWAYAT_ORGANISASI'];
         
-		$raw_query = "CALL DB2ADMIN.GETRIWAYATHUKUMAN('".$param['ID_RIWAYAT_HUKUMAN']."', '".$param['K_PEGAWAI']."')";
+		$raw_query = "CALL DB2ADMIN.GETRIWAYATORGANISASI('".$param['ID_RIWAYAT_ORGANISASI']."', '".$param['K_PEGAWAI']."')";
         $statement = db2_prepare($this->CI->ldb2->Handle, $raw_query);
         db2_execute($statement);
         while ($row = db2_fetch_assoc($statement)) {
@@ -49,9 +50,9 @@ class riwayat_hukuman_model extends Model {
     function get_array($param = array()) {
         $result = array();
 		$param['K_PEGAWAI'] = (empty($param['K_PEGAWAI'])) ? 'x' : $param['K_PEGAWAI'];
-		$param['ID_RIWAYAT_HUKUMAN'] = (empty($param['ID_RIWAYAT_HUKUMAN'])) ? 'x' : $param['ID_RIWAYAT_HUKUMAN'];
+		$param['ID_RIWAYAT_ORGANISASI'] = (empty($param['ID_RIWAYAT_ORGANISASI'])) ? 'x' : $param['ID_RIWAYAT_ORGANISASI'];
         
-		$raw_query = "CALL DB2ADMIN.GETRIWAYATHUKUMAN('".$param['ID_RIWAYAT_HUKUMAN']."', '".$param['K_PEGAWAI']."')";
+		$raw_query = "CALL DB2ADMIN.GETRIWAYATORGANISASI('".$param['ID_RIWAYAT_ORGANISASI']."', '".$param['K_PEGAWAI']."')";
         $statement = db2_prepare($this->CI->ldb2->Handle, $raw_query);
         db2_execute($statement);
         while ($row = db2_fetch_assoc($statement)) {
@@ -63,7 +64,7 @@ class riwayat_hukuman_model extends Model {
 	
 	function delete($param) {
 		$result = array( 'status' => false, 'message' => 'Error.') ;
-        $raw_query = "CALL DB2ADMIN.DELRIWAYATHUKUMAN('".$param['ID_RIWAYAT_HUKUMAN']."')";
+        $raw_query = "CALL DB2ADMIN.DELRIWAYATORGANISASI('".$param['ID_RIWAYAT_ORGANISASI']."')";
 		
 		WriteLog($param['K_PEGAWAI'], $raw_query);
         $execute_query = db2_prepare($this->CI->ldb2->Handle, $raw_query);

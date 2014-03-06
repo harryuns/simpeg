@@ -8,32 +8,64 @@ class DirGuruBesarAPI extends Controller {
 		$_SERVER['no_login'] = true;
         parent::Controller();
     }
+	
+	function GetArrayFakultas(){
+		if(isset($_REQUEST['ISCOMPRESS']))
+			$param['ISCOMPRESS'] = $_REQUEST['ISCOMPRESS'];
+		else $param['ISCOMPRESS'] = '1';
+		$param['user_id'] 			= 'rezki';
+		$param['IN_KEY']			= crypt($param['user_id'],API_KEY);
+		if($param['IN_KEY']==crypt($param['user_id'],API_KEY)){
+        	//echo json_encode($this->directory_gurubesar_model->get($param))
+			if($param['ISCOMPRESS']=='1')
+				echo gzcompress(base64_encode(json_encode($this->lunit_kerja->GetArrayAll('x',array('IS_FAKULTAS'=>'1'))))); 
+			else echo json_encode($this->lunit_kerja->GetArrayAll('x',array('IS_FAKULTAS'=>'1')));
+		}
+        else{
+            $error[0]=array("ERROR"=>"00001","MESSAGE"=>"Invalid API Key"); 
+			if($param['ISCOMPRESS']=='1')
+				echo gzcompress(base64_encode(json_encode($error)));
+			else 
+				echo json_encode($error);
+        }
+	}
     
     function CallGetDirectoryGuruBesar() {
-			
 			$Result = '';
-			if(isset($_GET['K_UNIT_KERJA']))
-				$param['K_UNIT_KERJA'] = $this->input->get('K_UNIT_KERJA');
+			if(isset($_REQUEST['K_UNIT_KERJA']))
+				$param['K_UNIT_KERJA'] = $_REQUEST['K_UNIT_KERJA'];
 			else $param['K_UNIT_KERJA'] = 'x';
-			if(isset($_GET['ID_GURU_BESAR']))
-				$param['ID_GURU_BESAR'] = $this->input->get('ID_GURU_BESAR');
+			if(isset($_REQUEST['ID_GURU_BESAR']))
+				$param['ID_GURU_BESAR'] = $_REQUEST['ID_GURU_BESAR'];
 			else $param['ID_GURU_BESAR'] = 'x';
-			if(isset($_GET['K_PEGAWAI']))
-				$param['K_PEGAWAI'] = $this->input->get('K_PEGAWAI');
+			if(isset($_REQUEST['K_PEGAWAI']))
+				$param['K_PEGAWAI'] = $_REQUEST['K_PEGAWAI'];
 			else $param['K_PEGAWAI'] = 'x';
-		
+			if(isset($_REQUEST['NAMA']))
+				$param['NAMA'] = $_REQUEST['NAMA'];
+			else $param['NAMA'] = '';
+			
+			if(isset($_REQUEST['ISCOMPRESS']))
+				$param['ISCOMPRESS'] = $_REQUEST['ISCOMPRESS'];
+			else $param['ISCOMPRESS'] = '1';
+			
 		$param['user_id'] 			= 'rezki';
 		$param['IN_KEY']			= crypt($param['user_id'],API_KEY);
 			
 		if($param['IN_KEY']==crypt($param['user_id'],API_KEY))
         {
         	//echo json_encode($this->directory_gurubesar_model->get($param))
-            echo gzcompress(base64_encode(json_encode($this->directory_gurubesar_model->get($param))));
-        }
+			if($param['ISCOMPRESS']=='1')
+				echo gzcompress(base64_encode(json_encode($this->directory_gurubesar_model->get($param)))); 
+			else echo json_encode($this->directory_gurubesar_model->get($param));
+		}
         else
         {
-            $error[0]=array("ERROR"=>"00001","MESSAGE"=>"Invalid API Key");
-            echo gzcompress(base64_encode(json_encode($error)));
+            $error[0]=array("ERROR"=>"00001","MESSAGE"=>"Invalid API Key"); 
+			if($param['ISCOMPRESS']=='1')
+				echo gzcompress(base64_encode(json_encode($error)));
+			else 
+				echo json_encode($error);
         }
 		//$Result = $this->directory_gurubesar_model->get($param);
         //echo json_encode($Result);

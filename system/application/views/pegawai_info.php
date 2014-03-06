@@ -8,6 +8,8 @@
 	$ArrayStatusKerja = $this->lstatus_kerja->GetArrayStatusKerja();
 	$ArrayJenisKerja = $this->ljenis_kerja->GetArrayJenisKerja();
 ?>
+
+<?php if (!empty($Pegawai['K_PEGAWAI'])) { ?>
 <div id="InfoPegawai" style="padding: 0 0 20px 0;">
     <div style="float: left; width: 100px;">NIP</div>
     <div style="float: left; width: 250px;"><?php echo $Pegawai['K_PEGAWAI']; ?></div>
@@ -22,6 +24,7 @@
     <div style="float: left; width: 250px;"><?php echo $ArrayJenisKerja[$Pegawai['K_JENIS_KERJA']]['Content']; ?></div>
     <div style="clear: both;"></div>
 </div>
+<?php } ?>
 
 <div class="hidden">
 	<iframe name="iframe_upload" src="<?php echo HOST.'/index.php/common/upload'; ?>"></iframe>

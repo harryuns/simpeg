@@ -85,8 +85,10 @@ class riwayat_struktural_request_model extends Model {
 	
     function get_array($param = array()) {
         $result = array();
-		$param['ID_REQ_JABATAN_STRUKTURAL'] = (empty($param['ID_REQ_JABATAN_STRUKTURAL'])) ? 'x' : $param['ID_REQ_JABATAN_STRUKTURAL'];
+		$param['offset'] = (isset($param['offset'])) ? $param['offset'] : 0;
+		$param['limit'] = (isset($param['limit'])) ? $param['limit'] : 50;
 		$param['IS_VALIDATE'] = (isset($param['IS_VALIDATE'])) ? $param['IS_VALIDATE'] : 'x';
+		$param['ID_REQ_JABATAN_STRUKTURAL'] = (empty($param['ID_REQ_JABATAN_STRUKTURAL'])) ? 'x' : $param['ID_REQ_JABATAN_STRUKTURAL'];
 		
 		$raw_query = "CALL DB2ADMIN.GETREQRIWAYATJABATANSTRUKTURAL(
 			'".$param['ID_REQ_JABATAN_STRUKTURAL']."', '".$param['K_PEGAWAI']."', '".$param['IS_VALIDATE']."'
@@ -97,6 +99,9 @@ class riwayat_struktural_request_model extends Model {
         while ($row = db2_fetch_assoc($statement)) {
 			$result[] = $this->sync($row);
         }
+		
+		// paging
+		$result = GetPageFromArray($result, $param['offset'], $param['limit']);
 		
         return $result;
     }

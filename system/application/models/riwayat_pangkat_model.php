@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class riwayat_homebase_model extends Model {
+class riwayat_pangkat_model extends Model {
     function __construct() {
 		parent::__construct();
         $this->CI =& get_instance();
@@ -8,14 +8,16 @@ class riwayat_homebase_model extends Model {
 	
 	function update($param) {
 		$result['status'] = false;
+		$param['GAJI_POKOK'] = (empty($param['GAJI_POKOK'])) ? 0 : $param['GAJI_POKOK'];
+		$param['TAHUN_JABATAN_TAMBAHAN'] = (empty($param['TAHUN_JABATAN_TAMBAHAN'])) ? 0 : $param['TAHUN_JABATAN_TAMBAHAN'];
+		$param['BULAN_JABATAN_TAMBAHAN'] = (empty($param['BULAN_JABATAN_TAMBAHAN'])) ? 0 : $param['BULAN_JABATAN_TAMBAHAN'];
 		
 		$raw_query = "
-			CALL DB2ADMIN.INSUPDRIWAYATHOMEBASE(
-				'".$param['ID_RIWAYAT_HOMEBASE']."', '".$param['K_PEGAWAI']."', '".$param['NO_SK']."', '".$param['TGL_SK']."',
-				'".$param['K_ASAL_SK']."', '".$param['TMT']."', '".$param['K_UNIT_KERJA']."', 
-				'".$param['K_JENJANG']."', '".$param['K_FAKULTAS']."', '".$param['K_JURUSAN']."',
-				'".$param['K_PROG_STUDI']."', '".$param['USERID']."', '".$param['IS_PDPT']."',
-				'".$param['IS_SIMPEG']."'
+			CALL DB2ADMIN.INSUPDRIWAYATPANGKAT(
+				'".$param['ID_RIWAYAT_PANGKAT']."', '".$param['K_PEGAWAI']."', '".$param['NO_SK']."', '".$param['K_ASAL_SK']."',
+				'".$param['TGL_SK']."', '".$param['K_PENJELASAN']."', '".$param['TMT']."',  '".$param['K_GOLONGAN']."',
+				'".$param['GAJI_POKOK']."', '".$param['KETERANGAN']."', '".$param['USERID']."', '".$param['PENANDATANGAN_SK']."',
+				'".$param['TAHUN_JABATAN_TAMBAHAN']."', '".$param['BULAN_JABATAN_TAMBAHAN']."'
 			)
 		";
 		
@@ -37,9 +39,9 @@ class riwayat_homebase_model extends Model {
 	function get_by_id($param = array()) {
         $result = array();
 		$param['K_PEGAWAI'] = (empty($param['K_PEGAWAI'])) ? 'x' : $param['K_PEGAWAI'];
-		$param['ID_RIWAYAT_HOMEBASE'] = (empty($param['ID_RIWAYAT_HOMEBASE'])) ? 'x' : $param['ID_RIWAYAT_HOMEBASE'];
+		$param['ID_RIWAYAT_PANGKAT'] = (empty($param['ID_RIWAYAT_PANGKAT'])) ? 'x' : $param['ID_RIWAYAT_PANGKAT'];
         
-		$raw_query = "CALL DB2ADMIN.GETRIWAYATHOMEBASE('".$param['ID_RIWAYAT_HOMEBASE']."', '".$param['K_PEGAWAI']."')";
+		$raw_query = "CALL DB2ADMIN.GETRIWAYATPANGKAT('".$param['ID_RIWAYAT_PANGKAT']."', '".$param['K_PEGAWAI']."')";
         $statement = db2_prepare($this->CI->ldb2->Handle, $raw_query);
         db2_execute($statement);
         while ($row = db2_fetch_assoc($statement)) {
@@ -51,10 +53,11 @@ class riwayat_homebase_model extends Model {
 	
     function get_array($param = array()) {
         $result = array();
+		
 		$param['K_PEGAWAI'] = (empty($param['K_PEGAWAI'])) ? 'x' : $param['K_PEGAWAI'];
-		$param['ID_RIWAYAT_HOMEBASE'] = (empty($param['ID_RIWAYAT_HOMEBASE'])) ? 'x' : $param['ID_RIWAYAT_HOMEBASE'];
+		$param['ID_RIWAYAT_PANGKAT'] = (empty($param['ID_RIWAYAT_PANGKAT'])) ? 'x' : $param['ID_RIWAYAT_PANGKAT'];
         
-		$raw_query = "CALL DB2ADMIN.GETRIWAYATHOMEBASE('".$param['ID_RIWAYAT_HOMEBASE']."', '".$param['K_PEGAWAI']."')";
+		$raw_query = "CALL DB2ADMIN.GETRIWAYATPANGKAT('".$param['ID_RIWAYAT_PANGKAT']."', '".$param['K_PEGAWAI']."')";
         $statement = db2_prepare($this->CI->ldb2->Handle, $raw_query);
         db2_execute($statement);
         while ($row = db2_fetch_assoc($statement)) {
@@ -66,7 +69,7 @@ class riwayat_homebase_model extends Model {
 	
 	function delete($param) {
 		$result = array( 'status' => false, 'message' => 'Error.') ;
-        $raw_query = "CALL DB2ADMIN.DELRIWAYATHOMEBASE('".$param['ID_RIWAYAT_HOMEBASE']."')";
+        $raw_query = "CALL DB2ADMIN.DELRIWAYATPANGKAT('".$param['ID_RIWAYAT_PANGKAT']."')";
 		
 		WriteLog($param['K_PEGAWAI'], $raw_query);
         $execute_query = db2_prepare($this->CI->ldb2->Handle, $raw_query);
@@ -83,8 +86,6 @@ class riwayat_homebase_model extends Model {
 	}
 	
 	function sync($row) {
-		$row['IS_PDPT_TEXT'] = ($row['IS_PDPT']) ? 'Ya' : 'Tidak';
-		$row['IS_SIMPEG_TEXT'] = ($row['IS_SIMPEG']) ? 'Ya' : 'Tidak';
 		$row['JML_FILE_TEXT'] = (@$row['JML_FILE'] == 0) ? '-' : 'Cek';
 		
 		return $row;
@@ -96,9 +97,9 @@ class riwayat_homebase_model extends Model {
 		$result['status'] = false;
 		$result['message'] = '';
 		
-		$param['ID_RIWAYAT_HOMEBASE_FILE'] = (empty($param['ID_RIWAYAT_HOMEBASE_FILE'])) ? 'x' : $param['ID_RIWAYAT_HOMEBASE_FILE'];
-		$raw_query = "CALL DB2ADMIN.INSUPDRIWAYATHOMEBASEFILE(
-			'".$param['ID_RIWAYAT_HOMEBASE_FILE']."', '".$param['ID_RIWAYAT_HOMEBASE']."', '".$param['FILENAME']."', '".$param['USERID']."'
+		$param['ID_RIWAYAT_PANGKAT_FILE'] = (empty($param['ID_RIWAYAT_PANGKAT_FILE'])) ? 'x' : $param['ID_RIWAYAT_PANGKAT_FILE'];
+		$raw_query = "CALL DB2ADMIN.INSUPDRIWAYATPANGKATFILE(
+			'".$param['ID_RIWAYAT_PANGKAT_FILE']."', '".$param['ID_RIWAYAT_PANGKAT']."', '".$param['FILENAME']."', '".$param['USERID']."'
 		)";
 		
 		WriteLog($param['K_PEGAWAI'], $raw_query);
@@ -125,15 +126,15 @@ class riwayat_homebase_model extends Model {
 		$result = array();
 		
 		$counter = 0;
-		$param['ID_RIWAYAT_HOMEBASE_FILE'] = (empty($param['ID_RIWAYAT_HOMEBASE_FILE'])) ? 'x' : $param['ID_RIWAYAT_HOMEBASE_FILE'];
-        $raw_query = "CALL DB2ADMIN.GETRIWAYATHOMEBASEFILE('".$param['ID_RIWAYAT_HOMEBASE_FILE']."', '".$param['ID_RIWAYAT_HOMEBASE']."')";
+		$param['ID_RIWAYAT_PANGKAT_FILE'] = (empty($param['ID_RIWAYAT_PANGKAT_FILE'])) ? 'x' : $param['ID_RIWAYAT_PANGKAT_FILE'];
+        $raw_query = "CALL DB2ADMIN.GETRIWAYATPANGKATFILE('".$param['ID_RIWAYAT_PANGKAT_FILE']."', '".$param['ID_RIWAYAT_PANGKAT']."')";
 		
 		WriteLog($param['K_PEGAWAI'], $raw_query);
         $execute_query = db2_prepare($this->CI->ldb2->Handle, $raw_query);
         $execute_result = db2_execute($execute_query) or die(db2_stmt_errormsg($execute_query));
         while (false !== $row = db2_fetch_assoc($execute_query)) {
 			$counter++;
-			$row['name_file'] = @$row['NO_SERTIFIKAT'] . ' File ke ' . $counter;
+			$row['name_file'] = @$row['NO_SK'] . ' File ke ' . $counter;
 			$row['link_file'] = base_url('images/upload/'. $row['FILENAME']);
 			$result[] = $row;
         }
@@ -143,7 +144,7 @@ class riwayat_homebase_model extends Model {
 	
 	function delete_file($param) {
 		$result = array();
-		$raw_query = "CALL DB2ADMIN.DELRIWAYATHOMEBASEFILE( '".$param['ID_RIWAYAT_HOMEBASE_FILE']."', '".$param['ID_RIWAYAT_HOMEBASE']."' )";
+		$raw_query = "CALL DB2ADMIN.DELRIWAYATPANGKATFILE( '".$param['ID_RIWAYAT_PANGKAT_FILE']."', '".$param['ID_RIWAYAT_PANGKAT']."' )";
 		
 		WriteLog($param['K_PEGAWAI'], $raw_query);
         $execute_query = db2_prepare($this->CI->ldb2->Handle, $raw_query);

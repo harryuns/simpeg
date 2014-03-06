@@ -24,7 +24,7 @@
 				<?php } ?>
 			</td>
 			<?php if ($is_request) { ?>
-			<td class="body"><?php echo show_jenis_request(@$row['JENIS_REQ_HOMEBASE_FILE']); ?></td>
+			<td class="body"><?php echo show_jenis_request(@$row['JENIS_REQ_PANGKAT_FILE']); ?></td>
 			<?php } ?>
 			<td class="body"><?php echo @$row['NO_SK']; ?></td>
 			<td class="body"><a href="<?php echo $row['link_file']; ?>" target="_blank"><?php echo $row['name_file']; ?></a></td></tr>

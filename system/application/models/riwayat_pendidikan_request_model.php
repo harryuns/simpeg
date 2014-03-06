@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class riwayat_homebase_request_model extends Model {
+class riwayat_pendidikan_request_model extends Model {
     function __construct() {
 		parent::__construct();
         $this->CI =& get_instance();
@@ -8,15 +8,19 @@ class riwayat_homebase_request_model extends Model {
 	
 	function update($param) {
 		$result['status'] = false;
-		$param['ID_REQ_HOMEBASE'] = (empty($param['ID_REQ_HOMEBASE'])) ? 'x' : $param['ID_REQ_HOMEBASE'];
-		$param['ID_RIWAYAT_HOMEBASE'] = (empty($param['ID_RIWAYAT_HOMEBASE'])) ? 'x' : $param['ID_RIWAYAT_HOMEBASE'];
+		$param['ID_REQ_PENDIDIKAN'] = (empty($param['ID_REQ_PENDIDIKAN'])) ? 'x' : $param['ID_REQ_PENDIDIKAN'];
+		$param['ID_RIWAYAT_PENDIDIKAN'] = (empty($param['ID_RIWAYAT_PENDIDIKAN'])) ? 'x' : $param['ID_RIWAYAT_PENDIDIKAN'];
 		
 		$raw_query = "
-			CALL DB2ADMIN.INSUPDREQRIWAYATHOMEBASE(
-				'".$param['ID_REQ_HOMEBASE']."', '".$param['JENIS_REQ_HOMEBASE']."', '".$param['USERID']."', '".$param['ID_RIWAYAT_HOMEBASE']."',
-				'".$param['K_PEGAWAI']."', '".$param['NO_SK']."', '".$param['TGL_SK']."', '".$param['K_ASAL_SK']."',
-				'".$param['TMT']."', '".$param['K_UNIT_KERJA']."', '".$param['K_PROG_STUDI']."', '".$param['K_JURUSAN']."',
-				'".$param['K_FAKULTAS']."', '".$param['K_JENJANG']."', '".$param['IS_PDPT']."', '".$param['IS_SIMPEG']."'
+			CALL DB2ADMIN.INSUPDREQRIWAYATPENDIDIKAN(
+				'".$param['ID_REQ_PENDIDIKAN']."', '".$param['JENIS_REQ_PENDIDIKAN']."', '".$param['USERID']."', '".$param['K_PEGAWAI']."',
+				'".$param['K_JENJANG']."', '".$param['NO_IJAZAH']."', '".$param['TGL_IJAZAH']."', '".$param['IPK']."',
+				'".$param['THN_MASUK']."', '".$param['PT']."', '".$param['K_NEGARA']."', '".$param['PROG_STUDI']."',
+				'".$param['BIDANG_ILMU']."', '".$param['KETERANGAN']."', '".$param['USERID']."', '".$param['THN_LULUS']."',
+				'".$param['K_STATUS_STUDI']."', '".@$param['FILE_IJAZAH']."', '".@$param['FILE_TRANS']."', '".@$param['PROFESI']."',
+				'".@$param['TMT_STUDI']."', '".$param['NO_SK_TUBEL']."', '".$param['TMT_TUBEL']."', '".$param['NO_SK_PEMBEBASAN']."',
+				'".$param['TMT_PEMBEBASAN']."', '".$param['TMT_LULUS']."', '".$param['STATUS_PENGAKTIFAN']."', '".$param['NO_SK_PENGAKTIFAN']."',
+				'".$param['TMT_PENGAKTIFAN']."', '".@$param['IS_STUDI_LANJUT']."', '".$param['ID_RIWAYAT_PENDIDIKAN']."', '".$param['K_ASAL_PT_S3DIKTI']."'
 			)
 		";
 		
@@ -28,7 +32,7 @@ class riwayat_homebase_request_model extends Model {
 			if ($query_status == QUERY_STATUS_SUCCESS) {
 				$result['status'] = true;
 				$result['message'] = 'Data berhasil disimpan';
-				$result['ID_REQ_HOMEBASE'] = $row['ID_REQ_HOMEBASE'];
+				$result['ID_REQ_PENDIDIKAN'] = $row['ID_REQ_PENDIDIKAN'];
 			} else {
 				$result['message'] = 'Error.';
 			}
@@ -39,8 +43,7 @@ class riwayat_homebase_request_model extends Model {
 	
 	function validate($param) {
 		$result['status'] = false;
-		$raw_query = "CALL DB2ADMIN.VALREQRIWAYATHOMEBASE( '".$param['ID_REQ_HOMEBASE']."', '".$param['USERID']."' )";
-		
+		$raw_query = "CALL DB2ADMIN.VALREQRIWAYATPENDIDIKAN( '".$param['ID_REQ_PENDIDIKAN']."', '".$param['USERID']."' )";
 		WriteLog($param['K_PEGAWAI'], $raw_query);
 		$execute_query = db2_prepare($this->CI->ldb2->Handle, $raw_query);
 		$execute_result = db2_execute($execute_query) or die(db2_stmt_errormsg($execute_query));
@@ -59,24 +62,30 @@ class riwayat_homebase_request_model extends Model {
 	
     function get_array($param = array()) {
         $result = array();
-		$param['ID_REQ_HOMEBASE'] = (empty($param['ID_REQ_HOMEBASE'])) ? 'x' : $param['ID_REQ_HOMEBASE'];
+		$param['offset'] = (isset($param['offset'])) ? $param['offset'] : 0;
+		$param['limit'] = (isset($param['limit'])) ? $param['limit'] : 50;
 		$param['IS_VALIDATE'] = (isset($param['IS_VALIDATE'])) ? $param['IS_VALIDATE'] : 'x';
+		$param['ID_REQ_PENDIDIKAN'] = (empty($param['ID_REQ_PENDIDIKAN'])) ? 'x' : $param['ID_REQ_PENDIDIKAN'];
 		
-		$raw_query = "CALL DB2ADMIN.GETREQRIWAYATHOMEBASE(
-			'".$param['ID_REQ_HOMEBASE']."', '".$param['K_PEGAWAI']."', '".$param['IS_VALIDATE']."'
+		$raw_query = "CALL DB2ADMIN.GETREQRIWAYATPENDIDIKAN(
+			'".$param['ID_REQ_PENDIDIKAN']."', '".$param['K_PEGAWAI']."', '".$param['IS_VALIDATE']."'
 		)";
+		
         $statement = db2_prepare($this->CI->ldb2->Handle, $raw_query);
         db2_execute($statement);
         while ($row = db2_fetch_assoc($statement)) {
 			$result[] = $this->sync($row);
         }
 		
+		// paging
+		$result = GetPageFromArray($result, $param['offset'], $param['limit']);
+		
         return $result;
     }
 	
 	function delete($param) {
 		$result = array( 'status' => false, 'message' => 'Error.') ;
-        $raw_query = "CALL DB2ADMIN.DELREQRIWAYATHOMEBASE('".$param['ID_REQ_HOMEBASE']."')";
+        $raw_query = "CALL DB2ADMIN.DELREQRIWAYATPENDIDIKAN('".$param['ID_REQ_PENDIDIKAN']."')";
 		
 		WriteLog($param['K_PEGAWAI'], $raw_query);
         $execute_query = db2_prepare($this->CI->ldb2->Handle, $raw_query);
@@ -93,9 +102,9 @@ class riwayat_homebase_request_model extends Model {
 	}
 	
 	function sync($row) {
-		$row['IS_PDPT_TEXT'] = ($row['IS_PDPT']) ? 'Ya' : 'Tidak';
-		$row['IS_SIMPEG_TEXT'] = ($row['IS_SIMPEG']) ? 'Ya' : 'Tidak';
-		$row['JML_FILE_TEXT'] = (@$row['JML_FILE'] == 0) ? '-' : 'Cek';
+		$row = StripArray($row, array( 'TGL_IJAZAH', 'TMT_STUDI', 'TMT_TUBEL', 'TMT_PEMBEBASAN', 'TMT_LULUS', 'TMT_PENGAKTIFAN' ));
+		$row['JML_FILE_IJAZAH_TEXT'] = (@$row['JML_FILE_IJAZAH'] == 0) ? '-' : 'Cek';
+		$row['JML_FILE_NON_IJAZAH_TEXT'] = (@$row['JML_FILE_NON_IJAZAH'] == 0) ? '-' : 'Cek';
 		
 		return $row;
 	}
@@ -106,12 +115,12 @@ class riwayat_homebase_request_model extends Model {
 		$result['status'] = false;
 		$result['message'] = '';
 		
-		$param['JENIS_REQ_HOMEBASE_FILE'] = (isset($param['JENIS_REQ_HOMEBASE_FILE'])) ? $param['JENIS_REQ_HOMEBASE_FILE'] : 'I';
-		$param['ID_RIWAYAT_HOMEBASE_FILE'] = (isset($param['ID_RIWAYAT_HOMEBASE_FILE'])) ? $param['ID_RIWAYAT_HOMEBASE_FILE'] : 'x';
+		$param['JENIS_REQ_PENDIDIKAN_FILE'] = (isset($param['JENIS_REQ_PENDIDIKAN_FILE'])) ? $param['JENIS_REQ_PENDIDIKAN_FILE'] : 'I';
+		$param['ID_RIWAYAT_PENDIDIKAN_FILE'] = (isset($param['ID_RIWAYAT_PENDIDIKAN_FILE'])) ? $param['ID_RIWAYAT_PENDIDIKAN_FILE'] : 'x';
 		
-		$raw_query = "CALL DB2ADMIN.INSREQRIWAYATHOMEBASEFILE(
-			'".$param['JENIS_REQ_HOMEBASE_FILE']."', '".$param['USERID']."', '".$param['ID_REQ_HOMEBASE']."', '".$param['ID_RIWAYAT_HOMEBASE_FILE']."',
-			'".$param['FILENAME']."'
+		$raw_query = "CALL DB2ADMIN.INSREQRIWAYATPENDIDIKANFILE(
+			'".$param['ID_RIWAYAT_PENDIDIKAN_FILE']."', '".$param['ID_REQ_PENDIDIKAN']."', '".$param['JENIS_REQ_PENDIDIKAN_FILE']."', '".$param['USERID']."',
+			'".$param['FILENAME']."', '".$param['IS_IJAZAH']."'
 		)";
 		
 		WriteLog($param['K_PEGAWAI'], $raw_query);
@@ -139,19 +148,19 @@ class riwayat_homebase_request_model extends Model {
 		$result = array();
 		
 		$counter = 0;
-		$param['ID_REQ_HOMEBASE'] = (empty($param['ID_REQ_HOMEBASE'])) ? 'x' : $param['ID_REQ_HOMEBASE'];
+		$param['ID_REQ_PENDIDIKAN'] = (empty($param['ID_REQ_PENDIDIKAN'])) ? 'x' : $param['ID_REQ_PENDIDIKAN'];
 		$param['IS_VALIDATE'] = (empty($param['IS_VALIDATE'])) ? 'x' : $param['IS_VALIDATE'];
-		$param['ID_REQ_HOMEBASE_FILE'] = (empty($param['ID_REQ_HOMEBASE_FILE'])) ? 'x' : $param['ID_REQ_HOMEBASE_FILE'];
+		$param['ID_REQ_PENDIDIKAN_FILE'] = (empty($param['ID_REQ_PENDIDIKAN_FILE'])) ? 'x' : $param['ID_REQ_PENDIDIKAN_FILE'];
 		
-        $raw_query = "CALL DB2ADMIN.GETREQRIWAYATHOMEBASEFILE(
-			'".$param['ID_REQ_HOMEBASE_FILE']."', '".$param['ID_REQ_HOMEBASE']."', '".$param['IS_VALIDATE']."'
+        $raw_query = "CALL DB2ADMIN.GETREQRIWAYATPENDIDIKANFILE(
+			'".$param['ID_REQ_PENDIDIKAN_FILE']."', '".$param['ID_REQ_PENDIDIKAN']."', '".$param['IS_VALIDATE']."'
 		)";
 		
         $execute_query = db2_prepare($this->CI->ldb2->Handle, $raw_query);
         $execute_result = db2_execute($execute_query) or die(db2_stmt_errormsg($execute_query));
         while (false !== $row = db2_fetch_assoc($execute_query)) {
 			$counter++;
-			$row['name_file'] = $row['NO_SK'] . ' File ke ' . $counter;
+			$row['name_file'] = ' File ke ' . $counter;
 			$row['link_file'] = base_url('images/upload/'. $row['FILENAME']);
 			$result[] = $row;
         }
@@ -161,7 +170,7 @@ class riwayat_homebase_request_model extends Model {
 	
 	function delete_file($param) {
 		$result = array();
-		$raw_query = "CALL DB2ADMIN.DELREQRIWAYATHOMEBASEFILE( '".$param['ID_REQ_HOMEBASE_FILE']."' )";
+		$raw_query = "CALL DB2ADMIN.DELREQRIWAYATPENDIDIKANFILE( '".$param['ID_REQ_PENDIDIKAN_FILE']."' )";
         
 		WriteLog($param['K_PEGAWAI'], $raw_query);
         $execute_query = db2_prepare($this->CI->ldb2->Handle, $raw_query);

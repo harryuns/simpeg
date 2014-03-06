@@ -59,8 +59,10 @@ class riwayat_homebase_request_model extends Model {
 	
     function get_array($param = array()) {
         $result = array();
-		$param['ID_REQ_HOMEBASE'] = (empty($param['ID_REQ_HOMEBASE'])) ? 'x' : $param['ID_REQ_HOMEBASE'];
+		$param['offset'] = (isset($param['offset'])) ? $param['offset'] : 0;
+		$param['limit'] = (isset($param['limit'])) ? $param['limit'] : 50;
 		$param['IS_VALIDATE'] = (isset($param['IS_VALIDATE'])) ? $param['IS_VALIDATE'] : 'x';
+		$param['ID_REQ_HOMEBASE'] = (empty($param['ID_REQ_HOMEBASE'])) ? 'x' : $param['ID_REQ_HOMEBASE'];
 		
 		$raw_query = "CALL DB2ADMIN.GETREQRIWAYATHOMEBASE(
 			'".$param['ID_REQ_HOMEBASE']."', '".$param['K_PEGAWAI']."', '".$param['IS_VALIDATE']."'
@@ -70,6 +72,9 @@ class riwayat_homebase_request_model extends Model {
         while ($row = db2_fetch_assoc($statement)) {
 			$result[] = $this->sync($row);
         }
+		
+		// paging
+		$result = GetPageFromArray($result, $param['offset'], $param['limit']);
 		
         return $result;
     }

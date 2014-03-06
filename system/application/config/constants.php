@@ -33,19 +33,23 @@ define('EMPTY_DATE', '1950-01-01');
 
 /* URL */
 if ($_SERVER['HTTP_HOST'] == 'develweb.ub.ac.id') {
+	define('IS_DEVEL', true);
 	define('LOGIN_URL', 'http://devel184.ub.ac.id/baisdev/api/Login/xmlapi/');
     define('HOST', 'http://develweb.ub.ac.id/simpeg');
     define('PATH', '/var/www/html/simpeg');
 } else if ($_SERVER['HTTP_HOST'] == 'devel184.ub.ac.id') {
+	define('IS_DEVEL', true);
 	define('LOGIN_URL', 'http://devel184.ub.ac.id/baisdev/api/Login/xmlapi/');
     define('HOST', 'http://devel184.ub.ac.id/simpeg');
     define('PATH', '/home/var/www/html/simpeg');
 } else if ($_SERVER['HTTP_HOST'] == 'simpeg.ub.ac.id') {
+	define('IS_DEVEL', false);
 	define('LOGIN_URL', 'http://bais.ub.ac.id/api/login/xmlapi/');
     define('HOST', 'http://simpeg.ub.ac.id');
 	define('HTTPS', 'https://simpeg.ub.ac.id');
     define('PATH', '/home/var/www/html/simpeg');
 } else if ($_SERVER['HTTP_HOST'] == '175.45.186.14') {
+	define('IS_DEVEL', false);
 	define('LOGIN_URL', 'http://bais.ub.ac.id/api/login/xmlapi/');
     define('HOST', 'http://175.45.186.14/simpeg');
 	define('HTTPS', 'https://175.45.186.14/simpeg');
