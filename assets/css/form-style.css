@@ -1,0 +1,121 @@
+body{
+	font-family:Arial, Helvetica, sans-serif;
+	background:#999;
+}
+#wrapper{
+	border:3px solid #000;
+	min-height:500px;
+	width:500px;
+	background:#FFF;
+	margin:auto;
+	position:relative;
+}
+#header{
+	width:100%;
+	height:100px;
+	border-bottom:3px solid #000;
+}
+#logo{
+	float:left;
+	width:100px;
+	height:100px;
+	position:relative;
+}
+#text-logo{
+	padding-top:20px;
+	font-weight:bold;
+	width:380px;
+	float:left;
+	text-align:center;
+	font-size:12px;
+	text-transform:uppercase;
+}
+#content{
+	width:440px;
+	background:#FFF;
+	padding:0px 30px 10px 30px;
+	font-size:9px;
+	line-height:1.2px;
+	position:relative;
+}
+#wrapper1{
+	border:3px solid #000;
+	min-height:500px;
+	width:600px;
+	background:#FFF;
+	margin:auto;
+	position:relative;
+}
+#header1{
+	width:100%;
+	height:100px;
+	border-bottom:3px solid #000;
+}
+#logo1{
+	float:left;
+	width:100px;
+	height:100px;
+	position:relative;
+}
+#text-logo1{
+	padding-top:20px;
+	font-weight:bold;
+	width:480px;
+	float:left;
+	text-align:center;
+	font-size:12px;
+	text-transform:uppercase;
+}
+#content1{
+	width:540px;
+	background:#FFF;
+	padding:10px 30px;
+	font-size:12px;
+	line-height:20px;
+	position:relative;
+}
+table#isi tbody tr td#jarak1{
+	width:155px;
+}
+table#isi tbody tr td#jarak2{
+	width:10px;
+}
+table#isi tbody tr td#jarak3{
+	width:230px;
+}
+#bawah{
+	width:440px;
+	height:150px;
+	margin-bottom:5px;
+	float:left;
+}
+#foto{
+	float:left;
+	width:106px;
+	margin:10px 20px;
+	height:130px;
+	border:1px solid #000;
+}
+#tanggal{
+	float:left;
+	width:106px;
+	margin:10px 20px;
+	height:130px;
+}
+#catatan{
+	float:left;
+	width:150px;
+	height:130px;
+	line-height:15px;
+}
+#ttd{
+	float:left;
+	width:146px;
+	padding-top:10px;
+}
+#clear{
+	clear:both;
+}
+
+
+.box-title{position:absolute; padding:20px; top:0; left:100%; display:block;margin-right:20px; border:solid 2px #000}
