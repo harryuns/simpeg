@@ -1,0 +1,171 @@
+@charset "utf-8";
+/* CSS Document */
+body {background: url('../images/bg_main.jpg') repeat scroll left top transparent; color:#10445F; font:12px "verdana",arial,tahoma; line-height:14px; min-height:100%}
+* {margin: 0; padding: 0;}
+
+html{}
+
+/* BODY */
+#body { background: url(../images/bg_trans.png) repeat-x left top transparent; width:100%; height:auto; overflow:auto;}
+
+#frame {width:1000px; margin:10px auto 0 auto; background:url(../images/lambangUB.png) 150px top no-repeat scroll; height:66px; padding-top:80px;}
+
+#sidebar {width:148px; float:left; padding:40px 0 12px 0; background:url(siado/bg-sidebar-bottom.png) bottom left no-repeat;}
+#sidebar ul {margin-top: -5px;}
+
+#sidebar li {list-style:none; border-left:1px solid #9ccfd8; margin-left:8px; font-family: Verdana, Geneva, sans-serif; letter-spacing: 0.1px;}
+
+#sidebar li a {text-decoration:none; display:block; padding:5px; background:url(siado/sekat.jpg) bottom left repeat-x;
+color:#4976A3; text-shadow: 1px 1px 1px #FFF;}
+
+#sidebar li a:hover {background: url("siado/bg.jpg") repeat-x scroll left bottom #FFFBEF;}
+
+.glossymenu{
+padding: 0;
+color:#FFF;
+width: 148px; /*width of menu*/
+background: url('siado/GlossyMenuBg.png') top right repeat-y;
+}
+
+.glossymenu a.menuitem{
+background:url(siado/menu.png) bottom left repeat-x;
+font: light 14px "Trebuchet MS", Verdana, Helvetica, sans-serif;
+padding:5px 10px 15px 10px;
+width:128px;
+display: block;
+color:#dbe6f0;
+position: relative; /*To help in the anchoring of the ".statusicon" icon image*/
+width: auto;
+text-decoration: none;
+}
+
+.glossymenu a.menuitem:visited, .glossymenu .menuitem:active{
+color: #a8c0d8; text-shadow: 1px 1px 1px #335588;
+} 
+
+.glossymenu a.menuitem .statusicon{ /*CSS for icon image that gets dynamically added to headers*/
+position: absolute;
+top: 5px;
+right: 5px;
+border: none;
+}
+
+.glossymenu a.menuitem:hover{
+}
+
+.glossymenu div.submenu{ /*DIV that contains each sub menu*/
+}
+
+.glossymenu div.submenu ul{ /*UL of each sub menu*/
+list-style-type: none;
+background:none;
+margin: 0;
+padding: 0;
+}
+
+
+.glossymenu div.submenu ul li a{
+display: block;
+font: normal 13px "Lucida Grande", "Trebuchet MS", Verdana, Helvetica, sans-serif;
+text-decoration: none;
+}
+
+.glossymenu div.submenu ul li a:hover{
+}
+
+.submenu a {color:#FFF;}
+
+#content {width:850px; font-size:11px; float:right; background: url(siado/header-content.jpg) top left repeat-x #f4f4ec; border-radius: 6px;
+-moz-border-radius: 6px; -webkit-border-radius: 6px; border:1px solid #e6dbca; margin-bottom: 5px; min-height:650px; overflow:auto; color:#32587d;
+padding: 110px 0 10px; 0; position:relative}
+
+#content td {padding: 5px;}
+
+#content h1 {margin: 20px 0 0 10px; color:#114772; text-shadow: 1px 1px 1px #FFF; font-family:"Georgia","Times New Roman",sans-serif !important; font-size: 14px; font-style:italic; font-weight: bold; line-height:1.6em; padding:0;}
+	
+#content h2 {font-size:0.8em; color:#4476a7; margin: 0 0 0 120px;}
+
+.tabel_id {width:98%; margin:10px auto; background:url(siado/bg-id.jpg) bottom center no-repeat; padding-bottom:10px;}
+.tabel {width: 100%; }
+.tabel h3 {font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif; padding:5px 0; text-shadow:1px 1px 1px #FFF;}
+.tabel a {color:#39c; text-decoration:none;}
+.tabel a:hover {text-decoration:underline;}
+
+.kiri {width:45%; margin:2.5% 0 0 1%; padding: 2% 1%; background:url(siado/bg.jpg) bottom left repeat-x #fffbef; float:left; border-radius: 6px; -moz-border-radius: 6px; -webkit-border-radius: 6px; border:1px solid #e6dbca; color:#4976a3;}
+
+.kanan {width:45%; margin:2.5% 1% 0 0; padding: 2% 1%; float: right; background:url(siado/bg.jpg) bottom left repeat-x #fffbef; border-radius: 6px; -moz-border-radius: 6px; -webkit-border-radius: 6px; border:1px solid #e6dbca;}
+
+.kanan a {color:#188bca; text-decoration:none;}
+.kanan a:hover {color:#036; text-decoration:underline;}
+.kanan li {list-style:none; margin-bottom:10px;}
+.kanan h3 {font-size:1.1em; margin:0; padding:0; font-style: normal; font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif; text-shadow:1px 1px 1px #FFF;}
+
+.full {width:96%; margin:0 auto; padding: 2% 1%; background:url(siado/bg.jpg) bottom left repeat-x #fffbef; clear:both;
+border-radius: 6px; -moz-border-radius: 6px; -webkit-border-radius: 6px; border:1px solid #e6dbca;}
+.full a {color:#188bca; text-decoration:none;}
+.full a:hover {color:#036; text-decoration:underline;}
+.full h3 {font-size:1.1em; margin-bottom:10px; padding:0; font-style: normal; font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif; text-shadow:1px 1px 1px #FFF;}
+
+
+/* LOGIN AREA */
+#frame2 {width:500px; margin:10px auto 0 auto; background:url(siado/lambangUB.png) center top no-repeat scroll; padding-top:80px;}
+#content-login {width:500px; margin:0 auto; font-size:11px; background: url(siado/header-content.jpg) right top scroll no-repeat #f4f4ec; border-radius: 6px; -moz-border-radius: 6px; -webkit-border-radius: 6px; border:1px solid #e0f7fc; margin-bottom: 5px; overflow:auto; color:#32587d; padding:120px 0 10px; 0}
+#content-login .tabel h3 {margin-bottom:20px;}
+#content-login input {margin:5px 0;}
+#content-login h1 {font-size:12px; margin:0 0 10px 0; padding:0; font-style: normal; font-family: Verdana, Geneva, sans-serif; text-shadow:1px 1px 1px #FFF;}
+#content-login li { margin: 5px 0 0 20px;}
+#content-login a {color:#188bca; text-decoration:none;}
+
+
+@keyframes myfirst
+{
+from {bottom: -120%;}
+to {bottom: 2%;}
+}
+
+@-webkit-keyframes myfirst /* Safari and Chrome */
+{
+from {bottom: -120%;}
+to {bottom: 2%;}
+}
+
+.notif-simpeg{position:fixed; min-height:120px; width:240px; right:10px; background:#fff; bottom:2%;font-size:90%;
+animation: myfirst 2s;
+-webkit-animation: myfirst 2s; /* Safari and Chrome */
+
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -khtml-border-radius: 6px;
+    border-radius: 6px;
+	border:solid 1px #888;
+	padding:2px;
+	-moz-box-shadow: 0px 0px 5px rgba(0,0,0,.6);
+    -webkit-box-shadow: 0px 0px 5px rgba(0,0,0,.6);
+    box-shadow: 0px 0px 5px rgba(0,0,0,.6);
+}
+
+.notif-simpeg-ttl{background:#c00; color:#fff; padding:5px 10px;
+    -moz-border-radius-topright: 4px;
+    -moz-border-radius-topleft: 4px;
+    -webkit-border-top-right-radius: 4px;
+    -webkit-border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+	margin-bottom:2px;
+}
+
+.notif-simpeg-isi{
+	border-top:solid 1px #ccc;
+	padding:8px;
+	min-height:120px;
+	  background-color: #fff;
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#ddd));
+  background: -webkit-linear-gradient(top, #ddd, #fff);
+  background: -moz-linear-gradient(top, #ddd, #fff);
+  background: -ms-linear-gradient(top, #ddd, #fff);
+  background: -o-linear-gradient(top, #ddd, #fff);
+	}
+
+.notif-simpeg-isi ul{display:block; margin-left:16px;}
+.notif-simpeg-isi ul li{padding:2px 0; line-height:1.2}
+.notif-simpeg a.notif-close{height:16px; width:16px; display:block; position:absolute; top:0; right:0; background:url(../images/cross2.png) center no-repeat; text-indent:-9999px; margin:7px 6px 0 0}

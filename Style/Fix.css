@@ -1,0 +1,61 @@
+/**************** IE fixes ****************/
+
+html
+{overflow:hidden;}
+
+body
+{height:100%; overflow:auto;}
+
+* {margin:0; padding:0;}
+
+.glossymenu{
+padding: 0;
+color:#FFF;
+width: 148px; /*width of menu*/
+}
+
+.glossymenu a.menuitem{
+background:url(images/menu.png) bottom left repeat-x;
+font: light 14px "Trebuchet MS", Verdana, Helvetica, sans-serif;
+width:128px;
+display: block;
+color:#dbe6f0;
+position: relative; /*To help in the anchoring of the ".statusicon" icon image*/
+width: auto;
+text-decoration: none;
+}
+
+.glossymenu a.menuitem:visited, .glossymenu .menuitem:active{
+color: #a8c0d8; text-shadow: 1px 1px 1px #335588;
+} 
+
+.glossymenu a.menuitem .statusicon{ /*CSS for icon image that gets dynamically added to headers*/
+position: absolute;
+top: 5px;
+right: 5px;
+border: none;
+}
+
+.glossymenu a.menuitem:hover{
+}
+
+.glossymenu div.submenu{ /*DIV that contains each sub menu*/
+}
+
+.glossymenu div.submenu ul{ /*UL of each sub menu*/
+list-style-type: none;
+background:none;
+margin: 0;
+padding: 0;
+}
+
+.glossymenu div.submenu ul li a{
+display: block;
+font: normal 13px "Lucida Grande", "Trebuchet MS", Verdana, Helvetica, sans-serif;
+text-decoration: none;
+}
+
+.glossymenu div.submenu ul li a:hover{
+}
+
+.submenu a {color:#FFF;}

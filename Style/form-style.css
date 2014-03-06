@@ -1,0 +1,128 @@
+body{
+	font:100%/1.2 Arial, Helvetica, sans-serif;
+	background:#999;
+}
+#wrapper{
+	border:3px solid #000;
+	min-height:480px;
+	height: 100px;
+	overflow:hidden;
+	width:800px;
+	background:#FFF;
+	margin:auto;
+	position:relative;
+}
+#header{
+	width:100%;
+	padding: 5px 0 10px;
+	height:100px!important;
+	border-bottom:3px solid #000;
+	text-align: center;
+}
+#logo{
+	float:left;
+	position:absolute;
+	left:20px;
+	width:90px;
+	height:70px;
+	margin:0 0 0 20px;
+}
+#text-logo{
+	padding-top:17px;
+	font-weight:bold;
+	text-align:center;
+	font-size:14px;
+	line-height:1;
+	text-transform:uppercase;
+	padding-left:20px;
+	width:500px;
+}
+#content{
+	background:#FFF;
+	padding:10px 30px 10px 30px;
+	font-size:14px;
+	line-height:1.2;
+	position:relative;
+}
+#wrapper1{
+	border:3px solid #000;
+	min-height:580px;
+	width:100%;
+	max-width: 800px;
+	background:#FFF;
+	margin:auto;
+	position:relative;
+}
+#header1{
+	width:100%;
+	height:85px;
+	border-bottom:3px solid #000;
+}
+#logo1{
+	float:left;
+	position:absolute;
+	left:20px;
+	width:100px;
+	height:100px;
+}
+#text-logo1{
+	padding-top:10px;
+	font-weight:bold;
+	text-align:center;
+	font-size:14px;
+	line-height:1;
+	text-transform:uppercase;
+}
+#content1{
+	background:#FFF;
+	padding:10px 30px;
+	font-size:14px;
+	position:relative;
+}
+table#isi tbody tr td#jarak1{
+	width:155px;
+}
+table#isi tbody tr td#jarak2{
+	width:10px;
+}
+table#isi tbody tr td#jarak3{
+	width:230px;
+}
+#bawah{
+	height:180px;
+	float:left;
+	margin: 10px auto 5px;
+}
+#foto{
+	float:left;
+	width:120px;
+	margin:10px 20px;
+	height:160px;
+	border:1px solid #000;
+}
+#tanggal{
+	float:left;
+	width:106px;
+	margin:10px 20px;
+	height:130px;
+}
+#catatan{
+	float:left;
+	width:200px;
+	height:130px;
+	line-height:15px;
+	font-size:11px;
+}
+#ttd{
+	float:left;
+	width:146px;
+	padding-top:10px;
+}
+#clear{
+	clear:both;
+}
+
+table#isi{width: 560px}
+
+.namaform{float:right; margin: -50px 20px 0 0; padding:10px; border:double 3px #000; text-align:center; width:100px}
+.coret{float:left; height: 20px; vertical-align:text-bottom; width:125px; font-size:10px; font-style:italic;}
