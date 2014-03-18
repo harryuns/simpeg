@@ -18,6 +18,7 @@ class Report0301 {
 		$objPHPExcel->setActiveSheetIndex(0)->mergeCells("R1:R2");
 		$objPHPExcel->setActiveSheetIndex(0)->mergeCells("S1:S2");
 		$objPHPExcel->setActiveSheetIndex(0)->mergeCells("T1:T2");
+		$objPHPExcel->setActiveSheetIndex(0)->mergeCells("U1:U2");
 		$objPHPExcel->setActiveSheetIndex(0)->mergeCells("E1:F1");
 		$objPHPExcel->setActiveSheetIndex(0)->mergeCells("G1:H1");
 		$objPHPExcel->setActiveSheetIndex(0)->mergeCells("I1:J1");
@@ -49,6 +50,7 @@ class Report0301 {
 		$objPHPExcel->setActiveSheetIndex(0)->setCellValue('R1', 'UMUR');
 		$objPHPExcel->setActiveSheetIndex(0)->setCellValue('S1', 'CATATAN MUTASI KEPEG');
 		$objPHPExcel->setActiveSheetIndex(0)->setCellValue('T1', 'FAK');
+		$objPHPExcel->setActiveSheetIndex(0)->setCellValue('U1', 'JURUSAN');
 		
         $ArrayContent = array();
 		foreach ($objPHPExcel->Report['List'] as $Key => $Array) {
@@ -69,7 +71,9 @@ class Report0301 {
 				'N' => $Array['THN_LULUS'],
 				'O' => $Array['IJZ'],
 				'P' => ExchangeFormatDate($Array['TGL_LAHIR']),
-				'Q' => $Array['UMUR']
+				'Q' => $Array['UMUR'],
+				'R' => $Array['UNIT_KERJA'],
+				'S' => $Array['JURUSAN_TEXT']
 			);
 		}
 		
@@ -96,6 +100,8 @@ class Report0301 {
             $objPHPExcel->setActiveSheetIndex(0)->setCellValue('P'.$Row, $Element['O']);
             $objPHPExcel->setActiveSheetIndex(0)->setCellValue('Q'.$Row, $Element['P']);
             $objPHPExcel->setActiveSheetIndex(0)->setCellValue('R'.$Row, $Element['Q']);
+            $objPHPExcel->setActiveSheetIndex(0)->setCellValue('T'.$Row, $Element['R']);
+            $objPHPExcel->setActiveSheetIndex(0)->setCellValue('U'.$Row, $Element['S']);
 			
             $Row++;
             $Number++;

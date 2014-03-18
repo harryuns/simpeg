@@ -26,7 +26,8 @@
                 <td class="normal" style="width: 100px; text-align: center;" rowspan="2">TANGGAL LAHIR</td>
                 <td class="normal" style="width: 100px; text-align: center;" rowspan="2">UMUR</td>
                 <td class="normal" style="width: 100px; text-align: center;" rowspan="2">CATATAN MUTASI KEPEG</td>
-                <td class="normal" style="width: 100px; text-align: center;" rowspan="2">FAK</td></tr>
+                <td class="normal" style="width: 100px; text-align: center;" rowspan="2">FAK</td>
+                <td class="normal" style="width: 100px; text-align: center;" rowspan="2">JURUSAN</td></tr>
             <tr>
                 <td class="body center">GOL</td>
                 <td class="body center">TMT</td>
@@ -68,7 +69,8 @@
                 <td class="body" style="text-align: center;">' . ExchangeFormatDate($Element['TGL_LAHIR']) . '</td>
                 <td class="body" style="text-align: center;">' . $Element['UMUR'] . '</td>
                 <td class="body" style="text-align: center;">&nbsp;</td>
-                <td class="body" style="text-align: center;">&nbsp;</td>
+                <td class="body" style="text-align: center;">' . $Element['UNIT_KERJA'] . '</td>
+                <td class="body" style="text-align: center;">' . $Element['JURUSAN_TEXT'] . '</td>
             </tr>';
     }
     

@@ -522,6 +522,12 @@ class LLaporan {
         $Statement = db2_prepare($this->CI->ldb2->Handle, $RawQuery);
         db2_execute($Statement);
         while ($Row = db2_fetch_assoc($Statement)) {
+			if ($Row['K_JURUSAN'] == '00') {
+				$Row['JURUSAN_TEXT'] = $Row['PRODI'];
+			} else {
+				$Row['JURUSAN_TEXT'] = $Row['JURUSAN'];
+			}
+			
 			$Row['MASA_KERJA_SEMUA'] = GetSummaryYearMonth($Row['MASA_KERJA_GOLONGAN'] + $Row['MASA_JABATAN_TAMBAHAN']);
 			
             $Laporan['List'][] = $Row;
@@ -546,6 +552,12 @@ class LLaporan {
         $Statement = db2_prepare($this->CI->ldb2->Handle, $RawQuery);
         db2_execute($Statement);
         while ($Row = db2_fetch_assoc($Statement)) {
+			if ($Row['K_JURUSAN'] == '00') {
+				$Row['JURUSAN_TEXT'] = $Row['PRODI'];
+			} else {
+				$Row['JURUSAN_TEXT'] = $Row['JURUSAN'];
+			}
+			
 			$Row['K_PEGAWAI'] = (!isset($Row['K_PEGAWAI'])) ? $Row['NIP'] : $Row['K_PEGAWAI'];
 			$Row['MASA_KERJA_SEMUA'] = GetSummaryYearMonth($Row['MASA_KERJA_GOLONGAN'] + $Row['MASA_JABATAN_TAMBAHAN']);
 			
