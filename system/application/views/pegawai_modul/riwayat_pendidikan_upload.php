@@ -12,7 +12,7 @@
 			<?php if ($is_request) { ?>
 			<td class="normal" style="width: 15%;">Jenis Request</td>
 			<?php } ?>
-			<td class="normal" style="width: 30%;">File Ijazah</td>
+			<td class="normal" style="width: 30%;">No Sertifikat</td>
 			<td class="normal" style="width: 45%;">Nama File</td></tr>
 		<?php foreach ($array as $row) { ?>
 		<tr>
@@ -24,9 +24,9 @@
 				<?php } ?>
 			</td>
 			<?php if ($is_request) { ?>
-			<td class="body"><?php echo show_jenis_request(@$row['JENIS_REQ_PENDIDIKAN_FILE']); ?></td>
+			<td class="body"><?php echo show_jenis_request(@$row['JENIS_REQ_HOMEBASE_FILE']); ?></td>
 			<?php } ?>
-			<td class="body"><?php echo ($row['IS_IJAZAH'] == 1) ? 'Ya': 'Tidak'; ?></td>
+			<td class="body"><?php echo @$row['NO_SK']; ?></td>
 			<td class="body"><a href="<?php echo $row['link_file']; ?>" target="_blank"><?php echo $row['name_file']; ?></a></td></tr>
 		<?php } ?>
 	</table></div>

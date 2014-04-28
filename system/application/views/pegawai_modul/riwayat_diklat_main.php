@@ -7,7 +7,7 @@
 	$message = get_flash_message();
 	$array_diklat = $this->ldiklat->GetArray();
 	$array_pegawai_diklat = $this->riwayat_diklat_model->get_array(array( 'k_pegawai' => $k_pegawai ));
-	$array_pegawai_diklat_request = $this->riwayat_diklat_request_model->get_array(array( 'k_pegawai' => $k_pegawai, 'IS_VALIDATE' => 0 ));
+	$array_pegawai_diklat_request = $this->riwayat_diklat_request_model->get_array(array( 'k_pegawai' => $k_pegawai ));
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

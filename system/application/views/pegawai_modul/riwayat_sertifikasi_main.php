@@ -5,15 +5,15 @@
 	$page = array( 'is_user_fakultas' => $is_user_fakultas, 'k_pegawai' => $k_pegawai );
 	
 	$message = get_flash_message();
-	$array_ptp = $this->ptp_model->get_array();
-	$array_rumpun_ilmu = $this->rumpun_ilmu_model->get_array();
-	$array_pegawai_sertifikasi = $this->riwayat_sertifikasi_model->get_array(array( 'K_PEGAWAI' => $k_pegawai ));
-	$array_pegawai_sertifikasi_request = $this->riwayat_sertifikasi_request_model->get_array(array( 'K_PEGAWAI' => $k_pegawai, 'IS_VALIDATE' => 0 ));
+	$array_asal_sk = $this->asal_sk_model->get_array();
+	$array_jabatan_fungsional = array();
+	$array_pegawai_homebase = $this->riwayat_homebase_model->get_array(array( 'K_PEGAWAI' => $k_pegawai ));
+	$array_pegawai_homebase_request = $this->riwayat_homebase_request_model->get_array(array( 'K_PEGAWAI' => $k_pegawai, 'IS_VALIDATE' => 0 ));
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<?php $this->load->view('body_meta', array( 'page_title' => 'Riwayat Sertifikasi' ) ); ?>
+<?php $this->load->view('body_meta', array( 'page_title' => 'Riwayat Home Base' ) ); ?>
 
 <body>
 <div id="body"><div id="frame">
@@ -32,8 +32,8 @@
 		<?php } ?>
 		
 		<div class="cnt-grid">
-			<?php if (count($array_pegawai_sertifikasi) > 0) { ?>
-				<h1>Riwayat Sertifikasi</h1>
+			<?php if (count($array_pegawai_homebase) > 0) { ?>
+				<h1>Riwayat Home Base</h1>
 				<div class="cnt_table_main record-valid"><table style="width: 1325px;">
 					<tr>
 						<td class="left" style="width: 175px;">&nbsp;</td>
@@ -45,7 +45,7 @@
 						<td class="normal" style="width: 150px;">Tanggal Akhir</td>
 						<td class="normal" style="width: 200px;">Keterangan</td>
 						<td class="normal" style="width: 75px;">Sertifikat</td></tr>
-					<?php foreach ($array_pegawai_sertifikasi as $row) { ?>
+					<?php foreach ($array_pegawai_homebase as $row) { ?>
 					<tr>
 						<td class="licon">
 							<span class="record hidden"><?php echo json_encode($row); ?></span>
@@ -53,19 +53,20 @@
 							<a class="btn-edit" data-action="update_valid"><img class="link" src="<?php echo HOST; ?>/images/Pencil.png" /></a>
 							<a class="btn-upload" data-action="update_upload_valid"><img class="link" src="<?php echo HOST; ?>/images/folder.png" /></a>
 						</td>
-						<td class="body"><?php echo $row['NO_SERTIFIKAT']; ?></td>
-						<td class="body"><?php echo ConvertDateToString($row['TGL_SERTIFIKAT']); ?></td>
-						<td class="body"><?php echo $row['NO_PESERTA']; ?></td>
-						<td class="body"><?php echo $row['PEJABAT_TT']; ?></td>
-						<td class="body"><?php echo $row['TUNJANGAN_SERTIFIKASI']; ?></td>
-						<td class="body"><?php echo ConvertDateToString($row['TGL_AKHIR']); ?></td>
-						<td class="body"><?php echo $row['KETERANGAN']; ?></td>
+						<td class="body"><?php echo $row['NO_SK']; ?></td>
+						<td class="body"><?php echo ConvertDateToString($row['TGL_SK']); ?></td>
+						<td class="body"><?php echo $row['ASAL_SK']; ?></td>
+						<td class="body"><?php echo ConvertDateToString($row['TMT']); ?></td>
+						<td class="body"><?php echo $row['UNIT_KERJA']; ?></td>
+						<td class="body"><?php echo $row['PRODI']; ?></td>
+						<td class="body"><?php echo $row['IS_PDPT_TEXT']; ?></td>
+						<td class="body"><?php echo $row['IS_SIMPEG_TEXT']; ?></td>
 						<td class="body"><?php echo $row['JML_FILE_TEXT']; ?></td></tr>
 					<?php } ?>
 				</table></div>
 			<?php } ?>
 			
-			<?php if (count($array_pegawai_sertifikasi_request) > 0) { ?>
+			<?php if (count($array_pegawai_homebase_request) > 0) { ?>
 				<h1>Riwayat yang belum tervalidasi</h1>
 				<div class="cnt_table_main record-request"><table style="width: 1500px;">
 					<tr>
@@ -79,7 +80,7 @@
 						<td class="normal" style="width: 150px;">Tanggal Akhir</td>
 						<td class="normal" style="width: 200px;">Keterangan</td>
 						<td class="normal" style="width: 75px;">Sertifikat</td></tr>
-					<?php foreach ($array_pegawai_sertifikasi_request as $row) { ?>
+					<?php foreach ($array_pegawai_homebase_request as $row) { ?>
 					<tr>
 						<td class="licon">
 							<span class="record hidden"><?php echo json_encode($row); ?></span>
@@ -88,14 +89,15 @@
 							<a class="btn-upload" data-action="update_upload_request"><img class="link" src="<?php echo HOST; ?>/images/folder.png" /></a>
 							<a class="btn-validate"><img class="link" src="<?php echo HOST; ?>/images/tick.png" /></a>
 						</td>
-						<td class="body"><?php echo show_jenis_request($row['JENIS_REQ_SERTIFIKASI']); ?></td>
-						<td class="body"><?php echo $row['NO_SERTIFIKAT']; ?></td>
-						<td class="body"><?php echo ConvertDateToString($row['TGL_SERTIFIKAT']); ?></td>
-						<td class="body"><?php echo $row['NO_PESERTA']; ?></td>
-						<td class="body"><?php echo $row['PEJABAT_TT']; ?></td>
-						<td class="body"><?php echo $row['TUNJANGAN_SERTIFIKASI']; ?></td>
-						<td class="body"><?php echo ConvertDateToString($row['TGL_AKHIR']); ?></td>
-						<td class="body"><?php echo $row['KETERANGAN']; ?></td>
+						<td class="body"><?php echo show_jenis_request($row['JENIS_REQ_HOMEBASE']); ?></td>
+						<td class="body"><?php echo $row['NO_SK']; ?></td>
+						<td class="body"><?php echo ConvertDateToString($row['TGL_SK']); ?></td>
+						<td class="body"><?php echo $row['ASAL_SK']; ?></td>
+						<td class="body"><?php echo ConvertDateToString($row['TMT']); ?></td>
+						<td class="body"><?php echo $row['UNIT_KERJA']; ?></td>
+						<td class="body"><?php echo $row['PRODI']; ?></td>
+						<td class="body"><?php echo $row['IS_PDPT_TEXT']; ?></td>
+						<td class="body"><?php echo $row['IS_SIMPEG_TEXT']; ?></td>
 						<td class="body"><?php echo $row['JML_FILE_TEXT']; ?></td></tr>
 					<?php } ?>
 				</table></div>
@@ -107,29 +109,29 @@
 		</div>
 		
 		<div class="cnt-form hidden">
-			<h1>Riwayat Sertifikasi</h1>
+			<h1>Riwayat Home Base</h1>
 			
-			<form style="width: 80%;" id="FormRiwayatSertifikasi" action="<?php echo base_url('index.php/pegawai_modul/riwayat_sertifikasi/action'); ?>">
+			<form style="width: 80%;" id="FormRiwayatHomeBase" action="<?php echo base_url('index.php/pegawai_modul/riwayat_homebase/action'); ?>">
 				<input type="hidden" name="action" />
-				<input type="hidden" name="ID_REQ_SERTIFIKASI" value="x" />
-				<input type="hidden" name="ID_RIWAYAT_SERTIFIKASI" value="x" />
+				<input type="hidden" name="ID_REQ_HOMEBASE" value="x" />
+				<input type="hidden" name="ID_RIWAYAT_HOMEBASE" value="x" />
 				<input type="hidden" name="K_PEGAWAI" value="<?php echo $k_pegawai; ?>" />
-				<input type="hidden" name="JENIS_REQ_SERTIFIKASI" />
+				<input type="hidden" name="JENIS_REQ_HOMEBASE" />
 				
 				<table style="width: 100%;" class="tabel" cellspacing="0" cellpadding="5" border="0">
 					<tr>
-						<td>No Sertifikat</td>
-						<td><input type="text" style="width: 85%;" size="50" name="NO_SERTIFIKAT" class="required sk_char" alt="No SK kosong" /></td></tr>
+						<td>No SK</td>
+						<td><input type="text" style="width: 85%;" size="50" name="NO_SK" class="required sk_char" alt="No SK kosong" /></td></tr>
 					<tr>
-						<td>Tanggal Sertifikat</td>
-						<td><input type="text" style="width: 150px;" size="50" name="TGL_SERTIFIKAT" class="required datepicker" alt="Tanggal SK kosong" /></td></tr>
+						<td>Tanggal SK</td>
+						<td><input type="text" style="width: 150px;" size="50" name="TGL_SK" class="required datepicker" alt="Tanggal SK kosong" /></td></tr>
 					<tr>
 						<td>No Peserta</td>
 						<td><input type="text" style="width: 150px;" size="50" name="NO_PESERTA" class="required" alt="Silahkan memasukkan No Peserta" /></td></tr>
 					<tr>
 						<td>PTP Serdos</td>
 						<td><select style="width: 250px;" name="K_PTP">
-							<?php echo ShowOption(array( 'Array' => $array_ptp, 'ArrayID' => 'K_PTP', 'ArrayTitle' => 'NAMA' )); ?>
+							<?php echo ShowOption(array( 'Array' => $array_ptp, 'ArrayID' => 'K_ASAL_SK', 'ArrayTitle' => 'CONTENT' )); ?>
 						</select></td>
 					</tr>
 					<tr>
@@ -138,7 +140,7 @@
 					<tr>
 						<td>Rumpun Ilmu</td>
 						<td><select style="width: 250px;" name="K_RUMPUN_ILMU">
-							<?php echo ShowOption(array( 'Array' => $array_rumpun_ilmu, 'ArrayID' => 'K_RUMPUN_ILMU', 'ArrayTitle' => 'CONTENT' )); ?>
+							<?php echo ShowOption(array( 'Array' => $array_rumpun_ilmu, 'ArrayID' => 'K_ASAL_SK', 'ArrayTitle' => 'CONTENT' )); ?>
 						</select></td>
 					</tr>
 					<tr>
@@ -167,8 +169,8 @@
 			<div id="form-upload" class="cnt_table_main">
 				<input type="hidden" name="action" />
 				<input type="hidden" name="K_PEGAWAI" />
-				<input type="hidden" name="ID_REQ_SERTIFIKASI" />
-				<input type="hidden" name="ID_RIWAYAT_SERTIFIKASI" />
+				<input type="hidden" name="ID_REQ_HOMEBASE" />
+				<input type="hidden" name="ID_RIWAYAT_HOMEBASE" />
 				
 				<table style="width: 80%; display: inline-table;" class="tabel" cellspacing="0" cellpadding="5" border="0">
 					<tr>
@@ -190,7 +192,7 @@
 
 <script type="text/javascript">
 (function() {
-	InitForm.Start('FormRiwayatSertifikasi');
+	InitForm.Start('FormRiwayatHomeBase');
 	
 	var page = {
 		init: function() {
@@ -271,6 +273,71 @@
 					});
 				}
 			});
+		},
+		
+		combo: {
+			unit_kerja: function() {
+				var param = {
+					combo: $('[name="K_JENJANG"]'),
+					callback: function() {
+						page.combo.jenjang();
+					},
+					ajax: {
+						url: Web.HOST + '/index.php/Ajax/Jenjang',
+						param: { Action: 'GetJenjangByUnitKerja', K_UNIT_KERJA: $('[name="K_UNIT_KERJA"]').val() }
+					}
+				}
+				Func.set_combo(param);
+			},
+			jenjang: function() {
+				var param = {
+					combo: $('[name="K_FAKULTAS"]'),
+					callback: function() {
+						page.combo.fakultas();
+					},
+					ajax: {
+						url: Web.HOST + '/index.php/Ajax/Fakultas',
+						param: {
+							Action: 'GetFakultasByJenjangUnitKerja',
+							K_UNIT_KERJA: $('[name="K_UNIT_KERJA"]').val(),
+							K_JENJANG: $('[name="K_JENJANG"]').val()
+						}
+					}
+				}
+				Func.set_combo(param);
+			},
+			fakultas: function() {
+				var param = {
+					combo: $('[name="K_JURUSAN"]'),
+					callback: function() {
+						page.combo.jurusan();
+					},
+					ajax: {
+						url: Web.HOST + '/index.php/Ajax/Jurusan',
+						param: {
+							Action: 'GetJurusanById',
+							K_FAKULTAS: $('[name="K_FAKULTAS"]').val(),
+							K_JENJANG: $('[name="K_JENJANG"]').val()
+						}
+					}
+				}
+				Func.set_combo(param);
+			},
+			jurusan: function() {
+				var param = {
+					combo: $('[name="K_PROG_STUDI"]'),
+					ajax: {
+						url: Web.HOST + '/index.php/Ajax/ProgramStudi',
+						param: {
+							Action: 'GetProgramStudiById',
+							K_FAKULTAS: $('[name="K_FAKULTAS"]').val(),
+							K_JENJANG: $('[name="K_JENJANG"]').val(),
+							K_JURUSAN: $('[name="K_JURUSAN"]').val()
+						}
+					}
+				}
+				Func.set_combo(param);
+			}
 		}
 	}
 	
@@ -283,8 +350,9 @@
 		
 		// init form
 		$('.cnt-form [name="action"]').val('update_request');
-		$('.cnt-form [name="ID_RIWAYAT_SERTIFIKASI"]').val('x');
-		$('.cnt-form [name="JENIS_REQ_SERTIFIKASI"]').val('I');
+		$('.cnt-form [name="ID_RIWAYAT_HOMEBASE"]').val('x');
+		$('.cnt-form [name="JENIS_REQ_HOMEBASE"]').val('I');
+		$('.cnt-form [name="K_UNIT_KERJA"]').change();
 	});
 	$('.cnt-grid .btn-edit').click(function() {
 		page.show_form();
@@ -298,19 +366,56 @@
 		var raw = $(this).parents('tr').find('.record').html();
 		eval('var record = ' + raw);
 		
-		Func.populate({ cnt: '.cnt-form', record: record});
-		$('.cnt-form [name="ID_REQ_SERTIFIKASI"]').val((record.ID_REQ_SERTIFIKASI == null) ? 'x' : record.ID_REQ_SERTIFIKASI);
-		$('.cnt-form [name="ID_RIWAYAT_SERTIFIKASI"]').val((record.ID_RIWAYAT_SERTIFIKASI == null) ? 'x' : record.ID_RIWAYAT_SERTIFIKASI);
+		a = record
+		record = a;
+		
+		$('.cnt-form [name="JENIS_REQ_HOMEBASE"]').val(record.JENIS_REQ_HOMEBASE);
+		$('.cnt-form [name="ID_RIWAYAT_HOMEBASE"]').val((record.ID_RIWAYAT_HOMEBASE == null) ? 'x' : record.ID_RIWAYAT_HOMEBASE);
+		$('.cnt-form [name="ID_REQ_HOMEBASE"]').val((record.ID_REQ_HOMEBASE == null) ? 'x' : record.ID_REQ_HOMEBASE);
+		$('.cnt-form [name="NO_SK"]').val(record.NO_SK);
+		$('.cnt-form [name="TGL_SK"]').val(Func.swap_date(record.TGL_SK));
+		$('.cnt-form [name="TMT"]').val(Func.swap_date(record.TMT));
+		$('.cnt-form [name="K_ASAL_SK"]').val(record.K_ASAL_SK);
+		$('.cnt-form [name="K_UNIT_KERJA"]').val(record.K_UNIT_KERJA);
+		$('.cnt-form [name="K_UNIT_KERJA"]').next().val(record.UNIT_KERJA);
+		$('.cnt-form [name="IS_PDPT"]').attr('checked', ( record.IS_PDPT == 1 ? 'checked' : ''));
+		$('.cnt-form [name="IS_SIMPEG"]').attr('checked', ( record.IS_SIMPEG == 1 ? 'checked' : ''));
+		
+		// set ansync data
+		var jenjang_param = {
+			value: record.K_JENJANG,
+			combo: $('.cnt-form [name="K_JENJANG"]'),
+			ajax: { url: Web.HOST + '/index.php/Ajax/Jenjang', param: { Action: 'GetJenjangByUnitKerja', K_UNIT_KERJA: record.K_UNIT_KERJA } }
+		}
+		Func.set_combo(jenjang_param);
+		var fakultas_param = {
+			value: record.K_FAKULTAS,
+			combo: $('.cnt-form [name="K_FAKULTAS"]'),
+			ajax: { url: Web.HOST + '/index.php/Ajax/Fakultas', param: { Action: 'GetFakultasByJenjangUnitKerja', K_UNIT_KERJA: record.K_UNIT_KERJA, K_JENJANG: record.K_JENJANG } }
+		}
+		Func.set_combo(fakultas_param);
+		var jurusan_param = {
+			value: record.K_JURUSAN,
+			combo: $('.cnt-form [name="K_JURUSAN"]'),
+			ajax: { url: Web.HOST + '/index.php/Ajax/Jurusan', param: { Action: 'GetJurusanById', K_FAKULTAS: record.K_FAKULTAS, K_JENJANG: record.K_JENJANG } }
+		}
+		Func.set_combo(jurusan_param);
+		var program_studi_param = {
+			value: record.K_PROG_STUDI,
+			combo: $('.cnt-form [name="K_PROG_STUDI"]'),
+			ajax: { url: Web.HOST + '/index.php/Ajax/ProgramStudi', param: { Action: 'GetProgramStudiById', K_FAKULTAS: record.K_FAKULTAS, K_JENJANG: record.K_JENJANG, K_JURUSAN: record.K_JURUSAN } }
+		}
+		Func.set_combo(program_studi_param);
 		
 		// update request or valid
 		if (action_form == 'update_request') {
 			if (action == 'update_valid') {
-				$('.cnt-form [name="JENIS_REQ_SERTIFIKASI"]').val('U');
+				$('.cnt-form [name="JENIS_REQ_HOMEBASE"]').val('U');
 			} else {
-				$('.cnt-form [name="JENIS_REQ_SERTIFIKASI"]').val(record.JENIS_REQ_SERTIFIKASI);
+				$('.cnt-form [name="JENIS_REQ_HOMEBASE"]').val(record.JENIS_REQ_HOMEBASE);
 			}
 		} else if (action_form == 'update_valid') {
-			$('.cnt-form [name="JENIS_REQ_SERTIFIKASI"]').val('U');
+			$('.cnt-form [name="JENIS_REQ_HOMEBASE"]').val('U');
 		}
 	});
 	$('.cnt-grid .btn-delete').click(function() {
@@ -323,7 +428,7 @@
 			
 			// set data
 			param.action = 'update_request';
-			param.JENIS_REQ_SERTIFIKASI = 'D';
+			param.JENIS_REQ_HOMEBASE = 'D';
 			
 			Func.ajax({ url: form.attr('action'), param: param, callback: function(result) {
 				if (result.status) {
@@ -362,10 +467,10 @@
 		$('#form-upload [name="FILENAME"]').val('');
 		
 		// add param
-		if (record.ID_REQ_SERTIFIKASI != null)
-			$('#form-upload [name="ID_REQ_SERTIFIKASI"]').val(record.ID_REQ_SERTIFIKASI);
-		if (record.ID_RIWAYAT_SERTIFIKASI != null)
-			$('#form-upload [name="ID_RIWAYAT_SERTIFIKASI"]').val(record.ID_RIWAYAT_SERTIFIKASI);
+		if (record.ID_REQ_HOMEBASE != null)
+			$('#form-upload [name="ID_REQ_HOMEBASE"]').val(record.ID_REQ_HOMEBASE);
+		if (record.ID_RIWAYAT_HOMEBASE != null)
+			$('#form-upload [name="ID_RIWAYAT_HOMEBASE"]').val(record.ID_RIWAYAT_HOMEBASE);
 		
 		record.reload = false;
 		record.action = (action == 'update_upload_valid') ? 'get_upload_valid' : 'get_upload_request';
@@ -376,11 +481,23 @@
 	});
 	
 	// init form
+	$('.cnt-form [name="K_UNIT_KERJA"]').change(function() {
+		page.combo.unit_kerja();
+	});
+	$('.cnt-form [name="K_JENJANG"]').change(function() {
+		page.combo.jenjang();
+	});
+	$('.cnt-form [name="K_FAKULTAS"]').change(function() {
+		page.combo.fakultas();
+	});
+	$('.cnt-form [name="K_JURUSAN"]').change(function() {
+		page.combo.jurusan();
+	});
 	$('.cnt-form form').submit(function(event) {
 		event.preventDefault();
 		
 		var form = $('.cnt-form form');
-		var ArrayError = InitForm.Validation('FormRiwayatSertifikasi');
+		var ArrayError = InitForm.Validation('FormRiwayatHomeBase');
 		
 		// validation
 		if (ArrayError.length > 0) {
@@ -388,9 +505,9 @@
 		}
 		
 		// submit
-		var param = Site.Form.GetValue('FormRiwayatSertifikasi');
-		param.TGL_AKHIR = Func.swap_date(param.TGL_AKHIR);
-		param.TGL_SERTIFIKAT = Func.swap_date(param.TGL_SERTIFIKAT);
+		var param = Site.Form.GetValue('FormRiwayatHomeBase');
+		param.TGL_SK = Func.swap_date(param.TGL_SK);
+		param.TMT = Func.swap_date(param.TMT);
 		Func.ajax({ url: form.attr('action'), param: param, callback: function(result) {
 			if (result.status) {
 				window.location = window.location.href

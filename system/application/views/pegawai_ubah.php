@@ -89,7 +89,7 @@
                                         <td>No HP</td>
                                         <td><input type="text" style="width: 150px;" size="50" value="<?php echo $Pegawai['NO_HP']; ?>" name="NO_HP" class="integer" /></td></tr>
                                     <tr>
-                                        <td>Email UB</td>
+                                        <td>Email</td>
                                         <td><input type="text" style="width: 85%;" size="50" value="<?php echo $Pegawai['EMAIL']; ?>" name="EMAIL" /></td></tr>                                    <tr>
                                     <tr>
                                         <td>No Odner</td>

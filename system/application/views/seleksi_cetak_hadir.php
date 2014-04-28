@@ -10,7 +10,7 @@
 			<div style="float: left; width: 25%;">
             	<img src="<?php echo HOST."/assets/css/images/ub.png"; ?>" style="padding-top: 3px; width:70px; height:70px;" />
             </div>
-            <div style="float: left; width: 65%; padding: 15px 0; font-weight: bold;">
+            <div style="float: left; width: 65%; padding: 15px 0; font-weight: bold; font-size:13px;">
             	PANITIA SELEKSI PENERIMAAN<br />
 				CALON TENAGA KEPENDIDIKAN DAN DOSEN TETAP NON PNS<br />
 				UNIVERSITAS BRAWIJAYA<br />
@@ -21,7 +21,7 @@
 		
         <div id="content1">
         	<div style="font-size: 20px; text-align: center; font-weight: bold; margin:0 0 5px 0;">BUKTI HADIR</div>
-            <table id="isi">
+            <table id="isi" style='font-size:13px;'>
             	<tr>
                 	<td id="jarak1">Unit Kerja</td>
                     <td id="jarak2">:</td>
@@ -91,7 +91,8 @@
         </div>
     </div>
 	
-	<div style="font-weight: bold; font-style: italic; font-size: 12px; padding: 25px 0; text-align: right;">&nbsp;</div>
+	<div style="font-weight: bold; font-style: italic; font-size: 12px; padding: 22px 0; text-align: right;">&nbsp;</div> 
+	<div style="clear: both;"></div>
 </div>
 </body>
 </html>

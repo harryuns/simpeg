@@ -30,7 +30,7 @@
 			</ul>
 		</div>
 		<a class="menuitem" href="<?php echo HOST.'/index.php/Asessor'; ?>">Asesor</a>
-		<a class="menuitem" href="<?php echo HOST.'/index.php/DirGuruBesar'; ?>">Directory Guru Besar</a>
+		<!-- <a class="menuitem" href="<?php echo HOST.'/index.php/DirGuruBesar'; ?>">Directory Guru Besar</a>	-->
 		<a class="menuitem" href="<?php echo HOST.'/index.php/Panduan'; ?>">Panduan</a>
 		<a class="menuitem" href="<?php echo HOST.'/index.php/Pesan'; ?>">Pesan</a>
 		<a class="menuitem" href="<?php echo HOST.'/index.php/login/Out'; ?>">Keluar</a>

@@ -27,7 +27,8 @@
                 <td class="normal" style="width: 100px; text-align: center;" rowspan="2">UMUR</td>
                 <td class="normal" style="width: 100px; text-align: center;" rowspan="2">CATATAN MUTASI KEPEG</td>
                 <td class="normal" style="width: 100px; text-align: center;" rowspan="2">FAK</td>
-                <td class="normal" style="width: 100px; text-align: center;" rowspan="2">JURUSAN</td></tr>
+                <td class="normal" style="width: 100px; text-align: center;" rowspan="2">JURUSAN</td>
+				<td class="normal" style="width: 100px; text-align: center;" rowspan="2">JENIS KELAMIN</td></tr>
             <tr>
                 <td class="body center">GOL</td>
                 <td class="body center">TMT</td>
@@ -58,7 +59,7 @@
                 <td class="body" style="text-align: left;">' . ExchangeFormatDate($Element['TMT_GOL']) . '</td>
                 <td class="body" style="text-align: center;">' . $Element['BAGIAN_JABATAN'] . '</td>
                 <td class="body" style="text-align: center;">' . ExchangeFormatDate($Element['TMT_JABATAN']) . '</td>
-                <td class="body" style="text-align: center;">' . $Element['MASA_KERJA_SEMUA'] . '</td>
+                <td class="body" style="text-align: center;">' . $Element['TOTAL_MASA_KERJA_KESELURUHAN'] . '</td>
                 <td class="body" style="text-align: center;">' . $Element['MASA_KERJA_GOLONGAN'] . '</td>
                 <td class="body" style="text-align: center;">&nbsp;</td>
                 <td class="body" style="text-align: center;">&nbsp;</td>
@@ -71,6 +72,7 @@
                 <td class="body" style="text-align: center;">&nbsp;</td>
                 <td class="body" style="text-align: center;">' . $Element['UNIT_KERJA'] . '</td>
                 <td class="body" style="text-align: center;">' . $Element['JURUSAN_TEXT'] . '</td>
+				<td class="body" style="text-align: center;">' . $Element['JENIS_KELAMIN'] . '</td>
             </tr>';
     }
     

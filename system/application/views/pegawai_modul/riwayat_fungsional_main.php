@@ -8,7 +8,7 @@
 	$message = get_flash_message();
 	$array_asal_sk = $this->asal_sk_model->get_array();
 	$array_jabatan_pekerjaan = $this->jabatan_pekerjaan_model->get_array();
-	$array_jabatan_fungsional = $this->jabatan_fungsional_model->get_array(array( 'IS_DOSEN' => @$pegawai['IsDosen'] ));
+	$array_jabatan_fungsional = $this->jabatan_fungsional_model->get_array(array( 'IS_DOSEN' => $pegawai['IsDosen'] ));
 	$array_pegawai_fungsional = $this->riwayat_fungsional_model->get_array(array( 'K_PEGAWAI' => $k_pegawai ));
 	$array_pegawai_fungsional_request = $this->riwayat_fungsional_request_model->get_array(array( 'K_PEGAWAI' => $k_pegawai, 'IS_VALIDATE' => 0 ));
 ?>
