@@ -30,15 +30,15 @@
 		<div class="cnt-grid">
 			<?php if (count($array_pegawai_aktif_request) > 0) { ?>
 				<h1>Perubahan / Mutasi Pegawai</h1>
-				<div class="cnt_table_main record-valid"><table style="width: 975px;">
+				<div class="cnt_table_main record-valid"><table>
 					<tr>
-						<td class="left" style="width: 50px;">&nbsp;</td>
-						<td class="normal" style="width: 150px;">NIP</td>
-						<td class="normal" style="width: 175px;">Status Aktif</td>
-						<td class="normal" style="width: 175px;">No SK</td>
-						<td class="normal" style="width: 175px;">Tanggal Mulai</td>
-						<td class="normal" style="width: 175px;">Keterangan</td>
-						<td class="normal" style="width: 75px;">Sertifikat</td></tr>
+						<td class="left">&nbsp;</td>
+						<td class="normal">NIP</td>
+						<td class="normal">Status Aktif</td>
+						<td class="normal">No SK</td>
+						<td class="normal">Tanggal Mulai</td>
+						<td class="normal">Keterangan</td>
+						<td class="normal">Sertifikat</td></tr>
 					<?php foreach ($array_pegawai_aktif_request as $row) { ?>
 					<?php $link = base_url('index.php/pegawai_modul/riwayat_aktif/index/'.ConvertLink($row['K_PEGAWAI'])); ?>
 					<tr>
@@ -57,20 +57,20 @@
 			
 			<?php if (count($array_pegawai_diklat_request) > 0) { ?>
 				<h1>Riwayat Diklat</h1>
-				<div class="cnt_table_main record-valid"><table style="width: 1500px;">
+				<div class="cnt_table_main record-valid"><table>
 					<tr>
-						<td class="left" style="width: 50px;">&nbsp;</td>
-						<td class="normal" style="width: 150px;">NIP</td>
-						<td class="normal" style="width: 150px;">No Sertifikat</td>
-						<td class="normal" style="width: 100px;">Tanggal SK</td>
-						<td class="normal" style="width: 100px;">Diklat</td>
-						<td class="normal" style="width: 200px;">Penyelenggara</td>
-						<td class="normal" style="width: 100px;">Tempat Diklat</td>
-						<td class="normal" style="width: 100px;">Angkatan</td>
-						<td class="normal" style="width: 100px;">Tanggal Mulai</td>
-						<td class="normal" style="width: 100px;">Tanggal Lulus</td>
-						<td class="normal" style="width: 300px;">Keterangan</td>
-						<td class="normal" style="width: 50px;">Sertifikat</td></tr>
+						<td class="left">&nbsp;</td>
+						<td class="normal">NIP</td>
+						<td class="normal">No Sertifikat</td>
+						<td class="normal">Tanggal SK</td>
+						<td class="normal">Diklat</td>
+						<td class="normal">Penyelenggara</td>
+						<td class="normal">Tempat Diklat</td>
+						<td class="normal">Angkatan</td>
+						<td class="normal">Tanggal Mulai</td>
+						<td class="normal">Tanggal Lulus</td>
+						<td class="normal">Keterangan</td>
+						<td class="normal">Sertifikat</td></tr>
 					<?php foreach ($array_pegawai_diklat_request as $row) { ?>
 					<?php $link = base_url('index.php/pegawai_modul/riwayat_diklat/index/'.ConvertLink($row['K_PEGAWAI'])); ?>
 					<tr>
@@ -94,19 +94,19 @@
 			
 			<?php if (count($array_pegawai_homebase_request) > 0) { ?>
 				<h1>Riwayat Home Base</h1>
-				<div class="cnt_table_main record-valid"><table style="width: 1500px;">
+				<div class="cnt_table_main record-valid"><table>
 					<tr>
-						<td class="left" style="width: 50px;">&nbsp;</td>
-						<td class="normal" style="width: 150px;">NIP</td>
-						<td class="normal" style="width: 150px;">No SK</td>
-						<td class="normal" style="width: 150px;">Tanggal SK</td>
-						<td class="normal" style="width: 225px;">Asal SK</td>
-						<td class="normal" style="width: 150px;">TMT</td>
-						<td class="normal" style="width: 225px;">Unit Kerja</td>
-						<td class="normal" style="width: 225px;">Prodi</td>
-						<td class="normal" style="width: 50px;">PDPT</td>
-						<td class="normal" style="width: 50px;">SIMPEG</td>
-						<td class="normal" style="width: 75px;">Sertifikat</td></tr>
+						<td class="left">&nbsp;</td>
+						<td class="normal">NIP</td>
+						<td class="normal">No SK</td>
+						<td class="normal">Tanggal SK</td>
+						<td class="normal">Asal SK</td>
+						<td class="normal">TMT</td>
+						<td class="normal">Unit Kerja</td>
+						<td class="normal">Prodi</td>
+						<td class="normal">PDPT</td>
+						<td class="normal">SIMPEG</td>
+						<td class="normal">Sertifikat</td></tr>
 					<?php foreach ($array_pegawai_homebase_request as $row) { ?>
 						<?php $link = base_url('index.php/pegawai_modul/riwayat_homebase/index/'.ConvertLink($row['K_PEGAWAI'])); ?>
 					<tr>
@@ -129,15 +129,15 @@
 			
 			<?php if (count($array_pegawai_hukuman_request) > 0) { ?>
 				<h1>Riwayat Hukuman</h1>
-				<div class="cnt_table_main record-valid"><table style="width: 900px;">
+				<div class="cnt_table_main record-valid"><table>
 					<tr>
-						<td class="left" style="width: 50px;">&nbsp;</td>
-						<td class="normal" style="width: 150px;">NIP</td>
-						<td class="normal" style="width: 150px;">No SK</td>
-						<td class="normal" style="width: 150px;">Tanggal SK</td>
-						<td class="normal" style="width: 150px;">TMT</td>
-						<td class="normal" style="width: 125px;">NIP Pejabat</td>
-						<td class="normal" style="width: 125px;">Nama Pejabat</td></tr>
+						<td class="left">&nbsp;</td>
+						<td class="normal">NIP</td>
+						<td class="normal">No SK</td>
+						<td class="normal">Tanggal SK</td>
+						<td class="normal">TMT</td>
+						<td class="normal">NIP Pejabat</td>
+						<td class="normal">Nama Pejabat</td></tr>
 					<?php foreach ($array_pegawai_hukuman_request as $row) { ?>
 						<?php $link = base_url('index.php/pegawai_modul/riwayat_hukuman/index/'.ConvertLink($row['K_PEGAWAI'])); ?>
 					<tr>
@@ -156,19 +156,19 @@
 			
 			<?php if (count($array_pegawai_fungsional_request) > 0) { ?>
 				<h1>Riwayat Jabatan Fungsional</h1>
-				<div class="cnt_table_main record-valid"><table style="width: 1650px;">
+				<div class="cnt_table_main record-valid"><table>
 					<tr>
-						<td class="left" style="width: 50px;">&nbsp;</td>
-						<td class="normal" style="width: 150px;">NIP</td>
-						<td class="normal" style="width: 150px;">No SK</td>
-						<td class="normal" style="width: 200px;">Jabatan Fungsional</td>
-						<td class="normal" style="width: 200px;">Unit Kerja</td>
-						<td class="normal" style="width: 150px;">Tanggal SK</td>
-						<td class="normal" style="width: 225px;">Asal SK</td>
-						<td class="normal" style="width: 150px;">TMT</td>
-						<td class="normal" style="width: 100px;">Angka Kredit</td>
-						<td class="normal" style="width: 200px;">Keterangan</td>
-						<td class="normal" style="width: 75px;">Sertifikat</td></tr>
+						<td class="left">&nbsp;</td>
+						<td class="normal">NIP</td>
+						<td class="normal">No SK</td>
+						<td class="normal">Jabatan Fungsional</td>
+						<td class="normal">Unit Kerja</td>
+						<td class="normal">Tanggal SK</td>
+						<td class="normal">Asal SK</td>
+						<td class="normal">TMT</td>
+						<td class="normal">Angka Kredit</td>
+						<td class="normal">Keterangan</td>
+						<td class="normal">Sertifikat</td></tr>
 					<?php foreach ($array_pegawai_fungsional_request as $row) { ?>
 						<?php $link = base_url('index.php/pegawai_modul/riwayat_fungsional/index/'.ConvertLink($row['K_PEGAWAI'])); ?>
 					<tr>
@@ -191,19 +191,19 @@
 			
 			<?php if (count($array_pegawai_struktural_request) > 0) { ?>
 				<h1>Riwayat Jabatan Struktural</h1>
-				<div class="cnt_table_main record-valid"><table style="width: 1575px;">
+				<div class="cnt_table_main record-valid"><table>
 					<tr>
-						<td class="left" style="width: 50px;">&nbsp;</td>
-						<td class="normal" style="width: 150px;">NIP</td>
-						<td class="normal" style="width: 100px;">No SK</td>
-						<td class="normal" style="width: 150px;">Tanggal SK</td>
-						<td class="normal" style="width: 200px;">Asal SK</td>
-						<td class="normal" style="width: 150px;">TMT</td>
-						<td class="normal" style="width: 200px;">Unit Kerja</td>
-						<td class="normal" style="width: 200px;">Jabatan Struktural</td>
-						<td class="normal" style="width: 100px;">Tunjangan Struktural</td>
-						<td class="normal" style="width: 200px;">Keterangan</td>
-						<td class="normal" style="width: 75px;">Sertifikat</td></tr>
+						<td class="left">&nbsp;</td>
+						<td class="normal">NIP</td>
+						<td class="normal">No SK</td>
+						<td class="normal">Tanggal SK</td>
+						<td class="normal">Asal SK</td>
+						<td class="normal">TMT</td>
+						<td class="normal">Unit Kerja</td>
+						<td class="normal">Jabatan Struktural</td>
+						<td class="normal">Tunjangan Struktural</td>
+						<td class="normal">Keterangan</td>
+						<td class="normal">Sertifikat</td></tr>
 					<?php foreach ($array_pegawai_struktural_request as $row) { ?>
 						<?php $link = base_url('index.php/pegawai_modul/riwayat_struktural/index/'.ConvertLink($row['K_PEGAWAI'])); ?>
 					<tr>
@@ -226,18 +226,18 @@
 			
 			<?php if (count($array_pegawai_keluarga_request) > 0) { ?>
 				<h1>Riwayat Keluarga</h1>
-				<div class="cnt_table_main record-valid"><table style="width: 1350px;">
+				<div class="cnt_table_main record-valid"><table>
 					<tr>
-						<td class="left" style="width: 50px;">&nbsp;</td>
-						<td class="normal" style="width: 150px;">NIP</td>
-						<td class="normal" style="width: 125px;">Nama</td>
-						<td class="normal" style="width: 150px;">Hub. Keluarga</td>
-						<td class="normal" style="width: 125px;">Tanggal Lahir</td>
-						<td class="normal" style="width: 150px;">Tempat Lahir</td>
-						<td class="normal" style="width: 150px;">Pendidikan</td>
-						<td class="normal" style="width: 150px;">Alamat</td>
-						<td class="normal" style="width: 150px;">Pekerjaan</td>
-						<td class="normal" style="width: 150px;">Keterangan</td></tr>
+						<td class="left">&nbsp;</td>
+						<td class="normal">NIP</td>
+						<td class="normal">Nama</td>
+						<td class="normal">Hub. Keluarga</td>
+						<td class="normal">Tanggal Lahir</td>
+						<td class="normal">Tempat Lahir</td>
+						<td class="normal">Pendidikan</td>
+						<td class="normal">Alamat</td>
+						<td class="normal">Pekerjaan</td>
+						<td class="normal">Keterangan</td></tr>
 					<?php foreach ($array_pegawai_keluarga_request as $row) { ?>
 						<?php $link = base_url('index.php/pegawai_modul/riwayat_keluarga/index/'.ConvertLink($row['K_PEGAWAI'])); ?>
 					<tr>
@@ -259,16 +259,16 @@
 			
 			<?php if (count($array_pegawai_organisasi_request) > 0) { ?>
 				<h1>Riwayat Organisasi</h1>
-				<div class="cnt_table_main record-valid"><table style="width: 1325px;">
+				<div class="cnt_table_main record-valid"><table>
 					<tr>
-						<td class="left" style="width: 50px;">&nbsp;</td>
-						<td class="normal" style="width: 150px;">NIP</td>
-						<td class="normal" style="width: 150px;">Nama</td>
-						<td class="normal" style="width: 150px;">Kedudukan</td>
-						<td class="normal" style="width: 225px;">No SK</td>
-						<td class="normal" style="width: 150px;">NIP Pejabat</td>
-						<td class="normal" style="width: 225px;">Tanggal Mulai</td>
-						<td class="normal" style="width: 225px;">Tanggal Selesai</td></tr>
+						<td class="left">&nbsp;</td>
+						<td class="normal">NIP</td>
+						<td class="normal">Nama</td>
+						<td class="normal">Kedudukan</td>
+						<td class="normal">No SK</td>
+						<td class="normal">NIP Pejabat</td>
+						<td class="normal">Tanggal Mulai</td>
+						<td class="normal">Tanggal Selesai</td></tr>
 					<?php foreach ($array_pegawai_organisasi_request as $row) { ?>
 						<?php $link = base_url('index.php/pegawai_modul/riwayat_organisasi/index/'.ConvertLink($row['K_PEGAWAI'])); ?>
 					<tr>
@@ -288,21 +288,21 @@
 			
 			<?php if (count($array_pegawai_pangkat_request) > 0) { ?>
 				<h1>Riwayat Pangkat</h1>
-				<div class="cnt_table_main record-valid"><table style="width: 2075px;">
+				<div class="cnt_table_main record-valid"><table>
 					<tr>
-						<td class="left" style="width: 50px;">&nbsp;</td>
-						<td class="normal" style="width: 150px;">NIP</td>
-						<td class="normal" style="width: 150px;">No SK</td>
-						<td class="normal" style="width: 150px;">Tanggal SK</td>
-						<td class="normal" style="width: 150px;">Pangkat</td>
-						<td class="normal" style="width: 150px;">Golongan</td>
-						<td class="normal" style="width: 200px;">Asal SK</td>
-						<td class="normal" style="width: 200px;">Penjelasan</td>
-						<td class="normal" style="width: 150px;">TMT</td>
-						<td class="normal" style="width: 150px;">Gaji Pokok</td>
-						<td class="normal" style="width: 200px;">Keterangan</td>
-						<td class="normal" style="width: 200px;">Penandatangan SK</td>
-						<td class="normal" style="width: 75px;">Sertifikat</td></tr>
+						<td class="left">&nbsp;</td>
+						<td class="normal">NIP</td>
+						<td class="normal">No SK</td>
+						<td class="normal">Tanggal SK</td>
+						<td class="normal">Pangkat</td>
+						<td class="normal">Golongan</td>
+						<td class="normal">Asal SK</td>
+						<td class="normal">Penjelasan</td>
+						<td class="normal">TMT</td>
+						<td class="normal">Gaji Pokok</td>
+						<td class="normal">Keterangan</td>
+						<td class="normal">Penandatangan SK</td>
+						<td class="normal">Sertifikat</td></tr>
 					<?php foreach ($array_pegawai_pangkat_request as $row) { ?>
 						<?php $link = base_url('index.php/pegawai_modul/riwayat_pangkat/index/'.ConvertLink($row['K_PEGAWAI'])); ?>
 					<tr>
@@ -327,21 +327,21 @@
 			
 			<?php if (count($array_pegawai_pendidikan_request) > 0) { ?>
 				<h1>Riwayat Pendidikan</h1>
-				<div class="cnt_table_main record-valid"><table style="width: 1550px;">
+				<div class="cnt_table_main record-valid"><table>
 					<tr>
-						<td class="left" style="width: 50px;">&nbsp;</td>
-						<td class="normal" style="width: 150px;">NIP</td>
-						<td class="normal" style="width: 100px;">Jenjang</td>
-						<td class="normal" style="width: 150px;">No Ijazah</td>
-						<td class="normal" style="width: 125px;">Tanggal Ijazah</td>
-						<td class="normal" style="width: 75px;">IPK</td>
-						<td class="normal" style="width: 150px;">PT</td>
-						<td class="normal" style="width: 100px;">Tahun Masuk</td>
-						<td class="normal" style="width: 300px;">Program Studi</td>
-						<td class="normal" style="width: 100px;">Bidang Ilmu</td>
-						<td class="normal" style="width: 100px;">Keterangan</td>
-						<td class="normal" style="width: 75px;">Ijazah</td>
-						<td class="normal" style="width: 75px;">Transkrip</td></tr>
+						<td class="left">&nbsp;</td>
+						<td class="normal">NIP</td>
+						<td class="normal">Jenjang</td>
+						<td class="normal">No Ijazah</td>
+						<td class="normal">Tanggal Ijazah</td>
+						<td class="normal">IPK</td>
+						<td class="normal">PT</td>
+						<td class="normal">Tahun Masuk</td>
+						<td class="normal">Program Studi</td>
+						<td class="normal">Bidang Ilmu</td>
+						<td class="normal">Keterangan</td>
+						<td class="normal">Ijazah</td>
+						<td class="normal">Transkrip</td></tr>
 					<?php foreach ($array_pegawai_pendidikan_request as $row) { ?>
 						<?php $link = base_url('index.php/pegawai_modul/riwayat_pendidikan/index/'.ConvertLink($row['K_PEGAWAI'])); ?>
 					<tr>
@@ -366,17 +366,17 @@
 			
 			<?php if (count($array_pegawai_honorer_request) > 0) { ?>
 				<h1>Riwayat Penempatan Kerja</h1>
-				<div class="cnt_table_main record-valid"><table style="width: 1400px;">
+				<div class="cnt_table_main record-valid"><table>
 					<tr>
-						<td class="left" style="width: 50px;">&nbsp;</td>
-						<td class="normal" style="width: 150px;">NIP</td>
-						<td class="normal" style="width: 150px;">No SK</td>
-						<td class="normal" style="width: 150px;">Tanggal SK</td>
-						<td class="normal" style="width: 225px;">Asal SK</td>
-						<td class="normal" style="width: 150px;">TMT</td>
-						<td class="normal" style="width: 225px;">Unit Kerja</td>
-						<td class="normal" style="width: 225px;">Prodi</td>
-						<td class="normal" style="width: 75px;">Sertifikat</td></tr>
+						<td class="left">&nbsp;</td>
+						<td class="normal">NIP</td>
+						<td class="normal">No SK</td>
+						<td class="normal">Tanggal SK</td>
+						<td class="normal">Asal SK</td>
+						<td class="normal">TMT</td>
+						<td class="normal">Unit Kerja</td>
+						<td class="normal">Prodi</td>
+						<td class="normal">Sertifikat</td></tr>
 					<?php foreach ($array_pegawai_honorer_request as $row) { ?>
 						<?php $link = base_url('index.php/pegawai_modul/riwayat_honorer/index/'.ConvertLink($row['K_PEGAWAI'])); ?>
 					<tr>
@@ -397,16 +397,16 @@
 			
 			<?php if (count($array_riwayat_penghargaan_request) > 0) { ?>
 				<h1>Riwayat Penghargaan</h1>
-				<div class="cnt_table_main record-valid"><table style="width: 1150px;">
+				<div class="cnt_table_main record-valid"><table>
 					<tr>
-						<td class="left" style="width: 50px;">&nbsp;</td>
-						<td class="normal" style="width: 150px;">NIP</td>
-						<td class="normal" style="width: 150px;">No SK</td>
-						<td class="normal" style="width: 150px;">Tanggal SK</td>
-						<td class="normal" style="width: 200px;">Asal SK</td>
-						<td class="normal" style="width: 200px;">Nama Penghargaan</td>
-						<td class="normal" style="width: 200px;">Keterangan</td>
-						<td class="normal" style="width: 50px;">Sertifikat</td></tr>
+						<td class="left">&nbsp;</td>
+						<td class="normal">NIP</td>
+						<td class="normal">No SK</td>
+						<td class="normal">Tanggal SK</td>
+						<td class="normal">Asal SK</td>
+						<td class="normal">Nama Penghargaan</td>
+						<td class="normal">Keterangan</td>
+						<td class="normal">Sertifikat</td></tr>
 					<?php foreach ($array_riwayat_penghargaan_request as $row) { ?>
 						<?php $link = base_url('index.php/pegawai_modul/riwayat_penghargaan/index/'.ConvertLink($row['K_PEGAWAI'])); ?>
 					<tr>
@@ -426,15 +426,15 @@
 			
 			<?php if (count($array_pegawai_perubahan_gaji_request) > 0) { ?>
 				<h1>Riwayat Perubahan Gaji</h1>
-				<div class="cnt_table_main record-valid"><table style="width: 1000px;">
+				<div class="cnt_table_main record-valid"><table>
 					<tr>
-						<td class="left" style="width: 50px;">&nbsp;</td>
-						<td class="normal" style="width: 150px;">NIP</td>
-						<td class="normal" style="width: 125px;">No SK</td>
-						<td class="normal" style="width: 125px;">TMT</td>
-						<td class="normal" style="width: 225px;">Gaji</td>
-						<td class="normal" style="width: 275px;">Perubahan Gaji</td>
-						<td class="normal" style="width: 50px;">Sertifikat</td></tr>
+						<td class="left">&nbsp;</td>
+						<td class="normal">NIP</td>
+						<td class="normal">No SK</td>
+						<td class="normal">TMT</td>
+						<td class="normal">Gaji</td>
+						<td class="normal">Perubahan Gaji</td>
+						<td class="normal">Sertifikat</td></tr>
 					<?php foreach ($array_pegawai_perubahan_gaji_request as $row) { ?>
 						<?php $link = base_url('index.php/pegawai_modul/riwayat_perubahan_gaji/index/'.ConvertLink($row['K_PEGAWAI'])); ?>
 					<tr>
@@ -453,16 +453,16 @@
 			
 			<?php if (count($array_pegawai_seminar_request) > 0) { ?>
 				<h1>Riwayat Seminar</h1>
-				<div class="cnt_table_main record-valid"><table style="width: 1225px;">
+				<div class="cnt_table_main record-valid"><table>
 					<tr>
-						<td class="left" style="width: 50px;">&nbsp;</td>
-						<td class="normal" style="width: 150px;">NIP</td>
-						<td class="normal" style="width: 150px;">Tahun</td>
-						<td class="normal" style="width: 150px;">Nama</td>
-						<td class="normal" style="width: 200px;">Lokasi</td>
-						<td class="normal" style="width: 150px;">Tingkat</td>
-						<td class="normal" style="width: 150px;">Kedudukan</td>
-						<td class="normal" style="width: 225px;">Penyelenggara</td></tr>
+						<td class="left">&nbsp;</td>
+						<td class="normal">NIP</td>
+						<td class="normal">Tahun</td>
+						<td class="normal">Nama</td>
+						<td class="normal">Lokasi</td>
+						<td class="normal">Tingkat</td>
+						<td class="normal">Kedudukan</td>
+						<td class="normal">Penyelenggara</td></tr>
 					<?php foreach ($array_pegawai_seminar_request as $row) { ?>
 						<?php $link = base_url('index.php/pegawai_modul/riwayat_seminar/index/'.ConvertLink($row['K_PEGAWAI'])); ?>
 					<tr>
@@ -482,18 +482,18 @@
 			
 			<?php if (count($array_pegawai_sertifikasi_request) > 0) { ?>
 				<h1>Riwayat Sertifikasi</h1>
-				<div class="cnt_table_main record-valid"><table style="width: 1350px;">
+				<div class="cnt_table_main record-valid"><table>
 					<tr>
-						<td class="left" style="width: 50px;">&nbsp;</td>
-						<td class="normal" style="width: 150px;">NIP</td>
-						<td class="normal" style="width: 150px;">No Sertifikat</td>
-						<td class="normal" style="width: 125px;">Tanggal Sertifikat</td>
-						<td class="normal" style="width: 150px;">No Peserta</td>
-						<td class="normal" style="width: 200px;">Pejabat TT</td>
-						<td class="normal" style="width: 100px;">Tunjangan</td>
-						<td class="normal" style="width: 150px;">Tanggal Akhir</td>
-						<td class="normal" style="width: 200px;">Keterangan</td>
-						<td class="normal" style="width: 75px;">Sertifikat</td></tr>
+						<td class="left">&nbsp;</td>
+						<td class="normal">NIP</td>
+						<td class="normal">No Sertifikat</td>
+						<td class="normal">Tanggal Sertifikat</td>
+						<td class="normal">No Peserta</td>
+						<td class="normal">Pejabat TT</td>
+						<td class="normal">Tunjangan</td>
+						<td class="normal">Tanggal Akhir</td>
+						<td class="normal">Keterangan</td>
+						<td class="normal">Sertifikat</td></tr>
 					<?php foreach ($array_pegawai_sertifikasi_request as $row) { ?>
 						<?php $link = base_url('index.php/pegawai_modul/riwayat_sertifikasi/index/'.ConvertLink($row['K_PEGAWAI'])); ?>
 					<tr>

@@ -22,29 +22,33 @@
 					
 					<div></div>
                     
-                    <div>
-                        <form method="post" id="FormPegawai">
+                    <div class="clearfix">
+                    		
+                        <form method="post" id="FormPegawai" class="clearfix">
+                        		
+                        		<legend>Form Pencarian</legend>
                             <input type="hidden" name="PageActive" value="1" />
                             <input type="hidden" name="DeletePegawai" value="" />
                             <input type="hidden" name="PencarianDetailLastest" value="<?php echo $PencarianDetailLastest; ?>" />
-                            <table style="width: 100%;">
-	                            <tr>
-                                    <td>Nomor Peserta</td>
-                                    <td><input type="text" style="width: 300px;" maxlength="50" value="<?php if ($_POST) echo $_POST['NOMOR']; ?>" name="NOMOR" /></td></tr>
-                                <tr>
-                                    <td>Periode</td>
-                                    <td>
-                                     <select id="TAHUN" name="TAHUN">
+                            
+                            <div class="left  form-block">
+                            <label><strong>Nomor Peserta : </strong></label>
+                            <input type="text" style="width: 300px;" maxlength="50" value="<?php if ($_POST) echo $_POST['NOMOR']; ?>" name="NOMOR" />
+                            
+                            </div>
+                            
+                            <div class="left form-block">
+                            <label><strong>Periode :</strong></label>
+                            <select id="TAHUN" name="TAHUN">
 									 <?foreach($ArrayPeriode as $key=>$value){?>
                                     	<option value="<?php echo $value['K_PERIODE'];?>"><?php echo $value['PERIODE'] .' - '. $value['TAHUN'];?></option>                                    	                                	                                  	
 										<?}?>
 									</select>
-                                    </td></tr>                                  
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>                                    
-                                    <input type="submit" name="CariPegawai" value="Cari Data" /></td></tr>
-                            </table>
+                  					</div>
+                  					<div class="left form-block">
+                            	<input type="submit" name="CariPegawai" value="Cari Data" />
+                            </div>
+                            
                         </form>                                                
                     </div>
                      <?php

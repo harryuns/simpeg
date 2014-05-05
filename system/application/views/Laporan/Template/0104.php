@@ -2,16 +2,16 @@
     echo '
         <div class="cnt_table_main">
         <div style="padding: 10px 0; font-weight: 700; font-size: 11px; text-align: center;">'.$Laporan['Title'].'</div>
-        <table style="width: 100%;">
+        <table>
             <tr>
-                <td class="left" style="width: 5%;">No</td>
-                <td class="center" style="width: 20%;">Jurusan</td>
-                <td class="center" style="width: 20%;">Jabatan Fungsional</td>
-                <td class="normal" style="width: 11%; text-align: center;">'.($Laporan['Year'] - 4).'</td>
-                <td class="normal" style="width: 11%; text-align: center;">'.($Laporan['Year'] - 3).'</td>
-                <td class="normal" style="width: 11%; text-align: center;">'.($Laporan['Year'] - 2).'</td>
-                <td class="normal" style="width: 11%; text-align: center;">'.($Laporan['Year'] - 1).'</td>
-                <td class="normal" style="width: 11%; text-align: center;">'.$Laporan['Year'].'</td>
+                <td class="left">No</td>
+                <td class="center">Jurusan</td>
+                <td class="center">Jabatan Fungsional</td>
+                <td class="normal" style="text-align: center;">'.($Laporan['Year'] - 4).'</td>
+                <td class="normal" style="text-align: center;">'.($Laporan['Year'] - 3).'</td>
+                <td class="normal" style="text-align: center;">'.($Laporan['Year'] - 2).'</td>
+                <td class="normal" style="text-align: center;">'.($Laporan['Year'] - 1).'</td>
+                <td class="normal" style="text-align: center;">'.$Laporan['Year'].'</td>
             </tr>
     ';
     

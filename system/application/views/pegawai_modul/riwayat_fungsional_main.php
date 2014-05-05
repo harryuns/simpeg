@@ -8,7 +8,7 @@
 	$message = get_flash_message();
 	$array_asal_sk = $this->asal_sk_model->get_array();
 	$array_jabatan_pekerjaan = $this->jabatan_pekerjaan_model->get_array();
-	$array_jabatan_fungsional = $this->jabatan_fungsional_model->get_array(array( 'IS_DOSEN' => $pegawai['IsDosen'] ));
+	$array_jabatan_fungsional = $this->jabatan_fungsional_model->get_array(array( 'IS_DOSEN' => @$pegawai['IsDosen'] ));
 	$array_pegawai_fungsional = $this->riwayat_fungsional_model->get_array(array( 'K_PEGAWAI' => $k_pegawai ));
 	$array_pegawai_fungsional_request = $this->riwayat_fungsional_request_model->get_array(array( 'K_PEGAWAI' => $k_pegawai, 'IS_VALIDATE' => 0 ));
 ?>
@@ -22,11 +22,13 @@
 	<div id="sidebar">
 		<div class="hidden cnt-page"><?php echo json_encode($page); ?></div>
 		<div class="glossymenu"><?php $this->load->view('main_menu'); ?></div>
-		<div class="glossymenu" style="padding: 50px 0 0 0;"><?php $this->load->view('main_sub_menu'); ?></div>
-		<?php $this->load->view('common/form_unit_kerja'); ?>
+
 	</div>
 	
-	<div id="content"><div class="full" style="min-height: 400px;"><div id="CntRightFull">
+	<div id="content">
+  	<div class="contentmenu clearfix"><?php $this->load->view('main_sub_menu'); ?></div>
+		<?php $this->load->view('common/form_unit_kerja'); ?>
+  <div class="full" style="min-height: 400px;"><div id="CntRightFull">
 		<?php $this->load->view('pegawai_info'); ?>
 		
 		<?php if (!empty($message)) { ?>
@@ -36,18 +38,18 @@
 		<div class="cnt-grid">
 			<?php if (count($array_pegawai_fungsional) > 0) { ?>
 				<h1>Riwayat Jabatan Fungsional</h1>
-				<div class="cnt_table_main record-valid"><table style="width: 1625px;">
+				<div class="cnt_table_main record-valid"><table>
 					<tr>
-						<td class="left" style="width: 175px;">&nbsp;</td>
-						<td class="normal" style="width: 150px;">No SK</td>
-						<td class="normal" style="width: 200px;">Jabatan Fungsional</td>
-						<td class="normal" style="width: 200px;">Unit Kerja</td>
-						<td class="normal" style="width: 150px;">Tanggal SK</td>
-						<td class="normal" style="width: 225px;">Asal SK</td>
-						<td class="normal" style="width: 150px;">TMT</td>
-						<td class="normal" style="width: 100px;">Angka Kredit</td>
-						<td class="normal" style="width: 200px;">Keterangan</td>
-						<td class="normal" style="width: 75px;">Sertifikat</td></tr>
+						<td class="left">&nbsp;</td>
+						<td class="normal">No SK</td>
+						<td class="normal">Jabatan Fungsional</td>
+						<td class="normal">Unit Kerja</td>
+						<td class="normal">Tanggal SK</td>
+						<td class="normal">Asal SK</td>
+						<td class="normal">TMT</td>
+						<td class="normal">Angka Kredit</td>
+						<td class="normal">Keterangan</td>
+						<td class="normal">Sertifikat</td></tr>
 					<?php foreach ($array_pegawai_fungsional as $row) { ?>
 					<tr>
 						<td class="licon">
@@ -71,19 +73,19 @@
 			
 			<?php if (count($array_pegawai_fungsional_request) > 0) { ?>
 				<h1>Riwayat yang belum tervalidasi</h1>
-				<div class="cnt_table_main record-request"><table style="width: 1775px;">
+				<div class="cnt_table_main record-request"><table>
 					<tr>
-						<td class="left" style="width: 175px;">&nbsp;</td>
-						<td class="normal" style="width: 150px;">Jenis Request</td>
-						<td class="normal" style="width: 150px;">No SK</td>
-						<td class="normal" style="width: 200px;">Jabatan Fungsional</td>
-						<td class="normal" style="width: 200px;">Unit Kerja</td>
-						<td class="normal" style="width: 150px;">Tanggal SK</td>
-						<td class="normal" style="width: 225px;">Asal SK</td>
-						<td class="normal" style="width: 150px;">TMT</td>
-						<td class="normal" style="width: 100px;">Angka Kredit</td>
-						<td class="normal" style="width: 200px;">Keterangan</td>
-						<td class="normal" style="width: 75px;">Sertifikat</td></tr>
+						<td class="left">&nbsp;</td>
+						<td class="normal">Jenis Request</td>
+						<td class="normal">No SK</td>
+						<td class="normal">Jabatan Fungsional</td>
+						<td class="normal">Unit Kerja</td>
+						<td class="normal">Tanggal SK</td>
+						<td class="normal">Asal SK</td>
+						<td class="normal">TMT</td>
+						<td class="normal">Angka Kredit</td>
+						<td class="normal">Keterangan</td>
+						<td class="normal">Sertifikat</td></tr>
 					<?php foreach ($array_pegawai_fungsional_request as $row) { ?>
 					<tr>
 						<td class="licon">

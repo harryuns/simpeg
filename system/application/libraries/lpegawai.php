@@ -90,7 +90,7 @@ class LPegawai extends Controller {
 		$Pegawai['LINK_FILEKARPEG'] = (empty($Pegawai['FILEKARPEG'])) ? '' : HOST . '/images/Foto/' .  $Pegawai['FILEKARPEG'];
 		
 		$Pegawai['LinkCetak'] = HOST.'/index.php/Pegawai/Cetak/'.ConvertLink($Pegawai['K_PEGAWAI']);
-		$Pegawai['LinkPegawai'] = HOST.'/index.php/Pegawai/Tambah/'.ConvertLink($Pegawai['K_PEGAWAI']);
+		$Pegawai['LinkPegawai'] = base_url('index.php/Pegawai/Tambah/'.ConvertLink($Pegawai['K_PEGAWAI']));
 		$Pegawai['LinkPegawaiAktif'] = HOST.'/index.php/PegawaiAktif/Ubah/'.ConvertLink($Pegawai['K_PEGAWAI']);
 		$Pegawai['LinkRiwayatHidup'] = HOST.'/index.php/RiwayatHidup/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
 		$Pegawai['LinkRiwayatPendidikan'] = HOST.'/index.php/RiwayatPendidikan/Ubah/'.ConvertLink($Pegawai['K_PEGAWAI']);
@@ -110,30 +110,28 @@ class LPegawai extends Controller {
 		$Pegawai['LinkRiwayatHukuman'] = HOST.'/index.php/RiwayatHukuman/Ubah/'.ConvertLink($Pegawai['K_PEGAWAI']);
 		$Pegawai['LinkDataEkd'] = HOST.'/index.php/SendToEkd/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
 		
-		if (IS_DEVEL) {
-			$Pegawai['LinkPegawaiAktif'] = HOST.'/index.php/pegawai_modul/riwayat_aktif/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
-			$Pegawai['LinkRiwayatPendidikan'] = HOST.'/index.php/pegawai_modul/riwayat_pendidikan/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
-			$Pegawai['LinkRiwayatDiklat'] = HOST.'/index.php/pegawai_modul/riwayat_diklat/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
-			$Pegawai['LinkRiwayatPangkat'] = HOST.'/index.php/pegawai_modul/riwayat_pangkat/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
-			$Pegawai['LinkRiwayatFungsional'] = HOST.'/index.php/pegawai_modul/riwayat_fungsional/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
-			$Pegawai['LinkRiwayatStruktural'] = HOST.'/index.php/pegawai_modul/riwayat_struktural/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
-			$Pegawai['LinkRiwayatHonorer'] = HOST.'/index.php/pegawai_modul/riwayat_honorer/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
-			$Pegawai['LinkRiwayatPenghargaan'] = HOST.'/index.php/pegawai_modul/riwayat_penghargaan/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
-			$Pegawai['LinkRiwayatSertifikasi'] = HOST.'/index.php/pegawai_modul/riwayat_sertifikasi/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
-			$Pegawai['LinkRiwayatKeluarga'] = HOST.'/index.php/pegawai_modul/riwayat_keluarga/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
-			$Pegawai['LinkKenaikanGaji'] = HOST.'/index.php/pegawai_modul/riwayat_perubahan_gaji/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
-			$Pegawai['LinkRiwayatHomeBase'] = HOST.'/index.php/pegawai_modul/riwayat_homebase/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
-			$Pegawai['LinkRiwayatSeminar'] = HOST.'/index.php/pegawai_modul/riwayat_seminar/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
-			$Pegawai['LinkRiwayatOrganisasi'] = HOST.'/index.php/pegawai_modul/riwayat_organisasi/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
-			$Pegawai['LinkRiwayatHukuman'] = HOST.'/index.php/pegawai_modul/riwayat_hukuman/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
-		}
+		$Pegawai['LinkPegawaiAktif'] = base_url('index.php/pegawai_modul/riwayat_aktif/index/'.ConvertLink($Pegawai['K_PEGAWAI']));
+		$Pegawai['LinkRiwayatPendidikan'] = base_url('index.php/pegawai_modul/riwayat_pendidikan/index/'.ConvertLink($Pegawai['K_PEGAWAI']));
+		$Pegawai['LinkRiwayatDiklat'] = base_url('index.php/pegawai_modul/riwayat_diklat/index/'.ConvertLink($Pegawai['K_PEGAWAI']));
+		$Pegawai['LinkRiwayatPangkat'] = base_url('index.php/pegawai_modul/riwayat_pangkat/index/'.ConvertLink($Pegawai['K_PEGAWAI']));
+		$Pegawai['LinkRiwayatFungsional'] = base_url('index.php/pegawai_modul/riwayat_fungsional/index/'.ConvertLink($Pegawai['K_PEGAWAI']));
+		$Pegawai['LinkRiwayatStruktural'] = base_url('index.php/pegawai_modul/riwayat_struktural/index/'.ConvertLink($Pegawai['K_PEGAWAI']));
+		$Pegawai['LinkRiwayatHonorer'] = base_url('index.php/pegawai_modul/riwayat_honorer/index/'.ConvertLink($Pegawai['K_PEGAWAI']));
+		$Pegawai['LinkRiwayatPenghargaan'] = base_url('index.php/pegawai_modul/riwayat_penghargaan/index/'.ConvertLink($Pegawai['K_PEGAWAI']));
+		$Pegawai['LinkRiwayatSertifikasi'] = base_url('index.php/pegawai_modul/riwayat_sertifikasi/index/'.ConvertLink($Pegawai['K_PEGAWAI']));
+		$Pegawai['LinkRiwayatKeluarga'] = base_url('index.php/pegawai_modul/riwayat_keluarga/index/'.ConvertLink($Pegawai['K_PEGAWAI']));
+		$Pegawai['LinkKenaikanGaji'] = base_url('index.php/pegawai_modul/riwayat_perubahan_gaji/index/'.ConvertLink($Pegawai['K_PEGAWAI']));
+		$Pegawai['LinkRiwayatHomeBase'] = base_url('index.php/pegawai_modul/riwayat_homebase/index/'.ConvertLink($Pegawai['K_PEGAWAI']));
+		$Pegawai['LinkRiwayatSeminar'] = base_url('index.php/pegawai_modul/riwayat_seminar/index/'.ConvertLink($Pegawai['K_PEGAWAI']));
+		$Pegawai['LinkRiwayatOrganisasi'] = base_url('index.php/pegawai_modul/riwayat_organisasi/index/'.ConvertLink($Pegawai['K_PEGAWAI']));
+		$Pegawai['LinkRiwayatHukuman'] = base_url('index.php/pegawai_modul/riwayat_hukuman/index/'.ConvertLink($Pegawai['K_PEGAWAI']));
 		
 		// skp
-		$Pegawai['link_skp_penyusunan'] = HOST.'/index.php/pegawai_modul/skp_penyusunan/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
-		$Pegawai['link_skp_penilaian'] = HOST.'/index.php/pegawai_modul/skp_penilaian/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
-		$Pegawai['link_skp_perilaku'] = HOST.'/index.php/pegawai_modul/skp_perilaku/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
-		$Pegawai['link_skp_validasi'] = HOST.'/index.php/pegawai_modul/skp_validasi/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
-		$Pegawai['link_skp_tanggapan'] = HOST.'/index.php/pegawai_modul/skp_tanggapan/index/'.ConvertLink($Pegawai['K_PEGAWAI']);
+		$Pegawai['link_skp_penyusunan'] = base_url('index.php/pegawai_modul/skp_penyusunan/index/'.ConvertLink($Pegawai['K_PEGAWAI']));
+		$Pegawai['link_skp_penilaian'] = base_url('index.php/pegawai_modul/skp_penilaian/index/'.ConvertLink($Pegawai['K_PEGAWAI']));
+		$Pegawai['link_skp_perilaku'] = base_url('index.php/pegawai_modul/skp_perilaku/index/'.ConvertLink($Pegawai['K_PEGAWAI']));
+		$Pegawai['link_skp_validasi'] = base_url('index.php/pegawai_modul/skp_validasi/index/'.ConvertLink($Pegawai['K_PEGAWAI']));
+		$Pegawai['link_skp_tanggapan'] = base_url('index.php/pegawai_modul/skp_tanggapan/index/'.ConvertLink($Pegawai['K_PEGAWAI']));
 		
         // Add Parameter
         $Pegawai['IsNewPegawai'] = (empty($K_PEGAWAI)) ? 1 : 0;
@@ -193,7 +191,7 @@ class LPegawai extends Controller {
 			}
 			
 			$Row['IsPns'] = $this->IsPns($Row);
-			$Row['LinkEdit'] = HOST.'/index.php/Pegawai/Tambah/'.ConvertLink($Row['K_PEGAWAI']);
+			$Row['LinkEdit'] = base_url('index.php/Pegawai/Tambah/'.ConvertLink($Row['K_PEGAWAI']));
 			
 			// masa kerja total
 			$Row['MASA_KERJA_GOLONGAN'] = (empty($Row['MASA_KERJA_GOLONGAN'])) ? 0 : $Row['MASA_KERJA_GOLONGAN'];

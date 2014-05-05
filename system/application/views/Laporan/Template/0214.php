@@ -12,15 +12,15 @@
 
 <div class="cnt_table_main">
 	<div style="padding: 10px 0; font-weight: 700; font-size: 11px; text-align: center;"><?php echo $Laporan['Title']; ?></div>
-	<table style="width: 100%;">
+	<table>
 		<tr>
-			<td class="left" style="width: 4%;">No</td>
-			<td class="center" style="width: 36%;">Fakultas / Unit Kerja</td>
-			<td class="normal" style="width: 12%; text-align: center;"><?php echo ($Laporan['Year'] - 4); ?></td>
-			<td class="normal" style="width: 12%; text-align: center;"><?php echo ($Laporan['Year'] - 3); ?></td>
-			<td class="normal" style="width: 12%; text-align: center;"><?php echo ($Laporan['Year'] - 2); ?></td>
-			<td class="normal" style="width: 12%; text-align: center;"><?php echo ($Laporan['Year'] - 1); ?></td>
-			<td class="normal" style="width: 12%; text-align: center;"><?php echo $Laporan['Year']; ?></td></tr>
+			<td class="left">No</td>
+			<td class="center">Fakultas / Unit Kerja</td>
+			<td class="normal" style="text-align: center;"><?php echo ($Laporan['Year'] - 4); ?></td>
+			<td class="normal" style="text-align: center;"><?php echo ($Laporan['Year'] - 3); ?></td>
+			<td class="normal" style="text-align: center;"><?php echo ($Laporan['Year'] - 2); ?></td>
+			<td class="normal" style="text-align: center;"><?php echo ($Laporan['Year'] - 1); ?></td>
+			<td class="normal" style="text-align: center;"><?php echo $Laporan['Year']; ?></td></tr>
 		
 		<!-- write body -->
 		<?php $counter = 0; ?>

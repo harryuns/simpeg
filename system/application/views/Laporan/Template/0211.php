@@ -8,10 +8,10 @@
 <div style="padding: 10px 0; font-weight: 700; font-size: 11px; text-align: center;"><?php echo $Laporan['Title']; ?></div>
 <table style="width: <?php echo $table_length; ?>px;">
 	<tr>
-		<td class="left" style="width: 25px;">No</td>
+		<td class="left">No</td>
 		<td class="center" style="width: <?php echo $fakultas_length; ?>px;">Fakultas / Unit Kerja</td>
 		<?php foreach ($array_column as $name) { ?>
-			<td class="center" style="width: 100px;"><?php echo $name; ?></td>
+			<td class="center"><?php echo $name; ?></td>
 		<?php } ?>
 	</tr>
 	
@@ -32,7 +32,7 @@
 	<tr>
 		<td colspan="2" class="center">Total</td>
 		<?php foreach ($array_column as $name) { ?>
-			<td class="center" style="width: 100px;"><?php echo @$array_total[$name]; ?></td>
+			<td class="center"><?php echo @$array_total[$name]; ?></td>
 		<?php } ?>
 	</tr>
 </table>

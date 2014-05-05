@@ -2,6 +2,17 @@
 //	print_r($ArrayRiwayatPangkat); exit;
 ?>
 <body>
+		<div id="portal" style="display:true" class="clearfix">
+	<div class="logo left">
+		<a href="#">Simpeg UB</a>
+	</div>
+	<div class="hlink right">
+    	<ul>
+            <li>Login as <a href="#">rizalespe (Rizal Setya Perdana)</a>, </li>
+			</ul>
+    </div>
+    
+</div>
     <div id="body">
         <div id="frame">
             <div id="sidebar">
@@ -25,7 +36,7 @@
 						<div id="menu_control">
 							<a href='<?=base_url()?>/index.php/DirGuruBesar/insert'>Tambah data</a> 
 							&nbsp;|&nbsp;
-							<a href='javascript:void(0)' onclick="showformimport()">Import data</a>  
+							<a href='javascript:void(0)' onClick="showformimport()">Import data</a>  
 						</div>
 						<div id="List" class="cnt_table_main" style="width: 100%; height: 400px;">
 						<table id='list-table' >

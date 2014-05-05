@@ -22,11 +22,15 @@
 	<div id="sidebar">
 		<div class="hidden cnt-page"><?php echo json_encode($page); ?></div>
 		<div class="glossymenu"><?php $this->load->view('main_menu'); ?></div>
-		<div class="glossymenu" style="padding: 50px 0 0 0;"><?php $this->load->view('main_sub_menu'); ?></div>
-		<?php $this->load->view('common/form_unit_kerja'); ?>
+
 	</div>
 	
-	<div id="content"><div class="full" style="min-height: 400px;"><div id="CntRightFull">
+	<div id="content">
+  	
+  	<div class="contentmenu clearfix"><?php $this->load->view('main_sub_menu'); ?></div>
+		<?php $this->load->view('common/form_unit_kerja'); ?>
+    
+  <div class="full" style="min-height: 400px;"><div id="CntRightFull">
 		<?php $this->load->view('pegawai_info'); ?>
 		
 		<?php if (!empty($message)) { ?>
@@ -38,16 +42,16 @@
 		<div class="cnt-grid-kegiatan">
 			<h1>SKP TARGET</h1>
 			<?php if (count($array_kegiatan_skp) > 0) { ?>
-				<div class="cnt_table_main"><table style="width: 850px;">
+				<div class="cnt_table_main"><table>
 					<tr>
-						<td class="left" style="width: 100px;">&nbsp;</td>
-						<td class="normal" style="width: 150px;">Kegiatan</td>
-						<td class="normal" style="width: 100px;">AK Target</td>
-						<td class="normal" style="width: 100px;">KUAN Target</td>
-						<td class="normal" style="width: 100px;">KUAL Target</td>
-						<td class="normal" style="width: 100px;">Waktu Target</td>
-						<td class="normal" style="width: 100px;">Biaya Target</td>
-						<td class="normal" style="width: 100px;">Validasi</td></tr>
+						<td class="left">&nbsp;</td>
+						<td class="normal">Kegiatan</td>
+						<td class="normal">AK Target</td>
+						<td class="normal">KUAN Target</td>
+						<td class="normal">KUAL Target</td>
+						<td class="normal">Waktu Target</td>
+						<td class="normal">Biaya Target</td>
+						<td class="normal">Validasi</td></tr>
 					<?php foreach ($array_kegiatan_skp as $row) { ?>
 					<tr>
 						<td class="licon">
@@ -78,16 +82,16 @@
 		<div class="cnt-grid-penilai">
 			<h1>SKP PEJABAT PENILAI</h1>
 			<?php if (count($array_penilai_skp) > 0) { ?>
-				<div class="cnt_table_main"><table style="width: 700px;">
+				<div class="cnt_table_main"><table>
 					<tr>
-						<td class="left" rowspan="2" style="width: 100px;">&nbsp;</td>
-						<td class="normal" colspan="2" style="width: 300px; text-align: center;">Pejabat Penilai</td>
-						<td class="normal" colspan="2" style="width: 300px; text-align: center;">Atasan Pejabat Penilai</td></tr>
+						<td class="left" rowspan="2">&nbsp;</td>
+						<td class="normal" colspan="2" style="text-align: center;">Pejabat Penilai</td>
+						<td class="normal" colspan="2" style="text-align: center;">Atasan Pejabat Penilai</td></tr>
 					<tr>
-						<td class="normal" style="width: 150px; text-align: center;">Nama</td>
-						<td class="normal" style="width: 150px; text-align: center;">NIP</td>
-						<td class="normal" style="width: 150px; text-align: center;">Nama</td>
-						<td class="normal" style="width: 150px; text-align: center;">NIP</td></tr>
+						<td class="normal" style="text-align: center;">Nama</td>
+						<td class="normal" style="text-align: center;">NIP</td>
+						<td class="normal" style="text-align: center;">Nama</td>
+						<td class="normal" style="text-align: center;">NIP</td></tr>
 					<?php foreach ($array_penilai_skp as $row) { ?>
 					<tr>
 						<td class="licon">

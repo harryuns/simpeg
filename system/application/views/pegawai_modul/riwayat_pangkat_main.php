@@ -6,25 +6,27 @@
 	
 	$message = get_flash_message();
 	$array_asal_sk = $this->asal_sk_model->get_array();
-	$array_jabatan_fungsional = array();
-	$array_pegawai_homebase = $this->riwayat_homebase_model->get_array(array( 'K_PEGAWAI' => $k_pegawai ));
-	$array_pegawai_homebase_request = $this->riwayat_homebase_request_model->get_array(array( 'K_PEGAWAI' => $k_pegawai, 'IS_VALIDATE' => 0 ));
+	$array_golongan = $this->golongan_model->get_array();
+	$array_penjelasan = $this->penjelasan_model->get_array();
+	$array_pegawai_pangkat = $this->riwayat_pangkat_model->get_array(array( 'K_PEGAWAI' => $k_pegawai ));
+	$array_pegawai_pangkat_request = $this->riwayat_pangkat_request_model->get_array(array( 'K_PEGAWAI' => $k_pegawai, 'IS_VALIDATE' => 0 ));
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<?php $this->load->view('body_meta', array( 'page_title' => 'Riwayat Home Base' ) ); ?>
+<?php $this->load->view('body_meta', array( 'page_title' => 'Riwayat Pangkat' ) ); ?>
 
 <body>
 <div id="body"><div id="frame">
 	<div id="sidebar">
 		<div class="hidden cnt-page"><?php echo json_encode($page); ?></div>
 		<div class="glossymenu"><?php $this->load->view('main_menu'); ?></div>
-		<div class="glossymenu" style="padding: 50px 0 0 0;"><?php $this->load->view('main_sub_menu'); ?></div>
-		<?php $this->load->view('common/form_unit_kerja'); ?>
 	</div>
 	
-	<div id="content"><div class="full" style="min-height: 400px;"><div id="CntRightFull">
+	<div id="content">
+  	<div class="contentmenu clearfix"><?php $this->load->view('main_sub_menu'); ?></div>
+		<?php $this->load->view('common/form_unit_kerja'); ?>
+  <div class="full" style="min-height: 400px;"><div id="CntRightFull">
 		<?php $this->load->view('pegawai_info'); ?>
 		
 		<?php if (!empty($message)) { ?>
@@ -32,23 +34,23 @@
 		<?php } ?>
 		
 		<div class="cnt-grid">
-			<?php if (count($array_pegawai_homebase) > 0) { ?>
-				<h1>Riwayat Home Base</h1>
-				<div class="cnt_table_main record-valid"><table style="width: 1300px;">
+			<?php if (count($array_pegawai_pangkat) > 0) { ?>
+				<h1>Riwayat Pangkat</h1>
+				<div class="cnt_table_main record-valid"><table>
 					<tr>
-						<td class="left" style="width: 175px;">&nbsp;</td>
-						<td class="normal" style="width: 150px;">No SK</td>
-						<td class="normal" style="width: 150px;">Tanggal SK</td>
-						<td class="normal" style="width: 150px;">Pangkat</td>
-						<td class="normal" style="width: 150px;">Golongan</td>
-						<td class="normal" style="width: 200px;">Asal SK</td>
-						<td class="normal" style="width: 200px;">Penjelasan</td>
-						<td class="normal" style="width: 150px;">TMT</td>
-						<td class="normal" style="width: 150px;">Gaji Pokok</td>
-						<td class="normal" style="width: 200px;">Keterangan</td>
-						<td class="normal" style="width: 200px;">Penandatangan SK</td>
-						<td class="normal" style="width: 75px;">Sertifikat</td></tr>
-					<?php foreach ($array_pegawai_homebase as $row) { ?>
+						<td class="left">&nbsp;</td>
+						<td class="normal">No SK</td>
+						<td class="normal">Tanggal SK</td>
+						<td class="normal">Pangkat</td>
+						<td class="normal">Golongan</td>
+						<td class="normal">Asal SK</td>
+						<td class="normal">Penjelasan</td>
+						<td class="normal">TMT</td>
+						<td class="normal">Gaji Pokok</td>
+						<td class="normal">Keterangan</td>
+						<td class="normal">Penandatangan SK</td>
+						<td class="normal">Sertifikat</td></tr>
+					<?php foreach ($array_pegawai_pangkat as $row) { ?>
 					<tr>
 						<td class="licon">
 							<span class="record hidden"><?php echo json_encode($row); ?></span>
@@ -58,35 +60,37 @@
 						</td>
 						<td class="body"><?php echo $row['NO_SK']; ?></td>
 						<td class="body"><?php echo ConvertDateToString($row['TGL_SK']); ?></td>
+						<td class="body"><?php echo $row['PANGKAT']; ?></td>
+						<td class="body"><?php echo $row['GOLONGAN']; ?></td>
 						<td class="body"><?php echo $row['ASAL_SK']; ?></td>
+						<td class="body"><?php echo $row['PENJELASAN']; ?></td>
 						<td class="body"><?php echo ConvertDateToString($row['TMT']); ?></td>
-						<td class="body"><?php echo $row['UNIT_KERJA']; ?></td>
-						<td class="body"><?php echo $row['PRODI']; ?></td>
-						<td class="body"><?php echo $row['IS_PDPT_TEXT']; ?></td>
-						<td class="body"><?php echo $row['IS_SIMPEG_TEXT']; ?></td>
+						<td class="body"><?php echo $row['GAJI_POKOK']; ?></td>
+						<td class="body"><?php echo $row['KETERANGAN']; ?></td>
+						<td class="body"><?php echo $row['PENANDATANGAN_SK']; ?></td>
 						<td class="body"><?php echo $row['JML_FILE_TEXT']; ?></td></tr>
 					<?php } ?>
 				</table></div>
 			<?php } ?>
 			
-			<?php if (count($array_pegawai_homebase_request) > 0) { ?>
+			<?php if (count($array_pegawai_pangkat_request) > 0) { ?>
 				<h1>Riwayat yang belum tervalidasi</h1>
-				<div class="cnt_table_main record-request"><table style="width: 1450px;">
+				<div class="cnt_table_main record-request"><table>
 					<tr>
-						<td class="left" style="width: 175px;">&nbsp;</td>
-						<td class="normal" style="width: 150px;">Jenis Request</td>
-						<td class="normal" style="width: 150px;">No SK</td>
-						<td class="normal" style="width: 150px;">Tanggal SK</td>
-						<td class="normal" style="width: 150px;">Pangkat</td>
-						<td class="normal" style="width: 150px;">Golongan</td>
-						<td class="normal" style="width: 200px;">Asal SK</td>
-						<td class="normal" style="width: 200px;">Penjelasan</td>
-						<td class="normal" style="width: 150px;">TMT</td>
-						<td class="normal" style="width: 150px;">Gaji Pokok</td>
-						<td class="normal" style="width: 200px;">Keterangan</td>
-						<td class="normal" style="width: 200px;">Penandatangan SK</td>
-						<td class="normal" style="width: 75px;">Sertifikat</td></tr>
-					<?php foreach ($array_pegawai_homebase_request as $row) { ?>
+						<td class="left">&nbsp;</td>
+						<td class="normal">Jenis Request</td>
+						<td class="normal">No SK</td>
+						<td class="normal">Tanggal SK</td>
+						<td class="normal">Pangkat</td>
+						<td class="normal">Golongan</td>
+						<td class="normal">Asal SK</td>
+						<td class="normal">Penjelasan</td>
+						<td class="normal">TMT</td>
+						<td class="normal">Gaji Pokok</td>
+						<td class="normal">Keterangan</td>
+						<td class="normal">Penandatangan SK</td>
+						<td class="normal">Sertifikat</td></tr>
+					<?php foreach ($array_pegawai_pangkat_request as $row) { ?>
 					<tr>
 						<td class="licon">
 							<span class="record hidden"><?php echo json_encode($row); ?></span>
@@ -95,15 +99,17 @@
 							<a class="btn-upload" data-action="update_upload_request"><img class="link" src="<?php echo HOST; ?>/images/folder.png" /></a>
 							<a class="btn-validate"><img class="link" src="<?php echo HOST; ?>/images/tick.png" /></a>
 						</td>
-						<td class="body"><?php echo show_jenis_request($row['JENIS_REQ_HOMEBASE']); ?></td>
+						<td class="body"><?php echo show_jenis_request($row['JENIS_REQ_PANGKAT']); ?></td>
 						<td class="body"><?php echo $row['NO_SK']; ?></td>
 						<td class="body"><?php echo ConvertDateToString($row['TGL_SK']); ?></td>
+						<td class="body"><?php echo $row['PANGKAT']; ?></td>
+						<td class="body"><?php echo $row['GOLONGAN']; ?></td>
 						<td class="body"><?php echo $row['ASAL_SK']; ?></td>
+						<td class="body"><?php echo $row['PENJELASAN']; ?></td>
 						<td class="body"><?php echo ConvertDateToString($row['TMT']); ?></td>
-						<td class="body"><?php echo $row['UNIT_KERJA']; ?></td>
-						<td class="body"><?php echo $row['PRODI']; ?></td>
-						<td class="body"><?php echo $row['IS_PDPT_TEXT']; ?></td>
-						<td class="body"><?php echo $row['IS_SIMPEG_TEXT']; ?></td>
+						<td class="body"><?php echo $row['GAJI_POKOK']; ?></td>
+						<td class="body"><?php echo $row['KETERANGAN']; ?></td>
+						<td class="body"><?php echo $row['PENANDATANGAN_SK']; ?></td>
 						<td class="body"><?php echo $row['JML_FILE_TEXT']; ?></td></tr>
 					<?php } ?>
 				</table></div>
@@ -115,14 +121,14 @@
 		</div>
 		
 		<div class="cnt-form hidden">
-			<h1>Riwayat Home Base</h1>
+			<h1>Riwayat Pangkat</h1>
 			
-			<form style="width: 80%;" id="FormRiwayatHomeBase" action="<?php echo base_url('index.php/pegawai_modul/riwayat_homebase/action'); ?>">
+			<form style="width: 80%;" id="FormRiwayatHomeBase" action="<?php echo base_url('index.php/pegawai_modul/riwayat_pangkat/action'); ?>">
 				<input type="hidden" name="action" />
-				<input type="hidden" name="ID_REQ_HOMEBASE" value="x" />
-				<input type="hidden" name="ID_RIWAYAT_HOMEBASE" value="x" />
+				<input type="hidden" name="ID_REQ_PANGKAT" value="x" />
+				<input type="hidden" name="ID_RIWAYAT_PANGKAT" value="x" />
 				<input type="hidden" name="K_PEGAWAI" value="<?php echo $k_pegawai; ?>" />
-				<input type="hidden" name="JENIS_REQ_HOMEBASE" />
+				<input type="hidden" name="JENIS_REQ_PANGKAT" />
 				
 				<table style="width: 100%;" class="tabel" cellspacing="0" cellpadding="5" border="0">
 					<tr>
@@ -139,13 +145,13 @@
 					<tr>
 						<td>Penjelasan</td>
 						<td><select style="width: 85%;" name="K_PENJELASAN">
-							<?php echo ShowOption(array( 'Array' => $array_penjelasan, 'ArrayID' => 'K_ASAL_SK', 'ArrayTitle' => 'CONTENT' )); ?>
+							<?php echo ShowOption(array( 'Array' => $array_penjelasan, 'ArrayID' => 'K_PENJELASAN', 'ArrayTitle' => 'CONTENT' )); ?>
 						</select></td>
 					</tr>
 					<tr>
 						<td>Golongan</td>
 						<td><select style="width: 85%;" name="K_GOLONGAN">
-							<?php echo ShowOption(array( 'Array' => $array_golongan, 'ArrayID' => 'K_ASAL_SK', 'ArrayTitle' => 'CONTENT' )); ?>
+							<?php echo ShowOption(array( 'Array' => $array_golongan, 'ArrayID' => 'K_GOLONGAN', 'ArrayTitle' => 'PANGKAT' )); ?>
 						</select></td>
 					</tr>
 					<tr>
@@ -156,13 +162,13 @@
 						<td><input type="text" style="width: 150px;" size="50" name="GAJI_POKOK" class="integer" /></td></tr>
 					<tr>
 						<td>Masa Kerja Keseluruhan</td>
-						<td><?php echo $Pegawai['MASA_KERJA_KESELURUHAN']; ?></td></tr>
+						<td class="cnt-masa-kerja-keseluruhan">-</td></tr>
 					<tr>
 						<td>Masa Kerja Golongan</td>
-						<td><?php echo $Pegawai['MASA_KERJA_GOLONGAN']; ?></td></tr>
+						<td class="cnt-masa-kerja-golongan">-</td></tr>
 					<tr>
 						<td>Penandatangan SK</td>
-						<td><input type="text" style="width: 150px;" size="50" name="PENANDATANGAN_SK" /></td></tr>
+						<td><input type="text" style="width: 85%;" size="50" name="PENANDATANGAN_SK" /></td></tr>
 					<tr class="cnt-masa-kerja">
 						<td>Masa Kerja Tambahan</td>
 						<td>
@@ -189,8 +195,8 @@
 			<div id="form-upload" class="cnt_table_main">
 				<input type="hidden" name="action" />
 				<input type="hidden" name="K_PEGAWAI" />
-				<input type="hidden" name="ID_REQ_HOMEBASE" />
-				<input type="hidden" name="ID_RIWAYAT_HOMEBASE" />
+				<input type="hidden" name="ID_REQ_PANGKAT" />
+				<input type="hidden" name="ID_RIWAYAT_PANGKAT" />
 				
 				<table style="width: 80%; display: inline-table;" class="tabel" cellspacing="0" cellpadding="5" border="0">
 					<tr>
@@ -296,68 +302,6 @@
 		},
 		
 		combo: {
-			unit_kerja: function() {
-				var param = {
-					combo: $('[name="K_JENJANG"]'),
-					callback: function() {
-						page.combo.jenjang();
-					},
-					ajax: {
-						url: Web.HOST + '/index.php/Ajax/Jenjang',
-						param: { Action: 'GetJenjangByUnitKerja', K_UNIT_KERJA: $('[name="K_UNIT_KERJA"]').val() }
-					}
-				}
-				Func.set_combo(param);
-			},
-			jenjang: function() {
-				var param = {
-					combo: $('[name="K_FAKULTAS"]'),
-					callback: function() {
-						page.combo.fakultas();
-					},
-					ajax: {
-						url: Web.HOST + '/index.php/Ajax/Fakultas',
-						param: {
-							Action: 'GetFakultasByJenjangUnitKerja',
-							K_UNIT_KERJA: $('[name="K_UNIT_KERJA"]').val(),
-							K_JENJANG: $('[name="K_JENJANG"]').val()
-						}
-					}
-				}
-				Func.set_combo(param);
-			},
-			fakultas: function() {
-				var param = {
-					combo: $('[name="K_JURUSAN"]'),
-					callback: function() {
-						page.combo.jurusan();
-					},
-					ajax: {
-						url: Web.HOST + '/index.php/Ajax/Jurusan',
-						param: {
-							Action: 'GetJurusanById',
-							K_FAKULTAS: $('[name="K_FAKULTAS"]').val(),
-							K_JENJANG: $('[name="K_JENJANG"]').val()
-						}
-					}
-				}
-				Func.set_combo(param);
-			},
-			jurusan: function() {
-				var param = {
-					combo: $('[name="K_PROG_STUDI"]'),
-					ajax: {
-						url: Web.HOST + '/index.php/Ajax/ProgramStudi',
-						param: {
-							Action: 'GetProgramStudiById',
-							K_FAKULTAS: $('[name="K_FAKULTAS"]').val(),
-							K_JENJANG: $('[name="K_JENJANG"]').val(),
-							K_JURUSAN: $('[name="K_JURUSAN"]').val()
-						}
-					}
-				}
-				Func.set_combo(param);
-			},
 			penjelasan: function() {
 				var value = $('[name="K_PENJELASAN"]').val();
 				if (value == '01') {
@@ -380,8 +324,8 @@
 		
 		// init form
 		$('.cnt-form [name="action"]').val('update_request');
-		$('.cnt-form [name="ID_RIWAYAT_HOMEBASE"]').val('x');
-		$('.cnt-form [name="JENIS_REQ_HOMEBASE"]').val('I');
+		$('.cnt-form [name="ID_RIWAYAT_PANGKAT"]').val('x');
+		$('.cnt-form [name="JENIS_REQ_PANGKAT"]').val('I');
 		$('.cnt-form [name="K_UNIT_KERJA"]').change();
 		$('.cnt-form [name="K_PENJELASAN"]').change();
 	});
@@ -397,59 +341,33 @@
 		var raw = $(this).parents('tr').find('.record').html();
 		eval('var record = ' + raw);
 		
-		a = record
-		record = a;
-		
-		$('.cnt-form [name="JENIS_REQ_HOMEBASE"]').val(record.JENIS_REQ_HOMEBASE);
-		$('.cnt-form [name="ID_RIWAYAT_HOMEBASE"]').val((record.ID_RIWAYAT_HOMEBASE == null) ? 'x' : record.ID_RIWAYAT_HOMEBASE);
-		$('.cnt-form [name="ID_REQ_HOMEBASE"]').val((record.ID_REQ_HOMEBASE == null) ? 'x' : record.ID_REQ_HOMEBASE);
+		$('.cnt-form [name="JENIS_REQ_PANGKAT"]').val(record.JENIS_REQ_PANGKAT);
+		$('.cnt-form [name="ID_RIWAYAT_PANGKAT"]').val((record.ID_RIWAYAT_PANGKAT == null) ? 'x' : record.ID_RIWAYAT_PANGKAT);
+		$('.cnt-form [name="ID_REQ_PANGKAT"]').val((record.ID_REQ_PANGKAT == null) ? 'x' : record.ID_REQ_PANGKAT);
 		$('.cnt-form [name="NO_SK"]').val(record.NO_SK);
 		$('.cnt-form [name="TGL_SK"]').val(Func.swap_date(record.TGL_SK));
-		$('.cnt-form [name="TMT"]').val(Func.swap_date(record.TMT));
 		$('.cnt-form [name="K_ASAL_SK"]').val(record.K_ASAL_SK);
-		$('.cnt-form [name="K_UNIT_KERJA"]').val(record.K_UNIT_KERJA);
-		$('.cnt-form [name="K_UNIT_KERJA"]').next().val(record.UNIT_KERJA);
-		$('.cnt-form [name="IS_PDPT"]').attr('checked', ( record.IS_PDPT == 1 ? 'checked' : ''));
-		$('.cnt-form [name="IS_SIMPEG"]').attr('checked', ( record.IS_SIMPEG == 1 ? 'checked' : ''));
+		$('.cnt-form [name="GAJI_POKOK"]').val(record.GAJI_POKOK);
+		$('.cnt-form [name="K_GOLONGAN"]').val(record.K_GOLONGAN);
+		$('.cnt-form [name="KETERANGAN"]').val(record.KETERANGAN);
+		$('.cnt-form [name="TMT"]').val(Func.swap_date(record.TMT));
+		$('.cnt-form [name="K_PENJELASAN"]').val(record.K_PENJELASAN);
+		$('.cnt-form [name="PENANDATANGAN_SK"]').val(record.PENANDATANGAN_SK);
+		$('.cnt-form [name="TAHUN_JABATAN_TAMBAHAN"]').val(record.TAHUN_JABATAN_TAMBAHAN);
+		$('.cnt-form [name="BULAN_JABATAN_TAMBAHAN"]').val(record.BULAN_JABATAN_TAMBAHAN);
 		
 		// set combo
 		$('.cnt-form [name="K_PENJELASAN"]').change();
 		
-		// set ansync data
-		var jenjang_param = {
-			value: record.K_JENJANG,
-			combo: $('.cnt-form [name="K_JENJANG"]'),
-			ajax: { url: Web.HOST + '/index.php/Ajax/Jenjang', param: { Action: 'GetJenjangByUnitKerja', K_UNIT_KERJA: record.K_UNIT_KERJA } }
-		}
-		Func.set_combo(jenjang_param);
-		var fakultas_param = {
-			value: record.K_FAKULTAS,
-			combo: $('.cnt-form [name="K_FAKULTAS"]'),
-			ajax: { url: Web.HOST + '/index.php/Ajax/Fakultas', param: { Action: 'GetFakultasByJenjangUnitKerja', K_UNIT_KERJA: record.K_UNIT_KERJA, K_JENJANG: record.K_JENJANG } }
-		}
-		Func.set_combo(fakultas_param);
-		var jurusan_param = {
-			value: record.K_JURUSAN,
-			combo: $('.cnt-form [name="K_JURUSAN"]'),
-			ajax: { url: Web.HOST + '/index.php/Ajax/Jurusan', param: { Action: 'GetJurusanById', K_FAKULTAS: record.K_FAKULTAS, K_JENJANG: record.K_JENJANG } }
-		}
-		Func.set_combo(jurusan_param);
-		var program_studi_param = {
-			value: record.K_PROG_STUDI,
-			combo: $('.cnt-form [name="K_PROG_STUDI"]'),
-			ajax: { url: Web.HOST + '/index.php/Ajax/ProgramStudi', param: { Action: 'GetProgramStudiById', K_FAKULTAS: record.K_FAKULTAS, K_JENJANG: record.K_JENJANG, K_JURUSAN: record.K_JURUSAN } }
-		}
-		Func.set_combo(program_studi_param);
-		
 		// update request or valid
 		if (action_form == 'update_request') {
 			if (action == 'update_valid') {
-				$('.cnt-form [name="JENIS_REQ_HOMEBASE"]').val('U');
+				$('.cnt-form [name="JENIS_REQ_PANGKAT"]').val('U');
 			} else {
-				$('.cnt-form [name="JENIS_REQ_HOMEBASE"]').val(record.JENIS_REQ_HOMEBASE);
+				$('.cnt-form [name="JENIS_REQ_PANGKAT"]').val(record.JENIS_REQ_PANGKAT);
 			}
 		} else if (action_form == 'update_valid') {
-			$('.cnt-form [name="JENIS_REQ_HOMEBASE"]').val('U');
+			$('.cnt-form [name="JENIS_REQ_PANGKAT"]').val('U');
 		}
 	});
 	$('.cnt-grid .btn-delete').click(function() {
@@ -462,7 +380,7 @@
 			
 			// set data
 			param.action = 'update_request';
-			param.JENIS_REQ_HOMEBASE = 'D';
+			param.JENIS_REQ_PANGKAT = 'D';
 			
 			Func.ajax({ url: form.attr('action'), param: param, callback: function(result) {
 				if (result.status) {
@@ -501,10 +419,10 @@
 		$('#form-upload [name="FILENAME"]').val('');
 		
 		// add param
-		if (record.ID_REQ_HOMEBASE != null)
-			$('#form-upload [name="ID_REQ_HOMEBASE"]').val(record.ID_REQ_HOMEBASE);
-		if (record.ID_RIWAYAT_HOMEBASE != null)
-			$('#form-upload [name="ID_RIWAYAT_HOMEBASE"]').val(record.ID_RIWAYAT_HOMEBASE);
+		if (record.ID_REQ_PANGKAT != null)
+			$('#form-upload [name="ID_REQ_PANGKAT"]').val(record.ID_REQ_PANGKAT);
+		if (record.ID_RIWAYAT_PANGKAT != null)
+			$('#form-upload [name="ID_RIWAYAT_PANGKAT"]').val(record.ID_RIWAYAT_PANGKAT);
 		
 		record.reload = false;
 		record.action = (action == 'update_upload_valid') ? 'get_upload_valid' : 'get_upload_request';

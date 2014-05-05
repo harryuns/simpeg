@@ -11,14 +11,20 @@
                     <div id="CntLaporan">
                         <h1 style="padding: 0 0 10px 0;">Laporan Kepegawaian</h1>
                         
-                        <form method="post">
-                        <div style="font-weight: 700; margin: 0 0 10px 0;">Silahkan memilih laporan berikut :</div>
-                        <div style="float: left; width: 200px; padding: 0 0 10px 0;">Jenis Laporan</div>
-                        <div style="float: left; width: 350px;"><select name="JenisLaporan" style="width: 300px;"><?php echo GetOption(false, $ArrayJenisLaporan, ''); ?></select></div>
-                        <div class="clear"></div>
-                        <div style="float: left; width: 200px; padding: 0 0 10px 0;">Nama Laporan</div>
-                        <div style="float: left; width: 350px;"><select name="NamaLaporan" style="width: 300px;"><?php echo GetOption(false, $ArrayNamaLaporan, ''); ?></select></div>
-                        <div class="clear"></div>
+                        
+                        <form method="post" class="clearfix">
+                        <legend>Silahkan memilih laporan berikut :</legend>
+                        <div class="clearfix"  style="padding-top:20px;">
+                        <div class="form-row" >
+                        <label>Jenis Laporan</label>
+                        <select name="JenisLaporan" style="width: 300px;"><?php echo GetOption(false, $ArrayJenisLaporan, ''); ?></select>
+                        </div>
+                        <div class="form-row">
+                        <label>Nama Laporan</label>
+                        <select name="NamaLaporan" style="width: 300px;"><?php echo GetOption(false, $ArrayNamaLaporan, ''); ?></select>
+                       	</div>
+                        
+                        </div>
                         <div id="CntReportFilter"></div>
                         <div style="float: left; width: 200px; padding: 0 0 10px 0;">&nbsp;</div>
                         <div style="float: left; width: 350px;"><input style="width: 100px;" type="button" name="Submit" value="Lihat Report" /></div>

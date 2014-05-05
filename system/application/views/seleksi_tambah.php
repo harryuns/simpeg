@@ -20,57 +20,86 @@
                 <div class="full" style="min-height: 400px;">
                     <h1 style="padding: 0 0 10px 0;">Tanda Peserta</h1>
 					
-                    <div>
-                        <form method="post" id="FormPegawai">
+                    <div class="clearfix">
+                        <form method="post" id="FormPegawai" class="clearfix">
+                        
+                        		
                             <input type="hidden" name="PageActive" value="1" />
                             <input type="hidden" name="DeletePegawai" value="0" />
                             <input type="hidden" name="PencarianDetailLastest" value="<?php echo $PencarianDetailLastest; ?>" />
-                            <table style="width: 100%;">
-                            	<tr>
-                                    <td>Unit Kerja</td>
-                                    <td><input type="text" style="width: 300px;" maxlength="50" value="<?php  if (isset($ArrayPegawai['Pegawai'])) echo $ArrayPegawai['Pegawai'][0]['UNIT']; ?>" name="UNIT" /></td></tr>                                
-	                            <tr>
-                                    <td>Nomor Peserta</td>
-                                    <td><input type="text" style="width: 300px;" maxlength="50" value="<?php  if (isset($ArrayPegawai['Pegawai'])) echo $ArrayPegawai['Pegawai'][0]['NO_PESERTA']; ?>" name="NOMOR" /></td></tr>
-                                <tr>
-                                    <td>Periode</td>
-                                    <td>
-										<select id="TAHUN" name="TAHUN">
-											<? foreach($ArrayPeriode as $key=>$value){?>
-											<option value="<?php echo $value['K_PERIODE'];?>"><?php echo $value['PERIODE'] .' - '. $value['TAHUN'];?></option>
-											<?}?>
-										</select> 
-                                    </td></tr>    
-                                <tr>
-                                    <td>N a m a</td>
-                                    <td><input type="text" style="width: 300px;" maxlength="50" value="<?php echo @$ArrayPegawai['Pegawai'][0]['NAMA']; ?>" name="NAMA" /></td></tr>
-                               <tr>
-                                    <td>A l a m a t</td>
-                                    <td><textarea rows="3" cols="60" id="ALAMAT" name="ALAMAT" ><?php echo @$ArrayPegawai['Pegawai'][0]['ALAMAT']; ?></textarea></td></tr>
-                               <tr>
-                                    <td>Pilihan Pelamar</td>
-                                    <td><input type="text" style="width: 300px;" maxlength="50" value="<?php echo @$ArrayPegawai['Pegawai'][0]['PILIHAN']; ?>" name="PILIHAN" /></td></tr>
-							   <tr>
-                                    <td>Jenjang</td>
-                                    <td>
-                                    <input type="text" style="width: 300px;" maxlength="50" value="<?php echo @$ArrayPegawai['Pegawai'][0]['JENJANG']; ?>" name="JENJANG" />
-                                    </td></tr>
-                                <tr>
-                                    <td>Kualifikasi Pendidikan</td>
-                                    <td><textarea rows="3" cols="60" id="KUALIFIKASI"  name="KUALIFIKASI"><?php echo @$ArrayPegawai['Pegawai'][0]['KUALIFIKASI_PEND']; ?></textarea></td></tr>
-								<tr>
-                                    <td>Tanggal Ujian</td>
-                                    <td><input type="text" style="width: 300px;" maxlength="50" value="<?php echo @$ArrayPegawai['Pegawai'][0]['TGL_UJIAN']; ?>" name="TGL_UJIAN" class="datepicker" /></td></tr>
-                                <tr>
-                                    <td>Waktu Ujian</td>
-                                    <td><input type="text" style="width: 300px;" maxlength="50" value="<?php echo @$ArrayPegawai['Pegawai'][0]['PUKUL']; ?>" name="PUKUL" /></td></tr>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>
-                                    <input type="reset" name="Reset" value="Reset" />
-                                    <input type="submit" name="Submit" value="Submit" /></td></tr>
-                            </table>
+                            
+                            <div class="left">
+                            	<div class="form-row">
+                              	<label>Unit Kerja :</label>
+                                <input type="text" style="width: 240px;" maxlength="50" value="<?php  if (isset($ArrayPegawai['Pegawai'])) echo $ArrayPegawai['Pegawai'][0]['UNIT']; ?>" name="UNIT" />
+                              </div>
+                              <div class="form-row">
+                              	<label>Nomor Peserta</label>
+                                <input type="text" style="width: 240px;" maxlength="50" value="<?php  if (isset($ArrayPegawai['Pegawai'])) echo $ArrayPegawai['Pegawai'][0]['NO_PESERTA']; ?>" name="NOMOR" />
+                              </div>
+                              <div class="form-row">
+                              	<label>Periode</label>
+                                <select id="TAHUN" name="TAHUN">
+																	<? foreach($ArrayPeriode as $key=>$value){?>
+                                  <option value="<?php echo $value['K_PERIODE'];?>"><?php echo $value['PERIODE'] .' - '. $value['TAHUN'];?></option>
+                                  <?}?>
+                                </select> 
+                              </div>
+                              <div class="form-row">
+                              	<label>N a m a</label>
+                                <input type="text" style="width: 240px;" maxlength="50" value="<?php echo @$ArrayPegawai['Pegawai'][0]['NAMA']; ?>" name="NAMA" />
+                              </div>
+                              <div class="form-row">
+                              	<label>A l a m a t</label>
+                                <textarea rows="3" style="width:240px; height:100px" cols="60" id="ALAMAT" name="ALAMAT" ><?php echo @$ArrayPegawai['Pegawai'][0]['ALAMAT']; ?></textarea>
+                              </div>
+                              <div class="form-row">
+                              	<label></label>
+                                
+                              </div>
+                            
+                            </div>
+                            
+                            
+                            <div class="left">
+                            		<div class="form-row">
+                              	<label>Pilihan Pelamar</label>
+                                <input type="text" style="width: 240px;" maxlength="50" value="<?php echo @$ArrayPegawai['Pegawai'][0]['PILIHAN']; ?>" name="PILIHAN" />
+                              	</div>
+                                <div class="form-row">
+                              	<label>Jenjang</label>
+                                <input type="text" style="width: 240px;" maxlength="50" value="<?php echo @$ArrayPegawai['Pegawai'][0]['JENJANG']; ?>" name="JENJANG" />
+                              	</div>
+                                <div class="form-row">
+                              	<label>Kualifikasi Pendidikan</label>
+                                <textarea rows="3" style="width:240px;height:100px" cols="60" id="KUALIFIKASI"  name="KUALIFIKASI"><?php echo @$ArrayPegawai['Pegawai'][0]['KUALIFIKASI_PEND']; ?></textarea>
+                              	</div>
+                                <div class="form-row">
+                              	<label>Tanggal Ujian</label>
+                                <input type="text" style="width: 240px;" maxlength="50" value="<?php echo @$ArrayPegawai['Pegawai'][0]['TGL_UJIAN']; ?>" name="TGL_UJIAN" class="datepicker" />
+                              	</div>
+                                <div class="form-row">
+                              	<label>Waktu Ujian</label>
+                                <input type="text" style="width: 240px;" maxlength="50" value="<?php echo @$ArrayPegawai['Pegawai'][0]['PUKUL']; ?>" name="PUKUL" />
+                              	</div>
+                                
+                                
+                              
+                            
+                            </div>
+                            
+                            <div style="clear:both"></div>
+                            
+                            <div class="clearfix">
+                              <div class="form-row">
+                                  <label></label>
+                                  <input type="reset" name="Reset" value="Reset" />
+                                  <input type="submit" name="Submit" value="Submit" />
+                                </div>
+                            </div>
+                            
                         </form>
+                        
                     </div>
                 </div>
             </div>

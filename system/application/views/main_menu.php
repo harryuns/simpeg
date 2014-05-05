@@ -1,43 +1,57 @@
 <?php
 	$User = $this->llogin->GetUser();
 ?>
+
+    <nav id="nav">
+    
+    <ul id="menu">
+    
 <?php if ($_SESSION['UserLogin']['ApplicationRequest'] == 'Simpeg') { ?>
 	<?php if (in_array($User['UserGroupID'], $this->config->item('admin_group_id'))) { ?>
-		<a class="menuitem " href="<?php echo HOST.'/index.php/Pegawai'; ?>">Pencarian</a>		
+    <li>
+		<a class="menuitem " href="<?php echo HTTPS.'/index.php/Pegawai'; ?>"><span class="menu-icon menu-cari">&nbsp;</span>Pencarian</a>		
+    </li>
 		<?php if ($this->llogin->IsUserFakultas() == 0 || true) { ?>
-		<a class="menuitem submenuheader" href="#">Seleksi Pegawai</a> 
-		<div class="submenu">
-			<ul>
-				<li><a href="<?php echo HOST.'/index.php/SeleksiDosen/CariPeserta'; ?>">Pencarian</a></li>
-				<li><a href="<?php echo HOST.'/index.php/SeleksiDosen'; ?>">Tambah Peserta</a></li>						
-				<li><a href="<?php echo HOST.'/index.php/SeleksiDosen/HapusPesertaAll'; ?>">Hapus Peserta</a></li>
-				<li><a href="<?php echo HOST.'/index.php/SeleksiDosen/UnggahPeserta'; ?>">Unggah Peserta</a></li>												
-				<li><a href="<?php echo HOST.'/index.php/SeleksiDosen/Cetak'; ?>">Cetak</a></li>								
-			</ul>
-		</div>
+		<li>
+    <a class="menuitem submenuheader" href="#"><span class="menu-icon menu-seleksi">&nbsp;</span>Seleksi Pegawai</a> 
+		
+      <ul class="submenu">
+          <li><a href="<?php echo HTTPS.'/index.php/SeleksiDosen/CariPeserta'; ?>">Pencarian</a></li>
+          <li><a href="<?php echo HTTPS.'/index.php/SeleksiDosen'; ?>">Tambah Peserta</a></li>						
+          <li><a href="<?php echo HTTPS.'/index.php/SeleksiDosen/HapusPesertaAll'; ?>">Hapus Peserta</a></li>
+          <li><a href="<?php echo HTTPS.'/index.php/SeleksiDosen/UnggahPeserta'; ?>">Unggah Peserta</a></li>												
+          <li><a href="<?php echo HTTPS.'/index.php/SeleksiDosen/Cetak'; ?>">Cetak</a></li>								
+      </ul>
+    </li>
 		<?php } ?>
 		<?php if ($this->llogin->IsUserFakultas() == 0 || true) { ?>
-			<a class="menuitem" href="<?php echo HOST.'/index.php/Pegawai/Tambah'; ?>">Pegawai Baru</a>
+			<li><a class="menuitem" href="<?php echo HTTPS.'/index.php/Pegawai/Tambah'; ?>"><span class="menu-icon menu-tambah">&nbsp;</span>Pegawai Baru</a></li>
 		<?php } ?>
-		<a class="menuitem submenuheader" href="#">Laporan</a>
-		<div class="submenu">
-			<ul>
-				<li><a href="<?php echo HOST.'/index.php/Laporan'; ?>">Kepegawaian</a></li>
-				<li><a href="<?php echo HOST.'/index.php/LaporanEkd'; ?>">Nilai EKD</a></li>
-				<li><a href="<?php echo HOST.'/index.php/LaporanEkd/Simulasi'; ?>">Simulasi</a></li>
-				<li><a href="<?php echo HOST.'/index.php/LaporanEkd/AssessorActivity'; ?>">Kegiatan Asesor</a></li>
+		<li><a class="menuitem submenuheader" href="#"><span class="menu-icon menu-laporan">&nbsp;</span>Laporan</a>
+		<ul class="submenu">
+				<li><a href="<?php echo HTTPS.'/index.php/Laporan'; ?>">Kepegawaian</a></li>
+				<li><a href="<?php echo HTTPS.'/index.php/LaporanEkd'; ?>">Nilai EKD</a></li>
+				<li><a href="<?php echo HTTPS.'/index.php/LaporanEkd/Simulasi'; ?>">Simulasi</a></li>
+				<li><a href="<?php echo HTTPS.'/index.php/LaporanEkd/AssessorActivity'; ?>">Kegiatan Asesor</a></li>
 				<li><a href="#">Entry EKD Dosen</a></li>
-			</ul>
-		</div>
-		<a class="menuitem" href="<?php echo HOST.'/index.php/Asessor'; ?>">Asesor</a>
-		<!-- <a class="menuitem" href="<?php echo HOST.'/index.php/DirGuruBesar'; ?>">Directory Guru Besar</a>	-->
-		<a class="menuitem" href="<?php echo HOST.'/index.php/Panduan'; ?>">Panduan</a>
-		<a class="menuitem" href="<?php echo HOST.'/index.php/Pesan'; ?>">Pesan</a>
-		<a class="menuitem" href="<?php echo HOST.'/index.php/login/Out'; ?>">Keluar</a>
+		</ul>
+    </li>
+		<li><a class="menuitem" href="<?php echo HTTPS.'/index.php/Asessor'; ?>"><span class="menu-icon menu-asesor">&nbsp;</span>Asesor</a></li>
+		<li><a class="menuitem" href="<?php echo HTTPS.'/index.php/DirGuruBesar'; ?>"><span class="menu-icon menu-direktori">&nbsp;</span>Directory Guru Besar</a></li>
+		<li><a class="menuitem" href="<?php echo HTTPS.'/index.php/Panduan'; ?>"><span class="menu-icon menu-panduan">&nbsp;</span>Panduan</a></li>
+		<li><a class="menuitem" href="<?php echo HTTPS.'/index.php/Pesan'; ?>"><span class="menu-icon menu-pesan">&nbsp;</span>Pesan</a></li>
+        <li><div class="sp"></div>
+		<li><a class="menuitem" href="<?php echo HTTPS.'/index.php/login/Out'; ?>"><span class="menu-icon misc-keluar">&nbsp;</span>Keluar</a></li>
 	<?php } else { ?>
-		<a class="menuitem" href="<?php echo HOST.'/index.php/login/Out'; ?>">Keluar</a>
+		<li><a class="menuitem" href="<?php echo HTTPS.'/index.php/login/Out'; ?>"><span class="menu-icon misc-keluar">&nbsp;</span>Keluar</a></li>
 	<?php } ?>
 <?php } else if ($_SESSION['UserLogin']['ApplicationRequest'] == 'Siado') { ?>
-	<a class="menuitem" href="<?php echo HOST.'/index.php/Panduan'; ?>">Panduan</a>
-	<a class="menuitem" href="<?php echo HOST.'/index.php/SendToEkd/Logout'; ?>">Kembali ke Siado</a>
+	<li><a class="menuitem" href="<?php echo HTTPS.'/index.php/Panduan'; ?>"><span class="menu-icon menu-keluar">&nbsp;</span>Panduan</a></li>
+	<li><a class="menuitem" href="<?php echo HTTPS.'/index.php/SendToEkd/Logout'; ?>"><span class="menu-icon menu-keluar">&nbsp;</span>Kembali ke Siado</a></li>
 <?php } ?>
+
+    </ul>
+    </nav>
+    
+    
+    

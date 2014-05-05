@@ -11,9 +11,20 @@
 			</div>
             
             <div id="content">
-                <div class="full" style="min-height: 400px;">
-                    <h1><a href="<?php echo HOST.'/Document/Panduan.pdf'; ?>">Download Panduan Simpeg</a></h1>
-                    <h1><a href="<?php echo HOST.'/Document/Panduan Asesor.pdf'; ?>">Download Panduan Asesor</a></h1>
+                <div class="full clearfix" style="min-height: 400px;">
+                		<div class="panduan-block left">
+                    	<a href="<?php echo HOST.'/Document/Panduan.pdf'; ?>">
+                      	<small>-Download-</small>
+                        <span>Panduan Simpeg</span>
+                      </a>
+                    </div>
+                    
+                		<div class="panduan-block left">
+                    	<a href="<?php echo HOST.'/Document/Panduan Asesor.pdf'; ?>">
+                      	<small>-Download-</small>
+                        <span>Panduan Asesor</span>
+                      </a>
+                    </div>
                 </div>
                 <div class="clear"></div>
             </div>

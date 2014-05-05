@@ -2,14 +2,14 @@
     echo '
         <div class="cnt_table_main">
         <div style="padding: 10px 0; font-weight: 700; font-size: 11px; text-align: center;">'.$Laporan['Title'].'</div>
-        <table style="width: 100%;">
+        <table>
             <tr>
-                <td class="left" style="width: 4%;">No</td>
-                <td class="center" style="width: 50%;">Content</td>
-                <td class="center" style="width: 11%;">No Urut</td>
-                <td class="center" style="width: 10%;">Singkat</td>
-                <td class="center" style="width: 15%;">Sekolah</td>
-                <td class="center" style="width: 10%;">Jumlah</td>
+                <td class="left">No</td>
+                <td class="center">Content</td>
+                <td class="center">No Urut</td>
+                <td class="center">Singkat</td>
+                <td class="center">Sekolah</td>
+                <td class="center">Jumlah</td>
             </tr>
     ';
     

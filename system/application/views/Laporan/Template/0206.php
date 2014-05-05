@@ -2,25 +2,25 @@
     echo '
         <div class="cnt_table_main">
         <div style="padding: 10px 0; font-weight: 700; font-size: 11px; text-align: center;">'.$Laporan['Title'].'</div>
-        <table style="width: 100%;">
+        <table>
             <tr>
-                <td class="left" style="width: 4%;">No</td>
-                <td class="center" style="width: 21%;">Fakultas / Unit Kerja</td>
-                <td class="normal" style="width: 5%; text-align: center;">III1</td>
-                <td class="normal" style="width: 5%; text-align: center;">IV1</td>
-                <td class="normal" style="width: 5%; text-align: center;">GOL1</td>
-                <td class="normal" style="width: 5%; text-align: center;">III2</td>
-                <td class="normal" style="width: 5%; text-align: center;">IV2</td>
-                <td class="normal" style="width: 5%; text-align: center;">GOL2</td>
-                <td class="normal" style="width: 5%; text-align: center;">III3</td>
-                <td class="normal" style="width: 5%; text-align: center;">IV3</td>
-                <td class="normal" style="width: 5%; text-align: center;">GOL3</td>
-                <td class="normal" style="width: 5%; text-align: center;">III4</td>
-                <td class="normal" style="width: 5%; text-align: center;">IV4</td>
-                <td class="normal" style="width: 5%; text-align: center;">GOL4</td>
-                <td class="normal" style="width: 5%; text-align: center;">III5</td>
-                <td class="normal" style="width: 5%; text-align: center;">IV5</td>
-                <td class="normal" style="width: 5%; text-align: center;">GOL5</td>
+                <td class="left">No</td>
+                <td class="center">Fakultas / Unit Kerja</td>
+                <td class="normal" style="text-align: center;">III1</td>
+                <td class="normal" style="text-align: center;">IV1</td>
+                <td class="normal" style="text-align: center;">GOL1</td>
+                <td class="normal" style="text-align: center;">III2</td>
+                <td class="normal" style="text-align: center;">IV2</td>
+                <td class="normal" style="text-align: center;">GOL2</td>
+                <td class="normal" style="text-align: center;">III3</td>
+                <td class="normal" style="text-align: center;">IV3</td>
+                <td class="normal" style="text-align: center;">GOL3</td>
+                <td class="normal" style="text-align: center;">III4</td>
+                <td class="normal" style="text-align: center;">IV4</td>
+                <td class="normal" style="text-align: center;">GOL4</td>
+                <td class="normal" style="text-align: center;">III5</td>
+                <td class="normal" style="text-align: center;">IV5</td>
+                <td class="normal" style="text-align: center;">GOL5</td>
             </tr>
     ';
     

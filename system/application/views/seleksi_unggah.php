@@ -13,30 +13,27 @@
                 <div class="full" style="min-height: 400px;">
                     <h1 style="padding: 0 0 10px 0;">Unggah Data Peserta</h1>													
 					<div>
-					<table style="width: 100%;">
-	                            <tr>
-                                    <td>1. Download template (Format Excel) &nbsp; : &nbsp;
-                                    <a href="<?php echo HOST.'/assets/seleksi_peserta.xlsx'; ?>" target="_blank">Klik disini</a></td></tr>   
-                    </table>                
-					</div>                    
-                    <div style="width: 550px;" id="FormPegawai">
-                    	<form method="post" enctype="multipart/form-data">                        
+          						<div class="clearfix">
+                      
+                    	<form method="post" enctype="multipart/form-data" class="clearfix">   
+											                             
                             <input type="hidden" name="PageActive" value="1" />
-                            <input type="hidden" name="DeletePegawai" value="0" />                            
-                            <table style="width: 100%;">
-	                            <tr>
-                                    <td>2. Pilih File Peserta (Format Excel)</td>
-                                    <td><input type="file" name="FILEPESERTA"></td></tr>                                                                  
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>                                    
-                                    <input type="submit" name="Submit" value="Unggah" />
-                                    </td>
-                                </tr>
-                            </table>
-                        </form>                                                
-                    </div>  
-                  
+                            <input type="hidden" name="DeletePegawai" value="0" />    
+                            
+                            <div class="form-row left">
+                            	<label style="width:220px">Pilih File Peserta (Format Excel)</label>
+                            	<input type="file" name="FILEPESERTA">
+                              
+                            	<input type="submit" name="Submit" value="Unggah" />
+                            </div>
+                            
+                            <div class="form-row left" style="line-height:24px; margin-left:20px">
+                            	<em><a href="<?php echo HOST.'/assets/seleksi_peserta.xlsx'; ?>" target="_blank">*) Download template</a> (Format Excel)</em>            
+                            </div>
+                                                    
+                           
+                        </form>         
+                  		</div>
                      <?php
                      
                             if (isset($ArrayPegawai['Pegawai']) && count($ArrayPegawai['Pegawai']) > 0) {

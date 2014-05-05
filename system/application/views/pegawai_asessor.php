@@ -21,39 +21,56 @@
                     
                     <div>
                         <div id="AsessorEntry" style="padding: 0 0 15px 0;">
-                            <div style="float: left; width: 125px;">NIP</div>
-                            <div style="float: left; width: 250px; padding: 0 0 5px 0;">
-                                :
-                                <input type="text" style="width: 150px;" name="NIP_0" class="required" alt="Tolong masukkan NIP Asessor 1" readonly="readonly" />
-                                <img class="PopupAsessor SearchAsessor1" src="<?php echo HOST; ?>/Style/siado/Lens.jpg" style="width: 18px; height: 18px; margin: 0 0 -3px 0; cursor: pointer;" />
-                            </div>
-                            <div class="clear"></div>
-                            <div style="float: left; width: 125px;">Nama</div>
-                            <div style="float: left; width: 250px; padding: 0 0 5px 0;">: <input type="text" style="width: 150px;" name="NAMA_0" class="required" alt="Tolong masukkan Nama Asessor 1" readonly="readonly" /></div>
-                            <div class="clear"></div>
-                            <div style="float: left; width: 125px;">Asessor ke </div>
-                            <div style="float: left; width: 250px; padding: 0 0 5px 0;">: 
-                                <select name="ASESOR_KE" style="width: 150px;"><option value="1">1</option><option value="2">2</option></select>
-                            </div>
-                            <div class="clear"></div>
-                            <div style="float: left; width: 125px;">Tahun Akademik</div>
-                            <div style="float: left; width: 250px; padding: 0 0 5px 0;">: <select style="width: 150px;" name="TAHUN_AKADEMIK"><?php echo GetOption(false, $ArrayTahunAkademik, ''); ?></select></div>
-                            <div class="clear"></div>
-                            <div style="float: left; width: 125px;">Semester</div>
-                            <div style="float: left; width: 250px; padding: 0 0 5px 0;">: <select name="SEMESTER" style="width: 150px;"><option value="0">Genap</option><option value="1">Ganjil</option></select></div>
-                            <div class="clear"></div>
-                        </div>
                         
-                        <div id="AsessorSearch">
+                        <div class="clearfix" style="border: solid 1px #ccc; padding:20px 0">
+                        	<div class="form-row">
+                          	<label>NIP : </label>
+                            <input type="text" style="width: 150px;" name="NIP_0" class="required" alt="Tolong masukkan NIP Asessor 1" readonly="readonly" />
+                            <img class="PopupAsessor SearchAsessor1" src="<?php echo HOST; ?>/Style/siado/Lens.jpg" style="width: 18px; height: 18px; margin: 0 0 -3px 0; cursor: pointer;" />
+                          </div>
+                          
+                          <div class="form-row">
+                          <label>Nama : </label>
+                          <input type="text" style="width: 150px;" name="NAMA_0" class="required" alt="Tolong masukkan Nama Asessor 1" readonly="readonly" />
+                          </div>
+                          <div class="form-row">
+                          <label>Asessor ke-</label>
+                          <select name="ASESOR_KE" style="width: 150px;"><option value="1">1</option><option value="2">2</option></select>
+                          </div>
+                          <div class="form-row">
+                          <label>Tahun Akademik :</label>
+                          <select style="width: 150px;" name="TAHUN_AKADEMIK"><?php echo GetOption(false, $ArrayTahunAkademik, ''); ?></select>
+                          </div>
+                          <div class="form-row">
+                          <label>Semester : </label>
+                          <select name="SEMESTER" style="width: 150px;"><option value="0">Genap</option><option value="1">Ganjil</option></select>
+                          </div>
+                          
+                          
                             <input type="hidden" name="PencarianDetail" value="0" />
                             <input type="hidden" name="K_AKTIF" value="01" />
                             <input type="hidden" name="K_JENIS_KERJA" value="01" />
                             <input type="hidden" name="K_STATUS_KERJA" value="01" />
                             <input type="hidden" name="PageActive" value="1" />
-                            <div style="float: left; width: 125px;">Cari Dosen</div>
-                            <div style="float: left; width: 250px; padding: 0 0 5px 0;">:
+                          
+                          <div class="form-row">
+                          <label>Cari Dosen</label>
+                          
                                 <input type="text" style="width: 150px;" name="NAMA" />
+                          </div>
+                          <div class="form-row">
+                          <label></label>
+                          
                                 <input type="button" style="width: 75px;" name="CariPegawai" value="Cari" />
+                          </div>
+                        
+                        </div>
+                            
+                        </div>
+                        
+                        <div id="AsessorSearch">
+                            <div style="float: left; width: 125px;"></div>
+                            <div style="float: left; width: 250px; padding: 0 0 5px 0;">:
                             </div>
                             <div class="clear"></div>
                         </div>

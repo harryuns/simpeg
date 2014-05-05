@@ -22,26 +22,25 @@
 					
 					<div></div>
                     
-                    <div>                                                
-                            <table style="width: 100%;">                           			                            
-                                <tr>
-                                    <td>Periode</td>
-                                    <td>
-                                    <form method="post" id="FormDelPegawai">
-                                     <select id="TAHUN" name="TAHUN">
+                    <div class="clearfix">
+                    	
+                            <form method="post" id="FormDelPegawai" class="clearfix">
+                       <div class="left  form-block">
+                       			
+                            <label><strong>Periode : </strong></label>
+                             <select id="TAHUN" name="TAHUN">
 									  <?foreach($ArrayPeriode as $key=>$value){?>
                                     	<option value="<?php echo $value['K_PERIODE'];?>"><?php echo $value['PERIODE'] .' - '. $value['TAHUN'];?></option>                                    	                                	                                  	
 										<?}?>
 									</select>
-                                    </form>    
-                                    </td></tr>                                  
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>                                                                       
-                                    <button id="BtnHapus" name="BtnHapus" onclick="HapusDataPeserta()">Hapus Data</button>
-                                    </td></tr>
-                            </table>
-                                                                    
+                            
+                            </div>
+                            
+                            <div class="left form-block">
+                            <button id="BtnHapus" name="BtnHapus" onclick="HapusDataPeserta()">Hapus Data</button>
+                  					</div>
+
+                     		</form>                                       
                     </div>
                      
                 </div>

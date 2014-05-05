@@ -16,11 +16,13 @@
 	<div id="sidebar">
 		<div class="hidden cnt-page"><?php echo json_encode($page); ?></div>
 		<div class="glossymenu"><?php $this->load->view('main_menu'); ?></div>
-		<div class="glossymenu" style="padding: 50px 0 0 0;"><?php $this->load->view('main_sub_menu'); ?></div>
-		<?php $this->load->view('common/form_unit_kerja'); ?>
 	</div>
 	
-	<div id="content"><div class="full" style="min-height: 400px;"><div id="CntRightFull">
+	<div id="content">
+  	
+  	<div class="contentmenu clearfix"><?php $this->load->view('main_sub_menu'); ?></div>
+		<?php $this->load->view('common/form_unit_kerja'); ?>
+  <div class="full" style="min-height: 400px;"><div id="CntRightFull">
 		<?php $this->load->view('pegawai_info'); ?>
 		
 		<?php if (!empty($message)) { ?>
@@ -32,23 +34,23 @@
 		<?php foreach ($array_pegawai as $nip => $data) { ?>
 		<div class="cnt-grid-validasi">
 			<h1>Tanggapan SKP : <?php echo $data['nama_pegawai']; ?></h1>
-			<div class="cnt_table_main"><table style="width: 1450px;">
+			<div class="cnt_table_main"><table>
 				<tr>
-					<td class="left" style="width: 100px;">&nbsp;</td>
-					<td class="normal" style="width: 150px;">Kegiatan</td>
-					<td class="normal" style="width: 100px;">AK Target</td>
-					<td class="normal" style="width: 100px;">KUAN Target</td>
-					<td class="normal" style="width: 100px;">KUAL Target</td>
-					<td class="normal" style="width: 100px;">Waktu Target</td>
-					<td class="normal" style="width: 100px;">Biaya Target</td>
-					<td class="normal" style="width: 100px;">AK Real</td>
-					<td class="normal" style="width: 100px;">KUAN Real</td>
-					<td class="normal" style="width: 100px;">KUAL Real</td>
-					<td class="normal" style="width: 100px;">Waktu Real</td>
-					<td class="normal" style="width: 100px;">Biaya Real</td>
-					<td class="normal" style="width: 100px;">Perhitungan</td>
-					<td class="normal" style="width: 100px;">Nilai Capaian</td>
-					<td class="normal" style="width: 100px;">Validasi</td></tr>
+					<td class="left">&nbsp;</td>
+					<td class="normal">Kegiatan</td>
+					<td class="normal">AK Target</td>
+					<td class="normal">KUAN Target</td>
+					<td class="normal">KUAL Target</td>
+					<td class="normal">Waktu Target</td>
+					<td class="normal">Biaya Target</td>
+					<td class="normal">AK Real</td>
+					<td class="normal">KUAN Real</td>
+					<td class="normal">KUAL Real</td>
+					<td class="normal">Waktu Real</td>
+					<td class="normal">Biaya Real</td>
+					<td class="normal">Perhitungan</td>
+					<td class="normal">Nilai Capaian</td>
+					<td class="normal">Validasi</td></tr>
 				<?php foreach ($data['array_kegiatan'] as $row) { ?>
 				<tr>
 					<td class="licon">

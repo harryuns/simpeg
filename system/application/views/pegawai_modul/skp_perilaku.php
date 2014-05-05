@@ -21,7 +21,11 @@
 		<?php $this->load->view('common/form_unit_kerja'); ?>
 	</div>
 	
-	<div id="content"><div class="full" style="min-height: 400px;"><div id="CntRightFull">
+	<div id="content">
+  	
+  	<div class="contentmenu clearfix"><?php $this->load->view('main_sub_menu'); ?></div>
+		<?php $this->load->view('common/form_unit_kerja'); ?>
+  <div class="full" style="min-height: 400px;"><div id="CntRightFull">
 		<?php $this->load->view('pegawai_info'); ?>
 		
 		<?php if (!empty($message)) { ?>
@@ -33,11 +37,11 @@
 		<div class="cnt-grid-perilaku">
 			<h1>SKP Perilaku</h1>
 			<?php if (count($array_perilaku_pegawai) > 0) { ?>
-				<div class="cnt_table_main"><table style="width: 350px;">
+				<div class="cnt_table_main"><table>
 					<tr>
-						<td class="left" style="width: 100px;">&nbsp;</td>
-						<td class="normal" style="width: 250px;">Perilaku</td>
-						<td class="normal" style="width: 100px;">Nilai</td></tr>
+						<td class="left">&nbsp;</td>
+						<td class="normal">Perilaku</td>
+						<td class="normal">Nilai</td></tr>
 					<?php foreach ($array_perilaku_pegawai as $row) { ?>
 					<tr>
 						<td class="licon">

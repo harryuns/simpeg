@@ -6,14 +6,14 @@
 ?>
 
 <?php if (count($array) > 0) { ?>
-	<div class="cnt_table_main"><table style="width: 100%; display: table;">
+	<div class="cnt_table_main"><table style="display: table;">
 		<tr>
-			<td class="left" style="width: 10%;">&nbsp;</td>
+			<td class="left">&nbsp;</td>
 			<?php if ($is_request) { ?>
-			<td class="normal" style="width: 15%;">Jenis Request</td>
+			<td class="normal">Jenis Request</td>
 			<?php } ?>
-			<td class="normal" style="width: 30%;">No Sertifikat</td>
-			<td class="normal" style="width: 45%;">Nama File</td></tr>
+			<td class="normal">No Sertifikat</td>
+			<td class="normal">Nama File</td></tr>
 		<?php foreach ($array as $row) { ?>
 		<tr>
 			<td class="licon">

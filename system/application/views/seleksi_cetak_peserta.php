@@ -8,18 +8,13 @@
 
 <body>
 <?php 
-$imageContent = file_get_contents(HOST."/assets/css/images/ub.png");
-$imageData = base64_encode($imageContent);
-//echo HOST."/assets/css/images/ub.png";
-?>
-<?php 
 if (isset($ArrayPegawai['Pegawai']) && count($ArrayPegawai['Pegawai']) > 0) {
 	foreach ($ArrayPegawai['Pegawai'] as $Key => $Array) {
 ?>
 <div id="wrapper1">
    	  <div id="header">
         	<div id="logo">
-            	<img src="<?php echo HOST."/assets/css/images/ub.jpg"; ?>" style="padding-top:10px; width:80px;height:80px;" />
+            	<img src="<?php echo HOST."/assets/css/images/ub.png"; ?>" style="padding-top:10px; width:80px;height:80px;" />
             </div>
             <div id="text-logo">            
             	kementerian pendidikan dan kebudayaan<br />
@@ -96,7 +91,7 @@ if (isset($ArrayPegawai['Pegawai']) && count($ArrayPegawai['Pegawai']) > 0) {
                             <table style="font-size:11px;">
 								<tr>
                                 	<td style="vertical-align:top">1.</td>
-                                    <td>Tanda Peserta harus dibawa pada <b>saat Ujian</b></td>
+                                    <td>Tanda Peserta harus bawa pada <b>saat Ujian</b></td>
                                 </tr>
                                 <tr>
                                 	<td style="vertical-align:top">2.</td>

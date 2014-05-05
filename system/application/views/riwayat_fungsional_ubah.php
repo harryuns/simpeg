@@ -1,4 +1,5 @@
 <?php
+	$array_jabatan_pekerjaan = $this->jabatan_pekerjaan_model->get_array();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -8,10 +9,11 @@
         <div id="frame">
             <div id="sidebar">
                 <div class="glossymenu"><?php include 'main_menu.php'; ?></div>
-                <div class="glossymenu" style="padding: 50px 0 0 0;"><?php include 'main_sub_menu.php'; ?></div>
             </div>
             
             <div id="content">
+            		
+            		<div class="contentmenu clearfix"><?php include 'main_sub_menu.php'; ?></div>
                 <div class="full" style="min-height: 400px;">
                     <?php
                         if ($RiwayatFungsional['ShowGrid'] == '1') {
@@ -121,8 +123,11 @@
 										<td>Bidang Ilmu</td>
 										<td><input type="text" style="width: 150px;" size="50" value="<?php echo $RiwayatFungsional['BIDANG_ILMU']; ?>" name="BIDANG_ILMU" /></td></tr>
 									<tr>
-										<td>Jabatan Lain</td>
-										<td><input type="text" style="width: 150px;" size="50" value="<?php echo $RiwayatFungsional['JABATAN_LAIN']; ?>" name="JABATAN_LAIN" /></td></tr>
+										<td style="width: 200px;">Jabatan Pekerjaan</td>
+										<td style="width: 300px;"><select style="width: 85%;" name="JABATAN_LAIN">
+											<?php echo ShowOption(array( 'Array' => $array_jabatan_pekerjaan, 'ArrayID' => 'K_JABATAN_PEKERJAAN', 'ArrayTitle' => 'CONTENT', 'Selected' => $RiwayatFungsional['JABATAN_LAIN'] )); ?>
+										</select></td>
+									</tr>
 									<tr>
 										<td>Penandatangan SK</td>
 										<td><input type="text" style="width: 150px;" size="50" value="<?php echo $RiwayatFungsional['PENANDATANGAN_SK']; ?>" name="PENANDATANGAN_SK" /></td></tr>

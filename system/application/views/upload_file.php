@@ -3,7 +3,7 @@
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<?php include 'body_meta.php'; ?>
+<?php $this->load->view('body_meta', array( 'page_title' => 'Upload File', 'notify_status' => false ) ); ?>
 <body style="background: none; margin: 0px; padding: 0px;">
 	<style>
 #table-upload { font-family:"Trebuchet MS", Arial, Helvetica, sans-serif; width:100%; border-collapse:collapse; }

@@ -9,7 +9,6 @@
 	$array_jabatan_fungsional = array();
 	$array_pegawai_hukuman = $this->riwayat_hukuman_model->get_array(array( 'K_PEGAWAI' => $k_pegawai ));
 	$array_pegawai_hukuman_request = $this->riwayat_hukuman_request_model->get_array(array( 'K_PEGAWAI' => $k_pegawai, 'IS_VALIDATE' => 0 ));
-	
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -21,11 +20,12 @@
 	<div id="sidebar">
 		<div class="hidden cnt-page"><?php echo json_encode($page); ?></div>
 		<div class="glossymenu"><?php $this->load->view('main_menu'); ?></div>
-		<div class="glossymenu" style="padding: 50px 0 0 0;"><?php $this->load->view('main_sub_menu'); ?></div>
-		<?php $this->load->view('common/form_unit_kerja'); ?>
 	</div>
 	
-	<div id="content"><div class="full" style="min-height: 400px;"><div id="CntRightFull">
+	<div id="content">
+  	<div class="contentmenu clearfix"><?php $this->load->view('main_sub_menu'); ?></div>
+		<?php $this->load->view('common/form_unit_kerja'); ?>
+  <div class="full" style="min-height: 400px;"><div id="CntRightFull">
 		<?php $this->load->view('pegawai_info'); ?>
 		
 		<?php if (!empty($message)) { ?>
@@ -35,14 +35,14 @@
 		<div class="cnt-grid">
 			<?php if (count($array_pegawai_hukuman) > 0) { ?>
 				<h1>Riwayat Hukuman</h1>
-				<div class="cnt_table_main record-valid"><table style="width: 900px;">
+				<div class="cnt_table_main record-valid"><table>
 					<tr>
-						<td class="left" style="width: 175px;">&nbsp;</td>
-						<td class="normal" style="width: 150px;">No SK</td>
-						<td class="normal" style="width: 150px;">Tanggal SK</td>
-						<td class="normal" style="width: 150px;">TMT</td>
-						<td class="normal" style="width: 125px;">NIP Pejabat</td>
-						<td class="normal" style="width: 125px;">Nama Pejabat</td></tr>
+						<td class="left">&nbsp;</td>
+						<td class="normal">No SK</td>
+						<td class="normal">Tanggal SK</td>
+						<td class="normal">TMT</td>
+						<td class="normal">NIP Pejabat</td>
+						<td class="normal">Nama Pejabat</td></tr>
 					<?php foreach ($array_pegawai_hukuman as $row) { ?>
 					<tr>
 						<td class="licon">
@@ -61,15 +61,15 @@
 			
 			<?php if (count($array_pegawai_hukuman_request) > 0) { ?>
 				<h1>Riwayat yang belum tervalidasi</h1>
-				<div class="cnt_table_main record-request"><table style="width: 1050px;">
+				<div class="cnt_table_main record-request"><table>
 					<tr>
-						<td class="left" style="width: 175px;">&nbsp;</td>
-						<td class="normal" style="width: 150px;">Jenis Request</td>
-						<td class="normal" style="width: 150px;">No SK</td>
-						<td class="normal" style="width: 150px;">Tanggal SK</td>
-						<td class="normal" style="width: 150px;">TMT</td>
-						<td class="normal" style="width: 125px;">NIP Pejabat</td>
-						<td class="normal" style="width: 125px;">Nama Pejabat</td></tr>
+						<td class="left">&nbsp;</td>
+						<td class="normal">Jenis Request</td>
+						<td class="normal">No SK</td>
+						<td class="normal">Tanggal SK</td>
+						<td class="normal">TMT</td>
+						<td class="normal">NIP Pejabat</td>
+						<td class="normal">Nama Pejabat</td></tr>
 					<?php foreach ($array_pegawai_hukuman_request as $row) { ?>
 					<tr>
 						<td class="licon">
@@ -178,17 +178,9 @@
 		var raw = $(this).parents('tr').find('.record').html();
 		eval('var record = ' + raw);
 		
-		a = record
-		record = a;
-		
-		$('.cnt-form [name="JENIS_REQ_HUKUMAN"]').val(record.JENIS_REQ_HUKUMAN);
+		Func.populate({ cnt: '.cnt-form', record: record});
 		$('.cnt-form [name="ID_RIWAYAT_HUKUMAN"]').val((record.ID_RIWAYAT_HUKUMAN == null) ? 'x' : record.ID_RIWAYAT_HUKUMAN);
 		$('.cnt-form [name="ID_REQ_HUKUMAN"]').val((record.ID_REQ_HUKUMAN == null) ? 'x' : record.ID_REQ_HUKUMAN);
-		$('.cnt-form [name="NO_SK"]').val(record.NO_SK);
-		$('.cnt-form [name="TGL_SK"]').val(Func.swap_date(record.TGL_SK));
-		$('.cnt-form [name="TMT"]').val(Func.swap_date(record.TMT));
-		$('.cnt-form [name="NIP_PEJABAT"]').val(record.NIP_PEJABAT);
-		$('.cnt-form [name="NAMA_PEJABAT"]').val(record.NAMA_PEJABAT);
 		
 		// update request or valid
 		if (action_form == 'update_request') {

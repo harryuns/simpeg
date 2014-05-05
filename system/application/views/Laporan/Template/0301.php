@@ -12,23 +12,24 @@
         <div style="padding: 10px 0; font-weight: 700; font-size: 11px; text-align: center;">'.$Laporan['Title'].'</div>
         <div style="padding: 5px 0; font-weight: 700; font-size: 11px;">Unit Kerja : ' . $Laporan['UnitKerja']['CONTENT'] . '</div>
 		
-        <table style="width: 1500px;">
+        <table>
             <tr>
-                <td class="left" style="width: 20px;" rowspan="2">No</td>
-                <td class="center" style="width: 300px;" rowspan="2">NAMA</td>
-                <td class="center" style="width: 100px;" rowspan="2">NIDN</td>
-                <td class="normal" style="width: 100px; text-align: center;" rowspan="2">NIP</td>
-                <td class="normal" style="width: 100px; text-align: center;" colspan="2">PANGKAT</td>
-                <td class="normal" style="width: 100px; text-align: center;" colspan="2">JABATAN</td>
-                <td class="normal" style="width: 100px; text-align: center;" colspan="2">MASA KERJA</td>
-                <td class="normal" style="width: 100px; text-align: center;" colspan="3">LATIHAN PRAJABATAN</td>
-                <td class="normal" style="width: 100px; text-align: center;" colspan="3">PENDIDIKAN</td>
-                <td class="normal" style="width: 100px; text-align: center;" rowspan="2">TANGGAL LAHIR</td>
-                <td class="normal" style="width: 100px; text-align: center;" rowspan="2">UMUR</td>
-                <td class="normal" style="width: 100px; text-align: center;" rowspan="2">CATATAN MUTASI KEPEG</td>
-                <td class="normal" style="width: 100px; text-align: center;" rowspan="2">FAK</td>
-                <td class="normal" style="width: 100px; text-align: center;" rowspan="2">JURUSAN</td>
-				<td class="normal" style="width: 100px; text-align: center;" rowspan="2">JENIS KELAMIN</td></tr>
+                <td class="left" rowspan="2">No</td>
+                <td class="center" rowspan="2">NAMA</td>
+                <td class="center" rowspan="2">NIDN</td>
+                <td class="normal" style="text-align: center;" rowspan="2">NIP</td>
+                <td class="normal" style="text-align: center;" colspan="2">PANGKAT</td>
+                <td class="normal" style="text-align: center;" colspan="2">JABATAN</td>
+                <td class="normal" style="text-align: center;" colspan="2">MASA KERJA</td>
+                <td class="normal" style="text-align: center;" colspan="3">LATIHAN PRAJABATAN</td>
+                <td class="normal" style="text-align: center;" colspan="3">PENDIDIKAN</td>
+                <td class="normal" style="text-align: center;" rowspan="2">TANGGAL LAHIR</td>
+                <td class="normal" style="text-align: center;" rowspan="2">UMUR</td>
+                <td class="normal" style="text-align: center;" rowspan="2">CATATAN MUTASI KEPEG</td>
+                <td class="normal" style="text-align: center;" rowspan="2">FAK</td>
+                <td class="normal" style="text-align: center;" rowspan="2">JURUSAN</td>
+				<td class="normal" style="text-align: center;" rowspan="2">JENIS KELAMIN</td>
+				</tr>
             <tr>
                 <td class="body center">GOL</td>
                 <td class="body center">TMT</td>
@@ -59,7 +60,7 @@
                 <td class="body" style="text-align: left;">' . ExchangeFormatDate($Element['TMT_GOL']) . '</td>
                 <td class="body" style="text-align: center;">' . $Element['BAGIAN_JABATAN'] . '</td>
                 <td class="body" style="text-align: center;">' . ExchangeFormatDate($Element['TMT_JABATAN']) . '</td>
-                <td class="body" style="text-align: center;">' . $Element['TOTAL_MASA_KERJA_KESELURUHAN'] . '</td>
+                <td class="body" style="text-align: center;">' . $Element['MASA_KERJA_SEMUA'] . '</td>
                 <td class="body" style="text-align: center;">' . $Element['MASA_KERJA_GOLONGAN'] . '</td>
                 <td class="body" style="text-align: center;">&nbsp;</td>
                 <td class="body" style="text-align: center;">&nbsp;</td>

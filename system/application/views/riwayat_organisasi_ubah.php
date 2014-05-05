@@ -24,10 +24,11 @@
         <div id="frame">
             <div id="sidebar">
                 <div class="glossymenu"><?php include 'main_menu.php'; ?></div>
-                <div class="glossymenu" style="padding: 50px 0 0 0;"><?php include 'main_sub_menu.php'; ?></div>
             </div>
             
             <div id="content">
+            		
+            		<div class="contentmenu clearfix"><?php include 'main_sub_menu.php'; ?></div>
                 <div class="full" style="min-height: 400px;">
                     <div id="CntRightFull">
                         <?php include 'pegawai_info.php'; ?>

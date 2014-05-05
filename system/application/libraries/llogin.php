@@ -5,6 +5,7 @@ if ( ! defined('BASEPATH'))
 class LLogin extends Controller {
     function LLogin() {
         $CI =& get_instance();
+		$this->ci = $CI;
         @session_start();
 		
 		// Check POST Parameter for Request Report
@@ -168,13 +169,13 @@ class LLogin extends Controller {
 							$UserLogin['UserGroupID'] = $GroupAttrID;
 							$UserLogin['TimeActive'] = strtotime("now");
 							$UserLogin['ApplicationRequest'] = 'Simpeg';
-							$UserLogin['LinkIndex'] = HOST.'/index.php/Pegawai';
+							$UserLogin['LinkIndex'] = $this->ci->config->item('base_url').'index.php/Pegawai';
 							
 							$UserLogin['Fakultas']['Title'] = $User['FAKULTAS']['value'];
 							$UserLogin['Fakultas']['ID'] = (empty($User['FAKULTAS']['attr']['Code'])) ? 'x' : $User['FAKULTAS']['attr']['Code'];
 							
 							$_SESSION['UserLogin'] = $UserLogin;
-							header('Location: '.HOST.'/index.php/Pegawai');
+							header('Location: '.$UserLogin['LinkIndex']);
 							exit;
 						} else if (in_array($GroupAttrID, array(88, 1005, 1061))) {
 							$UserLogin['UserID'] = $LoginName;
@@ -189,7 +190,7 @@ class LLogin extends Controller {
 							$UserLogin['Fakultas']['ID'] = (empty($User['FAKULTAS']['attr']['Code'])) ? 'x' : $User['FAKULTAS']['attr']['Code'];
 							
 							$UserLogin['Nip'] = $PegawaiNip;
-							$UserLogin['LinkIndex'] = HOST.'/index.php/Pegawai/Tambah/'.ConvertLink($UserLogin['Nip']);
+							$UserLogin['LinkIndex'] = $this->ci->config->item('base_url').'index.php/Pegawai/Tambah/'.ConvertLink($UserLogin['Nip']);
 							
 							$_SESSION['UserLogin'] = $UserLogin;
 							setcookie("External_Application", '', time() - 3600, "/", ".ub.ac.id");

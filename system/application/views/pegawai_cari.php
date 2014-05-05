@@ -35,8 +35,9 @@
 					
 					<div></div>
                     
-                    <div>
-                        <form method="post" id="FormPegawai">
+                    <div class="clearfix">
+                        <form class="cari-pegawai clearfix" method="post" id="FormPegawai">
+                        		<legend>Form Pencarian</legend>
                             <input type="hidden" name="PageActive" value="1" />
                             <input type="hidden" name="DeletePegawai" value="0" />
                             <input type="hidden" name="PencarianDetailLastest" value="<?php echo $PencarianDetailLastest; ?>" />
@@ -44,39 +45,63 @@
 							<?php if ($this->llogin->IsUserFakultas() == 1) { ?>
 								<input type="hidden" name="K_PARENT" value="14" />
 							<?php } ?>
-							
-                            <table style="width: 100%;">
-                                <tr>
-                                    <td>Nama</td>
-                                    <td><input type="text" style="width: 300px;" maxlength="50" value="<?php echo $_POST['NAMA']; ?>" name="NAMA" /></td></tr>
-                                <tr class="hidden">
-                                    <td>Berdasarkan</td>
-                                    <td><select style="width: 200px;" name="PencarianDetail">
-                                        <?php echo ShowOption(array('Array' => $ArraySearchCriteria, 'Selected' => $PencarianDetailLastest)); ?>
-                                    </select></td></tr>
-                                <tr class="SearchDetail hidden">
-                                    <td>Jenis Kerja</td>
-                                    <td><select style="width: 200px;" name="K_JENIS_KERJA"><?php echo GetOption(false, $ArrayJenisKerja, $_POST['K_JENIS_KERJA']); ?></select></td></tr>
-                                <tr class="SearchDetail hidden">
-                                    <td>Unit Kerja</td>
-                                    <td>
-										<input type="hidden" name="K_UNIT_KERJA" value="<?php echo @$unit_kerja['K_UNIT_KERJA']; ?>" />
-										<input type="text" name="UNIT_KERJA" style="width: 200px;" size="50" value="<?php echo @$unit_kerja['CONTENT']; ?>" class="unit-kerja" readonly="readonly" />
-										<input type="button" style="width: 75px;" class="show_unitkerja" data-target=".unit-kerja" value="Pilih" />
-									</td></tr>
-                                <tr class="SearchDetail hidden">
-                                    <td>Status Kerja</td>
-                                    <td><select style="width: 200px;" name="K_STATUS_KERJA"><?php echo GetOption(false, $ArrayStatusKerja, $_POST['K_STATUS_KERJA']); ?></select></td></tr>
-                                <tr class="SearchDetail hidden">
-                                    <td>Status Aktif</td>
-                                    <td><select style="width: 200px;" name="K_AKTIF"><?php echo GetOption(false, $ArrayStatusPensiun, $_POST['K_AKTIF']); ?></select></td></tr>
-								<tr>
-                                    <td>Diurutkan berdasarkan</td>
-                                    <td><select style="width: 200px;" name="SORTING"><?php echo GetOption(false, $array_sorting, @$_POST['SORTING']); ?></select></td></tr>
-								<tr>
-                                    <td>&nbsp;</td>
-                                    <td><input type="submit" name="CariPegawai" value="Cari Data" /></td></tr>
-                            </table>
+              							
+                            <div class="left form-block">
+              							<div class="form-row">
+														<label>Nama :</label>
+                            <input type="text" style="width: 210px;" maxlength="50" value="<?php echo $_POST['NAMA']; ?>" name="NAMA" />														
+                            </div>
+                            <div class="form-row hidden">
+                            <label>Berdasarkan :</label>
+                            <select style="width: 222px;" name="PencarianDetail">
+                            <?php echo ShowOption(array('Array' => $ArraySearchCriteria, 'Selected' => $PencarianDetailLastest)); ?>
+                            </select>
+                            </div>
+                            <div class="form-row">
+                            <label>Jenis Kerja</label>
+                            <select style="width: 222px;" name="K_JENIS_KERJA"><?php echo GetOption(false, $ArrayJenisKerja, $_POST['K_JENIS_KERJA']); ?></select>
+                            </div>
+                            <div class="form-row">
+                            <label>Unit Kerja</label>
+                            <input type="hidden" name="K_UNIT_KERJA" value="<?php echo @$unit_kerja['K_UNIT_KERJA']; ?>" />
+										<input type="text" name="UNIT_KERJA" style="width: 146px;" size="50" value="<?php echo @$unit_kerja['CONTENT']; ?>" class="unit-kerja" readonly="readonly" />
+										<input type="button" style="min-width:0;width: 60px!important;" class="show_unitkerja" data-target=".unit-kerja" value="Pilih" />
+                    				</div>
+                            
+                            <div class="form-row">
+                            <label>Diurutkan berdasarkan</label>
+                            <select style="width: 222px;" name="SORTING"><?php echo GetOption(false, $array_sorting, @$_POST['SORTING']); ?></select>
+                            </div>
+                            <div class="form-row">
+                            <label>&nbsp;</label>
+                            	<input type="submit" name="CariPegawai" value="Cari Data" />
+                            </div>
+                            
+                            </div>
+                            
+                            <div class="left form-block">
+                            <div class="form-row hidden">
+                            <label>Status Kerja</label>
+                            <select style="width: 182px;" name="K_STATUS_KERJA"><?php echo GetOption(false, $ArrayStatusKerja, $_POST['K_STATUS_KERJA']); ?></select>
+                            </div>
+                            <div class="form-row hidden">
+                            <label>Status Aktif</label>
+                            <select style="width: 182px;" name="K_AKTIF"><?php echo GetOption(false, $ArrayStatusPensiun, $_POST['K_AKTIF']); ?></select>
+                            </div>
+                            
+                            
+                            </div>
+                            
+                            <div class="left form-info form-block">
+                            	<strong>Jika terdapat data double di DUK, dicek kembali :</strong><br />
+                              <ol style="margin:0;padding:0">
+                                <li>Data riwayat pendidikan dengan jenjang, tgl ijazah dan tahun lulus yang sama</li>
+                                <li>Data riwayat fungsional dengan tmt atau tgl sk yang sama</li>
+                                <li>Data riwayat homebase dengan tmt atau tgl sk yang sama</li>
+                                <li>Data riwayat pangkat dengan golongan pangkat atau tmt yang sama</li>
+                              </ol>
+                            </div>
+                            
                         </form>
                         
 						<?php if (isset($ArrayPegawai['Pegawai'])) { ?>
@@ -87,15 +112,6 @@
 							<?php } ?>
 						<?php } ?>
 						
-						<div style="padding: 15px 0 0 25px;">
-							* Jika terdapat data double di DUK, dicek kembali :<br />
-							<ol>
-								<li>Data riwayat pendidikan dengan jenjang, tgl ijazah dan tahun lulus yang sama</li>
-								<li>Data riwayat fungsional dengan tmt atau tgl sk yang sama</li>
-								<li>Data riwayat homebase dengan tmt atau tgl sk yang sama</li>
-								<li>Data riwayat pangkat dengan golongan pangkat atau tmt yang sama</li>
-							</ul>
-						</div>
 						
                         <div id="DialogConfirm" title="Informasi" style="display: none;"><p>&nbsp;</p></div>
                         <div id="DialogProfile" title="Informasi" style="display: none;"><p>&nbsp;</p></div>
@@ -144,7 +160,7 @@ function InitSearch() {
 			});
 		},
         InitPaging: function() {
-            $('#PagePegawai a').click(function() {
+            $('#PageFeature a').click(function() {
                 var Page = $(this).text();
                 $('input[name="PageActive"]').val(Page);
                 $('#FormPegawai').submit();

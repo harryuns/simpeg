@@ -7,7 +7,7 @@
 	$message = get_flash_message();
 	$array_diklat = $this->ldiklat->GetArray();
 	$array_pegawai_diklat = $this->riwayat_diklat_model->get_array(array( 'k_pegawai' => $k_pegawai ));
-	$array_pegawai_diklat_request = $this->riwayat_diklat_request_model->get_array(array( 'k_pegawai' => $k_pegawai ));
+	$array_pegawai_diklat_request = $this->riwayat_diklat_request_model->get_array(array( 'k_pegawai' => $k_pegawai, 'IS_VALIDATE' => 0 ));
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -19,10 +19,11 @@
 	<div id="sidebar">
 		<div class="hidden cnt-page"><?php echo json_encode($page); ?></div>
 		<div class="glossymenu"><?php $this->load->view('main_menu'); ?></div>
-		<div class="glossymenu" style="padding: 50px 0 0 0;"><?php $this->load->view('main_sub_menu'); ?></div>
 	</div>
 	
-	<div id="content"><div class="full" style="min-height: 400px;"><div id="CntRightFull">
+	<div id="content">
+  	<div class="contentmenu clearfix"><?php $this->load->view('main_sub_menu'); ?></div>
+  <div class="full" style="min-height: 400px;"><div id="CntRightFull">
 		<?php $this->load->view('pegawai_info'); ?>
 		
 		<?php if (!empty($message)) { ?>
@@ -32,19 +33,19 @@
 		<div class="cnt-grid">
 			<?php if (count($array_pegawai_diklat) > 0) { ?>
 				<h1>Riwayat Diklat</h1>
-				<div class="cnt_table_main record-valid"><table style="width: 1300px;">
+				<div class="cnt_table_main record-valid"><table>
 					<tr>
-						<td class="left" style="width: 175px;">&nbsp;</td>
-						<td class="normal" style="width: 150px;">No Sertifikat</td>
-						<td class="normal" style="width: 100px;">Tanggal SK</td>
-						<td class="normal" style="width: 100px;">Diklat</td>
-						<td class="normal" style="width: 200px;">Penyelenggara</td>
-						<td class="normal" style="width: 100px;">Tempat Diklat</td>
-						<td class="normal" style="width: 100px;">Angkatan</td>
-						<td class="normal" style="width: 100px;">Tanggal Mulai</td>
-						<td class="normal" style="width: 100px;">Tanggal Lulus</td>
-						<td class="normal" style="width: 300px;">Keterangan</td>
-						<td class="normal" style="width: 50px;">Sertifikat</td></tr>
+						<td class="left">&nbsp;</td>
+						<td class="normal">No Sertifikat</td>
+						<td class="normal">Tanggal SK</td>
+						<td class="normal">Diklat</td>
+						<td class="normal">Penyelenggara</td>
+						<td class="normal">Tempat Diklat</td>
+						<td class="normal">Angkatan</td>
+						<td class="normal">Tanggal Mulai</td>
+						<td class="normal">Tanggal Lulus</td>
+						<td class="normal">Keterangan</td>
+						<td class="normal">Sertifikat</td></tr>
 					<?php foreach ($array_pegawai_diklat as $row) { ?>
 					<tr>
 						<td class="licon">
@@ -69,20 +70,20 @@
 			
 			<?php if (count($array_pegawai_diklat_request) > 0) { ?>
 				<h1>Riwayat yang belum tervalidasi</h1>
-				<div class="cnt_table_main record-request"><table style="width: 1450px;">
+				<div class="cnt_table_main record-request"><table>
 					<tr>
-						<td class="left" style="width: 175px;">&nbsp;</td>
-						<td class="normal" style="width: 150px;">Jenis Request</td>
-						<td class="normal" style="width: 150px;">No Sertifikat</td>
-						<td class="normal" style="width: 100px;">Tanggal SK</td>
-						<td class="normal" style="width: 100px;">Diklat</td>
-						<td class="normal" style="width: 200px;">Penyelenggara</td>
-						<td class="normal" style="width: 100px;">Tempat Diklat</td>
-						<td class="normal" style="width: 100px;">Angkatan</td>
-						<td class="normal" style="width: 100px;">Tanggal Mulai</td>
-						<td class="normal" style="width: 100px;">Tanggal Lulus</td>
-						<td class="normal" style="width: 300px;">Keterangan</td>
-						<td class="normal" style="width: 50px;">Sertifikat</td></tr>
+						<td class="left">&nbsp;</td>
+						<td class="normal">Jenis Request</td>
+						<td class="normal">No Sertifikat</td>
+						<td class="normal">Tanggal SK</td>
+						<td class="normal">Diklat</td>
+						<td class="normal">Penyelenggara</td>
+						<td class="normal">Tempat Diklat</td>
+						<td class="normal">Angkatan</td>
+						<td class="normal">Tanggal Mulai</td>
+						<td class="normal">Tanggal Lulus</td>
+						<td class="normal">Keterangan</td>
+						<td class="normal">Sertifikat</td></tr>
 					<?php foreach ($array_pegawai_diklat_request as $row) { ?>
 					<tr>
 						<td class="licon">

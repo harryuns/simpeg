@@ -33,10 +33,10 @@
 	<link rel="stylesheet" href="<?php echo HOST."/assets/lib/pde/pde.css"; ?>">
     <script type="text/javascript" src="<?php echo HOST."/assets/lib/pde/pde.js"; ?>"></script>
 	
-	
-    <link href="<?php echo HOST."/Style/Main.css"; ?>" rel="stylesheet" type="text/css" media="screen, tv, projection" >  
+	    <link href="<?php echo HTTPS; ?>/Style/reset.css" rel="stylesheet" type="text/css" media="all" >
     <link href="<?php echo HOST."/Style/jquery.dataTables.css"; ?>" rel="stylesheet" type="text/css" media="screen, tv, projection" >  
-    <link href="<?php echo HOST."/Style/Wisuda.css"; ?>" rel="stylesheet" type="text/css" media="screen, tv, projection" >  
+
+    <link href="<?php echo HTTPS; ?>/Style/style.css" rel="stylesheet" type="text/css" media="screen" >
     
     <!--[if IE 6]>
     <link href="<?php echo HOST."/Style/Fix.css"; ?>" rel="stylesheet" type="text/css" >
@@ -46,3 +46,5 @@
     <title><?php echo $Page['PageTitle']; ?></title>
 	
 </head>
+
+

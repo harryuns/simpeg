@@ -2,17 +2,17 @@
     echo '
         <div class="cnt_table_main">
         <div style="padding: 10px 0; font-weight: 700; font-size: 11px; text-align: center;">'.$Laporan['Title'].'</div>
-        <table style="width: 100%;">
+        <table>
             <tr>
-                <td class="left" style="width: 4%;">No</td>
-                <td class="center" style="width: 18%;">Jenis Kerja</td>
-                <td class="center" style="width: 18%;">Status Kerja</td>
-                <td class="normal" style="width: 10%; text-align: center;">&lt; 20</td>
-                <td class="normal" style="width: 10%; text-align: center;">&lt; 30</td>
-                <td class="normal" style="width: 10%; text-align: center;">&lt; 40</td>
-                <td class="normal" style="width: 10%; text-align: center;">&lt; 50</td>
-                <td class="normal" style="width: 10%; text-align: center;">&lt; 60</td>
-                <td class="normal" style="width: 10%; text-align: center;">&gt; 60</td>
+                <td class="left">No</td>
+                <td class="center">Jenis Kerja</td>
+                <td class="center">Status Kerja</td>
+                <td class="normal" style="text-align: center;">&lt; 20</td>
+                <td class="normal" style="text-align: center;">&lt; 30</td>
+                <td class="normal" style="text-align: center;">&lt; 40</td>
+                <td class="normal" style="text-align: center;">&lt; 50</td>
+                <td class="normal" style="text-align: center;">&lt; 60</td>
+                <td class="normal" style="text-align: center;">&gt; 60</td>
             </tr>
     ';
 	

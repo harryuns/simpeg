@@ -21,10 +21,11 @@
 	<div id="sidebar">
 		<div class="hidden cnt-page"><?php echo json_encode($page); ?></div>
 		<div class="glossymenu"><?php $this->load->view('main_menu'); ?></div>
-		<div class="glossymenu" style="padding: 50px 0 0 0;"><?php $this->load->view('main_sub_menu'); ?></div>
 	</div>
 	
-	<div id="content"><div class="full" style="min-height: 400px;"><div id="CntRightFull">
+	<div id="content">
+  	<div class="contentmenu clearfix"><?php $this->load->view('main_sub_menu'); ?></div>
+  <div class="full" style="min-height: 400px;"><div id="CntRightFull">
 		<?php $this->load->view('pegawai_info'); ?>
 		
 		<?php if (!empty($message)) { ?>
@@ -34,17 +35,17 @@
 		<div class="cnt-grid">
 			<?php if (count($array_pegawai_keluarga) > 0) { ?>
 				<h1>Riwayat Keluarga</h1>
-				<div class="cnt_table_main record-valid"><table style="width: 1275px;">
+				<div class="cnt_table_main record-valid"><table>
 					<tr>
-						<td class="left" style="width: 125px;">&nbsp;</td>
-						<td class="normal" style="width: 125px;">Nama</td>
-						<td class="normal" style="width: 150px;">Hub. Keluarga</td>
-						<td class="normal" style="width: 125px;">Tanggal Lahir</td>
-						<td class="normal" style="width: 150px;">Tempat Lahir</td>
-						<td class="normal" style="width: 150px;">Pendidikan</td>
-						<td class="normal" style="width: 150px;">Alamat</td>
-						<td class="normal" style="width: 150px;">Pekerjaan</td>
-						<td class="normal" style="width: 150px;">Keterangan</td></tr>
+						<td class="left">&nbsp;</td>
+						<td class="normal">Nama</td>
+						<td class="normal">Hub. Keluarga</td>
+						<td class="normal">Tanggal Lahir</td>
+						<td class="normal">Tempat Lahir</td>
+						<td class="normal">Pendidikan</td>
+						<td class="normal">Alamat</td>
+						<td class="normal">Pekerjaan</td>
+						<td class="normal">Keterangan</td></tr>
 					<?php foreach ($array_pegawai_keluarga as $row) { ?>
 					<tr>
 						<td class="licon">
@@ -66,18 +67,18 @@
 			
 			<?php if (count($array_pegawai_keluarga_request) > 0) { ?>
 				<h1>Riwayat yang belum tervalidasi</h1>
-				<div class="cnt_table_main record-request"><table style="width: 1425px;">
+				<div class="cnt_table_main record-request"><table>
 					<tr>
-						<td class="left" style="width: 175px;">&nbsp;</td>
-						<td class="normal" style="width: 150px;">Jenis Request</td>
-						<td class="normal" style="width: 125px;">Nama</td>
-						<td class="normal" style="width: 150px;">Hub. Keluarga</td>
-						<td class="normal" style="width: 125px;">Tanggal Lahir</td>
-						<td class="normal" style="width: 150px;">Tempat Lahir</td>
-						<td class="normal" style="width: 150px;">Pendidikan</td>
-						<td class="normal" style="width: 150px;">Alamat</td>
-						<td class="normal" style="width: 150px;">Pekerjaan</td>
-						<td class="normal" style="width: 150px;">Keterangan</td></tr>
+						<td class="left">&nbsp;</td>
+						<td class="normal">Jenis Request</td>
+						<td class="normal">Nama</td>
+						<td class="normal">Hub. Keluarga</td>
+						<td class="normal">Tanggal Lahir</td>
+						<td class="normal">Tempat Lahir</td>
+						<td class="normal">Pendidikan</td>
+						<td class="normal">Alamat</td>
+						<td class="normal">Pekerjaan</td>
+						<td class="normal">Keterangan</td></tr>
 					<?php foreach ($array_pegawai_keluarga_request as $row) { ?>
 					<tr>
 						<td class="licon">
