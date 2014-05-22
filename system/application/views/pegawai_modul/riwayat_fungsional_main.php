@@ -162,7 +162,7 @@
 					</tr>
 					<tr>
 						<td>Penandatangan SK</td>
-						<td><input type="text" style="width: 150px;" size="50" name="PENANDATANGAN_SK" /></td></tr>
+						<td><textarea style="width: 85%; height: 75px;" name="PENANDATANGAN_SK"></textarea></td></tr>
 					<tr>
 						<td>Tunjangan Fungsional</td>
 						<td><input type="text" style="width: 150px;" size="50" name="TUNJANGAN_FUNGSIONAL" class="integer" /></td></tr>

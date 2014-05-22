@@ -520,22 +520,6 @@ if ( ! function_exists('Write'))
 	}
 }
 
-if ( ! function_exists('GetExtention'))
-{
-    function GetExtention($FileName) {
-        $FileName = trim($FileName);
-        if (empty($FileName)) {
-            return '';
-        }
-        
-        $ArrayString = explode('.', $FileName);
-        $Extention = $ArrayString[count($ArrayString) - 1];
-        $Extention = preg_replace('/\?.+/i', '', $Extention);
-        
-        return $Extention;
-    }
-}
-
 if ( ! function_exists('WriteLogErrorQuery'))
 {
     function WriteLogErrorQuery($StringQuery) {

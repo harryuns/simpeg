@@ -101,7 +101,7 @@
 							<textarea name="TANGGAPAN" style="width: 500px; height: 65px;"><?php echo $data['tanggapan']['TANGGAPAN']; ?></textarea>
 						</div>
 						<div style="float: left; width: 150px;">
-							<input type="button" class="btn-tanggapan-submit" value="Submit" />
+							<input type="button" class="btn-tanggapan-submit" value="Submit" style="margin: 0 0 10px 0;" />
 							<input type="button" class="btn-tanggapan-cancel" value="Batal" />
 						</div>
 						<div style="clear: both;"></div>

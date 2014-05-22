@@ -105,14 +105,13 @@
                             <td class="left" style="width: 100px;">Aktif</td>
                             <td class="center" style="width: 100px;">No SK</td>
                             <td class="normal" style="width: 125px; text-align: center;">Tanggal Mulai</td>
-                            <td class="normal" style="width: 125px; text-align: center;">Tanggal Selesai</td></tr>';
+						</tr>';
             foreach ($ArrayPegawaiAktif as $Key => $Array) {
                 echo '
                     <tr>
                         <td class="licon">'.$ArrayAktif[$Array['K_AKTIF']]['Content'].'</td>
                         <td class="icon">'.$Array['NO_SK'].'</td>
                         <td class="body" style="text-align: center;">'.ConvertDateToString($Array['TGL_MULAI']).'</td>
-                        <td class="body" style="text-align: center;">'.ConvertDateToString($Array['TGL_SELESAI']).'</td>
                     </tr>';
             }
             echo '</table>';

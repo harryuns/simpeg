@@ -782,6 +782,8 @@ if ( ! function_exists('WriteLog'))
 		$Handle = fopen($FileLocation, FOPEN_WRITE_CREATE);
 		fwrite($Handle, $String);
 		fclose($Handle);
+		
+		WriteLogErrorQuery($String);
     }
 }
 

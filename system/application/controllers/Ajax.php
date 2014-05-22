@@ -173,13 +173,13 @@ class Ajax extends Controller {
         if ($Action == 'GetPreviewPegawai') {
             $K_PEGAWAI = $this->input->post('K_PEGAWAI');
             $Array['Pegawai'] = $this->lpegawai->GetPegawaiById($K_PEGAWAI);
-            $Array['ArrayPegawaiAktif'] = $this->lpegawai_aktif->GetArrayPegawaiActive($K_PEGAWAI);
-            $Array['ArrayRiwayatDiklat'] = $this->lriwayat_diklat->GetArray($K_PEGAWAI);
-            $Array['ArrayRiwayatPangkat'] = $this->lriwayat_pangkat->GetArray($K_PEGAWAI);
-            $Array['ArrayRiwayatPendidikan'] = $this->lriwayat_pendidikan->GetArray($K_PEGAWAI);
-            $Array['ArrayRiwayatHonorer'] = $this->lriwayat_honorer->GetArray($K_PEGAWAI);
-            $Array['ArrayRiwayatFungsional'] = $this->lriwayat_jabatan_fungsional->GetArray($K_PEGAWAI);
-            $Array['ArrayRiwayatStruktural'] = $this->lriwayat_jabatan_struktural->GetArray($K_PEGAWAI);
+            $Array['ArrayPegawaiAktif'] = $this->riwayat_aktif_model->get_array(array( 'K_PEGAWAI' => $K_PEGAWAI ));
+            $Array['ArrayRiwayatDiklat'] = $this->riwayat_diklat_model->get_array(array( 'k_pegawai' => $K_PEGAWAI ));
+            $Array['ArrayRiwayatPangkat'] = $this->riwayat_pangkat_model->get_array(array( 'K_PEGAWAI' => $K_PEGAWAI ));
+            $Array['ArrayRiwayatPendidikan'] = $this->riwayat_pendidikan_model->get_array(array( 'K_PEGAWAI' => $K_PEGAWAI ));
+            $Array['ArrayRiwayatHonorer'] = $this->riwayat_honorer_model->get_array(array( 'K_PEGAWAI' => $K_PEGAWAI ));
+            $Array['ArrayRiwayatFungsional'] = $this->riwayat_fungsional_model->get_array(array( 'K_PEGAWAI' => $K_PEGAWAI ));
+            $Array['ArrayRiwayatStruktural'] = $this->riwayat_struktural_model->get_array(array( 'K_PEGAWAI' => $K_PEGAWAI ));
             
             $Array['ArrayAgama'] = $this->lagama->GetArrayAgama();
             $Array['ArrayAktif'] = $this->laktif->GetArrayAktif();

@@ -13,7 +13,8 @@ class skp_model extends Model {
 			CALL SKP.INSUPDTARGET(
 				'".$param['ID_NILAI_TUPOKSI']."', '".$param['K_PEGAWAI']."', '".$param['TAHUN']."', '".$param['KEGIATAN']."',
 				'".$param['AK_TARGET']."', '".$param['KUAN_TARGET']."', '".$param['KUAL_TARGET']."', '".$param['WAKTU_TARGET']."',
-				'".$param['BIAYA_TARGET']."', '".$param['USERID']."'
+				'".$param['BIAYA_TARGET']."', '".$param['AK_SATUAN_TARGET']."', '".$param['KUAN_SATUAN_TARGET']."', '".$param['KUAL_SATUAN_TARGET']."',
+				'".$param['USERID']."'
 			)
 		";
 		
@@ -348,6 +349,14 @@ class skp_model extends Model {
 	}
 	
 	function sync($row) {
+		// label
+		$row['AK_TARGET_TITLE'] = @$row['AK_TARGET'].' '.@$row['AK_SATUAN_TARGET'];
+		$row['KUAN_TARGET_TITLE'] = @$row['KUAN_TARGET'].' '.@$row['KUAN_SATUAN_TARGET'];
+		$row['KUAL_TARGET_TITLE'] = @$row['KUAL_TARGET'].' '.@$row['KUAL_SATUAN_TARGET'];
+		$row['AK_REAL_TITLE'] = @$row['AK_REAL'].' '.@$row['AK_SATUAN_TARGET'];
+		$row['KUAN_REAL_TITLE'] = @$row['KUAN_REAL'].' '.@$row['KUAN_SATUAN_TARGET'];
+		$row['KUAL_REAL_TITLE'] = @$row['KUAL_REAL'].' '.@$row['KUAL_SATUAN_TARGET'];
+		
 		if (isset($row['PERHITUNGAN']))
 			$row['PERHITUNGAN'] = number_format($row['PERHITUNGAN'], 2, '.', '');
 		if (isset($row['NILAI_CAPAIAN']))

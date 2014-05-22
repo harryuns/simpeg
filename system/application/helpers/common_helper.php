@@ -277,15 +277,18 @@ if (! function_exists('ftp_move_file')) {
 }
 
 if (! function_exists('GetExtention')) {
-	function GetExtention($FileName) {
-		$FileName = strtolower(trim($FileName));
-		if (empty($FileName)) {
-			return '';
-		}
-
-		$ArrayString = explode('.', $FileName);
-		return $ArrayString[count($ArrayString) - 1];
-	}
+    function GetExtention($FileName) {
+        $FileName = strtolower(trim($FileName));
+        if (empty($FileName)) {
+            return '';
+        }
+        
+        $ArrayString = explode('.', $FileName);
+        $Extention = $ArrayString[count($ArrayString) - 1];
+        $Extention = preg_replace('/\?.+/i', '', $Extention);
+        
+        return $Extention;
+    }
 }
 
 if (! function_exists('Write')) {

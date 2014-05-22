@@ -70,9 +70,9 @@ table.border td,th,caption{background-color:#fff}
 	<tr>
 		<td style="text-align: center;"><?php echo $counter; ?></td>
 		<td><?php echo $row['KEGIATAN']; ?></td>
-		<td style="text-align: center;"><?php echo show_skp($row['AK_TARGET']); ?></td>
-		<td style="text-align: center;"><?php echo $row['KUAN_TARGET']; ?></td>
-		<td style="text-align: center;"><?php echo $row['KUAL_TARGET']; ?></td>
+		<td style="text-align: center;"><?php echo show_skp($row['AK_TARGET_TITLE']); ?></td>
+		<td style="text-align: center;"><?php echo $row['KUAN_TARGET_TITLE']; ?></td>
+		<td style="text-align: center;"><?php echo $row['KUAL_TARGET_TITLE']; ?></td>
 		<td style="text-align: center;"><?php echo $row['WAKTU_TARGET']; ?></td>
 		<td style="text-align: center;"><?php echo show_skp($row['BIAYA_TARGET']); ?></td></tr>
 	<?php $counter++; ?>

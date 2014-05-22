@@ -60,9 +60,9 @@
 							<a class="btn-edit" data-action="update_penyusunan"><img class="link" src="<?php echo HOST; ?>/images/Pencil.png" /></a>
 						</td>
 						<td class="body"><?php echo $row['KEGIATAN']; ?></td>
-						<td class="body"><?php echo $row['AK_TARGET']; ?></td>
-						<td class="body"><?php echo $row['KUAN_TARGET']; ?></td>
-						<td class="body"><?php echo $row['KUAL_TARGET']; ?></td>
+						<td class="body"><?php echo $row['AK_TARGET_TITLE']; ?></td>
+						<td class="body"><?php echo $row['KUAN_TARGET_TITLE']; ?></td>
+						<td class="body"><?php echo $row['KUAL_TARGET_TITLE']; ?></td>
 						<td class="body"><?php echo $row['WAKTU_TARGET']; ?></td>
 						<td class="body"><?php echo $row['BIAYA_TARGET']; ?></td>
 						<td class="body"><?php echo $row['VALID_TEXT']; ?></td></tr>
@@ -127,13 +127,22 @@
 						<td><textarea name="KEGIATAN" class="required" alt="Kegiatan kosong" style="width: 75%; height: 60px;"></textarea></td></tr>
 					<tr>
 						<td>AK Target</td>
-						<td><input type="text" style="width: 30%;" size="50" name="AK_TARGET" class="required int" alt="AK Target kosong" /></td></tr>
+						<td>
+							<input type="text" style="width: 30%;" size="50" name="AK_TARGET" class="required int" alt="AK Target kosong" />
+							<input type="text" style="width: 30%;" size="50" name="AK_SATUAN_TARGET" placeholder="Satuan" />
+						</td></tr>
 					<tr>
 						<td>KUAN Target</td>
-						<td><input type="text" style="width: 30%;" size="50" name="KUAN_TARGET" class="required int" alt="KUAN Target kosong" /></td></tr>
+						<td>
+							<input type="text" style="width: 30%;" size="50" name="KUAN_TARGET" class="required int" alt="KUAN Target kosong" />
+							<input type="text" style="width: 30%;" size="50" name="KUAN_SATUAN_TARGET" placeholder="Satuan" />
+						</td></tr>
 					<tr>
 						<td>KUAL Target</td>
-						<td><input type="text" style="width: 30%;" size="50" name="KUAL_TARGET" class="required int" alt="KUAL Target kosong" /></td></tr>
+						<td>
+							<input type="text" style="width: 30%;" size="50" name="KUAL_TARGET" class="required int" alt="KUAL Target kosong" />
+							<input type="text" style="width: 30%;" size="50" name="KUAL_SATUAN_TARGET" placeholder="Satuan" />
+						</td></tr>
 					<tr>
 						<td>Waktu Target</td>
 						<td><input type="text" style="width: 30%;" size="50" name="WAKTU_TARGET" class="required" alt="Waktu Target kosong" /></td></tr>
@@ -233,15 +242,7 @@
 		// populate form
 		var raw = $(this).parents('tr').find('.record').html();
 		eval('var record = ' + raw);
-		
-		$('.cnt-form-kegiatan [name="ID_NILAI_TUPOKSI"]').val(record.ID_NILAI_TUPOKSI);
-		$('.cnt-form-kegiatan [name="TAHUN"]').val(record.TAHUN);
-		$('.cnt-form-kegiatan [name="KEGIATAN"]').val(record.KEGIATAN);
-		$('.cnt-form-kegiatan [name="AK_TARGET"]').val(record.AK_TARGET);
-		$('.cnt-form-kegiatan [name="KUAN_TARGET"]').val(record.KUAN_TARGET);
-		$('.cnt-form-kegiatan [name="KUAL_TARGET"]').val(record.KUAL_TARGET);
-		$('.cnt-form-kegiatan [name="WAKTU_TARGET"]').val(record.WAKTU_TARGET);
-		$('.cnt-form-kegiatan [name="BIAYA_TARGET"]').val(record.BIAYA_TARGET);
+		Func.populate({ cnt: '.cnt-form-kegiatan', record: record });
 		
 		if (record.IS_VALID == 1) {
 			$('.cnt-form-kegiatan .btn-submit').hide();
