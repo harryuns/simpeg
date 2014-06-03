@@ -168,12 +168,18 @@
 						<td class="cnt-masa-kerja-golongan">-</td></tr>
 					<tr>
 						<td>Penandatangan SK</td>
-						<td><input type="text" style="width: 85%;" size="50" name="PENANDATANGAN_SK" /></td></tr>
+						<td><textarea style="width: 85%; height: 75px;" name="PENANDATANGAN_SK"></textarea></td></tr>
 					<tr class="cnt-masa-kerja">
 						<td>Masa Kerja Tambahan</td>
 						<td>
 							<input type="text" style="width: 40px;" size="5" name="TAHUN_JABATAN_TAMBAHAN" class="integer" /> Tahun
 							<input type="text" style="width: 40px;" size="5" name="BULAN_JABATAN_TAMBAHAN" class="integer" /> Bulan
+						</td></tr>
+					<tr class="cnt-masa-kerja">
+						<td>Masa Kerja Pengurangan</td>
+						<td>
+							<input type="text" style="width: 40px;" size="5" name="TAHUN_JABATAN_PENGURANGAN" class="integer" /> Tahun
+							<input type="text" style="width: 40px;" size="5" name="BULAN_JABATAN_PENGURANGAN" class="integer" /> Bulan
 						</td></tr>
 					<tr>
 						<td>Keterangan</td>
@@ -304,12 +310,14 @@
 		combo: {
 			penjelasan: function() {
 				var value = $('[name="K_PENJELASAN"]').val();
-				if (value == '01') {
+				if (Func.InArray(value, ['01', '03', '04'])) {
 					$('.cnt-masa-kerja').show();
 				} else {
 					$('.cnt-masa-kerja').hide();
 					$('input[name="TAHUN_JABATAN_TAMBAHAN"]').val('0');
 					$('input[name="BULAN_JABATAN_TAMBAHAN"]').val('0');
+					$('input[name="TAHUN_JABATAN_PENGURANGAN"]').val('0');
+					$('input[name="BULAN_JABATAN_PENGURANGAN"]').val('0');
 				}
 			}
 		}
@@ -341,20 +349,9 @@
 		var raw = $(this).parents('tr').find('.record').html();
 		eval('var record = ' + raw);
 		
-		$('.cnt-form [name="JENIS_REQ_PANGKAT"]').val(record.JENIS_REQ_PANGKAT);
+		Func.populate({ cnt: '.cnt-form', record: record});
 		$('.cnt-form [name="ID_RIWAYAT_PANGKAT"]').val((record.ID_RIWAYAT_PANGKAT == null) ? 'x' : record.ID_RIWAYAT_PANGKAT);
 		$('.cnt-form [name="ID_REQ_PANGKAT"]').val((record.ID_REQ_PANGKAT == null) ? 'x' : record.ID_REQ_PANGKAT);
-		$('.cnt-form [name="NO_SK"]').val(record.NO_SK);
-		$('.cnt-form [name="TGL_SK"]').val(Func.swap_date(record.TGL_SK));
-		$('.cnt-form [name="K_ASAL_SK"]').val(record.K_ASAL_SK);
-		$('.cnt-form [name="GAJI_POKOK"]').val(record.GAJI_POKOK);
-		$('.cnt-form [name="K_GOLONGAN"]').val(record.K_GOLONGAN);
-		$('.cnt-form [name="KETERANGAN"]').val(record.KETERANGAN);
-		$('.cnt-form [name="TMT"]').val(Func.swap_date(record.TMT));
-		$('.cnt-form [name="K_PENJELASAN"]').val(record.K_PENJELASAN);
-		$('.cnt-form [name="PENANDATANGAN_SK"]').val(record.PENANDATANGAN_SK);
-		$('.cnt-form [name="TAHUN_JABATAN_TAMBAHAN"]').val(record.TAHUN_JABATAN_TAMBAHAN);
-		$('.cnt-form [name="BULAN_JABATAN_TAMBAHAN"]').val(record.BULAN_JABATAN_TAMBAHAN);
 		
 		// set combo
 		$('.cnt-form [name="K_PENJELASAN"]').change();

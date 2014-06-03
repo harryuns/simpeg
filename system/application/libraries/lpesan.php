@@ -32,15 +32,16 @@ class LPesan {
         return $Return;
     }
     
-    function GetArray($Param) {
+    function GetArray($param) {
         $ArrayList = array();
-        $Date = (isset($Param['Date']) && !empty($Param['Date'])) ? ChangeFormatDate($Param['Date']) : 'x';
-        $PageActive = (isset($Param['PageActive'])) ? $Param['PageActive'] : '1';
-        $SearchType = (isset($Param['SearchType']) && !empty($Param['SearchType'])) ? $Param['SearchType'] : 'SearchByDate';
-        $K_PEGAWAI = (isset($Param['K_PEGAWAI'])) ? $Param['K_PEGAWAI'] : '';
+        $Date = (isset($param['Date']) && !empty($param['Date'])) ? ChangeFormatDate($param['Date']) : 'x';
+        $PageActive = (isset($param['PageActive'])) ? $param['PageActive'] : '1';
+        $SearchType = (isset($param['SearchType']) && !empty($param['SearchType'])) ? $param['SearchType'] : 'SearchByDate';
+        $K_PEGAWAI = (isset($param['K_PEGAWAI'])) ? $param['K_PEGAWAI'] : '';
+        $param['K_UNIT_KERJA'] = (isset($param['K_UNIT_KERJA'])) ? $param['K_UNIT_KERJA'] : 'x';
         
         if ($SearchType == 'SearchByDate') {
-            $RawQuery = "CALL EKD.GETREQUESTBYDATE('".$Date."')";
+            $RawQuery = "CALL EKD.GETREQUESTBYDATE('".$Date."', '".$param['K_UNIT_KERJA']."')";
         } else {
             $RawQuery = "CALL EKD.GETREQUESTBYKPEG('".$K_PEGAWAI."')";
         }

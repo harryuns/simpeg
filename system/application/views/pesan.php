@@ -12,7 +12,7 @@
             <div id="content">
                 <div class="full" style="min-height: 400px;">
                     <h1 style="padding: 0 0 10px 0;">Pesan</h1>
-                    <div id="CntPesanForm"><form method="post" action="<?php echo HOST.'/index.php/Pesan'; ?>">
+                    <div id="CntPesanForm"><form method="post" action="<?php echo base_url('index.php/Pesan'); ?>">
                         <input type="hidden" name="PageActive" value="<?php echo $ListMessage['PageActive']; ?>" />
                         <div style="float: left; width: 150px;">Tanggal :</div>
                         <div style="float: left; width: 160px;"><input type="text" name="Date" value="<?php echo $ListMessage['SearchDate']; ?>" class="datepicker" /></div>
@@ -44,8 +44,8 @@
 										$CommentTitle = ($Array['JML_ANSWER'] == 0) ? 'Balas Pesan' : $Array['JML_ANSWER'] . ' Balasan';
 										$CommentReply = '<div style="margin: 5px 0 0 0; font-weight: 700; cursor: pointer;" class="CommentReply">'.$CommentTitle.'<span class="hidden JsonClean">'.$JsonArrayClean.'</span></div>';
 										
-										$LinkPegawaiData = '<a href="'.$Array['LinkPegawaiData'].'"><img src="'.HOST.'/images/Pencil.png" style="width: 15px; border: none;" title="Edit Data Pegawai" /></a>';
-										$LinkPegawaiPesan = '<a href="'.$Array['LinkPegawaiPesan'].'"><img src="'.HOST.'/Style/siado/Lens.jpg" style="width: 15px; border: none;" title="Cari berdasarakan NIP pegawai" /></a>';
+										$LinkPegawaiData = '<a href="'.$Array['LinkPegawaiData'].'"><img src="'.base_url('images/Pencil.png').'" style="width: 15px; border: none;" title="Edit Data Pegawai" /></a>';
+										$LinkPegawaiPesan = '<a href="'.$Array['LinkPegawaiPesan'].'"><img src="'.base_url('Style/siado/Lens.jpg').'" style="width: 15px; border: none;" title="Cari berdasarakan NIP pegawai" /></a>';
 									}
 									
 									echo '

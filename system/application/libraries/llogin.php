@@ -269,7 +269,7 @@ class LLogin extends Controller {
 	function IsUserFakultas() {
 		$FakultasID = '';
 		if (isset($_SESSION['UserLogin']))
-			$FakultasID = $_SESSION['UserLogin']['Fakultas']['ID'];		
+			$FakultasID = $_SESSION['UserLogin']['Fakultas']['ID'];
 		$IsUserFakultas = '1';
 		if ($FakultasID == 'x') {
 			$IsUserFakultas = '0';
@@ -280,6 +280,19 @@ class LLogin extends Controller {
 	
 	function is_user_fakultas() {
 		$result = ($this->IsUserFakultas()) ? true : false;
+		return $result;
+	}
+	
+	function get_unit_kerja() {
+		$result = array( 'status' => false );
+		
+		$is_user_fakultas = $this->is_user_fakultas();
+		if ($is_user_fakultas) {
+			$k_unit_kerja = $FakultasID = $_SESSION['UserLogin']['Fakultas']['ID'];
+			$result['status'] = true;
+			$result['unit_kerja']['K_UNIT_KERJA'] = $k_unit_kerja;
+		}
+		
 		return $result;
 	}
 	

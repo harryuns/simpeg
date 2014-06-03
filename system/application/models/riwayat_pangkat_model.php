@@ -11,13 +11,15 @@ class riwayat_pangkat_model extends Model {
 		$param['GAJI_POKOK'] = (empty($param['GAJI_POKOK'])) ? 0 : $param['GAJI_POKOK'];
 		$param['TAHUN_JABATAN_TAMBAHAN'] = (empty($param['TAHUN_JABATAN_TAMBAHAN'])) ? 0 : $param['TAHUN_JABATAN_TAMBAHAN'];
 		$param['BULAN_JABATAN_TAMBAHAN'] = (empty($param['BULAN_JABATAN_TAMBAHAN'])) ? 0 : $param['BULAN_JABATAN_TAMBAHAN'];
+		$param['TAHUN_JABATAN_PENGURANGAN'] = (empty($param['TAHUN_JABATAN_PENGURANGAN'])) ? 0 : $param['TAHUN_JABATAN_PENGURANGAN'];
+		$param['BULAN_JABATAN_PENGURANGAN'] = (empty($param['BULAN_JABATAN_PENGURANGAN'])) ? 0 : $param['BULAN_JABATAN_PENGURANGAN'];
 		
 		$raw_query = "
 			CALL DB2ADMIN.INSUPDRIWAYATPANGKAT(
 				'".$param['ID_RIWAYAT_PANGKAT']."', '".$param['K_PEGAWAI']."', '".$param['NO_SK']."', '".$param['K_ASAL_SK']."',
 				'".$param['TGL_SK']."', '".$param['K_PENJELASAN']."', '".$param['TMT']."',  '".$param['K_GOLONGAN']."',
 				'".$param['GAJI_POKOK']."', '".$param['KETERANGAN']."', '".$param['USERID']."', '".$param['PENANDATANGAN_SK']."',
-				'".$param['TAHUN_JABATAN_TAMBAHAN']."', '".$param['BULAN_JABATAN_TAMBAHAN']."'
+				'".$param['TAHUN_JABATAN_TAMBAHAN']."', '".$param['BULAN_JABATAN_TAMBAHAN']."', '".$param['TAHUN_JABATAN_PENGURANGAN']."', '".$param['BULAN_JABATAN_PENGURANGAN']."'
 			)
 		";
 		

@@ -15,6 +15,9 @@
 if ($_SERVER['SERVER_NAME'] == 'devel184.ub.ac.id') {
 	$config['base_url']	= "http://devel184.ub.ac.id/simpeg/";
 	$config['base_path'] = realpath(dirname(__FILE__) . '/../../..');
+} else if ($_SERVER['SERVER_NAME'] == 'develweb.ub.ac.id') {
+	$config['base_url']	= "http://develweb.ub.ac.id/simpeg/";
+	$config['base_path'] = realpath(dirname(__FILE__) . '/../../..');
 } else {
 	$config['base_url']	= "https://simpeg.ub.ac.id/";
 	$config['base_path'] = realpath(dirname(__FILE__) . '/../../..');
